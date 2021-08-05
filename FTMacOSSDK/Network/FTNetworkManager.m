@@ -10,12 +10,13 @@
 
 @interface FTNetworkManager()
 @property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
 @end
 @implementation FTNetworkManager
 + (instancetype)sharedInstance {
     return [self shareManagerURLSession:[NSURLSession sharedSession]];
 }
-+ (instancetype)shareManagerURLSession:(id)session{
++ (instancetype)shareManagerURLSession:(NSURLSession *)session{
     static FTNetworkManager *manger;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -24,7 +25,7 @@
     });
     return manger;
 }
-- (NSURLSessionDataTask *)sendRequest:(id)request
+- (NSURLSessionDataTask *)sendRequest:(id<FTRequestProtocol>)request
                                               success:(FTNetworkSuccessBlock)success
                                               failure:(FTNetworkFailureBlock)failure {
     
@@ -45,7 +46,7 @@
                 return;
             }
             
-            if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 300) {
+            if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 500) {
                 
                 if (success) {
                     success(httpResponse, data);
@@ -62,8 +63,22 @@
     
     return task;
 }
-- (NSURLRequest *)createRequest:(id)request{
+- (NSURLRequest *)createRequest:(id<FTRequestProtocol>)request{
     
-    return request;
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]initWithURL:request.absoluteURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
+    urlRequest.HTTPMethod = request.httpMethod;
+    
+    return urlRequest;
+}
+
+- (void)sendRequest:(id<FTRequestProtocol>  _Nonnull)request
+         completion:(void(^_Nullable)(NSHTTPURLResponse * _Nonnull httpResponse,
+                                      NSData * _Nullable data,
+                                      NSError * _Nullable error))callback{
+    [self sendRequest:request success:^(NSHTTPURLResponse * _Nonnull httpResponse, NSData * _Nonnull data) {
+        if (callback) callback(httpResponse,data,nil);
+    } failure:^(NSHTTPURLResponse * _Nonnull httpResponse, NSData * _Nonnull data, NSError * _Nonnull error) {
+        if (callback) callback(httpResponse,data,error);
+    }];
 }
 @end
