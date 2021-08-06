@@ -10,7 +10,6 @@
 
 @interface FTNetworkManager()
 @property (nonatomic, strong) NSURLSession *session;
-@property (nonatomic, strong) NSOperationQueue *operationQueue;
 @end
 @implementation FTNetworkManager
 + (instancetype)sharedInstance {
@@ -25,9 +24,10 @@
     });
     return manger;
 }
-- (NSURLSessionDataTask *)sendRequest:(id<FTRequestProtocol>)request
-                                              success:(FTNetworkSuccessBlock)success
-                                              failure:(FTNetworkFailureBlock)failure {
+- (NSURLSessionDataTask *)realSendRequest:(id<FTRequestProtocol>)request
+                           completion:(void(^_Nullable)(NSHTTPURLResponse * _Nonnull httpResponse,
+                             NSData * _Nullable data,
+                             NSError * _Nullable error))callback{
     
     NSURLRequest *urlRequest = [self createRequest:request];
     
@@ -39,23 +39,7 @@
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (error) {
-                if (failure) {
-                    failure(httpResponse, data, error);
-                }
-                return;
-            }
-            
-            if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 500) {
-                
-                if (success) {
-                    success(httpResponse, data);
-                }
-            } else {
-                if (failure) {
-                    failure(httpResponse, data, error);
-                }
-            }
+            callback(httpResponse,data,error);
         });
     }];
     
@@ -63,11 +47,15 @@
     
     return task;
 }
-- (NSURLRequest *)createRequest:(id<FTRequestProtocol>)request{
-    
-    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]initWithURL:request.absoluteURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
-    urlRequest.HTTPMethod = request.httpMethod;
-    
+- (NSURLRequest *)createRequest:(id<FTRequestProtocol>)requestObject{
+    NSURL *url = requestObject.absoluteURL;
+    if (!url) {
+        return nil;
+    }
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]initWithURL:requestObject.absoluteURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
+    if([requestObject respondsToSelector:@selector(adaptedRequest:)]){
+        urlRequest = [requestObject adaptedRequest:urlRequest];
+    }
     return urlRequest;
 }
 
@@ -75,10 +63,6 @@
          completion:(void(^_Nullable)(NSHTTPURLResponse * _Nonnull httpResponse,
                                       NSData * _Nullable data,
                                       NSError * _Nullable error))callback{
-    [self sendRequest:request success:^(NSHTTPURLResponse * _Nonnull httpResponse, NSData * _Nonnull data) {
-        if (callback) callback(httpResponse,data,nil);
-    } failure:^(NSHTTPURLResponse * _Nonnull httpResponse, NSData * _Nonnull data, NSError * _Nonnull error) {
-        if (callback) callback(httpResponse,data,error);
-    }];
+    [self realSendRequest:request completion:callback];
 }
 @end

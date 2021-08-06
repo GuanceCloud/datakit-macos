@@ -12,25 +12,32 @@ NS_ASSUME_NONNULL_BEGIN
 #ifndef NS_ENUM
 #define NS_ENUM(_type, _name) enum _name : _type _name; enum _name : _type
 #endif
+extern NSString *const kFTReachabilityChangedNotification;
+
 typedef NS_ENUM(NSInteger, FTNetworkStatus) {
     // Apple NetworkStatus Compatible Names.
     FTNotReachable = 0,
     FTReachableViaWiFi = 2,
     FTReachableViaWWAN = 1
 };
-
+typedef void(^NetworkChangeBlock)(void);
 @interface FTReachability : NSObject
-+(instancetype)reachabilityWithHostname:(NSString*)hostname;
 
-+(instancetype)reachabilityWithAddress:(void *)hostAddress;
+/// 是否有网络连接
+@property (readonly, nonatomic, assign, getter = isReachable) BOOL reachable;
+/// 网络状态改变回调
+@property (nonatomic,copy) NetworkChangeBlock networkChanged;
 
-+ (instancetype)reachabilityForInternetConnection;
++ (instancetype)sharedInstance;
+///当前网络状态类型
+- (NSString *)networkType;
 
-- (BOOL)startNotifier;
+/// 开始监听网络状态
+-(BOOL)startNotifier;
+
+/// 停止监听网络状态
 - (void)stopNotifier;
-- (BOOL)isReachable;
--(FTNetworkStatus)currentReachabilityStatus;
-- (BOOL)connectionRequired;
+
 
 @end
 

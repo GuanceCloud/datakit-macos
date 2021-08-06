@@ -1,0 +1,41 @@
+//
+//  FTSDKAgent.m
+//  FTMacOSSDK
+//
+//  Created by 胡蕾蕾 on 2021/8/2.
+//  Copyright © 2021 DataFlux-cn. All rights reserved.
+//
+
+#import "FTSDKAgent.h"
+#import "FTTrackConfig.h"
+#import "FTReachability.h"
+#import "FTConfigManager.h"
+@interface FTSDKAgent()
+@end
+@implementation FTSDKAgent
+static FTSDKAgent *sharedInstance = nil;
+
++ (void)startWithConfigOptions:(FTTrackConfig *)configOptions{
+    NSAssert ((strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(dispatch_get_main_queue())) == 0),@"SDK 必须在主线程里进行初始化，否则会引发无法预料的问题（比如丢失 launch 事件）。");
+    
+    NSAssert((configOptions.metricsUrl.length!=0 ), @"请设置FT-GateWay metrics 写入地址");
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[FTSDKAgent alloc] initWithConfig:configOptions];
+    });
+}
+// 单例
++ (instancetype)sharedInstance {
+    NSAssert(sharedInstance, @"请先使用 startWithConfigOptions: 初始化 SDK");
+    return sharedInstance;
+}
+-(instancetype)initWithConfig:(FTTrackConfig *)config{
+    self = [super init];
+    if(self){
+        //开启网络监听
+        [[FTReachability sharedInstance] startNotifier];
+        FTConfigManager.sharedInstance.trackConfig = config;
+    }
+    return self;
+}
+@end

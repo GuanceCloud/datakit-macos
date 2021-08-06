@@ -104,9 +104,7 @@ NSArray * FTQueryStringPairsFromKeyAndValue(NSString *key, id value,FTParameterT
     return mutableQueryStringComponents;
 }
 @end
-@interface FTRequestBody : NSObject
 
-@end
 @implementation FTRequestBody : NSObject
 
 + (id )repleacingSpecialCharactersMeasurement:(NSString *)str{
@@ -121,8 +119,8 @@ NSArray * FTQueryStringPairsFromKeyAndValue(NSString *key, id value,FTParameterT
 }
 
 @end
-@implementation FTRequestLineBody : NSObject
-- (NSString *)getRequestDataWithEventArray:(NSArray *)events{
+@implementation FTRequestLineBody
+- (NSString *)getRequestBodyWithEventArray:(NSArray *)events{
     __block NSMutableString *requestDatas = [NSMutableString new];
     [events enumerateObjectsUsingBlock:^(FTRecordModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSDictionary *item = [FTJSONUtil dictionaryWithJsonString:obj.data];
@@ -147,8 +145,8 @@ NSArray * FTQueryStringPairsFromKeyAndValue(NSString *key, id value,FTParameterT
     return requestDatas;
 }
 @end
-@implementation FTRequestObjectBody : NSObject
-- (NSString *)getObjctRequestWithEventArray:(NSArray *)events{
+@implementation FTRequestObjectBody
+- (NSString *)getRequestBodyWithEventArray:(NSArray *)events{
     NSMutableArray *list = [NSMutableArray new];
     [events enumerateObjectsUsingBlock:^(FTRecordModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSDictionary *item = [FTJSONUtil dictionaryWithJsonString:obj.data].mutableCopy;

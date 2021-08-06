@@ -32,6 +32,9 @@
             case FTDataTypeTRACING:
                 opStr = @"Tracing";
                 break;
+            case FTDataTypeObject:
+                opStr = @"Object";
+                break;
         }
         NSMutableDictionary *opdata = @{
             @"source":source,

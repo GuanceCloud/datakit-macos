@@ -42,23 +42,62 @@ static void FTReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     }
 }
 @implementation FTReachability
-+ (instancetype)reachabilityWithHostName:(NSString *)hostName
-{
-    FTReachability* returnValue = NULL;
-    SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, [hostName UTF8String]);
-    if (reachability != NULL)
-    {
-        returnValue= [[self alloc] init];
-        if (returnValue != NULL)
-        {
-            returnValue->_reachabilityRef = reachability;
-        }
-        else {
-            CFRelease(reachability);
-        }
-    }
-    return returnValue;
++ (instancetype)sharedInstance{
+    static FTReachability *manager;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [FTReachability reachabilityForInternetConnection];
+    });
+    return manager;
 }
+
+- (NSString *)networkType{
+    FTNetworkStatus status = [self currentReachabilityStatus];
+    
+    if (status == FTReachableViaWiFi) {
+        return @"wifi";
+    }
+#if TARGET_OS_IPHONE
+    NSArray *typeStrings2G = @[CTRadioAccessTechnologyEdge,
+                               CTRadioAccessTechnologyGPRS,
+                               CTRadioAccessTechnologyCDMA1x];
+    NSArray *typeStrings3G = @[CTRadioAccessTechnologyHSDPA,
+                               CTRadioAccessTechnologyWCDMA,
+                               CTRadioAccessTechnologyHSUPA,
+                               CTRadioAccessTechnologyCDMAEVDORev0,
+                               CTRadioAccessTechnologyCDMAEVDORevA,
+                               CTRadioAccessTechnologyCDMAEVDORevB,
+                               CTRadioAccessTechnologyeHRPD];
+    
+    NSArray *typeStrings4G = @[CTRadioAccessTechnologyLTE];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        CTTelephonyNetworkInfo *teleInfo= [[CTTelephonyNetworkInfo alloc] init];
+        NSString *accessString = teleInfo.currentRadioAccessTechnology;
+        if (@available(iOS 14.1, *)) {
+            NSArray *typeStrings5G = @[CTRadioAccessTechnologyNRNSA,
+                                       CTRadioAccessTechnologyNR];
+            if ([typeStrings5G containsObject:accessString]) {
+                return @"5G";
+            }
+        }
+        if ([typeStrings4G containsObject:accessString]) {
+            return @"4G";
+        } else if ([typeStrings3G containsObject:accessString]) {
+            return @"3G";
+        } else if ([typeStrings2G containsObject:accessString]) {
+            return @"2G";
+        } else {
+            return @"unknown";
+        }
+    } else {
+        return @"unknown";
+    }
+#endif
+
+    return @"unreachable";
+}
+
 
 +(instancetype)reachabilityWithAddress:(void *)hostAddress
 {
@@ -87,7 +126,6 @@ static void FTReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
     self = [super init];
     if (self != nil)
     {
-//        self.reachableOnWWAN = YES;
         self.reachabilityRef = ref;
 
         // We need to create a serial queue.
@@ -122,19 +160,9 @@ static void FTReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         }
         else
         {
-#ifdef DEBUG
-            NSLog(@"SCNetworkReachabilitySetDispatchQueue() failed: %s", SCErrorString(SCError()));
-#endif
-
             // UH OH - FAILURE - stop any callbacks!
             SCNetworkReachabilitySetCallback(self.reachabilityRef, NULL, NULL);
         }
-    }
-    else
-    {
-#ifdef DEBUG
-        NSLog(@"SCNetworkReachabilitySetCallback() failed: %s", SCErrorString(SCError()));
-#endif
     }
 
     // if we get here we fail at the internet
@@ -157,6 +185,32 @@ static void FTReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
         return NO;
     
     return [self isReachableWithFlags:flags];
+}
+#define testcase (kSCNetworkReachabilityFlagsConnectionRequired | kSCNetworkReachabilityFlagsTransientConnection)
+
+-(BOOL)isReachableWithFlags:(SCNetworkReachabilityFlags)flags
+{
+    BOOL connectionUP = YES;
+    
+    if(!(flags & kSCNetworkReachabilityFlagsReachable))
+        connectionUP = NO;
+    
+    if( (flags & testcase) == testcase )
+        connectionUP = NO;
+    
+#if    TARGET_OS_IPHONE
+    if(flags & kSCNetworkReachabilityFlagsIsWWAN)
+    {
+        // We're on 3G.
+        if(!self.reachableOnWWAN)
+        {
+            // We don't want to connect when on 3G.
+            connectionUP = NO;
+        }
+    }
+#endif
+    
+    return connectionUP;
 }
 -(BOOL)isReachableViaWWAN
 {
@@ -230,7 +284,9 @@ static void FTReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 }
 -(void)reachabilityChanged:(SCNetworkReachabilityFlags)flags
 {
-
+    if (self.networkChanged) {
+        self.networkChanged();
+    }
     // this makes sure the change notification happens on the MAIN THREAD
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:kFTReachabilityChangedNotification

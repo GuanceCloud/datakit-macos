@@ -7,13 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class FTRecordModel;
 NS_ASSUME_NONNULL_BEGIN
+@protocol FTRequestBodyProtocol <NSObject>
+- (NSString *)getRequestBodyWithEventArray:(NSArray *)events;
+@end
 
-@interface FTRequestLineBody : NSObject
+@interface FTRequestLineBody : NSObject<FTRequestBodyProtocol>
+@property (nonatomic, strong) NSArray <FTRecordModel *> *events;
 
 @end
-@interface FTRequestObjectBody : NSObject
+@interface FTRequestObjectBody : NSObject<FTRequestBodyProtocol>
+@property (nonatomic, strong) NSArray <FTRecordModel *> *events;
 
 @end
 NS_ASSUME_NONNULL_END

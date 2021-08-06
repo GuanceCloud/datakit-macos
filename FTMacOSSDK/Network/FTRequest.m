@@ -8,22 +8,77 @@
 
 #import "FTRequest.h"
 #import "FTRequestBody.h"
-
-@implementation FTLoggingRequest
--(instancetype)initWithMetricsUrl:(NSString *)metricsUrl events:(NSArray<FTTrackDataModel *> *)events{
-    self = [super init];
+#import "FTDateUtil.h"
+#import "FTConfigManager.h"
+#import "FTMacOSSDKVersion.h"
+@implementation FTRequest
+-(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events type:(FTDataType)type{
+    FTRequest *request = nil;
+    switch (type) {
+        case FTDataTypeRUM:
+            request = [[FTRumRequest alloc]initWithEvents:events];
+            break;
+        case FTDataTypeLOGGING:
+            request = [[FTLoggingRequest alloc]initWithEvents:events];
+            break;
+        case FTDataTypeTRACING:
+            request = [[FTTracingRequest alloc]initWithEvents:events];
+            break;
+        case FTDataTypeObject:
+            request = [[FTObjectRequest alloc]initWithEvents:events];
+            break;
+    }
+    return request;
+}
+-(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events{
     if(self){
-        self.metricsUrl = metricsUrl;
         self.events = events;
     }
     return self;
 }
 -(NSURL *)absoluteURL{
-    if (!self.metricsUrl) {
+    if (!FTConfigManager.sharedInstance.trackConfig.metricsUrl) {
         return nil;
     }
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.metricsUrl,self.path]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",FTConfigManager.sharedInstance.trackConfig.metricsUrl,self.path]];
     return url;
+}
+-(NSString *)contentType{
+    return @"text/plain";
+}
+-(NSString *)httpMethod{
+    return @"POST";
+}
+-(NSString *)path{
+    return nil;
+}
+- (NSMutableURLRequest *)adaptedRequest:(NSMutableURLRequest *)mutableRequest{
+     NSString *date =[FTDateUtil currentTimeGMT];
+     //添加header
+     [mutableRequest addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+     [mutableRequest addValue:self.contentType forHTTPHeaderField:@"Content-Type"];
+     [mutableRequest addValue:@"charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+     [mutableRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+     //设置请求参数
+     [mutableRequest setValue:FTConfigManager.sharedInstance.trackConfig.XDataKitUUID forHTTPHeaderField:@"X-Datakit-UUID"];
+     [mutableRequest setValue:date forHTTPHeaderField:@"Date"];
+     [mutableRequest setValue:[NSString stringWithFormat:@"sdk_package_agent=%@",SDK_VERSION] forHTTPHeaderField:@"User-Agent"];
+     [mutableRequest setValue:@"zh-CN" forHTTPHeaderField:@"Accept-Language"];
+     
+    if (self.requestBody&&self.events) {
+        NSString *body = [self.requestBody getRequestBodyWithEventArray:self.events];
+        mutableRequest.HTTPBody = [body dataUsingEncoding:NSUTF8StringEncoding];
+    }
+     return mutableRequest;
+}
+@end
+@implementation FTLoggingRequest
+-(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events{
+    if(self){
+        self.events = events;
+        self.requestBody = [[FTRequestLineBody alloc]init];
+    }
+    return self;
 }
 -(NSString *)path{
     return @"/v1/write/logging";
@@ -31,25 +86,14 @@
 -(NSString *)contentType{
     return @"text/plain";
 }
--(NSString *)httpMethod{
-    return @"POST";
-}
 @end
 @implementation FTRumRequest
--(instancetype)initWithMetricsUrl:(NSString *)metricsUrl events:(NSArray<FTTrackDataModel *> *)events{
-    self = [super init];
+-(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events{
     if(self){
-        self.metricsUrl = metricsUrl;
         self.events = events;
+        self.requestBody = [[FTRequestLineBody alloc]init];
     }
     return self;
-}
--(NSURL *)absoluteURL{
-    if (!self.metricsUrl) {
-        return nil;
-    }
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.metricsUrl,self.path]];
-    return url;
 }
 -(NSString *)path{
     return @"/v1/write/rum";
@@ -57,25 +101,15 @@
 -(NSString *)contentType{
     return @"text/plain";
 }
--(NSString *)httpMethod{
-    return @"POST";
-}
+
 @end
-@implementation FTTracingRequest 
--(instancetype)initWithMetricsUrl:(NSString *)metricsUrl events:(NSArray<FTTrackDataModel *> *)events{
-    self = [super init];
+@implementation FTTracingRequest
+-(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events{
     if(self){
-        self.metricsUrl = metricsUrl;
         self.events = events;
+        self.requestBody = [[FTRequestLineBody alloc]init];
     }
     return self;
-}
--(NSURL *)absoluteURL{
-    if (!self.metricsUrl) {
-        return nil;
-    }
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.metricsUrl,self.path]];
-    return url;
 }
 -(NSString *)path{
     return @"/v1/write/tracing";
@@ -83,34 +117,21 @@
 -(NSString *)contentType{
     return @"text/plain";
 }
--(NSString *)httpMethod{
-    return @"POST";
-}
 @end
 @implementation FTObjectRequest
-
--(instancetype)initWithMetricsUrl:(NSString *)metricsUrl events:(NSArray<FTTrackDataModel *> *)events{
-    self = [super init];
+-(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events{
     if(self){
-        self.metricsUrl = metricsUrl;
         self.events = events;
+        self.requestBody = [[FTRequestObjectBody alloc]init];
     }
     return self;
 }
--(NSURL *)absoluteURL{
-    if (!self.metricsUrl) {
-        return nil;
-    }
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.metricsUrl,self.path]];
-    return url;
-}
+
 -(NSString *)path{
     return @"/v1/write/object";
 }
 -(NSString *)contentType{
     return @"application/json";
 }
--(NSString *)httpMethod{
-    return @"POST";
-}
+
 @end

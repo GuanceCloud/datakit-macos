@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-@class FTTrackDataModel;
+#import "FTConstants.h"
+#import "FTRequestBody.h"
+@class FTRecordModel;
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol FTRequestProtocol <NSObject>
@@ -18,13 +20,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *contentType;
 @property (nonatomic, copy, readonly) NSString *httpMethod;
 @optional
-@property (nonatomic, copy) NSString *metricsUrl;
 ///event property
-@property (nonatomic, strong) NSArray <FTTrackDataModel *> *events;
+@property (nonatomic, strong) NSArray <FTRecordModel *> *events;
+@property (nonatomic, strong) NSDictionary  *header;
+@property (nonatomic, strong) id<FTRequestBodyProtocol> requestBody;
+- (NSMutableURLRequest *)adaptedRequest:(NSMutableURLRequest *)mutableRequest;
 @end
 
 @interface FTRequest : NSObject<FTRequestProtocol>
--(instancetype)initWithMetricsUrl:(NSString *)metricsUrl events:(NSArray <FTTrackDataModel*>*)events;
+
+-(instancetype)initWithEvents:(NSArray <FTRecordModel*>*)events type:(FTDataType)type;
 @end
 
 @interface FTLoggingRequest : FTRequest

@@ -7,13 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "FTConstants.h"
 NS_ASSUME_NONNULL_BEGIN
-typedef NS_ENUM(NSInteger, FTDataType) {
-    FTDataTypeRUM,
-    FTDataTypeLOGGING,
-    FTDataTypeTRACING,
-};
+
 @interface FTRecordModel : NSObject
 //数据库自增id
 @property (nonatomic, assign) long _id;
