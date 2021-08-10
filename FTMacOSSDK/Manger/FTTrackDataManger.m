@@ -22,6 +22,7 @@ static const NSUInteger kOnceUploadDefaultCount = 10; // 一次上传数据数�
 @property (nonatomic, strong) dispatch_queue_t serialQueue;
 @property (nonatomic, strong) dispatch_queue_t concurrentLabel;
 @property (nonatomic, assign) BOOL isUploading;
+@property (nonatomic, assign) NSDate *lastAddDBDate;
 @end
 @implementation FTTrackDataManger{
     dispatch_semaphore_t _lock;
@@ -37,12 +38,6 @@ static const NSUInteger kOnceUploadDefaultCount = 10; // 一次上传数据数�
 
 +(instancetype)allocWithZone:(struct _NSZone *)zone{
     return [FTTrackDataManger sharedInstance];
-}
--(id)copy{
-    return self;
-}
--(id)mutableCopy{
-    return self;
 }
 -(instancetype)init{
     self = [super init];
@@ -65,13 +60,13 @@ static const NSUInteger kOnceUploadDefaultCount = 10; // 一次上传数据数�
     switch (type) {
         case FTAddDataConcurrent:{
             dispatch_async(self.concurrentLabel, ^{
-                [[FTTrackerEventDBTool sharedManger] insertItemWithItemData:data];
+                [[FTTrackerEventDBTool sharedManger] insertItem:data];
             });
             break;
         }
         case FTAddDataSerial:{
             dispatch_async(self.serialQueue, ^{
-                [[FTTrackerEventDBTool sharedManger] insertItemWithItemData:data];
+                [[FTTrackerEventDBTool sharedManger] insertItem:data];
             });
             break;
         }
@@ -82,11 +77,20 @@ static const NSUInteger kOnceUploadDefaultCount = 10; // 一次上传数据数�
             break;
         }
         case FTAddDataImmediate:{
-            [[FTTrackerEventDBTool sharedManger] insertItemToCache:data];
+            [[FTTrackerEventDBTool sharedManger] insertItem:data];
             break;
         }
     }
-    
+    if (self.lastAddDBDate) {
+        NSDate* now = [NSDate date];
+        NSTimeInterval time = [now timeIntervalSinceDate:self.lastAddDBDate];
+        if (time>10) {
+            self.lastAddDBDate = [NSDate date];
+            [self uploadTrackData];
+        }
+    }else{
+        self.lastAddDBDate = [NSDate date];
+    }
 }
 
 - (void)uploadTrackData{

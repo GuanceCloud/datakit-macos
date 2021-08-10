@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSString *dbPath;
 @property (nonatomic, strong) ZY_FMDatabaseQueue *dbQueue;
 @property (nonatomic, strong) ZY_FMDatabase *db;
-@property (nonatomic, strong) NSMutableArray<NSDictionary *> *messageCaches;
+@property (nonatomic, strong) NSMutableArray<FTRecordModel *> *messageCaches;
 
 @end
 @implementation FTTrackerEventDBTool{
@@ -96,7 +96,7 @@ static dispatch_once_t onceToken;
     }];
 }
 
--(BOOL)insertItemWithItemData:(FTRecordModel *)item{
+-(BOOL)insertItem:(FTRecordModel *)item{
     __block BOOL success = NO;
    if([self isOpenDatabese:self.db]) {
        if([self getDatasCount]+self.messageCaches.count>=5000){
@@ -285,7 +285,7 @@ static dispatch_once_t onceToken;
     }];
 
 }
-- (NSMutableArray<NSDictionary *> *)messageCaches {
+- (NSMutableArray<FTRecordModel *> *)messageCaches {
     if (!_messageCaches) {
         _messageCaches = [NSMutableArray array];
     }

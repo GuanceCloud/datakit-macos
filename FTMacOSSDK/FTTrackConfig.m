@@ -7,7 +7,8 @@
 //
 
 #import "FTTrackConfig.h"
-
+@interface FTTrackConfig()<NSCopying>
+@end
 @implementation FTTrackConfig
 -(instancetype)initWithMetricsUrl:(NSString *)metricsUrl{
     if (self = [super init]) {
@@ -16,8 +17,7 @@
     }
     return self;
 }
-//todo:待验证 macOS NSCopy协议
-- (id)copy{
+-(id)copyWithZone:(NSZone *)zone{
     FTTrackConfig *options = [[[self class] allocWithZone:nil] init];
     options.metricsUrl = self.metricsUrl;
     options.XDataKitUUID = self.XDataKitUUID;

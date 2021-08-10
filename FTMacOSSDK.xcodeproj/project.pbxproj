@@ -178,6 +178,13 @@
 			path = fmdb;
 			sourceTree = "<group>";
 		};
+		7C8190E426C108B000D0D8C4 /* AutoTrack */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AutoTrack;
+			sourceTree = "<group>";
+		};
 		7CA16C2D26B7C8D80079840D = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +222,7 @@
 				7C65AE0F26BBD28600D51A8F /* FTRecordModel.h */,
 				7C65AE1026BBD28600D51A8F /* FTRecordModel.m */,
 				7C65AE4126BD453900D51A8F /* FTMacOSSDKVersion.h */,
+				7C8190E426C108B000D0D8C4 /* AutoTrack */,
 				7C65ADC626BA82C700D51A8F /* FTDataBase */,
 				7C65ADC126BA7B7C00D51A8F /* Manger */,
 				7CA16DAD26B94F080079840D /* Network */,
