@@ -9,7 +9,14 @@
 #import <Foundation/Foundation.h>
 @class FTTrackConfig;
 NS_ASSUME_NONNULL_BEGIN
-
+///事件等级和状态，info：提示，warning：警告，error：错误，critical：严重，ok：恢复，默认：info
+typedef NS_ENUM(NSInteger, FTStatus) {
+    FTStatusInfo         = 0,
+    FTStatusWarning,
+    FTStatusError,
+    FTStatusCritical,
+    FTStatusOk,
+};
 @interface FTSDKAgent : NSObject
 /**
  * @abstract
@@ -27,6 +34,15 @@ NS_ASSUME_NONNULL_BEGIN
  * @param configOptions     配置参数
 */
 + (void)startWithConfigOptions:(FTTrackConfig *)configOptions;
+/**
+ * @abstract
+ * 日志上报
+ *
+ * @param content  日志内容，可为json字符串
+ * @param status   事件等级和状态，info：提示，warning：警告，error：错误，critical：严重，ok：恢复，默认：info
+
+ */
+-(void)logging:(NSString *)content status:(FTStatus)status;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,6 +10,7 @@
 #import "FTTrackConfig.h"
 #import "FTReachability.h"
 #import "FTConfigManager.h"
+#import "FTLog.h"
 @interface FTSDKAgent()
 @end
 @implementation FTSDKAgent
@@ -37,5 +38,15 @@ static FTSDKAgent *sharedInstance = nil;
         FTConfigManager.sharedInstance.trackConfig = config;
     }
     return self;
+}
+-(void)logging:(NSString *)content status:(FTStatus)status{
+    if (![content isKindOfClass:[NSString class]] || content.length==0) {
+        return;
+    }
+    @try {
+        
+    } @catch (NSException *exception) {
+        ZYErrorLog(@"exception %@",exception);
+    }
 }
 @end
