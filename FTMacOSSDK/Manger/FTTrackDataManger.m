@@ -15,12 +15,12 @@
 #import "FTRequest.h"
 #import "FTConstants.h"
 #import "FTNetworkManager.h"
+#import "FTThread.h"
 static const NSUInteger kOnceUploadDefaultCount = 10; // 一次上传数据数量
 
 @interface FTTrackDataManger ()
 @property (nonatomic, strong) FTReachability *reachability;
-@property (nonatomic, strong) dispatch_queue_t serialQueue;
-@property (nonatomic, strong) dispatch_queue_t concurrentLabel;
+@property (nonatomic, strong) FTThread *ftThread;
 @property (nonatomic, assign) BOOL isUploading;
 @property (nonatomic, assign) NSDate *lastAddDBDate;
 @end
@@ -42,9 +42,9 @@ static const NSUInteger kOnceUploadDefaultCount = 10; // 一次上传数据数�
 -(instancetype)init{
     self = [super init];
     if (self) {
-        self.serialQueue = dispatch_queue_create("dataflux_track_data_serial", DISPATCH_QUEUE_SERIAL);
-        self.concurrentLabel = dispatch_queue_create("dataflux_track_data_concurrent", DISPATCH_QUEUE_CONCURRENT);
         _lock = dispatch_semaphore_create(1);
+        self.ftThread = [[FTThread alloc]init];
+        [self.ftThread start];
         [self listenNetworkChange];
     }
     return self;
@@ -57,29 +57,20 @@ static const NSUInteger kOnceUploadDefaultCount = 10; // 一次上传数据数�
     };
 }
 - (void)addTrackData:(FTRecordModel *)data type:(FTAddDataType)type{
+    //数据写入不用做额外的线程处理，数据采集组合除了崩溃数据，都是在子线程进行的
     switch (type) {
-        case FTAddDataConcurrent:{
-            dispatch_async(self.concurrentLabel, ^{
-                [[FTTrackerEventDBTool sharedManger] insertItem:data];
-            });
+        case FTAddDataNormal:
+            [[FTTrackerEventDBTool sharedManger] insertItem:data];
+
             break;
-        }
-        case FTAddDataSerial:{
-            dispatch_async(self.serialQueue, ^{
-                [[FTTrackerEventDBTool sharedManger] insertItem:data];
-            });
+        case FTAddDataCache:
+            [[FTTrackerEventDBTool sharedManger] insertItemToCache:data];
+
             break;
-        }
-        case FTAddDataCache:{
-            dispatch_async(self.concurrentLabel, ^{
-                [[FTTrackerEventDBTool sharedManger] insertItemToCache:data];
-            });
-            break;
-        }
-        case FTAddDataImmediate:{
+        case FTAddDataImmediate:
+            [[FTTrackerEventDBTool sharedManger] insertCacheToDB];
             [[FTTrackerEventDBTool sharedManger] insertItem:data];
             break;
-        }
     }
     if (self.lastAddDBDate) {
         NSDate* now = [NSDate date];
@@ -98,10 +89,8 @@ static const NSUInteger kOnceUploadDefaultCount = 10; // 一次上传数据数�
     if(![FTReachability sharedInstance].isReachable){
         return;
     }
-    dispatch_async(self.serialQueue, ^{
-        [self privateUpload];
-    });
-   
+    //常驻线程 进行上传操作
+    [self performSelector:@selector(privateUpload) onThread:self.ftThread withObject:nil waitUntilDone:NO];
 }
 - (void)privateUpload{
     if (self.isUploading) {
@@ -128,7 +117,7 @@ static const NSUInteger kOnceUploadDefaultCount = 10; // 一次上传数据数�
         ZYErrorLog(@"数据库删除已上传数据失败");
         return NO;
     }
-   return [self flushWithType:type];
+    return [self flushWithType:type];
 }
 -(BOOL)flushWithEvents:(NSArray *)events type:(FTDataType)type{
     @try {

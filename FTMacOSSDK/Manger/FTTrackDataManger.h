@@ -7,15 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FTConstants.h"
 /**
- - FTAddDataConcurrent: 异步并行写入数据库
- - FTAddDataSerial: 异步串行写入数据库
- - FTAddDataCache:  事务写入数据库
- - FTAddDataImmediate: 同步写入数据库
+ - FTAddDataNormal: trace与rum
+ - FTAddDataCache:  logging
+ - FTAddDataImmediate: 崩溃日志
  */
 typedef NS_ENUM(NSInteger, FTAddDataType) {
-    FTAddDataConcurrent,
-    FTAddDataSerial,
+    FTAddDataNormal,
     FTAddDataCache,
     FTAddDataImmediate,
 };

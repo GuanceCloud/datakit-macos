@@ -42,6 +42,8 @@
 		7C65AE3426BD167100D51A8F /* FTConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C65AE3226BD167100D51A8F /* FTConstants.m */; };
 		7C65AE3D26BD42C200D51A8F /* FTConfigManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C65AE3B26BD42C200D51A8F /* FTConfigManager.h */; };
 		7C65AE3E26BD42C200D51A8F /* FTConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C65AE3C26BD42C200D51A8F /* FTConfigManager.m */; };
+		7C81953326C51A3600D0D8C4 /* FTThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C81953126C51A3600D0D8C4 /* FTThread.h */; };
+		7C81953426C51A3600D0D8C4 /* FTThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C81953226C51A3600D0D8C4 /* FTThread.m */; };
 		7CA16C4126B7C8D80079840D /* FTMacOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA16C3726B7C8D80079840D /* FTMacOSSDK.framework */; };
 		7CA16C4626B7C8D80079840D /* FTMacOSSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CA16C4526B7C8D80079840D /* FTMacOSSDKTests.m */; };
 		7CA16DBC26B94F080079840D /* FTNetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CA16DAE26B94F080079840D /* FTNetworkManager.h */; };
@@ -103,6 +105,8 @@
 		7C65AE3B26BD42C200D51A8F /* FTConfigManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTConfigManager.h; sourceTree = "<group>"; };
 		7C65AE3C26BD42C200D51A8F /* FTConfigManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTConfigManager.m; sourceTree = "<group>"; };
 		7C65AE4126BD453900D51A8F /* FTMacOSSDKVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTMacOSSDKVersion.h; sourceTree = "<group>"; };
+		7C81953126C51A3600D0D8C4 /* FTThread.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTThread.h; sourceTree = "<group>"; };
+		7C81953226C51A3600D0D8C4 /* FTThread.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTThread.m; sourceTree = "<group>"; };
 		7CA16C3726B7C8D80079840D /* FTMacOSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FTMacOSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CA16C4026B7C8D80079840D /* FTMacOSSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FTMacOSSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CA16C4526B7C8D80079840D /* FTMacOSSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTMacOSSDKTests.m; sourceTree = "<group>"; };
@@ -261,6 +265,8 @@
 				7C65AE1626BBE0CD00D51A8F /* FTDateUtil.m */,
 				7C65AE3126BD167100D51A8F /* FTConstants.h */,
 				7C65AE3226BD167100D51A8F /* FTConstants.m */,
+				7C81953126C51A3600D0D8C4 /* FTThread.h */,
+				7C81953226C51A3600D0D8C4 /* FTThread.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -285,6 +291,7 @@
 			files = (
 				7C65ADDE26BA82C700D51A8F /* ZY_FMDatabase.h in Headers */,
 				7CA16DC626B94F080079840D /* FTSDKAgent.h in Headers */,
+				7C81953326C51A3600D0D8C4 /* FTThread.h in Headers */,
 				7C65ADDB26BA82C700D51A8F /* ZY_FMDatabaseQueue.h in Headers */,
 				7C65ADFB26BB898700D51A8F /* FTRequest.h in Headers */,
 				7C65ADDF26BA82C700D51A8F /* ZY_FMDB.h in Headers */,
@@ -412,6 +419,7 @@
 				7C65ADD726BA82C700D51A8F /* ZY_FMDatabaseQueue.m in Sources */,
 				7CA16DC426B94F080079840D /* FTSwizzle.m in Sources */,
 				7C65ADBE26BA7B6F00D51A8F /* FTTrackDataManger.m in Sources */,
+				7C81953426C51A3600D0D8C4 /* FTThread.m in Sources */,
 				7C65ADD526BA82C700D51A8F /* FTTrackerEventDBTool.m in Sources */,
 				7C65AE0B26BBD22400D51A8F /* FTJSONUtil.m in Sources */,
 				7C65AE2C26BD00FF00D51A8F /* FTTrackConfig.m in Sources */,
