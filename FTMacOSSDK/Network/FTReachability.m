@@ -13,6 +13,10 @@
 #import <arpa/inet.h>
 #import <ifaddrs.h>
 #import <netdb.h>
+#if    TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#endif
 
 NSString *const kFTReachabilityChangedNotification = @"kFTReachabilityChangedNotification";
 
@@ -125,7 +129,7 @@ static void FTReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
 {
     self = [super init];
     if (self != nil)
-    {
+    {   self.reachableOnWWAN = YES;
         self.reachabilityRef = ref;
 
         // We need to create a serial queue.
