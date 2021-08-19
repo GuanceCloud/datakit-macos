@@ -6,7 +6,8 @@
 //
 
 #import "AppDelegate.h"
-
+#import <FTMacOSSDK/FTSDKAgent.h>
+#import <FTMacOSSDK/FTTrackConfig.h>
 @interface AppDelegate ()
 
 
@@ -16,6 +17,11 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
+    NSProcessInfo *processInfo = [NSProcessInfo processInfo];
+    NSString *url = [processInfo environment][@"ACCESS_SERVER_URL"];
+    FTTrackConfig *config = [[FTTrackConfig alloc]initWithMetricsUrl:url];
+    [FTSDKAgent startWithConfigOptions:config];
+    [[FTSDKAgent sharedInstance] logging:@"applicationDidFinishLaunching" status:FTStatusInfo];
 }
 
 

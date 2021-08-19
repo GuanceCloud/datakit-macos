@@ -6,12 +6,14 @@
 //
 
 #import "ViewController.h"
-
+#import <FTMacOSSDK/FTSDKAgent.h>
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self createUI];
+    [[FTSDKAgent sharedInstance] logging:@"viewDidLoad" status:FTStatusInfo];
+
     // Do any additional setup after loading the view.
 }
 
