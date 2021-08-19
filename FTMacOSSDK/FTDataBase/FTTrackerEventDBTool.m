@@ -184,7 +184,12 @@ static dispatch_once_t onceToken;
             ZY_FMResultSet*set = [self.db executeQuery:format];
             while(set.next) {
                 //创建对象赋值
-
+                FTRecordModel* item = [[FTRecordModel alloc]init];
+                item._id= [[set stringForColumn:@"_id"]intValue];
+                item.tm = [set longForColumn:@"tm"];
+                item.data= [set stringForColumn:@"data"];
+                item.op = [set stringForColumn:@"op"];
+                [array addObject:item];
             }
         }];
         return array;

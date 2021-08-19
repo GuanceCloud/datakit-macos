@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class FTRecordModel;
 ///数据写入，数据上传 相关操作
 @interface FTTrackDataManger : NSObject
++(instancetype)sharedInstance;
 ///数据写入
 - (void)addTrackData:(FTRecordModel *)data type:(FTAddDataType)type;
 

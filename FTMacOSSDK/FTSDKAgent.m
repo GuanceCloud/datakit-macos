@@ -10,7 +10,10 @@
 #import "FTTrackConfig.h"
 #import "FTReachability.h"
 #import "FTConfigManager.h"
+#import "FTTrackDataManger.h"
+#import "FTRecordModel.h"
 #import "FTLog.h"
+#import "FTDateUtil.h"
 @interface FTSDKAgent()
 @end
 @implementation FTSDKAgent
@@ -44,7 +47,8 @@ static FTSDKAgent *sharedInstance = nil;
         return;
     }
     @try {
-        
+        FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"df_rum_macos_log" op:FTDataTypeLOGGING tags:@{@"sdk_name":@"df_macos_rum_sdk"} field:@{@"message":content} tm:[FTDateUtil currentTimeNanosecond]];
+        [[FTTrackDataManger sharedInstance] addTrackData:model type:FTAddDataNormal];
     } @catch (NSException *exception) {
         ZYErrorLog(@"exception %@",exception);
     }

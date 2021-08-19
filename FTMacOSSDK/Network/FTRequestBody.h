@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol FTRequestBodyProtocol <NSObject>
 - (NSString *)getRequestBodyWithEventArray:(NSArray *)events;
 @end
+@interface FTRequestBody : NSObject
 
+@end
 @interface FTRequestLineBody : NSObject<FTRequestBodyProtocol>
 @property (nonatomic, strong) NSArray <FTRecordModel *> *events;
 

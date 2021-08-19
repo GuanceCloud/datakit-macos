@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * 请求HTTP请求头X-Datakit-UUID 数据采集端  如果用户不设置会自动配置
  */
-@property (nonatomic, copy) NSString *XDataKitUUID;@end
+@property (nonatomic, copy) NSString *XDataKitUUID;
+-(instancetype)initWithMetricsUrl:(NSString *)metricsUrl;
+@end
 
 NS_ASSUME_NONNULL_END

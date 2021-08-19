@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *httpMethod;
 @optional
 ///event property
-@property (nonatomic, strong) NSArray <FTRecordModel *> *events;
 @property (nonatomic, strong) NSDictionary  *header;
 @property (nonatomic, strong) id<FTRequestBodyProtocol> requestBody;
 - (NSMutableURLRequest *)adaptedRequest:(NSMutableURLRequest *)mutableRequest;

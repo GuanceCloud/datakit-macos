@@ -11,6 +11,10 @@
 #import "FTDateUtil.h"
 #import "FTConfigManager.h"
 #import "FTMacOSSDKVersion.h"
+@interface FTRequest()
+@property (nonatomic, strong) NSArray <FTRecordModel *> *events;
+
+@end
 @implementation FTRequest
 -(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events type:(FTDataType)type{
     FTRequest *request = nil;
@@ -31,6 +35,7 @@
     return request;
 }
 -(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events{
+    self = [super init];
     if(self){
         self.events = events;
     }
@@ -54,6 +59,7 @@
 }
 - (NSMutableURLRequest *)adaptedRequest:(NSMutableURLRequest *)mutableRequest{
      NSString *date =[FTDateUtil currentTimeGMT];
+     mutableRequest.HTTPMethod = self.httpMethod;
      //添加header
      [mutableRequest addValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
      [mutableRequest addValue:self.contentType forHTTPHeaderField:@"Content-Type"];
@@ -74,11 +80,14 @@
 @end
 @implementation FTLoggingRequest
 -(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events{
+    self = [super init];
     if(self){
         self.events = events;
-        self.requestBody = [[FTRequestLineBody alloc]init];
     }
     return self;
+}
+-(id<FTRequestBodyProtocol>)requestBody{
+    return [[FTRequestLineBody alloc]init];
 }
 -(NSString *)path{
     return @"/v1/write/logging";
@@ -89,11 +98,14 @@
 @end
 @implementation FTRumRequest
 -(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events{
+    self = [super init];
     if(self){
         self.events = events;
-        self.requestBody = [[FTRequestLineBody alloc]init];
     }
     return self;
+}
+-(id<FTRequestBodyProtocol>)requestBody{
+    return [[FTRequestLineBody alloc]init];
 }
 -(NSString *)path{
     return @"/v1/write/rum";
@@ -105,11 +117,14 @@
 @end
 @implementation FTTracingRequest
 -(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events{
+    self = [super init];
     if(self){
         self.events = events;
-        self.requestBody = [[FTRequestLineBody alloc]init];
     }
     return self;
+}
+-(id<FTRequestBodyProtocol>)requestBody{
+    return [[FTRequestLineBody alloc]init];
 }
 -(NSString *)path{
     return @"/v1/write/tracing";
@@ -120,13 +135,15 @@
 @end
 @implementation FTObjectRequest
 -(instancetype)initWithEvents:(NSArray<FTRecordModel *> *)events{
+    self = [super init];
     if(self){
         self.events = events;
-        self.requestBody = [[FTRequestObjectBody alloc]init];
     }
     return self;
 }
-
+-(id<FTRequestBodyProtocol>)requestBody{
+    return [[FTRequestObjectBody alloc]init];
+}
 -(NSString *)path{
     return @"/v1/write/object";
 }
