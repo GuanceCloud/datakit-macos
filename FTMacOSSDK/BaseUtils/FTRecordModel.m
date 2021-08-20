@@ -13,7 +13,14 @@
 #import "FTJSONUtil.h"
 #import "FTLog.h"
 @implementation FTRecordModel
-
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        _tm = [FTDateUtil currentTimeNanosecond];
+        _op = @"";
+    }
+    return self;
+}
 -(instancetype)initWithSource:(NSString *)source op:(FTDataType )op tags:(NSDictionary *)tags field:(NSDictionary *)field tm:(long long)tm{
     self = [super init];
     if (self) {

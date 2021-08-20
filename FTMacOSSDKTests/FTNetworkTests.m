@@ -7,9 +7,9 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <Utils/FTDateUtil.h>
+#import "FTDateUtil.h"
 #import <FTRecordModel.h>
-#import <Utils/FTConstants.h>
+#import <FTConstants.h>
 #import "FTTrackDataManger.h"
 #import "FTRequest.h"
 #import "FTNetworkManager.h"

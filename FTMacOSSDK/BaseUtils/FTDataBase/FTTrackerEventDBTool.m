@@ -44,6 +44,7 @@ static dispatch_once_t onceToken;
             dbTool.dbPath = path;
             ZYDebug(@"db path:%@",path);
             dbTool.dbQueue = dbQueue;
+            dbTool->_lock = dispatch_semaphore_create(1);
         }
         [dbTool createTable];
      }
@@ -56,7 +57,6 @@ static dispatch_once_t onceToken;
 }
 - (void)createTable{
     @try {
-        _lock = dispatch_semaphore_create(1);
         [self createEventTable];
     } @catch (NSException *exception) {
         ZYDebug(@"%@",exception);

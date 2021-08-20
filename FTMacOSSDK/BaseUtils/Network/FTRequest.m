@@ -10,7 +10,6 @@
 #import "FTRequestBody.h"
 #import "FTDateUtil.h"
 #import "FTConfigManager.h"
-#import "FTMacOSSDKVersion.h"
 @interface FTRequest()
 @property (nonatomic, strong) NSArray <FTRecordModel *> *events;
 
