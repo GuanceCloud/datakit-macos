@@ -7,7 +7,7 @@
 //
 
 #import "FTConfigManager.h"
-
+#import "FTMacOSSDKVersion.h"
 @implementation FTConfigManager
 + (instancetype)sharedInstance{
     static FTConfigManager *sharedInstance = nil;
@@ -20,5 +20,8 @@
 }
 -(void)setTrackConfig:(FTTrackConfig *)trackConfig{
     _trackConfig = [trackConfig copy];
+}
+-(NSString *)sdkVersion{
+    return SDK_VERSION;
 }
 @end

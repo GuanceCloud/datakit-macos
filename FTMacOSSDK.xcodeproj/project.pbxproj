@@ -123,6 +123,7 @@
 		7CA16DBA26B94F080079840D /* FTSDKAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSDKAgent.h; sourceTree = "<group>"; };
 		7CA16DBB26B94F080079840D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CA1801B26CE5D6B0035DDF0 /* FTNetworkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTNetworkTests.m; sourceTree = "<group>"; };
+		7CA1809726D345120035DDF0 /* FTMacOSSDKVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTMacOSSDKVersion.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -295,6 +296,7 @@
 				7C65AE3226BD167100D51A8F /* FTConstants.m */,
 				7C65AE3B26BD42C200D51A8F /* FTConfigManager.h */,
 				7C65AE3C26BD42C200D51A8F /* FTConfigManager.m */,
+				7CA1809726D345120035DDF0 /* FTMacOSSDKVersion.h */,
 			);
 			path = SDKCore;
 			sourceTree = "<group>";
