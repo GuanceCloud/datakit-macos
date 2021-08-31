@@ -8,23 +8,6 @@
 
 #import "FTConstants.h"
 
-@implementation FTConstants
-+(NSString *)dataTypeStr:(FTDataType)type{
-    NSString *request = nil;
-    switch (type) {
-        case FTDataTypeRUM:
-            request = @"RUM";
-            break;
-        case FTDataTypeLOGGING:
-            request = @"Logging";
-            break;
-        case FTDataTypeTRACING:
-            request = @"Tracing";
-            break;
-        case FTDataTypeObject:
-            request = @"Object";
-            break;
-    }
-    return request;
-}
-@end
+
+
+

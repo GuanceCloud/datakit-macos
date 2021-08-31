@@ -10,14 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, FTDataType) {
-    FTDataTypeRUM,
-    FTDataTypeLOGGING,
-    FTDataTypeTRACING,
-    FTDataTypeObject
-};
-@interface FTConstants : NSObject
-+(NSString *)dataTypeStr:(FTDataType)type;
-@end
+
 
 NS_ASSUME_NONNULL_END

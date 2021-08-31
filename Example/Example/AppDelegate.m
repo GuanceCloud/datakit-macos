@@ -2,12 +2,12 @@
 //  AppDelegate.m
 //  Example
 //
-//  Created by 胡蕾蕾 on 2021/8/3.
+//  Created by 胡蕾蕾 on 2021/8/31.
 //
 
 #import "AppDelegate.h"
-#import <FTMacOSSDK/FTSDKAgent.h>
-#import <FTMacOSSDK/FTTrackConfig.h>
+#import <FTSDKAgent.h>
+#import <FTTrackConfig.h>
 @interface AppDelegate ()
 
 

@@ -7,14 +7,13 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "FTDateUtil.h"
-#import <FTRecordModel.h>
-#import <FTConstants.h>
+#import <FTDateUtil.h>
 #import "FTTrackDataManger.h"
 #import "FTRequest.h"
+#import <FTMacOSSDK/FTSDKAgent.h>
+#import "FTRecordModel.h"
 #import "FTNetworkManager.h"
-#import <FTTrackConfig.h>
-#import <FTSDKAgent.h>
+#import "FTTrackConfig.h"
 @interface FTNetworkTests : XCTestCase
 
 @end
@@ -32,8 +31,8 @@
 - (void)testLoggingUpload{
     XCTestExpectation *expectation= [self expectationWithDescription:@"异步操作timeout"];
 
-    FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"testUploading" op:FTDataTypeLOGGING tags:@{@"name":@"testUpload"} field:@{@"event":@"testUpload"} tm:[FTDateUtil currentTimeNanosecond]];
-    FTRequest *request = [[FTRequest alloc]initWithEvents:@[model] type:FTDataTypeLOGGING];
+    FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"testUploading" op:FT_DATA_TYPE_LOGGING tags:@{@"name":@"testUpload"} field:@{@"event":@"testUpload"} tm:[FTDateUtil currentTimeNanosecond]];
+    FTRequest *request = [[FTRequest alloc]initWithEvents:@[model] type:FT_DATA_TYPE_LOGGING];
     [[FTNetworkManager sharedInstance] sendRequest:request completion:^(NSHTTPURLResponse * _Nonnull httpResponse, NSData * _Nullable data, NSError * _Nullable error) {
         XCTAssertTrue(httpResponse.statusCode == 200);
         [expectation fulfill];

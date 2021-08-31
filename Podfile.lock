@@ -1,0 +1,30 @@
+PODS:
+  - FTMacOSSDK (0.0.1):
+    - FTMacOSSDK/SDKCore (= 0.0.1)
+  - FTMacOSSDK/SDKCore (0.0.1):
+    - FTMobileSDK (~> 1.2.1-alpha.7)
+  - FTMobileSDK (1.2.1-alpha.7):
+    - FTMobileSDK/Core (= 1.2.1-alpha.7)
+  - FTMobileSDK/Common (1.2.1-alpha.7)
+  - FTMobileSDK/Core (1.2.1-alpha.7):
+    - FTMobileSDK/Common
+    - FTMobileSDK/FTMobileAgent
+
+DEPENDENCIES:
+  - FTMacOSSDK (from `./`)
+
+SPEC REPOS:
+  trunk:
+    - FTMobileSDK
+
+EXTERNAL SOURCES:
+  FTMacOSSDK:
+    :path: "./"
+
+SPEC CHECKSUMS:
+  FTMacOSSDK: 6be72c5f9a9780013bcbb4d2e393e3ff2c412734
+  FTMobileSDK: f1d58ff44a7e3eac02bdcb6916e91db48d8d1004
+
+PODFILE CHECKSUM: e4c7dff8c1937b061895eb5e19867cf786dbe7db
+
+COCOAPODS: 1.10.1

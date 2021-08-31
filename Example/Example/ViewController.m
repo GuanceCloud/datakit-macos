@@ -2,11 +2,11 @@
 //  ViewController.m
 //  Example
 //
-//  Created by 胡蕾蕾 on 2021/8/3.
+//  Created by 胡蕾蕾 on 2021/8/31.
 //
 
 #import "ViewController.h"
-#import <FTMacOSSDK/FTSDKAgent.h>
+
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -20,6 +20,7 @@
     [button setTitle:@"click"];
     [self.view addSubview:button];
 }
+
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
 

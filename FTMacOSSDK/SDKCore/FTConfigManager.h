@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FTConfigManager : NSObject
 @property(nonatomic, strong) FTTrackConfig *trackConfig;
-@property(nonatomic, copy, readonly) NSString *sdkVersion;
 
 + (instancetype)sharedInstance;
 

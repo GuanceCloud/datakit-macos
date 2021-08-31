@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.summary      = "DataFlux MacOS SDK"
   spec.description  = "DataFlux MacOS SDK"
 
-  spec.homepage     = "http://EXAMPLE/FTMacOSSDK"
+  spec.homepage     = "http://gitlab.jiagouyun.com/cma/ft-sdk-macos"
 
   spec.license      = { type: 'Apache', :file => 'LICENSE'}
 
@@ -23,23 +23,16 @@ Pod::Spec.new do |spec|
   spec.osx.deployment_target = '10.10'
   spec.requires_arc = true
   
-  spec.source       = { :git => "http://EXAMPLE/FTMacOSSDK.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "http://gitlab.jiagouyun.com/cma/ft-sdk-macos.git", :tag => "#{spec.version}" }
 
   spec.default_subspec = "SDKCore"
 
   spec.subspec 'SDKCore' do |core|
        core.source_files  = "FTMacOSSDK/SDKCore/*.{h,m}"
-       core.dependency = "FTMacOSSDK/AutoTrack"
-       core.dependency 'FTMacOSSDK/Common'
+       core.dependency 'FTMobileSDK/Common', '~> 1.2.1-alpha.7'
 
   end
 
-  spec.subspec 'Common' = |c|
-       c.source_files ="FTMacOSSDK/BaseUtils/*.{h,m}"
-  end
   
-  spec.subspec 'AutoTrack' = 'autotracker'
-        autotracker.source_files = "FTMacOSSDK/AutoTrack/*.{h,m}"
-  end
   
 end

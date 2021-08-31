@@ -39,6 +39,7 @@ static FTSDKAgent *sharedInstance = nil;
         //开启网络监听
         [[FTReachability sharedInstance] startNotifier];
         FTConfigManager.sharedInstance.trackConfig = config;
+        [FTLog enableLog:YES];
     }
     return self;
 }
@@ -47,7 +48,7 @@ static FTSDKAgent *sharedInstance = nil;
         return;
     }
     @try {
-        FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"df_rum_macos_log" op:FTDataTypeLOGGING tags:@{@"sdk_name":@"df_macos_rum_sdk"} field:@{@"message":content} tm:[FTDateUtil currentTimeNanosecond]];
+        FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"df_rum_macos_log" op:FT_DATA_TYPE_LOGGING tags:@{@"sdk_name":@"df_macos_rum_sdk"} field:@{@"message":content} tm:[FTDateUtil currentTimeNanosecond]];
         [[FTTrackDataManger sharedInstance] addTrackData:model type:FTAddDataNormal];
     } @catch (NSException *exception) {
         ZYErrorLog(@"exception %@",exception);

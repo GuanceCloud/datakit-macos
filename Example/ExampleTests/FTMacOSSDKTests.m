@@ -6,15 +6,15 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <FTSDKAgent.h>
+#import <FTTrackConfig.h>
 #import "FTDateUtil.h"
-#import <FTRecordModel.h>
-#import <FTConstants.h>
+#import "FTRecordModel.h"
 #import "FTTrackDataManger.h"
 #import "FTRequest.h"
 #import "FTNetworkManager.h"
-#import <FTTrackConfig.h>
-#import <FTSDKAgent.h>
 #import "FTTrackerEventDBTool.h"
+
 @interface FTMacOSSDKTests : XCTestCase
 
 @end
@@ -38,7 +38,7 @@
 
 - (void)testEventUpload{
     XCTestExpectation *expectation= [self expectationWithDescription:@"异步操作timeout"];
-    FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"testUploading" op:FTDataTypeLOGGING tags:@{@"name":@"testEventUpload1"} field:@{@"event":@"testEventUpload"} tm:[FTDateUtil currentTimeNanosecond]];
+    FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"testUploading" op:FT_DATA_TYPE_LOGGING tags:@{@"name":@"testEventUpload1"} field:@{@"event":@"testEventUpload"} tm:[FTDateUtil currentTimeNanosecond]];
     NSInteger oldCount = [[FTTrackerEventDBTool sharedManger] getDatasCount];
     
     [[FTTrackDataManger sharedInstance] addTrackData:model type:FTAddDataNormal];
@@ -46,7 +46,7 @@
     NSInteger newCount = [[FTTrackerEventDBTool sharedManger] getDatasCount];
     XCTAssertTrue(newCount>oldCount);
     [NSThread sleepForTimeInterval:10];
-    FTRecordModel *model2 = [[FTRecordModel alloc]initWithSource:@"testUploading" op:FTDataTypeLOGGING tags:@{@"name":@"testEventUpload2"} field:@{@"event":@"testEventUpload"} tm:[FTDateUtil currentTimeNanosecond]];
+    FTRecordModel *model2 = [[FTRecordModel alloc]initWithSource:@"testUploading" op:FT_DATA_TYPE_LOGGING tags:@{@"name":@"testEventUpload2"} field:@{@"event":@"testEventUpload"} tm:[FTDateUtil currentTimeNanosecond]];
     [[FTTrackDataManger sharedInstance] addTrackData:model2 type:FTAddDataNormal];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSInteger uploadedCount = [[FTTrackerEventDBTool sharedManger] getDatasCount];
