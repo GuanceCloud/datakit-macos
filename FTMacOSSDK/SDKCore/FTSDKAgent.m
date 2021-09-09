@@ -14,7 +14,10 @@
 #import "FTRecordModel.h"
 #import "FTLog.h"
 #import "FTDateUtil.h"
+#import "FTAutoTrack.h"
 @interface FTSDKAgent()
+@property (nonatomic, strong) FTAutoTrack *autoTrack;
+
 @end
 @implementation FTSDKAgent
 static FTSDKAgent *sharedInstance = nil;
@@ -39,6 +42,7 @@ static FTSDKAgent *sharedInstance = nil;
         //开启网络监听
         [[FTReachability sharedInstance] startNotifier];
         FTConfigManager.sharedInstance.trackConfig = config;
+        _autoTrack = [[FTAutoTrack alloc]init];
         [FTLog enableLog:YES];
     }
     return self;

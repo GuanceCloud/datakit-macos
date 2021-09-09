@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "FTMacOSSDK"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.1-alpha.1"
   spec.summary      = "DataFlux MacOS SDK"
   spec.description  = "DataFlux MacOS SDK"
 
@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
   spec.default_subspec = "SDKCore"
 
   spec.subspec 'SDKCore' do |core|
-       core.source_files  = "FTMacOSSDK/SDKCore/*.{h,m}"
+       core.source_files  = "FTMacOSSDK/SDKCore/**/*.{h,m}"
        core.dependency 'FTMobileSDK/Common', '~> 1.2.1-alpha.7'
 
   end
