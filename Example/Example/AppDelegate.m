@@ -8,8 +8,10 @@
 #import "AppDelegate.h"
 #import <FTSDKAgent.h>
 #import <FTTrackConfig.h>
+#import "LoginWindowController.h"
 @interface AppDelegate ()
 
+@property (nonatomic, strong) LoginWindowController *loginWindowC;
 
 @end
 
@@ -22,8 +24,16 @@
     FTTrackConfig *config = [[FTTrackConfig alloc]initWithMetricsUrl:url];
     [FTSDKAgent startWithConfigOptions:config];
     [[FTSDKAgent sharedInstance] logging:@"applicationDidFinishLaunching" status:FTStatusInfo];
+    [self.loginWindowC showWindow:self];
+    
 }
 
+-(LoginWindowController *)loginWindowC{
+    if (!_loginWindowC) {
+        _loginWindowC = [[NSStoryboard storyboardWithName:@"Main" bundle:nil] instantiateControllerWithIdentifier:@"LoginWindowController"];
+    }
+    return _loginWindowC;
+}
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application

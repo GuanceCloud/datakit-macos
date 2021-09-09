@@ -6,7 +6,10 @@
 //
 
 #import "ViewController.h"
+@interface ViewController()
+@property (nonatomic, strong) NSWindowController *mainAppWVC;
 
+@end
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -14,13 +17,18 @@
     [self createUI];
     // Do any additional setup after loading the view.
 }
-
 - (void)createUI{
-    NSButton *button = [[NSButton alloc]initWithFrame:CGRectMake(20, 20, 100, 40)];
-    [button setTitle:@"click"];
+    NSButton *button = [NSButton buttonWithTitle:@"Login" target:self action:@selector(click)];
+    
     [self.view addSubview:button];
 }
-
+- (void)click{
+    [self.view.window close];
+    
+    self.mainAppWVC = [[NSStoryboard storyboardWithName:@"Main" bundle:nil] instantiateControllerWithIdentifier:@"MainAppWVC"];
+    
+    [self.mainAppWVC showWindow:self];
+}
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
 

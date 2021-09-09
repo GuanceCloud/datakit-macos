@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		44AA25EEB360BE645D48839A /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6BDA0876EF4F249FA25207 /* libPods-ExampleTests.a */; };
+		7CD26F0E26E9F5140025CC50 /* LoginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26F0C26E9F5140025CC50 /* LoginWindowController.m */; };
+		7CD26F2726EA06BF0025CC50 /* LoginWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26F2626EA06BF0025CC50 /* LoginWindow.m */; };
 		7CDA50CB26DE15EB0062CC39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDA50CA26DE15EB0062CC39 /* AppDelegate.m */; };
 		7CDA50CE26DE15EB0062CC39 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDA50CD26DE15EB0062CC39 /* ViewController.m */; };
 		7CDA50D026DE15ED0062CC39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CDA50CF26DE15ED0062CC39 /* Assets.xcassets */; };
@@ -41,6 +43,10 @@
 		493DD0D25399A3B94608C5C7 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		5A6BDA0876EF4F249FA25207 /* libPods-ExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE11D26696445F40F7C3D79 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CD26F0C26E9F5140025CC50 /* LoginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWindowController.m; sourceTree = "<group>"; };
+		7CD26F0D26E9F5140025CC50 /* LoginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWindowController.h; sourceTree = "<group>"; };
+		7CD26F2526EA06BF0025CC50 /* LoginWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginWindow.h; sourceTree = "<group>"; };
+		7CD26F2626EA06BF0025CC50 /* LoginWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginWindow.m; sourceTree = "<group>"; };
 		7CDA50C626DE15EB0062CC39 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CDA50C926DE15EB0062CC39 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7CDA50CA26DE15EB0062CC39 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -139,11 +145,15 @@
 				7CDA50CA26DE15EB0062CC39 /* AppDelegate.m */,
 				7CDA50CC26DE15EB0062CC39 /* ViewController.h */,
 				7CDA50CD26DE15EB0062CC39 /* ViewController.m */,
+				7CD26F0D26E9F5140025CC50 /* LoginWindowController.h */,
+				7CD26F0C26E9F5140025CC50 /* LoginWindowController.m */,
 				7CDA50CF26DE15ED0062CC39 /* Assets.xcassets */,
 				7CDA50D126DE15ED0062CC39 /* Main.storyboard */,
 				7CDA50D426DE15ED0062CC39 /* Info.plist */,
 				7CDA50D526DE15ED0062CC39 /* main.m */,
 				7CDA50D726DE15ED0062CC39 /* Example.entitlements */,
+				7CD26F2526EA06BF0025CC50 /* LoginWindow.h */,
+				7CD26F2626EA06BF0025CC50 /* LoginWindow.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -364,7 +374,9 @@
 			files = (
 				7CDA50CE26DE15EB0062CC39 /* ViewController.m in Sources */,
 				7CDA50D626DE15ED0062CC39 /* main.m in Sources */,
+				7CD26F2726EA06BF0025CC50 /* LoginWindow.m in Sources */,
 				7CDA50CB26DE15EB0062CC39 /* AppDelegate.m in Sources */,
+				7CD26F0E26E9F5140025CC50 /* LoginWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
