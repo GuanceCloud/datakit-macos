@@ -11,6 +11,8 @@
 #import "NSViewController+FTAutoTrack.h"
 #import "NSWindowController+FTAutoTrack.h"
 #import "NSWindow+FTAutoTrack.h"
+#import "NSApplication+FTAutotrack.h"
+#import "NSTableView+FTAutoTrack.h"
 @implementation FTAutoTrack
 
 -(instancetype)init{
@@ -56,7 +58,9 @@
     @try {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            
+            NSError *error = NULL;
+            [NSApplication ft_swizzleMethod:@selector(sendAction:to:from:) withMethod:@selector(ft_sendAction:to:from:) error:&error];
+            [NSTableView ft_swizzleMethod:@selector(tableViewSelectionDidChange:) withMethod:@selector(ft_tableViewSelectionDidChange:) error:&error];
         });
     } @catch (NSException *exception) {
         ZYErrorLog(@"exception: %@", self, exception);
