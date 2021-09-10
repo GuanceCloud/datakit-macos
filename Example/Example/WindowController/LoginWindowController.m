@@ -20,6 +20,7 @@
 }
 
 -(void)windowWillClose:(NSNotification *)notification{
-    
+    self.contentViewController = nil;
+    self.window = nil;
 }
 @end

@@ -10,6 +10,15 @@
 		44AA25EEB360BE645D48839A /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6BDA0876EF4F249FA25207 /* libPods-ExampleTests.a */; };
 		7CD26F0E26E9F5140025CC50 /* LoginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26F0C26E9F5140025CC50 /* LoginWindowController.m */; };
 		7CD26F2726EA06BF0025CC50 /* LoginWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26F2626EA06BF0025CC50 /* LoginWindow.m */; };
+		7CD26F8D26EAFBE00025CC50 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26F8C26EAFBE00025CC50 /* MainWindowController.m */; };
+		7CD26FE226EB223E0025CC50 /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26FE126EB223E0025CC50 /* TabViewController.m */; };
+		7CD26FEC26EB24760025CC50 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26FEA26EB24760025CC50 /* FirstViewController.m */; };
+		7CD26FED26EB24760025CC50 /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD26FEB26EB24760025CC50 /* FirstViewController.xib */; };
+		7CD26FF726EB24D40025CC50 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26FF526EB24D40025CC50 /* SecondViewController.m */; };
+		7CD26FF826EB24D40025CC50 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD26FF626EB24D40025CC50 /* SecondViewController.xib */; };
+		7CD2703726EB4E3E0025CC50 /* PresentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2703526EB4E3E0025CC50 /* PresentVC.m */; };
+		7CD2703826EB4E3E0025CC50 /* PresentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CD2703626EB4E3E0025CC50 /* PresentVC.xib */; };
+		7CD2705226EB6C820025CC50 /* PresentCustomAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD2705126EB6C820025CC50 /* PresentCustomAnimator.m */; };
 		7CDA50CB26DE15EB0062CC39 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDA50CA26DE15EB0062CC39 /* AppDelegate.m */; };
 		7CDA50CE26DE15EB0062CC39 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDA50CD26DE15EB0062CC39 /* ViewController.m */; };
 		7CDA50D026DE15ED0062CC39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CDA50CF26DE15ED0062CC39 /* Assets.xcassets */; };
@@ -47,6 +56,21 @@
 		7CD26F0D26E9F5140025CC50 /* LoginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWindowController.h; sourceTree = "<group>"; };
 		7CD26F2526EA06BF0025CC50 /* LoginWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginWindow.h; sourceTree = "<group>"; };
 		7CD26F2626EA06BF0025CC50 /* LoginWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginWindow.m; sourceTree = "<group>"; };
+		7CD26F8B26EAFBE00025CC50 /* MainWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
+		7CD26F8C26EAFBE00025CC50 /* MainWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
+		7CD26FE026EB223E0025CC50 /* TabViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabViewController.h; sourceTree = "<group>"; };
+		7CD26FE126EB223E0025CC50 /* TabViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
+		7CD26FE926EB24760025CC50 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		7CD26FEA26EB24760025CC50 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		7CD26FEB26EB24760025CC50 /* FirstViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
+		7CD26FF426EB24D40025CC50 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		7CD26FF526EB24D40025CC50 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		7CD26FF626EB24D40025CC50 /* SecondViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
+		7CD2703426EB4E3E0025CC50 /* PresentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresentVC.h; sourceTree = "<group>"; };
+		7CD2703526EB4E3E0025CC50 /* PresentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PresentVC.m; sourceTree = "<group>"; };
+		7CD2703626EB4E3E0025CC50 /* PresentVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PresentVC.xib; sourceTree = "<group>"; };
+		7CD2705026EB6C820025CC50 /* PresentCustomAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresentCustomAnimator.h; sourceTree = "<group>"; };
+		7CD2705126EB6C820025CC50 /* PresentCustomAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PresentCustomAnimator.m; sourceTree = "<group>"; };
 		7CDA50C626DE15EB0062CC39 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CDA50C926DE15EB0062CC39 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7CDA50CA26DE15EB0062CC39 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -116,6 +140,39 @@
 			path = ../Pods;
 			sourceTree = "<group>";
 		};
+		7CD26F9126EAFBE80025CC50 /* WindowController */ = {
+			isa = PBXGroup;
+			children = (
+				7CD26F0D26E9F5140025CC50 /* LoginWindowController.h */,
+				7CD26F0C26E9F5140025CC50 /* LoginWindowController.m */,
+				7CD26F8B26EAFBE00025CC50 /* MainWindowController.h */,
+				7CD26F8C26EAFBE00025CC50 /* MainWindowController.m */,
+				7CD26F2526EA06BF0025CC50 /* LoginWindow.h */,
+				7CD26F2626EA06BF0025CC50 /* LoginWindow.m */,
+			);
+			path = WindowController;
+			sourceTree = "<group>";
+		};
+		7CD2700F26EB32CA0025CC50 /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				7CD26FE026EB223E0025CC50 /* TabViewController.h */,
+				7CD26FE126EB223E0025CC50 /* TabViewController.m */,
+				7CD26FF426EB24D40025CC50 /* SecondViewController.h */,
+				7CD26FF526EB24D40025CC50 /* SecondViewController.m */,
+				7CD26FF626EB24D40025CC50 /* SecondViewController.xib */,
+				7CD26FE926EB24760025CC50 /* FirstViewController.h */,
+				7CD26FEA26EB24760025CC50 /* FirstViewController.m */,
+				7CD26FEB26EB24760025CC50 /* FirstViewController.xib */,
+				7CD2703426EB4E3E0025CC50 /* PresentVC.h */,
+				7CD2703526EB4E3E0025CC50 /* PresentVC.m */,
+				7CD2703626EB4E3E0025CC50 /* PresentVC.xib */,
+				7CD2705026EB6C820025CC50 /* PresentCustomAnimator.h */,
+				7CD2705126EB6C820025CC50 /* PresentCustomAnimator.m */,
+			);
+			path = TabView;
+			sourceTree = "<group>";
+		};
 		7CDA50BD26DE15EB0062CC39 = {
 			isa = PBXGroup;
 			children = (
@@ -141,19 +198,17 @@
 		7CDA50C826DE15EB0062CC39 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				7CD2700F26EB32CA0025CC50 /* TabView */,
+				7CD26F9126EAFBE80025CC50 /* WindowController */,
 				7CDA50C926DE15EB0062CC39 /* AppDelegate.h */,
 				7CDA50CA26DE15EB0062CC39 /* AppDelegate.m */,
 				7CDA50CC26DE15EB0062CC39 /* ViewController.h */,
 				7CDA50CD26DE15EB0062CC39 /* ViewController.m */,
-				7CD26F0D26E9F5140025CC50 /* LoginWindowController.h */,
-				7CD26F0C26E9F5140025CC50 /* LoginWindowController.m */,
 				7CDA50CF26DE15ED0062CC39 /* Assets.xcassets */,
 				7CDA50D126DE15ED0062CC39 /* Main.storyboard */,
 				7CDA50D426DE15ED0062CC39 /* Info.plist */,
 				7CDA50D526DE15ED0062CC39 /* main.m */,
 				7CDA50D726DE15ED0062CC39 /* Example.entitlements */,
-				7CD26F2526EA06BF0025CC50 /* LoginWindow.h */,
-				7CD26F2626EA06BF0025CC50 /* LoginWindow.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -282,8 +337,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CD26FF826EB24D40025CC50 /* SecondViewController.xib in Resources */,
 				7CDA50D026DE15ED0062CC39 /* Assets.xcassets in Resources */,
+				7CD26FED26EB24760025CC50 /* FirstViewController.xib in Resources */,
 				7CDA50D326DE15ED0062CC39 /* Main.storyboard in Resources */,
+				7CD2703826EB4E3E0025CC50 /* PresentVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,11 +430,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CD26FF726EB24D40025CC50 /* SecondViewController.m in Sources */,
+				7CD2705226EB6C820025CC50 /* PresentCustomAnimator.m in Sources */,
+				7CD26F8D26EAFBE00025CC50 /* MainWindowController.m in Sources */,
 				7CDA50CE26DE15EB0062CC39 /* ViewController.m in Sources */,
 				7CDA50D626DE15ED0062CC39 /* main.m in Sources */,
 				7CD26F2726EA06BF0025CC50 /* LoginWindow.m in Sources */,
 				7CDA50CB26DE15EB0062CC39 /* AppDelegate.m in Sources */,
+				7CD26FE226EB223E0025CC50 /* TabViewController.m in Sources */,
 				7CD26F0E26E9F5140025CC50 /* LoginWindowController.m in Sources */,
+				7CD2703726EB4E3E0025CC50 /* PresentVC.m in Sources */,
+				7CD26FEC26EB24760025CC50 /* FirstViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

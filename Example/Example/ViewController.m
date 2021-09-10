@@ -8,21 +8,21 @@
 #import "ViewController.h"
 @interface ViewController()
 @property (nonatomic, strong) NSWindowController *mainAppWVC;
+@property (weak) IBOutlet NSButton *loginBtn;
 
 @end
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self createUI];
     // Do any additional setup after loading the view.
 }
-- (void)createUI{
-    NSButton *button = [NSButton buttonWithTitle:@"Login" target:self action:@selector(click)];
-    
-    [self.view addSubview:button];
+- (IBAction)closeClick:(id)sender {
+    [self.view.window close];
 }
-- (void)click{
+
+- (IBAction)loginClick:(id)sender {
+    
     [self.view.window close];
     
     self.mainAppWVC = [[NSStoryboard storyboardWithName:@"Main" bundle:nil] instantiateControllerWithIdentifier:@"MainAppWVC"];
