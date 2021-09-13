@@ -17,19 +17,71 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IzW-hv-JLQ">
-                    <rect key="frame" x="201" y="128" width="79" height="16"/>
-                    <textFieldCell key="cell" lineBreakMode="clipping" title="SecondView" id="Hci-ha-m9O">
-                        <font key="font" usesAppearanceFont="YES"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
+                <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScL-BO-mUs">
+                    <rect key="frame" x="40" y="94" width="139" height="148"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" useCurrentDate="YES" id="udv-QJ-gcZ">
+                        <font key="font" metaFont="system"/>
+                        <date key="date" timeIntervalSinceReferenceDate="653211761.55298805">
+                            <!--2021-09-13 07:42:41 +0000-->
+                        </date>
+                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                    </datePickerCell>
+                </datePicker>
+                <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aRM-GB-P4n">
+                    <rect key="frame" x="267" y="187" width="100" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="textField" useCurrentDate="YES" id="RSc-aJ-9Fs">
+                        <font key="font" metaFont="system"/>
+                        <date key="date" timeIntervalSinceReferenceDate="653212435.17481601">
+                            <!--2021-09-13 07:53:55 +0000-->
+                        </date>
+                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                    </datePickerCell>
+                </datePicker>
+                <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j8c-CI-baL">
+                    <rect key="frame" x="267" y="124" width="100" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <datePickerCell key="cell" borderStyle="bezel" alignment="left" useCurrentDate="YES" id="hqT-H3-jEq">
+                        <font key="font" metaFont="system"/>
+                        <date key="date" timeIntervalSinceReferenceDate="653212431.94826102">
+                            <!--2021-09-13 07:53:51 +0000-->
+                        </date>
+                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                    </datePickerCell>
+                </datePicker>
+                <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ca3-w1-MlW">
+                    <rect key="frame" x="263" y="40" width="104" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Gmi-N0-8JD">
+                        <font key="font" metaFont="system"/>
+                        <segments>
+                            <segment width="32"/>
+                            <segment width="32" selected="YES" tag="1"/>
+                            <segment width="32">
+                                <nil key="label"/>
+                            </segment>
+                        </segments>
+                    </segmentedCell>
+                </segmentedControl>
+                <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2o4-sP-blN">
+                    <rect key="frame" x="38" y="43" width="96" height="19"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="CGm-c0-kmU"/>
+                </slider>
+                <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" doubleValue="50" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="wPV-sn-uCi">
+                    <rect key="frame" x="264" y="84" width="100" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </progressIndicator>
+                <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a7O-vE-MuI">
+                    <rect key="frame" x="207" y="195" width="19" height="28"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="NLT-A2-IHe"/>
+                </stepper>
             </subviews>
-            <constraints>
-                <constraint firstItem="IzW-hv-JLQ" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="lBm-bM-O7R"/>
-                <constraint firstItem="IzW-hv-JLQ" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="lTB-5N-48V"/>
-            </constraints>
             <point key="canvasLocation" x="-102" y="120"/>
         </customView>
     </objects>

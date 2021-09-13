@@ -827,6 +827,21 @@
                                 </button>
                             </subviews>
                         </view>
+                        <toolbar key="toolbar" implicitIdentifier="F731E024-9134-4F3D-B4D2-0F4B27195915" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="QaQ-it-lvY">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="g0j-zy-dqq"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="fY1-tH-eE8"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="1F3-6N-okR"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="aPw-33-PAb"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="iw6-2E-cUn"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="g0j-zy-dqq"/>
+                                <toolbarItem reference="fY1-tH-eE8"/>
+                                <toolbarItem reference="iw6-2E-cUn"/>
+                                <toolbarItem reference="1F3-6N-okR"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="ijX-kl-ZeU" id="T1Z-TE-22a"/>
                         </connections>

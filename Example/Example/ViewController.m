@@ -15,6 +15,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSApplication *app = [NSApplication sharedApplication];
+    NSLog(@"windows = %@",app.windows);
     // Do any additional setup after loading the view.
 }
 - (IBAction)closeClick:(id)sender {

@@ -51,6 +51,8 @@
         }
     }
     NSLog(@"index = %ld tabViewItem.lable = %@ controller = %@",(long)index,tabViewItem.label,view);
+    NSApplication *app = [NSApplication sharedApplication];
+    NSLog(@"windows = %@",app.windows);
 }
 - (IBAction)modalClick:(id)sender {
     

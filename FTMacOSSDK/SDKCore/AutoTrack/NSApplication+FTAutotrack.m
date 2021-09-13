@@ -13,6 +13,36 @@
     return [self ft_sendAction:action to:target from:sender];
 }
 - (void)ftTrack:(SEL)action to:(id)target from:(id )sender{
+    if (![sender  isKindOfClass:[NSView class]]) {
+        return;
+    }
+    if([sender isKindOfClass:NSScroller.class]){
+        if (self.currentEvent.type != NSEventTypeLeftMouseUp) {
+            return;
+        }
+        //采集 NSScroller 拖拽
+        
+    }else if([sender isKindOfClass:NSDatePicker.class]){
+        //采集日历相关
+        if (action && target) {
+         
+        }else{
+            
+        }
+        
+    }else{
+        //采集其他控件点击
+        if([sender isKindOfClass:NSPopUpButton.class]){
+            NSPopUpButton *pop = sender;
+            NSLog(@"selectedItem.title %@", pop.selectedItem.title);
+        }
+    }
+    
+    NSLog(@"action %@",NSStringFromSelector(action));
+    NSLog(@"target %@",target);
+    NSLog(@"sender %@",sender);
+    NSLog(@"event %@",self.currentEvent);
+    
     
 }
 
