@@ -12,7 +12,6 @@
 #import "NSWindowController+FTAutoTrack.h"
 #import "NSWindow+FTAutoTrack.h"
 #import "NSApplication+FTAutotrack.h"
-#import "NSTableView+FTAutoTrack.h"
 @implementation FTAutoTrack
 
 -(instancetype)init{
@@ -48,6 +47,12 @@
             [NSViewController ft_swizzleMethod:@selector(viewDidLoad) withMethod:@selector(dataflux_viewDidLoad) error:&error];
             [NSViewController ft_swizzleMethod:@selector(viewDidAppear) withMethod:@selector(dataflux_viewDidAppear) error:&error];
             [NSViewController ft_swizzleMethod:@selector(viewDidDisappear) withMethod:@selector(dataflux_viewDidDisappear) error:&error];
+            [NSWindow ft_swizzleMethod:@selector(becomeMainWindow) withMethod:@selector(ft_becomeMainWindow) error:&error];
+            [NSWindow ft_swizzleMethod:@selector(becomeKeyWindow) withMethod:@selector(ft_becomeKeyWindow) error:&error];
+            [NSWindow ft_swizzleMethod:@selector(makeKeyWindow) withMethod:@selector(ft_makeKeyWindow) error:&error];
+            [NSWindowController ft_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(ft_windowDidLoad) error:&error];
+
+
         });
     } @catch (NSException *exception) {
         ZYErrorLog(@"exception: %@", self, exception);
@@ -59,8 +64,7 @@
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             NSError *error = NULL;
-            [NSApplication ft_swizzleMethod:@selector(sendAction:to:from:) withMethod:@selector(ft_sendAction:to:from:) error:&error];
-            [NSTableView ft_swizzleMethod:@selector(tableViewSelectionDidChange:) withMethod:@selector(ft_tableViewSelectionDidChange:) error:&error];
+            [NSApplication ft_swizzleMethod:@selector(sendAction:to:from:) withMethod:@selector(dataflux_sendAction:to:from:) error:&error];
         });
     } @catch (NSException *exception) {
         ZYErrorLog(@"exception: %@", self, exception);

@@ -798,6 +798,8 @@
                     </view>
                     <connections>
                         <outlet property="loginBtn" destination="RMp-1x-la5" id="eZ4-kw-EAw"/>
+                        <outlet property="passwordTF" destination="eRv-OT-wef" id="KcV-5z-pFg"/>
+                        <outlet property="userNameTF" destination="vlv-4r-xOh" id="qdr-TT-zKD"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

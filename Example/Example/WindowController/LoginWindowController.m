@@ -15,6 +15,7 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    self.window.delegate = self;
     [self.window center];
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
@@ -22,5 +23,8 @@
 -(void)windowWillClose:(NSNotification *)notification{
     self.contentViewController = nil;
     self.window = nil;
+}
+-(void)windowWillBeginSheet:(NSNotification *)notification{
+    
 }
 @end

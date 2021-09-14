@@ -8,9 +8,10 @@
 #import "TabViewController.h"
 #import "FirstViewController.h"
 #import "SecondViewController.h"
-#import <FTMacOSSDK/NSApplication+FTAutotrack.h>
 #import "PresentVC.h"
 #import "PresentCustomAnimator.h"
+#import "CollectionVC.h"
+
 @interface TabViewController ()<NSTabViewDelegate>
 @property (weak) IBOutlet NSTabView *tabView;
 
@@ -56,7 +57,7 @@
 }
 - (IBAction)modalClick:(id)sender {
     
-    PresentVC *vc = [[PresentVC alloc]init];
+    CollectionVC *vc = [[CollectionVC alloc]init];
     [self presentViewControllerAsModalWindow:vc];
 }
 - (IBAction)sheetClick:(id)sender {

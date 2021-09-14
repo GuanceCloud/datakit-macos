@@ -23,7 +23,7 @@
     NSString *url = [processInfo environment][@"ACCESS_SERVER_URL"];
     FTTrackConfig *config = [[FTTrackConfig alloc]initWithMetricsUrl:url];
     [FTSDKAgent startWithConfigOptions:config];
-    [[FTSDKAgent sharedInstance] logging:@"applicationDidFinishLaunching" status:FTStatusInfo];
+//    [[FTSDKAgent sharedInstance] logging:@"applicationDidFinishLaunching" status:FTStatusInfo];
     [self.loginWindowC showWindow:self];
     
 }

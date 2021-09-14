@@ -27,6 +27,10 @@
 		7CDA50EC26DE15EE0062CC39 /* ExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDA50EB26DE15EE0062CC39 /* ExampleUITests.m */; };
 		7CDAF53626DE1C8B00F8F01D /* FTNetworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAF53426DE1C8B00F8F01D /* FTNetworkTests.m */; };
 		7CDAF53726DE1C8B00F8F01D /* FTMacOSSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAF53526DE1C8B00F8F01D /* FTMacOSSDKTests.m */; };
+		7CF30ED726F098AF003CA20A /* CollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30ED526F098AF003CA20A /* CollectionVC.m */; };
+		7CF30ED826F098AF003CA20A /* CollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF30ED626F098AF003CA20A /* CollectionVC.xib */; };
+		7CF30EDF26F09D5E003CA20A /* CollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30EDD26F09D5E003CA20A /* CollectionViewItem.m */; };
+		7CF30EE026F09D5E003CA20A /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF30EDE26F09D5E003CA20A /* CollectionViewItem.xib */; };
 		D3C6583BB8ACF94F2C0ADB2B /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE11D26696445F40F7C3D79 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +92,12 @@
 		7CDA50ED26DE15EE0062CC39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CDAF53426DE1C8B00F8F01D /* FTNetworkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNetworkTests.m; sourceTree = "<group>"; };
 		7CDAF53526DE1C8B00F8F01D /* FTMacOSSDKTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMacOSSDKTests.m; sourceTree = "<group>"; };
+		7CF30ED426F098AF003CA20A /* CollectionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionVC.h; sourceTree = "<group>"; };
+		7CF30ED526F098AF003CA20A /* CollectionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionVC.m; sourceTree = "<group>"; };
+		7CF30ED626F098AF003CA20A /* CollectionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionVC.xib; sourceTree = "<group>"; };
+		7CF30EDC26F09D5E003CA20A /* CollectionViewItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewItem.h; sourceTree = "<group>"; };
+		7CF30EDD26F09D5E003CA20A /* CollectionViewItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewItem.m; sourceTree = "<group>"; };
+		7CF30EDE26F09D5E003CA20A /* CollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewItem.xib; sourceTree = "<group>"; };
 		A0988D1F06B19287F548B039 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DD52A21A9E849B2949641CE0 /* Pods-ExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.release.xcconfig"; path = "Target Support Files/Pods-ExampleTests/Pods-ExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +179,12 @@
 				7CD2703626EB4E3E0025CC50 /* PresentVC.xib */,
 				7CD2705026EB6C820025CC50 /* PresentCustomAnimator.h */,
 				7CD2705126EB6C820025CC50 /* PresentCustomAnimator.m */,
+				7CF30ED426F098AF003CA20A /* CollectionVC.h */,
+				7CF30ED526F098AF003CA20A /* CollectionVC.m */,
+				7CF30ED626F098AF003CA20A /* CollectionVC.xib */,
+				7CF30EDC26F09D5E003CA20A /* CollectionViewItem.h */,
+				7CF30EDD26F09D5E003CA20A /* CollectionViewItem.m */,
+				7CF30EDE26F09D5E003CA20A /* CollectionViewItem.xib */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
@@ -339,6 +355,8 @@
 			files = (
 				7CD26FF826EB24D40025CC50 /* SecondViewController.xib in Resources */,
 				7CDA50D026DE15ED0062CC39 /* Assets.xcassets in Resources */,
+				7CF30ED826F098AF003CA20A /* CollectionVC.xib in Resources */,
+				7CF30EE026F09D5E003CA20A /* CollectionViewItem.xib in Resources */,
 				7CD26FED26EB24760025CC50 /* FirstViewController.xib in Resources */,
 				7CDA50D326DE15ED0062CC39 /* Main.storyboard in Resources */,
 				7CD2703826EB4E3E0025CC50 /* PresentVC.xib in Resources */,
@@ -430,8 +448,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CF30EDF26F09D5E003CA20A /* CollectionViewItem.m in Sources */,
 				7CD26FF726EB24D40025CC50 /* SecondViewController.m in Sources */,
 				7CD2705226EB6C820025CC50 /* PresentCustomAnimator.m in Sources */,
+				7CF30ED726F098AF003CA20A /* CollectionVC.m in Sources */,
 				7CD26F8D26EAFBE00025CC50 /* MainWindowController.m in Sources */,
 				7CDA50CE26DE15EB0062CC39 /* ViewController.m in Sources */,
 				7CDA50D626DE15ED0062CC39 /* main.m in Sources */,

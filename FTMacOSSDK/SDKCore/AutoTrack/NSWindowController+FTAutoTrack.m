@@ -11,6 +11,7 @@
 - (void)ft_windowDidLoad{
 
     [self ft_windowDidLoad];
+    NSLog(@"ft_windowDidLoad %@",self);
 }
 - (void)ft_windowWillClose:(NSNotification *)notification{
     [self ft_windowWillClose:notification];

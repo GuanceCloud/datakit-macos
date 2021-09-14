@@ -56,12 +56,13 @@ static char *viewLoadDuration = "viewLoadDuration";
         }
         self.ft_viewUUID = [NSUUID UUID].UUIDString;
 //        [[FTMonitorManager sharedInstance] trackViewDidAppear:self];
-    
+    NSLog(@"dataflux_viewDidAppear = %@",self);
 }
 -(void)dataflux_viewDidDisappear{
     
     [self dataflux_viewDidDisappear];
-  
+    NSLog(@"dataflux_viewDidDisappear = %@",self);
+
 //  [[FTMonitorManager sharedInstance] trackViewDidDisappear:self];
 
     

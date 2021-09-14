@@ -9,6 +9,8 @@
 @interface ViewController()
 @property (nonatomic, strong) NSWindowController *mainAppWVC;
 @property (weak) IBOutlet NSButton *loginBtn;
+@property (weak) IBOutlet NSTextField *userNameTF;
+@property (weak) IBOutlet NSTextField *passwordTF;
 
 @end
 @implementation ViewController
@@ -24,7 +26,19 @@
 }
 
 - (IBAction)loginClick:(id)sender {
-    
+    if (self.userNameTF.stringValue.length==0) {
+        NSAlert *alert = [[NSAlert alloc]init];
+        [alert addButtonWithTitle:@"ok"];
+        [alert setMessageText:@"Alert"];
+        [alert setInformativeText:@"user name can't be null"];
+        [alert setAlertStyle:NSAlertStyleWarning];
+        [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+            
+        }];
+        return;
+    }
+    NSGetUncaughtExceptionHandler();
+
     [self.view.window close];
     
     self.mainAppWVC = [[NSStoryboard storyboardWithName:@"Main" bundle:nil] instantiateControllerWithIdentifier:@"MainAppWVC"];
