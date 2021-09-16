@@ -26,6 +26,21 @@
     
     NSString *title = data[@"title"];
     self.lable.stringValue = title;
+    NSClickGestureRecognizer *tap = [[NSClickGestureRecognizer alloc]init];
+    tap.action = @selector(lableTap);
+    tap.target = self;
+    [self.lable addGestureRecognizer:tap];
+   
+  
+    NSClickGestureRecognizer *gesture = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClick:)];
+    gesture.numberOfClicksRequired = 1;
+    [self.icon addGestureRecognizer:gesture];
+}
+- (void)lableTap{
+    NSLog(@"lableTap NSGestureRecognizer set action");
+}
+- (void)imageViewClick:(NSClickGestureRecognizer *)ges{
+    NSLog(@"imageTap NSGestureRecognizer init action");
 }
 -(void)updateStatus{
     if (self.selected) {

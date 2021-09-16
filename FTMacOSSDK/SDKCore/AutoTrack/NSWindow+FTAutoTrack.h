@@ -16,6 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)ft_resignKeyWindow;
 - (void)ft_becomeMainWindow;
 - (void)ft_resignMainWindow;
+- (void)ft_display;
+-(instancetype)ft_init;
+-(NSWindow *)ft_initWithWindowRef:(void *)windowRef;
+-(instancetype)ft_initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)style backing:(NSBackingStoreType)backingStoreType defer:(BOOL)flag;
+- (instancetype)ft_initWithCoder:(NSCoder *)coder;
+- (NSRect)ft_frameRectForContentRect:(NSRect)contentRect;
+-(void)ft_beginSheet:(NSWindow *)sheetWindow completionHandler:(void (^)(NSModalResponse))handler;
 @end
 
 NS_ASSUME_NONNULL_END

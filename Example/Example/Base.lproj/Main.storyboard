@@ -701,6 +701,70 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
+        <!--Split View Controller-->
+        <scene sceneID="DV2-28-3Rk">
+            <objects>
+                <splitViewController id="eX0-QP-yVz" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem id="1pO-TG-YBG"/>
+                        <splitViewItem id="BbM-aZ-VRu"/>
+                    </splitViewItems>
+                    <splitView key="splitView" dividerStyle="thin" vertical="YES" id="v9R-mh-sKJ">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <outlet property="delegate" destination="eX0-QP-yVz" id="1sz-f5-QmF"/>
+                        </connections>
+                    </splitView>
+                    <connections>
+                        <outlet property="splitView" destination="v9R-mh-sKJ" id="iV2-de-SXx"/>
+                        <segue destination="9Kx-dJ-qh9" kind="relationship" relationship="splitItems" id="kaS-s9-Mht"/>
+                        <segue destination="Zza-7M-ZLT" kind="relationship" relationship="splitItems" id="1rh-7f-cJt"/>
+                    </connections>
+                </splitViewController>
+                <customObject id="Xvi-Vm-Csd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-678" y="422"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Sxj-9L-dar">
+            <objects>
+                <viewController id="9Kx-dJ-qh9" sceneMemberID="viewController">
+                    <view key="view" id="NGS-Yc-Y38">
+                        <rect key="frame" x="0.0" y="0.0" width="180" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="agF-hI-w28" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-281" y="275"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="IUq-ca-rmu">
+            <objects>
+                <viewController id="Zza-7M-ZLT" sceneMemberID="viewController">
+                    <view key="view" id="Jzp-bd-5Y5">
+                        <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="ost-Jn-MBP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-98" y="608"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="DLT-dB-SJm">
+            <objects>
+                <viewController id="jD2-6L-OOy" sceneMemberID="viewController">
+                    <view key="view" id="fmy-TR-YbZ">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="xjj-F6-f0n" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-586" y="886"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>

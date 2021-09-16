@@ -29,6 +29,8 @@
     self.tabView.delegate = self;
     FirstViewController *vc1 = [[FirstViewController alloc]init];
     SecondViewController *vc2 = [[SecondViewController alloc]init];
+    [self addChildViewController:vc1];
+    [self addChildViewController:vc2];
     NSArray *vcs = @[vc1,vc2];
     int index = 0;
     for (NSTabViewItem *item in tabItems) {
@@ -37,6 +39,22 @@
         vc.view.frame = item.view.bounds;
         index = index+1;
     }
+    NSImageView *view = [[NSImageView alloc] initWithFrame:CGRectMake(5, 5, 30, 30)];
+//    [view prepareForReuse];
+    // 背景色
+    view.wantsLayer = YES;
+    view.layer.backgroundColor = NSColor.redColor.CGColor;
+    // 圆角
+    view.layer.cornerRadius = 15;
+    // 边框
+    view.layer.borderColor = NSColor.greenColor.CGColor;
+    view.layer.borderWidth = 2;
+    NSClickGestureRecognizer *gesture = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(viewClick:)];
+    [view addGestureRecognizer:gesture];
+    [self.view addSubview:view];
+}
+- (void)viewClick:(NSGestureRecognizer *)gesture {
+    NSLog(@"touch view");
 }
 
 -(void)tabView:(NSTabView *)tabView didSelectTabViewItem: (NSTabViewItem* )tabViewItem{
@@ -78,7 +96,38 @@
     [self presentViewController:vc animator:animator];
 }
 - (IBAction)showClick:(id)sender {
-    
+    PresentVC *vc = [[PresentVC alloc]init];
+
+//    let toVC = self.storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "ToVC")) as? NSViewController
+//    //增加 2个子视图控制器
+//    presentVC?.view.wantsLayer = true
+//    presentVC?.view.layer?.backgroundColor = NSColor.white.cgColor
+//    self.addChildViewController(presentVC!)
+//    self.view.addSubview((presentVC?.view)!)
+//
+//    self.addChildViewController(toVC!)
+    //显示 presentVC 视图
+    // 从 presentVC 视图 切换到另外一个 toVC 视图
+//        self.transition(from: presentVC!, to: toVC!, options: NSViewController.TransitionOptions.crossfade , completionHandler: nil)
+//    NSColorPanel *color = [[NSColorPanel alloc]init];
+//    [self.view.window beginSheet:color completionHandler:^(NSModalResponse returnCode) {
+//
+//    }];
+    NSOpenPanel *open = [NSOpenPanel openPanel];
+    open.canChooseFiles = YES;
+    [open beginWithCompletionHandler:^(NSModalResponse result) {
+        if(result == NSModalResponseOK){
+            NSArray *filesUrl = open.URLs;
+            for (NSURL *url in filesUrl) {
+                NSError *error;
+                NSString *string = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+                NSLog(@"fileUrl = %@",string);
+            }
+        }
+    }];
+}
+- (IBAction)segmentClick:(id)sender {
+
 }
 
 @end

@@ -20,7 +20,11 @@
 - (void)viewDidAppear{
     [super viewDidAppear];
     NSLog(@"FirstViewController viewDidAppear");
+   
+}
 
+- (void)viewClick:(NSGestureRecognizer *)gesture {
+    NSLog(@"touch view");
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

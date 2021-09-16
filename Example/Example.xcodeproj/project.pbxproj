@@ -31,6 +31,7 @@
 		7CF30ED826F098AF003CA20A /* CollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF30ED626F098AF003CA20A /* CollectionVC.xib */; };
 		7CF30EDF26F09D5E003CA20A /* CollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30EDD26F09D5E003CA20A /* CollectionViewItem.m */; };
 		7CF30EE026F09D5E003CA20A /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF30EDE26F09D5E003CA20A /* CollectionViewItem.xib */; };
+		7CF30EE726F1EF9E003CA20A /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30EE626F1EF9D003CA20A /* MainWindow.m */; };
 		D3C6583BB8ACF94F2C0ADB2B /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE11D26696445F40F7C3D79 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,8 @@
 		7CF30EDC26F09D5E003CA20A /* CollectionViewItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewItem.h; sourceTree = "<group>"; };
 		7CF30EDD26F09D5E003CA20A /* CollectionViewItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewItem.m; sourceTree = "<group>"; };
 		7CF30EDE26F09D5E003CA20A /* CollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewItem.xib; sourceTree = "<group>"; };
+		7CF30EE526F1EF9D003CA20A /* MainWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
+		7CF30EE626F1EF9D003CA20A /* MainWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
 		A0988D1F06B19287F548B039 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		DD52A21A9E849B2949641CE0 /* Pods-ExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.release.xcconfig"; path = "Target Support Files/Pods-ExampleTests/Pods-ExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,6 +162,8 @@
 				7CD26F8C26EAFBE00025CC50 /* MainWindowController.m */,
 				7CD26F2526EA06BF0025CC50 /* LoginWindow.h */,
 				7CD26F2626EA06BF0025CC50 /* LoginWindow.m */,
+				7CF30EE526F1EF9D003CA20A /* MainWindow.h */,
+				7CF30EE626F1EF9D003CA20A /* MainWindow.m */,
 			);
 			path = WindowController;
 			sourceTree = "<group>";
@@ -452,6 +457,7 @@
 				7CD26FF726EB24D40025CC50 /* SecondViewController.m in Sources */,
 				7CD2705226EB6C820025CC50 /* PresentCustomAnimator.m in Sources */,
 				7CF30ED726F098AF003CA20A /* CollectionVC.m in Sources */,
+				7CF30EE726F1EF9E003CA20A /* MainWindow.m in Sources */,
 				7CD26F8D26EAFBE00025CC50 /* MainWindowController.m in Sources */,
 				7CDA50CE26DE15EB0062CC39 /* ViewController.m in Sources */,
 				7CDA50D626DE15ED0062CC39 /* main.m in Sources */,

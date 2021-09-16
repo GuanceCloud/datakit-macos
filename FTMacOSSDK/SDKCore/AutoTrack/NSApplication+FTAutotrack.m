@@ -56,7 +56,9 @@
 
         
     }
-    
+
+    NSView *view = sender;
+    NSLog(@"view.window %@",view.window);
     NSLog(@"action %@",NSStringFromSelector(action));
     NSLog(@"target %@",target);
     NSLog(@"sender %@",sender);
