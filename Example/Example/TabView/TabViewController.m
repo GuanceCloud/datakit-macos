@@ -126,8 +126,12 @@
         }
     }];
 }
+
 - (IBAction)segmentClick:(id)sender {
 
 }
-
+-(void)viewDidDisappear{
+    [super viewDidDisappear];
+    
+}
 @end

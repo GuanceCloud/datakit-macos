@@ -25,5 +25,7 @@
     .setSdkVersion(SDK_VERSION)
     .setXDataKitUUID(trackConfig.XDataKitUUID);
 }
-
+-(void)setRumConfig:(FTRumConfig *)rumConfig{
+    _rumConfig = rumConfig;
+}
 @end

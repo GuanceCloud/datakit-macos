@@ -31,5 +31,9 @@
     
     // Do view setup here.
 }
+- (void)viewDidDisappear{
+    [super viewDidDisappear];
+    NSLog(@"FirstViewController viewDidDisappear");
 
+}
 @end

@@ -53,4 +53,9 @@
 - (IBAction)slider:(id)sender {
     NSLog(@"slider = %@",sender);
 }
+- (void)viewDidDisappear{
+    [super viewDidDisappear];
+    NSLog(@"SecondViewController viewDidDisappear");
+
+}
 @end

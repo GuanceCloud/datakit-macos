@@ -23,5 +23,41 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *XDataKitUUID;
 -(instancetype)initWithMetricsUrl:(NSString *)metricsUrl;
 @end
+@interface FTRumConfig : NSObject
+/**
+ * @method 指定初始化方法，设置 appid
+ * @param appid 应用唯一ID 设置后 rum 数据才能正常上报
+ * @return 配置对象
+ */
+- (instancetype)initWithAppid:(nonnull NSString *)appid;
+/// 禁用 new 初始化
++ (instancetype)new NS_UNAVAILABLE;
+/**
+ * 应用唯一ID，在DataFlux控制台上面创建监控时自动生成。
+ */
+@property (nonatomic, copy) NSString *appid;
+/**
+ * 采样配置，属性值：0至100，100则表示百分百采集，不做数据样本压缩。
+ */
+@property (nonatomic, assign) int samplerate;
+/**
+ * 设置是否追踪用户操作，目前支持应用启动和点击操作
+ */
+@property (nonatomic, assign) BOOL enableTraceUserAction;
+/**
+ * 设置是否需要采集崩溃日志
+ */
+@property (nonatomic, assign) BOOL enableTrackAppCrash;
+/**
+ * 设置是否需要采集卡顿
+ */
+@property (nonatomic, assign) BOOL enableTrackAppFreeze;
+/**
+ * 设置是否需要采集卡顿
+ * runloop采集主线程卡顿
+*/
+@property (nonatomic, assign) BOOL enableTrackAppANR;
 
+
+@end
 NS_ASSUME_NONNULL_END
