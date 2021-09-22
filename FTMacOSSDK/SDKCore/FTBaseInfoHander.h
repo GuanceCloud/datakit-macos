@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FTBaseInfoHander : NSObject
-
++ (BOOL)randomSampling:(int)sampling;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FTConfigManager : NSObject
 @property(nonatomic, strong) FTTrackConfig *trackConfig;
 @property(nonatomic, strong) FTRumConfig *rumConfig;
+@property(nonatomic, strong) FTLoggerConfig *loggerConfig;
+
 + (instancetype)sharedInstance;
 
 @end

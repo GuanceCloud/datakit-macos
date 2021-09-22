@@ -8,22 +8,11 @@
 #import "FTPresetProperty.h"
 
 @implementation FTPresetProperty
-+ (NSString *)appName {
-    NSString *displayName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-    if (displayName.length > 0) {
-        return displayName;
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        
     }
-    
-    NSString *bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
-    if (bundleName.length > 0) {
-        return bundleName;
-    }
-    
-    NSString *executableName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleExecutable"];
-    if (executableName) {
-        return executableName;
-    }
-    
-    return nil;
+    return self;
 }
 @end

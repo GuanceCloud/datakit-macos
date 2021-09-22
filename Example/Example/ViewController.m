@@ -37,7 +37,6 @@
         }];
         return;
     }
-    NSGetUncaughtExceptionHandler();
 
     [self.view.window close];
     

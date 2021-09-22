@@ -21,8 +21,13 @@
     // Insert code here to initialize your application
     NSProcessInfo *processInfo = [NSProcessInfo processInfo];
     NSString *url = [processInfo environment][@"ACCESS_SERVER_URL"];
+    NSString *appid = [processInfo environment][@"APP_ID"];
+
     FTTrackConfig *config = [[FTTrackConfig alloc]initWithMetricsUrl:url];
     [FTSDKAgent startWithConfigOptions:config];
+    FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:appid];
+    rumConfig.enableTraceUserAction = YES;
+    [[FTSDKAgent sharedInstance]startRumWithConfigOptions:rumConfig];
 //    [[FTSDKAgent sharedInstance] logging:@"applicationDidFinishLaunching" status:FTStatusInfo];
     [self.loginWindowC showWindow:self];
     

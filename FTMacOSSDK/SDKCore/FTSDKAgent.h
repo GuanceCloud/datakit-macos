@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class FTTrackConfig;
+@class FTTrackConfig,FTRumConfig,FTLoggerConfig;
 NS_ASSUME_NONNULL_BEGIN
 ///事件等级和状态，info：提示，warning：警告，error：错误，critical：严重，ok：恢复，默认：info
 typedef NS_ENUM(NSInteger, FTStatus) {
@@ -34,6 +34,20 @@ typedef NS_ENUM(NSInteger, FTStatus) {
  * @param configOptions     配置参数
 */
 + (void)startWithConfigOptions:(FTTrackConfig *)configOptions;
+/**
+ * @abstract
+ * 配置 RUM Config 开启 RUM 功能
+ *
+ * @param rumConfigOptions   rum配置参数
+ */
+- (void)startRumWithConfigOptions:(FTRumConfig *)rumConfigOptions;
+/**
+ * @abstract
+ * 配置 Logger Config 开启 Logger 功能
+ *
+ * @param loggerConfigOptions   logger配置参数
+ */
+- (void)startLoggerWithConfigOptions:(FTLoggerConfig *)loggerConfigOptions;
 /**
  * @abstract
  * 日志上报

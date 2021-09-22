@@ -37,8 +37,19 @@
 -(NSString *)actionName{
     return [NSString stringWithFormat:@"[%@]",NSStringFromClass(self.class)];
 }
--(BOOL )inMainWindow{
+-(BOOL)inMainWindow{
     return self.window.isMainWindow;
+}
+-(id)ftController{
+    NSResponder *nextResponder = self.nextResponder;
+    while (nextResponder != nil) {
+        if ([nextResponder isKindOfClass:NSViewController.class] || [nextResponder isKindOfClass:NSWindow.class]) {
+            break;
+        }else{
+            nextResponder = nextResponder.nextResponder;
+        }
+    }
+    return nextResponder;
 }
 @end
 

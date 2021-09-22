@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy, readonly) NSString *viewPath;
 @property (nonatomic, copy, readonly) NSString *actionName;
+@property (nonatomic, weak) id ftController;
 @property (nonatomic, assign, readonly) BOOL inMainWindow;
 
 

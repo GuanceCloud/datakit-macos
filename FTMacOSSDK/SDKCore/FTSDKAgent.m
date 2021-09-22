@@ -15,6 +15,8 @@
 #import "FTLog.h"
 #import "FTDateUtil.h"
 #import "FTAutoTrack.h"
+#import "FTRumManager.h"
+#import "FTPresetProperty.h"
 @interface FTSDKAgent()
 @property (nonatomic, strong) FTAutoTrack *autoTrack;
 
@@ -41,11 +43,20 @@ static FTSDKAgent *sharedInstance = nil;
     if(self){
         //开启网络监听
         [[FTReachability sharedInstance] startNotifier];
-        FTConfigManager.sharedInstance.trackConfig = config;
-        _autoTrack = [[FTAutoTrack alloc]init];
+        FTConfigManager.sharedInstance.trackConfig = [config copy];
         [FTLog enableLog:YES];
     }
     return self;
+}
+-(void)startRumWithConfigOptions:(FTRumConfig *)rumConfigOptions{
+    FTConfigManager.sharedInstance.rumConfig = [rumConfigOptions copy];
+    if(!_autoTrack){
+        _autoTrack = [[FTAutoTrack alloc]init];
+    }
+    [FTRumManager sharedInstance];
+}
+- (void)startLoggerWithConfigOptions:(FTLoggerConfig *)loggerConfigOptions{
+    
 }
 -(void)logging:(NSString *)content status:(FTStatus)status{
     if (![content isKindOfClass:[NSString class]] || content.length==0) {

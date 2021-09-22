@@ -9,6 +9,7 @@
 #import "FTDateUtil.h"
 #import <objc/runtime.h>
 #import "NSString+FTAdd.h"
+#import "FTRumManager.h"
 static char *viewLoadStartTimeKey = "viewLoadStartTimeKey";
 static char *viewControllerUUID = "viewControllerUUID";
 static char *viewLoadDuration = "viewLoadDuration";
@@ -55,7 +56,7 @@ static char *viewLoadDuration = "viewLoadDuration";
             self.ft_loadDuration = loadTime;
         }
         self.ft_viewUUID = [NSUUID UUID].UUIDString;
-//        [[FTMonitorManager sharedInstance] trackViewDidAppear:self];
+    [[FTRumManager sharedInstance] addViewAppearEvent:self];
     NSLog(@"dataflux_viewDidAppear = %@",self);
 }
 -(void)dataflux_viewDidDisappear{
@@ -63,7 +64,7 @@ static char *viewLoadDuration = "viewLoadDuration";
     [self dataflux_viewDidDisappear];
     NSLog(@"dataflux_viewDidDisappear = %@",self);
 
-//  [[FTMonitorManager sharedInstance] trackViewDidDisappear:self];
+     [[FTRumManager sharedInstance] addViewDisappearEvent:self];
 
     
 }

@@ -60,4 +60,41 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @end
+@interface FTLoggerConfig : NSObject
+/// 禁用 new 初始化
++ (instancetype)new NS_UNAVAILABLE;
+/**
+ * 设置日志所属业务或服务的名称 默认：df_rum_ios
+ */
+@property (nonatomic, copy) NSString *service;
+/**
+ * 采样配置，属性值：0至100，100则表示百分百采集，不做数据样本压缩。
+ */
+@property (nonatomic, assign) int samplerate;
+/**
+ * 设置是否需要采集控制台日志 默认为NO
+ */
+@property (nonatomic, assign) BOOL enableConsoleLog;
+/**
+ * 设置采集控制台日志过滤字符串 包含该字符串控制台日志会被采集 默认为全采集
+ */
+@property (nonatomic, copy) NSString *prefix;
+/**
+ * 是否将 logger 数据与 rum 关联
+ */
+@property (nonatomic, assign) BOOL enableLinkRumData;
+/**
+ * 是否上传自定义 log
+ */
+@property (nonatomic, assign) BOOL enableCustomLog;
+/**
+ * 设置采集自定义日志的状态数组  默认为全采集
+ * 例: @[@(FTStatusInfo),@(FTStatusError)]
+ * 或 @[@0,@1]
+ */
+@property (nonatomic, strong) NSArray<NSNumber*> *logLevelFilter;
+
+- (void)enableConsoleLog:(BOOL)enable prefix:(NSString *)prefix;
+@end
+
 NS_ASSUME_NONNULL_END
