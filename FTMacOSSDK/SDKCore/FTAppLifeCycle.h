@@ -17,9 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)applicationWillResignActive;
 
-- (void)applicationDidHide;
-
-- (void)applicationWillUnhide;
 @end
 @interface FTAppLifeCycle : NSObject
 + (instancetype)sharedInstance;

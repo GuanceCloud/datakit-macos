@@ -1,15 +1,15 @@
 //
-//  FTDeviceInfo.h
+//  FTBaseInfoHander.h
 //  FTMacOSSDK-framework
 //
-//  Created by 胡蕾蕾 on 2021/9/17.
+//  Created by 胡蕾蕾 on 2021/9/22.
 //
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FTDeviceInfo : NSObject
+@interface FTBaseInfoHander : NSObject
 
 @end
 

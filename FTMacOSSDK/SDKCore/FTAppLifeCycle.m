@@ -14,6 +14,8 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
+        _appLifecycleDelegates = [NSPointerArray pointerArrayWithOptions:NSPointerFunctionsWeakMemory];
+        _delegateLock = [[NSLock alloc] init];
         [self setupAppStateNotification];
     }
     return self;
@@ -59,22 +61,14 @@
 - (void)setupAppStateNotification{
     NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
     
-    [notification addObserver:self selector:@selector(applicationWillUnhideNotification:) name:NSApplicationWillUnhideNotification object:[NSApplication sharedApplication]];
+  
     [notification addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:NSApplicationDidBecomeActiveNotification object:[NSApplication sharedApplication]];
+    
     [notification addObserver:self selector:@selector(applicationWillResignActiveNotification:) name:NSApplicationWillResignActiveNotification object:[NSApplication sharedApplication]];
-    [notification addObserver:self selector:@selector(applicationDidHideNotification:) name:NSApplicationDidHideNotification object:[NSApplication sharedApplication]];
-
+    
     [notification addObserver:self selector:@selector(applicationWillTerminateNotification:) name:NSApplicationWillTerminateNotification object:[NSApplication sharedApplication]];
 }
-- (void)applicationWillUnhideNotification:(NSNotification *)notification{
-    [self.delegateLock lock];
-    for (id delegate in self.appLifecycleDelegates) {
-        if ([delegate respondsToSelector:@selector(applicationWillUnhide)]) {
-            [delegate applicationWillUnhide];
-        }
-    }
-    [self.delegateLock unlock];
-}
+
 - (void)applicationDidBecomeActiveNotification:(NSNotification *)notification{
     [self.delegateLock lock];
     for (id delegate in self.appLifecycleDelegates) {
@@ -93,15 +87,7 @@
     }
     [self.delegateLock unlock];
 }
-- (void)applicationDidHideNotification:(NSNotification *)notification{
-    [self.delegateLock lock];
-    for (id delegate in self.appLifecycleDelegates) {
-        if ([delegate respondsToSelector:@selector(applicationDidHide)]) {
-            [delegate applicationDidHide];
-        }
-    }
-    [self.delegateLock unlock];
-}
+
 - (void)applicationWillTerminateNotification:(NSNotification *)notification{
     [self.delegateLock lock];
     for (id delegate in self.appLifecycleDelegates) {
