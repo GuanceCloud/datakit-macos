@@ -17,6 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)applicationWillResignActive;
 
+#if TARGET_OS_IOS
+- (void)applicationWillEnterForeground;
+- (void)applicationDidEnterBackground;
+#endif
+
 @end
 @interface FTAppLifeCycle : NSObject
 + (instancetype)sharedInstance;

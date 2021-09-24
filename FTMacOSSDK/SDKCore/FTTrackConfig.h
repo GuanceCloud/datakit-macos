@@ -21,6 +21,15 @@ NS_ASSUME_NONNULL_BEGIN
  * 请求HTTP请求头X-Datakit-UUID 数据采集端  如果用户不设置会自动配置
  */
 @property (nonatomic, copy) NSString *XDataKitUUID;
+/**
+ * 设置是否允许 SDK 打印 Debug 日志
+ */
+@property (nonatomic, assign) BOOL enableSDKDebugLog;
+/**
+ * 应用版本号。
+ */
+@property (nonatomic, copy) NSString *version;
+
 -(instancetype)initWithMetricsUrl:(NSString *)metricsUrl;
 @end
 @interface FTRumConfig : NSObject

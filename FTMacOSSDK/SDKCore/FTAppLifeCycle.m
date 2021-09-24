@@ -6,6 +6,9 @@
 //
 
 #import "FTAppLifeCycle.h"
+#if TARGET_OS_IOS
+#import <UIKit/UIKit.h>
+#endif
 @interface FTAppLifeCycle()
 @property(strong, nonatomic, readonly) NSPointerArray *appLifecycleDelegates;
 @property(strong, nonatomic, readonly) NSLock *delegateLock;
@@ -60,16 +63,35 @@
 }
 - (void)setupAppStateNotification{
     NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+#if TARGET_OS_OSX
+    [notification addObserver:self selector:@selector(applicationDidBecomeActive:) name:NSApplicationDidBecomeActiveNotification object:[NSApplication sharedApplication]];
     
-  
-    [notification addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:NSApplicationDidBecomeActiveNotification object:[NSApplication sharedApplication]];
+    [notification addObserver:self selector:@selector(applicationWillResignActive:) name:NSApplicationWillResignActiveNotification object:[NSApplication sharedApplication]];
     
-    [notification addObserver:self selector:@selector(applicationWillResignActiveNotification:) name:NSApplicationWillResignActiveNotification object:[NSApplication sharedApplication]];
-    
-    [notification addObserver:self selector:@selector(applicationWillTerminateNotification:) name:NSApplicationWillTerminateNotification object:[NSApplication sharedApplication]];
+    [notification addObserver:self selector:@selector(applicationWillTerminate:) name:NSApplicationWillTerminateNotification object:[NSApplication sharedApplication]];
+#else
+    [notification addObserver:self
+                           selector:@selector(applicationWillEnterForeground:)
+                               name:UIApplicationWillEnterForegroundNotification
+                             object:nil];
+    [notification addObserver:self
+                           selector:@selector(applicationDidBecomeActive:)
+                               name:UIApplicationDidBecomeActiveNotification
+                             object:nil];
+    [notification addObserver:self
+                           selector:@selector(applicationWillResignActive:)
+                               name:UIApplicationWillResignActiveNotification
+                             object:nil];
+    [notification addObserver:self
+                           selector:@selector(applicationDidEnterBackground:)
+                               name:UIApplicationDidEnterBackgroundNotification
+                             object:nil];
+    [notification addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+#endif
+
 }
 
-- (void)applicationDidBecomeActiveNotification:(NSNotification *)notification{
+- (void)applicationDidBecomeActive:(NSNotification *)notification{
     [self.delegateLock lock];
     for (id delegate in self.appLifecycleDelegates) {
         if ([delegate respondsToSelector:@selector(applicationDidBecomeActive)]) {
@@ -78,7 +100,7 @@
     }
     [self.delegateLock unlock];
 }
-- (void)applicationWillResignActiveNotification:(NSNotification *)notification{
+- (void)applicationWillResignActive:(NSNotification *)notification{
     [self.delegateLock lock];
     for (id delegate in self.appLifecycleDelegates) {
         if ([delegate respondsToSelector:@selector(applicationWillResignActive)]) {
@@ -88,7 +110,7 @@
     [self.delegateLock unlock];
 }
 
-- (void)applicationWillTerminateNotification:(NSNotification *)notification{
+- (void)applicationWillTerminate:(NSNotification *)notification{
     [self.delegateLock lock];
     for (id delegate in self.appLifecycleDelegates) {
         if ([delegate respondsToSelector:@selector(applicationWillTerminate)]) {
@@ -97,4 +119,26 @@
     }
     [self.delegateLock unlock];
 }
+#if TARGET_OS_IOS
+- (void)applicationWillEnterForeground:(NSNotification *)notification{
+    [self.delegateLock lock];
+    for (id delegate in self.appLifecycleDelegates) {
+        if ([delegate respondsToSelector:@selector(applicationWillEnterForeground)]) {
+            [delegate applicationWillEnterForeground];
+        }
+    }
+    [self.delegateLock unlock];
+}
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification{
+    [self.delegateLock lock];
+    for (id delegate in self.appLifecycleDelegates) {
+        if ([delegate respondsToSelector:@selector(applicationDidEnterBackground)]) {
+            [delegate applicationDidEnterBackground];
+        }
+    }
+    [self.delegateLock unlock];
+}
+#endif
+
 @end

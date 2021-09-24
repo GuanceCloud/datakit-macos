@@ -9,9 +9,9 @@
 #import "FTConfigManager.h"
 #import "FTAutoTrackProtocol.h"
 #import "NSView+FTAutoTrack.h"
-#import "FTRumEvent.h"
 #import "FTLog.h"
 #import "FTAppLifeCycle.h"
+#import "FTRUMDataModel.h"
 @interface FTRumManager ()<FTAppLifeCycleDelegate>
 @property (nonatomic, strong) dispatch_queue_t serialQueue;
 @property (nonatomic, assign) BOOL traceOpen;
@@ -36,7 +36,7 @@
             _traceOpen = YES;
         }else{
             _traceOpen = NO;
-            ZYDebug(@"【RumConfig appid】 is disabled ");
+            ZYDebug(@"【FTRumConfig appid】 is disabled ");
         }
         [[FTAppLifeCycle sharedInstance] addAppLifecycleDelegate:self];
     }
@@ -57,7 +57,7 @@
     NSString *actionName = clickView.actionName;
     NSString *actionType = @"click";
     dispatch_async(self.serialQueue, ^{
-    FTRumActionEvent *action = [[FTRumActionEvent alloc]initWithActionID:[[NSUUID UUID]UUIDString] actionName:actionName actionType:actionType];
+    FTRUMActionModel *action = [[FTRUMActionModel alloc]initWithActionID:[[NSUUID UUID]UUIDString] actionName:actionName actionType:actionType];
     });
     
 }

@@ -6,6 +6,7 @@
 //
 
 #import "FTPresetProperty.h"
+#import "FTDeviceInfo.h"
 
 @implementation FTPresetProperty
 -(instancetype)init{
@@ -14,5 +15,8 @@
         
     }
     return self;
+}
+- (NSDictionary *)rumPropertyWithType:(NSString *)type terminal:(NSString *)terminal{
+    return nil;
 }
 @end

@@ -17,9 +17,13 @@
 #import "FTAutoTrack.h"
 #import "FTRumManager.h"
 #import "FTPresetProperty.h"
+#import "FTConstants.h"
+#import "FTBaseInfoHander.h"
+#import "NSString+FTAdd.h"
+#import "FTDateUtil.h"
 @interface FTSDKAgent()
 @property (nonatomic, strong) FTAutoTrack *autoTrack;
-
+@property (nonatomic, strong) FTLoggerConfig *loggerConfig;
 @end
 @implementation FTSDKAgent
 static FTSDKAgent *sharedInstance = nil;
@@ -55,18 +59,62 @@ static FTSDKAgent *sharedInstance = nil;
     }
     [FTRumManager sharedInstance];
 }
+static NSSet *logLevelFilterSet;
 - (void)startLoggerWithConfigOptions:(FTLoggerConfig *)loggerConfigOptions{
-    
+    self.loggerConfig = [loggerConfigOptions copy];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        logLevelFilterSet = [NSSet setWithArray:loggerConfigOptions.logLevelFilter];
+    });
 }
+#pragma mark - 数据写入 -
+
 -(void)logging:(NSString *)content status:(FTStatus)status{
-    if (![content isKindOfClass:[NSString class]] || content.length==0) {
-        return;
-    }
     @try {
-        FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"df_rum_macos_log" op:FT_DATA_TYPE_LOGGING tags:@{@"sdk_name":@"df_macos_rum_sdk"} field:@{@"message":content} tm:[FTDateUtil currentTimeNanosecond]];
+        if (!self.loggerConfig) {
+            ZYErrorLog(@"请先设置 FTLoggerConfig");
+            return;
+        }
+        if (!content || content.length == 0 || [content ft_charactorNumber]>FT_LOGGING_CONTENT_SIZE) {
+            ZYErrorLog(@"传入的第数据格式有误，或content超过30kb");
+            return;
+        }
+        if (![logLevelFilterSet containsObject:@(status)]) {
+            ZYDebug(@"经过过滤算法判断-此条日志不采集");
+            return;
+        }
+        if (![FTBaseInfoHander randomSampling:self.loggerConfig.samplerate]){
+            ZYDebug(@"经过采集算法判断-此条日志不采集");
+            return;
+        }
+      
+        FTRecordModel *model = [[FTRecordModel alloc]initWithSource:FT_LOGGER_SOURCE op:FT_DATA_TYPE_LOGGING tags:@{@"sdk_name":@"df_macos_rum_sdk"} field:@{@"message":content} tm:[FTDateUtil currentTimeNanosecond]];
         [[FTTrackDataManger sharedInstance] addTrackData:model type:FTAddDataNormal];
     } @catch (NSException *exception) {
         ZYErrorLog(@"exception %@",exception);
     }
+}
+- (void)rumWrite:(NSString *)type terminal:(NSString *)terminal tags:(NSDictionary *)tags fields:(NSDictionary *)fields{
+    [self rumWrite:type terminal:terminal tags:tags fields:fields tm:[FTDateUtil currentTimeNanosecond]];
+}
+
+- (void)rumWrite:(NSString *)type terminal:(NSString *)terminal tags:(NSDictionary *)tags fields:(NSDictionary *)fields tm:(long long)tm{
+    
+    @try {
+        if (![type isKindOfClass:NSString.class] || type.length == 0 || terminal.length == 0) {
+            return;
+        }
+        FTAddDataType dataType = FTAddDataImmediate;
+        NSMutableDictionary *baseTags =[NSMutableDictionary dictionaryWithDictionary:tags];
+        baseTags[@"network_type"] = @"";
+//        [baseTags addEntriesFromDictionary:[self.presetProperty rumPropertyWithType:type terminal:terminal]];
+        FTRecordModel *model = [[FTRecordModel alloc]initWithSource:type op:FT_DATA_TYPE_RUM tags:baseTags field:fields tm:tm];
+//        [self insertDBWithItemData:model type:dataType];
+    } @catch (NSException *exception) {
+        ZYErrorLog(@"exception %@",exception);
+    }
+    
+    
+    
 }
 @end
