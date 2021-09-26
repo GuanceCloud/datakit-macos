@@ -6,7 +6,7 @@
 //
 
 #import "NSApplication+FTAutotrack.h"
-
+#import "FTRumManager.h"
 @implementation NSApplication (FTAutotrack)
 - (BOOL)dataflux_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender{
     [self datafluxTrack:action to:target from:sender];
@@ -58,13 +58,15 @@
     }
 
     NSView *view = sender;
+    NSWindow *window = view.window;
     NSLog(@"view.window %@",view.window);
     NSLog(@"action %@",NSStringFromSelector(action));
     NSLog(@"target %@",target);
     NSLog(@"sender %@",sender);
     NSLog(@"event %@",self.currentEvent);
     
-    
+    [[FTRumManager sharedInstance] addActionEventWithView:view];
+
 }
 
 

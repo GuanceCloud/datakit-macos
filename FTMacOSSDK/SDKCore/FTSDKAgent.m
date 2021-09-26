@@ -7,6 +7,7 @@
 //
 
 #import "FTSDKAgent.h"
+#import "FTTrackerEventDBTool.h"
 #import "FTTrackConfig.h"
 #import "FTReachability.h"
 #import "FTConfigManager.h"

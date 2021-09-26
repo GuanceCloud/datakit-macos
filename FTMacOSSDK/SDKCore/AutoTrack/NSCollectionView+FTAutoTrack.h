@@ -13,4 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)dataflux_setDelegate:(id<NSCollectionViewDelegate>)delegate;
 @end
 
+@interface NSTableView (FTAutoTrack)
+
+@end
 NS_ASSUME_NONNULL_END

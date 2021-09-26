@@ -7,6 +7,7 @@
 
 #import "NSCollectionView+FTAutoTrack.h"
 #import "FTSwizzler.h"
+#import "FTRumManager.h"
 
 @implementation NSCollectionView (FTAutoTrack)
 
@@ -23,7 +24,7 @@
         void (^didSelectItemBlock)(id, SEL, id, id) = ^(id view, SEL command, NSCollectionView *collectionView, NSSet<NSIndexPath *> *indexPaths) {
             
             if (collectionView && indexPaths) {
-
+                [[FTRumManager sharedInstance] addActionEventWithView:self];
             }
         };
         
@@ -35,4 +36,18 @@
     
     
 }
+@end
+@implementation NSTableView (FTAutoTrack)
+
+-(void)dataflux_setDoubleAction:(SEL)doubleAction{
+    [self dataflux_setDoubleAction:doubleAction];
+    void (^doubleActionBlock)(void) = ^() {
+        [[FTRumManager sharedInstance] addActionEventWithView:self];
+    };
+    [FTSwizzler swizzleSelector:doubleAction
+                        onClass:self.class
+                      withBlock:doubleActionBlock
+                          named:@"tableView_doubleAction"];
+}
+
 @end

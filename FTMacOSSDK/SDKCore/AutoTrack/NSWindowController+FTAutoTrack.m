@@ -8,13 +8,21 @@
 #import "NSWindowController+FTAutoTrack.h"
 
 @implementation NSWindowController (FTAutoTrack)
-- (void)ft_windowDidLoad{
 
-    [self ft_windowDidLoad];
-    NSLog(@"ft_windowDidLoad %@",self);
+-(void)dataflux_windowWillLoad{
+    [self dataflux_windowWillLoad];
 }
-- (void)ft_windowWillClose:(NSNotification *)notification{
-    [self ft_windowWillClose:notification];
+- (void)dataflux_windowDidLoad{
+
+    [self dataflux_windowDidLoad];
+    NSLog(@"ft_windowDidLoad contentViewController = %@",self.window.contentViewController);
+    if(!self.window.contentViewController){
+        // 记录 window 的生命周期
+    }
+    
+}
+- (void)dataflux_windowWillClose:(NSNotification *)notification{
+    [self dataflux_windowWillClose:notification];
 }
 
 @end

@@ -14,7 +14,7 @@
 #import "NSApplication+FTAutotrack.h"
 #import "NSGestureRecognizer+FTAutoTrack.h"
 #import "NSCollectionView+FTAutoTrack.h"
-
+#import "NSTabView+FTAutoTrack.h"
 @implementation FTAutoTrack
 
 -(instancetype)init{
@@ -35,12 +35,13 @@
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             NSError *error = NULL;
-            [NSWindow ft_swizzleMethod:@selector(init) withMethod:@selector(ft_init) error:&error];
-
-            [NSWindow ft_swizzleMethod:@selector(initWithCoder:) withMethod:@selector(ft_initWithCoder:) error:&error];
-            [NSWindow ft_swizzleMethod:@selector(initWithContentRect:styleMask:backing:defer:) withMethod:@selector(ft_initWithContentRect:styleMask:backing:defer:) error:&error];
-            [NSWindow ft_swizzleMethod:@selector(init) withMethod:@selector(ft_init) error:&error];
+            [NSWindow ft_swizzleMethod:@selector(initWithCoder:) withMethod:@selector(dataflux_initWithCoder:) error:&error];
+            [NSWindow ft_swizzleMethod:@selector(initWithContentRect:styleMask:backing:defer:) withMethod:@selector(dataflux_initWithContentRect:styleMask:backing:defer:) error:&error];
+            [NSWindow ft_swizzleMethod:@selector(init) withMethod:@selector(dataflux_init) error:&error];
             [NSWindow ft_swizzleMethod:@selector(close) withMethod:@selector(dataflux_close) error:&error];
+            [NSWindowController ft_swizzleMethod:@selector(windowWillLoad) withMethod:@selector(dataflux_windowWillLoad) error:&error];
+            [NSWindowController ft_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(dataflux_windowDidLoad) error:&error];
+            [NSWindowController ft_swizzleMethod:@selector(windowWillClose:) withMethod:@selector(dataflux_windowWillClose:) error:&error];
         });
     } @catch (NSException *exception) {
         ZYErrorLog(@"exception: %@", self, exception);
@@ -69,6 +70,7 @@
             [NSGestureRecognizer ft_swizzleMethod:@selector(setAction:) withMethod:@selector(dataflux_setAction:) error:&error];
             [NSGestureRecognizer ft_swizzleMethod:@selector(setTarget:) withMethod:@selector(dataflux_setTarget:) error:&error];
             [NSCollectionView ft_swizzleMethod:@selector(setDelegate:) withMethod:@selector(dataflux_setDelegate:) error:&error];
+            [NSTabView ft_swizzleMethod:@selector(setDelegate:) withMethod:@selector(dataflux_setDelegate:) error:&error];
         });
     } @catch (NSException *exception) {
         ZYErrorLog(@"exception: %@", self, exception);
