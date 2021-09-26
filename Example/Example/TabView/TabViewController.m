@@ -25,6 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    self.view.wantsLayer = YES;
+    self.view.layer.backgroundColor = NSColor.redColor.CGColor;
+
     NSArray *tabItems = self.tabView.tabViewItems;
     self.tabView.delegate = self;
     FirstViewController *vc1 = [[FirstViewController alloc]init];
@@ -96,15 +99,16 @@
     [self presentViewController:vc animator:animator];
 }
 - (IBAction)showClick:(id)sender {
-    PresentVC *vc = [[PresentVC alloc]init];
+    PresentVC *presentVC = [[PresentVC alloc]init];
 
 //    let toVC = self.storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "ToVC")) as? NSViewController
 //    //增加 2个子视图控制器
-//    presentVC?.view.wantsLayer = true
+    presentVC.view.wantsLayer = YES;
 //    presentVC?.view.layer?.backgroundColor = NSColor.white.cgColor
 //    self.addChildViewController(presentVC!)
 //    self.view.addSubview((presentVC?.view)!)
 //
+    [self addChildViewController:presentVC];
 //    self.addChildViewController(toVC!)
     //显示 presentVC 视图
     // 从 presentVC 视图 切换到另外一个 toVC 视图
@@ -113,18 +117,18 @@
 //    [self.view.window beginSheet:color completionHandler:^(NSModalResponse returnCode) {
 //
 //    }];
-    NSOpenPanel *open = [NSOpenPanel openPanel];
-    open.canChooseFiles = YES;
-    [open beginWithCompletionHandler:^(NSModalResponse result) {
-        if(result == NSModalResponseOK){
-            NSArray *filesUrl = open.URLs;
-            for (NSURL *url in filesUrl) {
-                NSError *error;
-                NSString *string = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
-                NSLog(@"fileUrl = %@",string);
-            }
-        }
-    }];
+//    NSOpenPanel *open = [NSOpenPanel openPanel];
+//    open.canChooseFiles = YES;
+//    [open beginWithCompletionHandler:^(NSModalResponse result) {
+//        if(result == NSModalResponseOK){
+//            NSArray *filesUrl = open.URLs;
+//            for (NSURL *url in filesUrl) {
+//                NSError *error;
+//                NSString *string = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+//                NSLog(@"fileUrl = %@",string);
+//            }
+//        }
+//    }];
 }
 
 - (IBAction)segmentClick:(id)sender {

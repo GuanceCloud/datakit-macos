@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		44AA25EEB360BE645D48839A /* libPods-ExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A6BDA0876EF4F249FA25207 /* libPods-ExampleTests.a */; };
+		7C87E29C27003E76001F6C3B /* SplitViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C87E29B27003E76001F6C3B /* SplitViewVC.m */; };
+		7C87E2AE270052A3001F6C3B /* SplitViewItemVC1.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C87E2AC270052A3001F6C3B /* SplitViewItemVC1.m */; };
+		7C87E2B6270052B2001F6C3B /* SplitViewItemVC2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C87E2B4270052B2001F6C3B /* SplitViewItemVC2.m */; };
 		7CD26F0E26E9F5140025CC50 /* LoginWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26F0C26E9F5140025CC50 /* LoginWindowController.m */; };
 		7CD26F2726EA06BF0025CC50 /* LoginWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26F2626EA06BF0025CC50 /* LoginWindow.m */; };
 		7CD26F8D26EAFBE00025CC50 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD26F8C26EAFBE00025CC50 /* MainWindowController.m */; };
@@ -57,6 +60,12 @@
 		493DD0D25399A3B94608C5C7 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		5A6BDA0876EF4F249FA25207 /* libPods-ExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE11D26696445F40F7C3D79 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C87E29A27003E76001F6C3B /* SplitViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewVC.h; sourceTree = "<group>"; };
+		7C87E29B27003E76001F6C3B /* SplitViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewVC.m; sourceTree = "<group>"; };
+		7C87E2AB270052A3001F6C3B /* SplitViewItemVC1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewItemVC1.h; sourceTree = "<group>"; };
+		7C87E2AC270052A3001F6C3B /* SplitViewItemVC1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewItemVC1.m; sourceTree = "<group>"; };
+		7C87E2B3270052B2001F6C3B /* SplitViewItemVC2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewItemVC2.h; sourceTree = "<group>"; };
+		7C87E2B4270052B2001F6C3B /* SplitViewItemVC2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewItemVC2.m; sourceTree = "<group>"; };
 		7CD26F0C26E9F5140025CC50 /* LoginWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginWindowController.m; sourceTree = "<group>"; };
 		7CD26F0D26E9F5140025CC50 /* LoginWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginWindowController.h; sourceTree = "<group>"; };
 		7CD26F2526EA06BF0025CC50 /* LoginWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginWindow.h; sourceTree = "<group>"; };
@@ -230,6 +239,12 @@
 				7CDA50D426DE15ED0062CC39 /* Info.plist */,
 				7CDA50D526DE15ED0062CC39 /* main.m */,
 				7CDA50D726DE15ED0062CC39 /* Example.entitlements */,
+				7C87E29A27003E76001F6C3B /* SplitViewVC.h */,
+				7C87E29B27003E76001F6C3B /* SplitViewVC.m */,
+				7C87E2AB270052A3001F6C3B /* SplitViewItemVC1.h */,
+				7C87E2AC270052A3001F6C3B /* SplitViewItemVC1.m */,
+				7C87E2B3270052B2001F6C3B /* SplitViewItemVC2.h */,
+				7C87E2B4270052B2001F6C3B /* SplitViewItemVC2.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -457,14 +472,17 @@
 				7CD26FF726EB24D40025CC50 /* SecondViewController.m in Sources */,
 				7CD2705226EB6C820025CC50 /* PresentCustomAnimator.m in Sources */,
 				7CF30ED726F098AF003CA20A /* CollectionVC.m in Sources */,
+				7C87E2B6270052B2001F6C3B /* SplitViewItemVC2.m in Sources */,
 				7CF30EE726F1EF9E003CA20A /* MainWindow.m in Sources */,
 				7CD26F8D26EAFBE00025CC50 /* MainWindowController.m in Sources */,
 				7CDA50CE26DE15EB0062CC39 /* ViewController.m in Sources */,
+				7C87E29C27003E76001F6C3B /* SplitViewVC.m in Sources */,
 				7CDA50D626DE15ED0062CC39 /* main.m in Sources */,
 				7CD26F2726EA06BF0025CC50 /* LoginWindow.m in Sources */,
 				7CDA50CB26DE15EB0062CC39 /* AppDelegate.m in Sources */,
 				7CD26FE226EB223E0025CC50 /* TabViewController.m in Sources */,
 				7CD26F0E26E9F5140025CC50 /* LoginWindowController.m in Sources */,
+				7C87E2AE270052A3001F6C3B /* SplitViewItemVC1.m in Sources */,
 				7CD2703726EB4E3E0025CC50 /* PresentVC.m in Sources */,
 				7CD26FEC26EB24760025CC50 /* FirstViewController.m in Sources */,
 			);
