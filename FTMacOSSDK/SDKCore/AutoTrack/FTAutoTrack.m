@@ -39,6 +39,7 @@
             [NSWindow ft_swizzleMethod:@selector(initWithContentRect:styleMask:backing:defer:) withMethod:@selector(dataflux_initWithContentRect:styleMask:backing:defer:) error:&error];
             [NSWindow ft_swizzleMethod:@selector(init) withMethod:@selector(dataflux_init) error:&error];
             [NSWindow ft_swizzleMethod:@selector(close) withMethod:@selector(dataflux_close) error:&error];
+            [NSWindow ft_swizzleMethod:@selector(makeKeyWindow) withMethod:@selector(dataflux_makeKeyWindow) error:&error];
             [NSWindowController ft_swizzleMethod:@selector(windowWillLoad) withMethod:@selector(dataflux_windowWillLoad) error:&error];
             [NSWindowController ft_swizzleMethod:@selector(windowDidLoad) withMethod:@selector(dataflux_windowDidLoad) error:&error];
             [NSWindowController ft_swizzleMethod:@selector(windowWillClose:) withMethod:@selector(dataflux_windowWillClose:) error:&error];

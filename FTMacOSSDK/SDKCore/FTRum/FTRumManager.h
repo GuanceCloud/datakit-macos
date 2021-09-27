@@ -6,18 +6,17 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "FTRUMHandler.h"
 NS_ASSUME_NONNULL_BEGIN
 @class FTRumConfig,FTRumEvent;
 
-@interface FTRumManager : NSObject
+@interface FTRumManager : FTRUMHandler
 + (instancetype)sharedInstance;
 
+- (void)addViewAppearEvent:(id)view;
+- (void)addViewDisappearEvent:(id)view;
+
 - (void)addActionEventWithView:(NSView *)view;
-
-- (void)addViewAppearEvent:(NSViewController *)view;
-
-- (void)addViewDisappearEvent:(NSViewController *)view;
 
 @end
 

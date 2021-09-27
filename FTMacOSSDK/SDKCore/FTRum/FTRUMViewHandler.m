@@ -8,10 +8,11 @@
 
 #import "FTRUMViewHandler.h"
 #import "FTRUMActionHandler.h"
-//#import "FTMobileAgent+Private.h"
+#import "FTRUMResourceHandler.h"
 #import "FTConstants.h"
 #import "FTDateUtil.h"
 #import "FTBaseInfoHander.h"
+#import "FTSDKAgent+Private.h"
 @interface FTRUMViewHandler()<FTRUMSessionProtocol>
 @property (nonatomic, strong) FTRUMActionHandler *actionHandler;
 @property (nonatomic, strong) NSMutableDictionary *resourceHandlers;
@@ -68,7 +69,7 @@
             }
             break;
         case FTRUMDataClick:{
-            if (self.isActiveView && self.actionHandler == nil) {
+            if (self.isActiveView && [self.viewid isEqualToString:model.baseViewData.view_id] && self.actionHandler == nil) {
                 [self startAction:model];
             }
         }
@@ -120,8 +121,8 @@
     if (model.type == FTRUMDataResourceError || model.type == FTRUMDataResourceSuccess) {
         FTRUMResourceDataModel *newModel = (FTRUMResourceDataModel *)model;
         
-//        FTRUMResourceHandler *handler =  self.resourceHandlers[newModel.identifier];
-//        self.resourceHandlers[newModel.identifier] =[handler.assistant manage:handler byPropagatingData:model];
+        FTRUMResourceHandler *handler =  self.resourceHandlers[newModel.identifier];
+        self.resourceHandlers[newModel.identifier] =[handler.assistant manage:handler byPropagatingData:model];
     }
     
     BOOL hasNoPendingResources = self.resourceHandlers.count == 0;
@@ -145,16 +146,16 @@
 }
 - (void)startResource:(FTRUMResourceDataModel *)model{
     __weak typeof(self) weakSelf = self;
-//    FTRUMResourceHandler *resourceHandler = [[FTRUMResourceHandler alloc]initWithModel:model];
-//    resourceHandler.errorHandler = ^(){
-//        weakSelf.viewErrorCount +=1;
-//        weakSelf.needUpdateView = YES;
-//    };
-//    resourceHandler.resourceHandler = ^{
-//        weakSelf.viewResourceCount+=1;
-//        weakSelf.needUpdateView = YES;
-//    };
-//    self.resourceHandlers[model.identifier] =resourceHandler;
+    FTRUMResourceHandler *resourceHandler = [[FTRUMResourceHandler alloc]initWithModel:model];
+    resourceHandler.errorHandler = ^(){
+        weakSelf.viewErrorCount +=1;
+        weakSelf.needUpdateView = YES;
+    };
+    resourceHandler.resourceHandler = ^{
+        weakSelf.viewResourceCount+=1;
+        weakSelf.needUpdateView = YES;
+    };
+    self.resourceHandlers[model.identifier] =resourceHandler;
 }
 - (void)writeWebViewJSBData:(FTRUMWebViewData *)data{
     NSDictionary *sessionTag = @{@"session_id":data.baseSessionData.session_id,
@@ -193,7 +194,7 @@
     if (![self.model.baseViewData.loading_time isEqual:@0]) {
         [field setValue:self.model.baseViewData.loading_time forKey:@"loading_time"];
     }
-//    [[FTMobileAgent sharedInstance] rumWrite:FT_TYPE_VIEW terminal:@"app" tags:sessionViewTag fields:field];
+    [[FTSDKAgent sharedInstance] rumWrite:@"view" terminal:@"macos" tags:sessionViewTag fields:field tm:[FTDateUtil currentTimeNanosecond]];
 }
 
 @end

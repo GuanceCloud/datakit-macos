@@ -40,6 +40,9 @@
 -(BOOL)inMainWindow{
     return self.window.isMainWindow;
 }
+-(BOOL)isKeyWindow{
+    return self.window.isKeyWindow;
+}
 -(id)ftController{
     NSResponder *nextResponder = self.nextResponder;
     while (nextResponder != nil) {

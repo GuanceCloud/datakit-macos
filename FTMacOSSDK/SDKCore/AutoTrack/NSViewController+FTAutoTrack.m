@@ -38,6 +38,13 @@ static char *viewLoadDuration = "viewLoadDuration";
 -(void)setFt_viewUUID:(NSString *)ft_viewUUID{
     objc_setAssociatedObject(self, &viewControllerUUID, ft_viewUUID, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
+-(NSString *)ft_parentVC{
+    if (self.parentViewController) {
+        return NSStringFromClass(self.parentViewController.class);
+    }
+    return @"";
+}
+
 - (void)dataflux_viewDidLoad{
     if (![self isKindOfClass:NSCollectionViewItem.class]) {
         self.ft_viewLoadStartTime =[NSDate date];

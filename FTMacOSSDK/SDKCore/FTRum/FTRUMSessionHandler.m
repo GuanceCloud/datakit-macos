@@ -17,6 +17,7 @@ static const NSTimeInterval sessionMaxDuration = 4 * 60 * 60; // 4 hours
 @property (nonatomic, strong) NSDate *sessionStartTime;
 @property (nonatomic, strong) NSDate *lastInteractionTime;
 @property (nonatomic, strong) NSMutableArray<FTRUMHandler*> *viewHandlers;
+@property (nonatomic, weak)  FTRUMActionHandler *actionHandler;
 @property (nonatomic, strong) FTRUMSessionModel *sessionModel;
 @property (nonatomic, assign) BOOL sampling;
 @end
@@ -64,17 +65,27 @@ static const NSTimeInterval sessionMaxDuration = 4 * 60 * 60; // 4 hours
         case FTRUMDataError:
             if (self.viewHandlers.count == 0) {
                 [self startView:model];
+            }else{
+                //最后一个action 的id 绑定model
             }
+            break;
+        case FTRUMDataResourceStart:
+            
             break;
         default:
             break;
     }
+    
     self.viewHandlers = [self.assistant manageChildHandlers:self.viewHandlers byPropagatingData:model];
     return  YES;
 }
 -(void)startView:(FTRUMDataModel *)model{
     
     FTRUMViewHandler *viewHandler = [[FTRUMViewHandler alloc]initWithModel:model];
+    __weak typeof(self) weakSelf = self;
+    viewHandler.addActionBlock = ^(FTRUMActionHandler * _Nonnull handler) {
+        weakSelf.actionHandler = handler;
+    };
     [self.viewHandlers addObject:viewHandler];
 }
 -(BOOL)timedOutOrExpired:(NSDate*)currentTime{

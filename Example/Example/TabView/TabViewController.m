@@ -117,18 +117,18 @@
 //    [self.view.window beginSheet:color completionHandler:^(NSModalResponse returnCode) {
 //
 //    }];
-//    NSOpenPanel *open = [NSOpenPanel openPanel];
-//    open.canChooseFiles = YES;
-//    [open beginWithCompletionHandler:^(NSModalResponse result) {
-//        if(result == NSModalResponseOK){
-//            NSArray *filesUrl = open.URLs;
-//            for (NSURL *url in filesUrl) {
-//                NSError *error;
-//                NSString *string = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
-//                NSLog(@"fileUrl = %@",string);
-//            }
-//        }
-//    }];
+    NSOpenPanel *open = [NSOpenPanel openPanel];
+    open.canChooseFiles = YES;
+    [open beginWithCompletionHandler:^(NSModalResponse result) {
+        if(result == NSModalResponseOK){
+            NSArray *filesUrl = open.URLs;
+            for (NSURL *url in filesUrl) {
+                NSError *error;
+                NSString *string = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+                NSLog(@"fileUrl = %@",string);
+            }
+        }
+    }];
 }
 
 - (IBAction)segmentClick:(id)sender {
