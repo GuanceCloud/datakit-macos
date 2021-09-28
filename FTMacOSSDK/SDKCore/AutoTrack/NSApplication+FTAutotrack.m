@@ -13,60 +13,34 @@
     return [self dataflux_sendAction:action to:target from:sender];
 }
 - (void)datafluxTrack:(SEL)action to:(id)target from:(id )sender{
-    if (![sender  isKindOfClass:[NSView class]]) {
+
+    if (![sender  isKindOfClass:[NSView class]] && ![sender isKindOfClass:[NSMenuItem class]]) {
         return;
     }
     //拖拽事件不采集
-    if (self.currentEvent.type == NSEventTypeLeftMouseDragged ) {
+    if (self.currentEvent.type != NSEventTypeLeftMouseUp &&  self.currentEvent.type != NSEventTypeLeftMouseDown ) {
         return;
     }
-    //Colors Panel 滑动条 过滤滑动状态 以及NSEventTypeLeftMouseDown
-    if ([sender isKindOfClass:NSSlider.class]) {
-        if (self.currentEvent.type != NSEventTypeLeftMouseUp) {
+    //NSStepper点击触发 NSEventTypeLeftMouseDown
+    if (self.currentEvent.type == NSEventTypeLeftMouseDown && ([sender isKindOfClass:NSDatePicker.class] || [sender isKindOfClass:NSStepper.class])) {
+        if([sender isKindOfClass:NSDatePicker.class] && !(action && target)){
             return;
         }
-        //采集滑动条滑动停止事件
-        
-    }
-    else if([sender isKindOfClass:NSDatePicker.class]){
-            //采集日历相关
-            //右上角的箭头与圆形按钮 与 stepper
-            if (action && target) {
-               
-                
-            }else{
-                //日期 textfiled 填写
-                if (self.currentEvent.type == NSEventTypeLeftMouseUp ||self.currentEvent.type == NSEventTypeKeyDown) {
-                   
-                }else{
-                    return;
-                }
-            }
-        
+        [[FTRumManager sharedInstance] addActionEventWithView:sender];
     }else{
-        //采集其他控件点击
-        if([sender isKindOfClass:NSPopUpButton.class]){
-            NSPopUpButton *pop = sender;
-            NSLog(@"selectedItem.title %@", pop.selectedItem.title);
-        }
+    //NSMenu 不继承于 NSView
+    if ([sender isKindOfClass:NSMenuItem.class]) {
+        [[FTRumManager sharedInstance] addActionEventWithView:sender];
+        return;
     }
-    if([sender isKindOfClass:NSTableView.class]){
-        NSTableView *tableView = sender;
-        NSLog(@"\n tableView clickedRow = %ld \n tableView clickedColumn = %ld",(long)tableView.clickedRow,(long)tableView.clickedColumn);
-
-        
+    if([sender isKindOfClass:NSView.class]){
+        [[FTRumManager sharedInstance] addActionEventWithView:sender];
     }
-
-    NSView *view = sender;
-    NSWindow *window = view.window;
-    NSLog(@"view.window %@",view.window);
+    }
     NSLog(@"action %@",NSStringFromSelector(action));
     NSLog(@"target %@",target);
     NSLog(@"sender %@",sender);
     NSLog(@"event %@",self.currentEvent);
-    
-    [[FTRumManager sharedInstance] addActionEventWithView:view];
-
 }
 
 

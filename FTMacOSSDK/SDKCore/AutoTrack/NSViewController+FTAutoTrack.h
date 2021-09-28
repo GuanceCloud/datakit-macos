@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NSViewController (FTAutoTrack)<FTAutoTrackViewControllerProperty>
+@interface NSViewController (FTAutoTrack)<FTRumViewProperty>
 - (void)dataflux_viewDidLoad;
 - (void)dataflux_viewDidAppear;
 - (void)dataflux_viewDidDisappear;

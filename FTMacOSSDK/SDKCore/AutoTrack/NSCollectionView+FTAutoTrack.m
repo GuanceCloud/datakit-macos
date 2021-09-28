@@ -49,5 +49,7 @@
                       withBlock:doubleActionBlock
                           named:@"tableView_doubleAction"];
 }
-
+-(NSString *)dataflux_actionName{
+    return [NSString stringWithFormat:@"[%@][column:%ld][row:%ld]",NSStringFromClass(self.class),self.clickedColumn,(long)self.clickedRow];
+}
 @end

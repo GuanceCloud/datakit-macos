@@ -46,21 +46,25 @@
     return self;
 }
 
-- (void)addActionEventWithView:(NSView *)view{
+- (void)addActionEventWithView:(id)view{
     if (!self.traceOpen) {
         return;
     }
     if(![FTConfigManager sharedInstance].rumConfig.enableTraceUserAction){
         return;
     }
-    
-    id<FTAutoTrackViewProperty> clickView = view;
-    
-    
-    NSString *actionName = clickView.actionName;
+    NSDate *time = [NSDate date];
+    id<FTRUMActionProperty> clickView = view;
+    NSString *actionName = clickView.dataflux_actionName;
     NSString *actionType = @"click";
+    id<FTRumViewProperty> controller = clickView.dataflux_controller;
+    NSString *view_id = controller.dataflux_viewUUID;
     dispatch_async(self.serialQueue, ^{
-    FTRUMActionModel *action = [[FTRUMActionModel alloc]initWithActionID:[[NSUUID UUID]UUIDString] actionName:actionName actionType:actionType];
+        FTRUMActionModel *action = [[FTRUMActionModel alloc]initWithActionID:[[NSUUID UUID]UUIDString] actionName:actionName actionType:actionType];
+        action.actionView_id = view_id;
+        FTRUMDataModel *model = [[FTRUMDataModel alloc]initWithType:FTRUMDataClick time:time];
+        model.baseActionData = action;
+        [self process:model];
     });
     
 }
@@ -68,15 +72,15 @@
     if (!self.traceOpen) {
         return;
     }
-    id<FTAutoTrackViewControllerProperty> appearView = view;
-    NSDate *time = appearView.ft_viewLoadStartTime?:[NSDate date];
-    NSString *viewReferrer = appearView.ft_parentVC;
-    NSString *viewID = appearView.ft_viewUUID;
+    id<FTRumViewProperty> appearView = view;
+    NSDate *time = appearView.dataflux_viewLoadStartTime?:[NSDate date];
+    NSString *viewReferrer = appearView.dataflux_parentVC;
+    NSString *viewID = appearView.dataflux_viewUUID;
     dispatch_async(self.serialQueue, ^{
         NSString *className = NSStringFromClass(appearView.class);
         //viewModel
         FTRUMViewModel *viewModel = [[FTRUMViewModel alloc]initWithViewID:viewID viewName:className viewReferrer:viewReferrer];
-        viewModel.loading_time = appearView.ft_loadDuration;
+        viewModel.loading_time = appearView.dataflux_loadDuration;
         FTRUMDataModel *model = [[FTRUMDataModel alloc]initWithType:FTRUMDataViewStart time:time];
         model.baseViewData = viewModel;
         [self process:model];
@@ -86,9 +90,9 @@
     if (!self.traceOpen) {
         return;
     }
-    id<FTAutoTrackViewControllerProperty> disAppearView = view;
+    id<FTRumViewProperty> disAppearView = view;
     NSDate *time = [NSDate date];
-    NSString *viewID = disAppearView.ft_viewUUID;
+    NSString *viewID = disAppearView.dataflux_viewUUID;
     dispatch_async(self.serialQueue, ^{
         FTRUMViewModel *viewModel = [[FTRUMViewModel alloc]init];
         viewModel.view_id = viewID;

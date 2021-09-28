@@ -14,16 +14,16 @@ static char *viewLoadStartTimeKey = "viewLoadStartTimeKey";
 static char *viewControllerUUID = "viewControllerUUID";
 static char *viewLoadDuration = "viewLoadDuration";
 @implementation NSViewController (FTAutoTrack)
--(void)setFt_viewLoadStartTime:(NSDate  *)viewLoadStartTime{
+-(void)setDataflux_viewLoadStartTime:(NSDate  *)viewLoadStartTime{
     objc_setAssociatedObject(self, &viewLoadStartTimeKey, viewLoadStartTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
--(NSDate *)ft_viewLoadStartTime{
+-(NSDate *)dataflux_viewLoadStartTime{
     return objc_getAssociatedObject(self, &viewLoadStartTimeKey);
 }
--(NSNumber *)ft_loadDuration{
+-(NSNumber *)dataflux_loadDuration{
     return objc_getAssociatedObject(self, &viewLoadDuration);
 }
--(void)setFt_loadDuration:(NSNumber *)ft_loadDuration{
+-(void)setDataflux_loadDuration:(NSNumber *)ft_loadDuration{
     objc_setAssociatedObject(self, &viewLoadDuration, ft_loadDuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 -(NSString *)ft_viewControllerId{
@@ -32,22 +32,32 @@ static char *viewLoadDuration = "viewLoadDuration";
 - (NSString *)ft_viewControllerName{
     return NSStringFromClass([self class]);
 }
--(NSString *)ft_viewUUID{
+-(NSString *)dataflux_viewUUID{
     return objc_getAssociatedObject(self, &viewControllerUUID);
 }
--(void)setFt_viewUUID:(NSString *)ft_viewUUID{
+-(void)setDataflux_viewUUID:(NSString *)ft_viewUUID{
     objc_setAssociatedObject(self, &viewControllerUUID, ft_viewUUID, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
--(NSString *)ft_parentVC{
+-(NSString *)dataflux_parentVC{
     if (self.parentViewController) {
         return NSStringFromClass(self.parentViewController.class);
     }
-    return @"";
+    return nil;
 }
+-(BOOL)dataflux_inMainWindow{
+    return self.view.window.isMainWindow;
+}
+-(BOOL)dataflux_isKeyWindow{
+    return self.view.window.isKeyWindow;
+}
+-(NSString *)dataflux_windowName{
+    return NSStringFromClass(self.view.window.class);
+}
+#pragma mark - AutoTrack -
 
 - (void)dataflux_viewDidLoad{
     if (![self isKindOfClass:NSCollectionViewItem.class]) {
-        self.ft_viewLoadStartTime =[NSDate date];
+        self.dataflux_viewLoadStartTime =[NSDate date];
     }
     [self dataflux_viewDidLoad];
 }
@@ -58,15 +68,15 @@ static char *viewLoadDuration = "viewLoadDuration";
         return;
     }
     
-    if(self.ft_viewLoadStartTime){
-        NSNumber *loadTime = [FTDateUtil nanotimeIntervalSinceDate:[NSDate date] toDate:self.ft_viewLoadStartTime];
-        self.ft_loadDuration = loadTime;
-        self.ft_viewLoadStartTime = nil;
+    if(self.dataflux_viewLoadStartTime){
+        NSNumber *loadTime = [FTDateUtil nanotimeIntervalSinceDate:[NSDate date] toDate:self.dataflux_viewLoadStartTime];
+        self.dataflux_loadDuration = loadTime;
+        self.dataflux_viewLoadStartTime = nil;
     }else{
         NSNumber *loadTime = @0;
-        self.ft_loadDuration = loadTime;
+        self.dataflux_loadDuration = loadTime;
     }
-    self.ft_viewUUID = [NSUUID UUID].UUIDString;
+    self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
     [[FTRumManager sharedInstance] addViewAppearEvent:self];
     NSLog(@"dataflux_viewDidAppear = %@",self);
 }

@@ -8,7 +8,7 @@
 #import "NSView+FTAutoTrack.h"
 
 @implementation NSView (FTAutoTrack)
--(NSString *)viewPath{
+-(NSString *)dataflux_viewPath{
     NSMutableString *str = [NSMutableString new];
     [str appendString:NSStringFromClass([self class])];
     NSView *currentView = self;
@@ -34,19 +34,18 @@
     window?[str insertString:[NSString stringWithFormat:@"%@/",NSStringFromClass(window.class)] atIndex:0]:nil;
     return str;
 }
--(NSString *)actionName{
+-(NSString *)dataflux_actionName{
     return [NSString stringWithFormat:@"[%@]",NSStringFromClass(self.class)];
 }
--(BOOL)inMainWindow{
-    return self.window.isMainWindow;
-}
--(BOOL)isKeyWindow{
-    return self.window.isKeyWindow;
-}
--(id)ftController{
+
+-(id)dataflux_controller{
     NSResponder *nextResponder = self.nextResponder;
     while (nextResponder != nil) {
-        if ([nextResponder isKindOfClass:NSViewController.class] || [nextResponder isKindOfClass:NSWindow.class]) {
+        if ([nextResponder isKindOfClass:NSViewController.class]) {
+            break;
+        }else if([nextResponder isKindOfClass:NSPanel.class]){
+            nextResponder = [NSApplication sharedApplication].keyWindow.contentViewController?:[NSApplication sharedApplication].keyWindow;
+        }else if([nextResponder isKindOfClass:NSWindow.class]){
             break;
         }else{
             nextResponder = nextResponder.nextResponder;
@@ -57,7 +56,7 @@
 @end
 
 @implementation NSPopUpButton (FTAutoTrack)
--(NSString *)actionName{
+-(NSString *)dataflux_actionName{
     if (self.selectedItem.title.length>0) {
         return [NSString stringWithFormat:@"[NSPopUpButton]%@",self.selectedItem.title];
     }else{
@@ -66,7 +65,7 @@
 }
 @end
 @implementation NSButton (FTAutoTrack)
--(NSString *)actionName{
+-(NSString *)dataflux_actionName{
     if (self.title.length>0) {
         return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.title];
     }else{

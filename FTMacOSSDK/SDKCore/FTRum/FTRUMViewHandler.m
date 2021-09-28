@@ -69,7 +69,7 @@
             }
             break;
         case FTRUMDataClick:{
-            if (self.isActiveView && [self.viewid isEqualToString:model.baseViewData.view_id] && self.actionHandler == nil) {
+            if (self.isActiveView && [self.viewid isEqualToString:model.baseActionData.actionView_id] && self.actionHandler == nil) {
                 [self startAction:model];
             }
         }

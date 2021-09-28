@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addViewAppearEvent:(id)view;
 - (void)addViewDisappearEvent:(id)view;
 
-- (void)addActionEventWithView:(NSView *)view;
+- (void)addActionEventWithView:(id )view;
 
 @end
 

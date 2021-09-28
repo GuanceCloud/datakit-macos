@@ -8,35 +8,26 @@
 #ifndef FTAutoTrackProtocol_h
 #define FTAutoTrackProtocol_h
 
-@protocol FTAutoTrackViewProperty <NSObject>
-
-@property (nonatomic, copy, readonly) NSString *viewPath;
-@property (nonatomic, copy, readonly) NSString *actionName;
-@property (nonatomic, weak) id ftController;
-@property (nonatomic, assign, readonly) BOOL inMainWindow;
-@property (nonatomic, assign, readonly) BOOL isKeyWindow;
+@protocol FTRUMActionProperty <NSObject>
+@optional
+@property (nonatomic, copy, readonly) NSString *dataflux_viewPath;
+@property (nonatomic, copy, readonly) NSString *dataflux_actionName;
+@property (nonatomic, weak, readonly) id dataflux_controller;
 
 
 @end
-@protocol FTAutoTrackViewControllerProperty <NSObject>
-@property (nonatomic, strong) NSDate *ft_viewLoadStartTime;
-@property (nonatomic, strong) NSNumber *ft_loadDuration;
-@property (nonatomic, copy, readonly) NSString *ft_viewControllerId;
-@property (nonatomic, copy, readonly) NSString *ft_parentVC;
-@property (nonatomic, copy) NSString *ft_viewUUID;
+@protocol FTRumViewProperty <NSObject>
+@property (nonatomic, strong) NSDate *dataflux_viewLoadStartTime;
+@property (nonatomic, strong) NSNumber *dataflux_loadDuration;
+@property (nonatomic, copy) NSString *dataflux_viewUUID;
+
+@property (nonatomic, copy, readonly) NSString *dataflux_parentVC;
+
+@property (nonatomic, copy, readonly) NSString *dataflux_windowName;
+@property (nonatomic, assign, readonly) BOOL dataflux_inMainWindow;
+@property (nonatomic, assign, readonly) BOOL dataflux_isKeyWindow;
 @end
 
-@protocol FTAutoTrackWindowProperty <NSObject>
-@property (nonatomic, strong) NSDate *ft_viewLoadStartTime;
-@property (nonatomic, strong) NSNumber *ft_loadDuration;
-@property (nonatomic, copy) NSString *ft_viewUUID;
-
-
-@property (nonatomic, assign, readonly) BOOL inMainWindow;
-@property (nonatomic, assign, readonly) BOOL isKeyWindow;
-
-
-@end
 
 
 #endif /* FTAutoTrackProtocol_h */

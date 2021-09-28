@@ -12,6 +12,7 @@
 #import "FTConstants.h"
 #import "FTRUMViewHandler.h"
 #import "FTBaseInfoHander.h"
+#import "FTSDKAgent+Private.h"
 
 static const NSTimeInterval actionMaxDuration = 10; // 10 seconds
 
@@ -102,7 +103,7 @@ static const NSTimeInterval actionMaxDuration = 10; // 10 seconds
     };
     NSMutableDictionary *tags = [NSMutableDictionary dictionaryWithDictionary:sessionViewTag];
     [tags addEntriesFromDictionary:actiontags];
-//    [[FTMobileAgent sharedInstance] rumWrite:FT_TYPE_ACTION terminal:@"app" tags:tags fields:fields tm:[FTDateUtil dateTimeNanosecond:self.actionStartTime]];
+    [[FTSDKAgent sharedInstance] rumWrite:@"action" terminal:@"app" tags:tags fields:fields tm:[FTDateUtil dateTimeMillisecond:self.actionStartTime]];
     if (self.handler) {
         self.handler();
     }
