@@ -12,11 +12,20 @@
 @interface AppDelegate ()
 
 @property (nonatomic, strong) LoginWindowController *loginWindowC;
+@property (nonatomic, strong) NSStatusItem *statusItem;
 
 @end
 
 @implementation AppDelegate
 - (void)applicationWillFinishLaunching:(NSNotification *)notification{
+    NSStatusBar *bar = [NSStatusBar systemStatusBar];
+    NSStatusItem *item = [bar statusItemWithLength:NSSquareStatusItemLength];
+    [item.button setTarget:self];
+    [item.button setAction:@selector(itemClick:)];
+    item.button.image = [NSImage imageNamed:@"blue"];
+    self.statusItem = item;
+}
+- (void)itemClick:(id)sender{
     
 }
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
@@ -36,6 +45,8 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
     // Insert code here to tear down your application
+    NSStatusBar *bar = [NSStatusBar systemStatusBar];
+    [bar removeStatusItem:self.statusItem];
 }
 
 

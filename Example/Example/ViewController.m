@@ -9,7 +9,7 @@
 @interface ViewController()
 @property (nonatomic, strong) NSWindowController *mainAppWVC;
 @property (weak) IBOutlet NSButton *loginBtn;
-@property (weak) IBOutlet NSTextField *userNameTF;
+@property (weak) IBOutlet NSSearchField *userNameTF;
 @property (weak) IBOutlet NSTextField *passwordTF;
 
 @end
@@ -19,6 +19,7 @@
     [super viewDidLoad];
     NSApplication *app = [NSApplication sharedApplication];
     NSLog(@"windows = %@",app.windows);
+    self.userNameTF.allowsEditingTextAttributes = YES;
     // Do any additional setup after loading the view.
 }
 - (IBAction)closeClick:(id)sender {

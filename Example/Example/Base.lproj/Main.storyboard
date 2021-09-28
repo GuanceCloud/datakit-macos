@@ -679,7 +679,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="127" y="-178"/>
+            <point key="canvasLocation" x="89" y="-363"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -853,24 +853,21 @@
                             <visualEffectView blendingMode="behindWindow" material="mediumLight" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="eE9-QG-TQW">
                                 <rect key="frame" x="0.0" y="0.0" width="230" height="270"/>
                             </visualEffectView>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vlv-4r-xOh">
-                                <rect key="frame" x="40" y="116" width="150" height="21"/>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p22-SS-Etu">
+                                <rect key="frame" x="40" y="124" width="150" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="XaZ-KE-EDI"/>
-                                    <constraint firstAttribute="width" constant="150" id="blI-cH-s0G"/>
+                                    <constraint firstAttribute="height" constant="22" id="8bM-Nf-qH3"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="login name" drawsBackground="YES" id="T2D-pv-0t0">
-                                    <font key="font" usesAppearanceFont="YES"/>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="jGo-Xh-sK7">
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                                </searchFieldCell>
+                            </searchField>
                             <textField verticalHuggingPriority="750" contentType="password" translatesAutoresizingMaskIntoConstraints="NO" id="eRv-OT-wef">
                                 <rect key="frame" x="40" y="80" width="150" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="E4v-lt-BzH"/>
-                                    <constraint firstAttribute="height" constant="21" id="Gt7-Ri-AoV"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="os4-Mo-lyX"/>
+                                    <constraint firstAttribute="height" constant="21" id="Nuj-DA-qKO"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="password" drawsBackground="YES" id="dbA-fC-q3a">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -919,16 +916,19 @@
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="eE9-QG-TQW" secondAttribute="trailing" id="Aed-nI-ciA"/>
-                            <constraint firstItem="vlv-4r-xOh" firstAttribute="top" secondItem="KuV-UT-IT1" secondAttribute="bottom" constant="20" id="O3l-TP-T1D"/>
-                            <constraint firstItem="vlv-4r-xOh" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="Si4-CU-AGi"/>
+                            <constraint firstItem="eRv-OT-wef" firstAttribute="width" secondItem="p22-SS-Etu" secondAttribute="width" id="I0r-bT-OnM"/>
+                            <constraint firstItem="p22-SS-Etu" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="40" id="Kkw-nc-P9U"/>
                             <constraint firstItem="FcC-xJ-hlr" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="5" id="Vc2-6B-CoM"/>
                             <constraint firstItem="eE9-QG-TQW" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="X6i-DW-oEX"/>
                             <constraint firstItem="KuV-UT-IT1" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="YGc-M2-2ZS"/>
+                            <constraint firstItem="p22-SS-Etu" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="cUx-dJ-LPx"/>
+                            <constraint firstItem="eRv-OT-wef" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="cyg-4y-GWR"/>
                             <constraint firstItem="KuV-UT-IT1" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="35" id="gfu-BZ-1GJ"/>
                             <constraint firstItem="RMp-1x-la5" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="ldw-b0-ZnG"/>
-                            <constraint firstItem="eRv-OT-wef" firstAttribute="top" secondItem="vlv-4r-xOh" secondAttribute="bottom" constant="15" id="qwt-84-aYV"/>
+                            <constraint firstItem="eRv-OT-wef" firstAttribute="top" secondItem="p22-SS-Etu" secondAttribute="bottom" constant="23" id="t2R-E3-YoQ"/>
                             <constraint firstAttribute="bottom" secondItem="RMp-1x-la5" secondAttribute="bottom" constant="25" id="tiL-VJ-f7k"/>
                             <constraint firstItem="eRv-OT-wef" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="uoo-aR-LPo"/>
+                            <constraint firstItem="p22-SS-Etu" firstAttribute="top" secondItem="KuV-UT-IT1" secondAttribute="bottom" constant="11" id="vV4-Yv-c6K"/>
                             <constraint firstAttribute="bottom" secondItem="eE9-QG-TQW" secondAttribute="bottom" id="vVx-jG-Fyy"/>
                             <constraint firstItem="eE9-QG-TQW" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="vbB-y2-ihF"/>
                             <constraint firstItem="FcC-xJ-hlr" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="5" id="xdN-HK-hc9"/>
@@ -940,7 +940,7 @@
                     <connections>
                         <outlet property="loginBtn" destination="RMp-1x-la5" id="eZ4-kw-EAw"/>
                         <outlet property="passwordTF" destination="eRv-OT-wef" id="KcV-5z-pFg"/>
-                        <outlet property="userNameTF" destination="vlv-4r-xOh" id="qdr-TT-zKD"/>
+                        <outlet property="userNameTF" destination="p22-SS-Etu" id="heF-BV-0YO"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
