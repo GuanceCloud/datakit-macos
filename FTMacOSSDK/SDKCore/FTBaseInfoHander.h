@@ -11,6 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FTBaseInfoHander : NSObject
 + (BOOL)randomSampling:(int)sampling;
++ (NSString *)boolStr:(BOOL)isTrue;
++ (void)performBlockDispatchMainSyncSafe:(DISPATCH_NOESCAPE dispatch_block_t)block;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -14,4 +14,5 @@ extern NSString * const FT_LOGGER_SOURCE;
 
 extern NSUInteger const FT_LOGGING_CONTENT_SIZE;
 
+extern NSString * const FT_NULL_VALUE;
 NS_ASSUME_NONNULL_END

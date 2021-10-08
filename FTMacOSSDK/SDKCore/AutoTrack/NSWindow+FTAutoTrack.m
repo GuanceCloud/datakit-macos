@@ -11,6 +11,7 @@
 #import <objc/runtime.h>
 #import "FTDateUtil.h"
 #import "FTRumManager.h"
+#import "FTConstants.h"
 @interface NSWindow (FTAutoTrack)<FTRumViewProperty>
 @end
 @implementation NSWindow (FTAutoTrack)
@@ -37,7 +38,7 @@ static char *viewControllerUUID = "viewControllerUUID";
     objc_setAssociatedObject(self, &viewControllerUUID, dataflux_viewUUID, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 -(NSString *)dataflux_parentVC{
-    return nil;
+    return FT_NULL_VALUE;
 }
 -(BOOL)dataflux_inMainWindow{
     return self.isMainWindow;
@@ -75,7 +76,7 @@ static char *viewControllerUUID = "viewControllerUUID";
         //记录 init - keyWindow 的时间差 作为window显示加载时长
         //只记录第一次 变成keyWindow
         if(self.dataflux_viewLoadStartTime){
-            NSNumber *loadTime = [FTDateUtil nanotimeIntervalSinceDate:[NSDate date] toDate:self.dataflux_viewLoadStartTime];
+            NSNumber *loadTime = [FTDateUtil nanotimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
             self.dataflux_loadDuration = loadTime;
             self.dataflux_viewLoadStartTime = nil;
             self.dataflux_viewUUID = [NSUUID UUID].UUIDString;

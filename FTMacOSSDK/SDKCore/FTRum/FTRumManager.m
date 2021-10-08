@@ -17,6 +17,7 @@
 @property (nonatomic, strong) dispatch_queue_t serialQueue;
 @property (nonatomic, assign) BOOL traceOpen;
 @property (nonatomic, strong) FTRUMSessionHandler *sessionHandler;
+@property (nonatomic, strong) NSSet *ignoredPrivateControllers;
 
 @end
 @implementation FTRumManager
@@ -59,6 +60,9 @@
     NSString *actionType = @"click";
     id<FTRumViewProperty> controller = clickView.dataflux_controller;
     NSString *view_id = controller.dataflux_viewUUID;
+    if(!view_id){
+        return;
+    }
     dispatch_async(self.serialQueue, ^{
         FTRUMActionModel *action = [[FTRUMActionModel alloc]initWithActionID:[[NSUUID UUID]UUIDString] actionName:actionName actionType:actionType];
         action.actionView_id = view_id;
@@ -72,6 +76,9 @@
     if (!self.traceOpen) {
         return;
     }
+    if ([self.ignoredPrivateControllers containsObject:NSStringFromClass([view class])]) {
+        return;
+    }
     id<FTRumViewProperty> appearView = view;
     NSDate *time = appearView.dataflux_viewLoadStartTime?:[NSDate date];
     NSString *viewReferrer = appearView.dataflux_parentVC;
@@ -82,12 +89,16 @@
         FTRUMViewModel *viewModel = [[FTRUMViewModel alloc]initWithViewID:viewID viewName:className viewReferrer:viewReferrer];
         viewModel.loading_time = appearView.dataflux_loadDuration;
         FTRUMDataModel *model = [[FTRUMDataModel alloc]initWithType:FTRUMDataViewStart time:time];
+        model.currentViewController = appearView;
         model.baseViewData = viewModel;
         [self process:model];
     });
 }
 - (void)addViewDisappearEvent:(id)view{
     if (!self.traceOpen) {
+        return;
+    }
+    if ([self.ignoredPrivateControllers containsObject:NSStringFromClass([view class])]) {
         return;
     }
     id<FTRumViewProperty> disAppearView = view;
@@ -129,5 +140,11 @@
     }
     
     return YES;
+}
+- (NSSet *)ignoredPrivateControllers {
+    if (!_ignoredPrivateControllers) {
+        _ignoredPrivateControllers = [NSSet setWithArray:@[@"NSTitlebarAccessoryViewController",@"NSTitlebarViewController"]];
+    }
+    return _ignoredPrivateControllers;
 }
 @end

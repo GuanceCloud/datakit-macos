@@ -100,7 +100,7 @@ static const NSTimeInterval sessionMaxDuration = 4 * 60 * 60; // 4 hours
 -(NSDictionary *)getCurrentSessionInfo{
     FTRUMViewHandler *view = (FTRUMViewHandler *)[self.viewHandlers lastObject];
     if (view) {
-        return [view.model getGlobalSessionViewTags];
+        return @{};
     }
     return @{};
 }

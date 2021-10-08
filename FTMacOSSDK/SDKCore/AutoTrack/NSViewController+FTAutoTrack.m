@@ -10,9 +10,13 @@
 #import <objc/runtime.h>
 #import "NSString+FTAdd.h"
 #import "FTRumManager.h"
+#import "FTConstants.h"
+#import "FTBaseInfoHander.h"
 static char *viewLoadStartTimeKey = "viewLoadStartTimeKey";
 static char *viewControllerUUID = "viewControllerUUID";
 static char *viewLoadDuration = "viewLoadDuration";
+static char *viewLoaded = "viewLoaded";
+
 @implementation NSViewController (FTAutoTrack)
 -(void)setDataflux_viewLoadStartTime:(NSDate  *)viewLoadStartTime{
     objc_setAssociatedObject(self, &viewLoadStartTimeKey, viewLoadStartTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -25,6 +29,12 @@ static char *viewLoadDuration = "viewLoadDuration";
 }
 -(void)setDataflux_loadDuration:(NSNumber *)ft_loadDuration{
     objc_setAssociatedObject(self, &viewLoadDuration, ft_loadDuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+-(BOOL )dataflux_viewLoaded{
+    return [objc_getAssociatedObject(self, &viewLoaded) boolValue];
+}
+-(void)setDataflux_viewLoaded:(BOOL )dataflux_viewLoaded{
+   objc_setAssociatedObject(self, &viewLoaded, [NSNumber numberWithBool:dataflux_viewLoaded], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 -(NSString *)ft_viewControllerId{
     return [self.ft_viewControllerName ft_md5HashToUpper32Bit];
@@ -42,13 +52,21 @@ static char *viewLoadDuration = "viewLoadDuration";
     if (self.parentViewController) {
         return NSStringFromClass(self.parentViewController.class);
     }
-    return nil;
+    return FT_NULL_VALUE;
 }
 -(BOOL)dataflux_inMainWindow{
-    return self.view.window.isMainWindow;
+    __block BOOL isMain = NO;
+    [FTBaseInfoHander performBlockDispatchMainSyncSafe:^{
+        isMain = self.view.window.isMainWindow;
+    }];
+    return isMain;
 }
 -(BOOL)dataflux_isKeyWindow{
-    return self.view.window.isKeyWindow;
+    __block BOOL isKey = NO;
+    [FTBaseInfoHander performBlockDispatchMainSyncSafe:^{
+        isKey = self.view.window.isKeyWindow;
+    }];
+    return isKey;
 }
 -(NSString *)dataflux_windowName{
     return NSStringFromClass(self.view.window.class);
@@ -67,13 +85,15 @@ static char *viewLoadDuration = "viewLoadDuration";
     if ([self isKindOfClass:NSCollectionViewItem.class]) {
         return;
     }
-    
-    if(self.dataflux_viewLoadStartTime){
-        NSNumber *loadTime = [FTDateUtil nanotimeIntervalSinceDate:[NSDate date] toDate:self.dataflux_viewLoadStartTime];
+    //NSTitlebarViewController、NSTitlebarAccessoryViewController
+    if(!self.dataflux_viewLoaded){
+        NSLog(@"dataflux_viewLoadStartTime %@",self.dataflux_viewLoadStartTime);
+        NSNumber *loadTime = [FTDateUtil nanotimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
         self.dataflux_loadDuration = loadTime;
-        self.dataflux_viewLoadStartTime = nil;
+        self.dataflux_viewLoaded = YES;
     }else{
         NSNumber *loadTime = @0;
+        self.dataflux_viewLoadStartTime = [NSDate date];
         self.dataflux_loadDuration = loadTime;
     }
     self.dataflux_viewUUID = [NSUUID UUID].UUIDString;

@@ -13,6 +13,7 @@
 #import "FTDateUtil.h"
 #import "FTBaseInfoHander.h"
 #import "FTSDKAgent+Private.h"
+#import "FTAutoTrackProtocol.h"
 @interface FTRUMViewHandler()<FTRUMSessionProtocol>
 @property (nonatomic, strong) FTRUMActionHandler *actionHandler;
 @property (nonatomic, strong) NSMutableDictionary *resourceHandlers;
@@ -20,7 +21,7 @@
 @property (nonatomic, copy) NSString *viewid;
 @property (nonatomic, assign,readwrite) BOOL isActiveView;
 @property (nonatomic, strong) FTRUMDataModel *model;
-
+@property (nonatomic, weak) id<FTRumViewProperty> currentViewController;
 @property (nonatomic, assign) NSInteger viewLongTaskCount;
 @property (nonatomic, assign) NSInteger viewResourceCount;
 @property (nonatomic, assign) NSInteger viewErrorCount;
@@ -35,7 +36,7 @@
     if (self) {
         self.assistant = self;
         self.isActiveView = YES;
-        self.viewid = model.baseViewData.view_id;
+        self.currentViewController = model.currentViewController;
         self.model = model;
         self.didReceiveStartData = NO;
         self.viewStartTime = model.time;
@@ -183,7 +184,9 @@
     }
     NSNumber *timeSpend = [FTDateUtil nanotimeIntervalSinceDate:self.viewStartTime toDate:[NSDate date]];
     NSMutableDictionary *sessionViewTag = [NSMutableDictionary dictionaryWithDictionary:[self.model getGlobalSessionViewTags]];
-//    [sessionViewTag setValue:[FTBaseInfoHander boolStr:self.isActiveView] forKey:@"is_active"];
+    [sessionViewTag setValue:[FTBaseInfoHander boolStr:self.isActiveView] forKey:@"is_active"];
+    [sessionViewTag setValue:[FTBaseInfoHander boolStr:self.currentViewController.dataflux_isKeyWindow] forKey:@"is_keyWindow"];
+
     NSMutableDictionary *field = @{@"view_error_count":@(self.viewErrorCount),
                                    @"view_resource_count":@(self.viewResourceCount),
                                    @"view_long_task_count":@(self.viewLongTaskCount),

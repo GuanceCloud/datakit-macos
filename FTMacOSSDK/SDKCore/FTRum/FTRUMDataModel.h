@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FTAutoTrackProtocol.h"
 @class FTTaskInterceptionModel;
 typedef NS_ENUM(NSUInteger, FTRUMDataType) {
     FTRUMDataLaunchHot,
@@ -55,6 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) FTRUMDataType type;
 @property (nonatomic, strong) NSDictionary *tags;
 @property (nonatomic, strong) NSDictionary *fields;
+@property (nonatomic, weak) id<FTRumViewProperty> currentViewController;
 
 @property (nonatomic, strong) FTRUMViewModel *baseViewData;
 @property (nonatomic, strong) FTRUMActionModel *baseActionData;
