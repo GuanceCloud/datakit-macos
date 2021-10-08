@@ -41,7 +41,8 @@
 -(id)dataflux_controller{
     NSResponder *nextResponder = self.nextResponder;
     while (nextResponder != nil) {
-        if ([nextResponder isKindOfClass:NSViewController.class]) {
+        //  获取 view 的 viewcontroller 时 不考虑 NSCollectionViewItem
+       if ([nextResponder isKindOfClass:NSViewController.class]&&![nextResponder isKindOfClass:NSCollectionViewItem.class]) {
             break;
         }else if([nextResponder isKindOfClass:NSPanel.class]){
             nextResponder = [NSApplication sharedApplication].keyWindow.contentViewController?:[NSApplication sharedApplication].keyWindow;

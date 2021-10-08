@@ -22,7 +22,7 @@
     
     if ([FTSwizzler realDelegateClass:class respondsToSelector:selector]) {
         void (^didSelectItemBlock)(id, SEL, id, id) = ^(id view, SEL command, NSCollectionView *collectionView, NSSet<NSIndexPath *> *indexPaths) {
-            
+            //  获取 view 的 viewcontroller 时 不考虑 NSCollectionViewItem
             if (collectionView && indexPaths) {
                 [[FTRumManager sharedInstance] addActionEventWithView:self];
             }
