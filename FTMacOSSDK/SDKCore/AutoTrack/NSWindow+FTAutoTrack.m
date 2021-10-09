@@ -76,7 +76,7 @@ static char *viewControllerUUID = "viewControllerUUID";
         //记录 init - keyWindow 的时间差 作为window显示加载时长
         //只记录第一次 变成keyWindow
         if(self.dataflux_viewLoadStartTime){
-            NSNumber *loadTime = [FTDateUtil nanotimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
+            NSNumber *loadTime = [FTDateUtil nanosecondtimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
             self.dataflux_loadDuration = loadTime;
             self.dataflux_viewLoadStartTime = nil;
             self.dataflux_viewUUID = [NSUUID UUID].UUIDString;

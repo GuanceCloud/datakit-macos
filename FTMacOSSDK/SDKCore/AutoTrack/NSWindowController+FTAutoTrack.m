@@ -65,7 +65,7 @@ static char *viewControllerUUID = "viewControllerUUID";
     if(!self.window.contentViewController){
         // 记录 window 的生命周期
         if(self.dataflux_viewLoadStartTime){
-            NSNumber *loadTime = [FTDateUtil nanotimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
+            NSNumber *loadTime = [FTDateUtil nanosecondtimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
             self.dataflux_loadDuration = loadTime;
             self.dataflux_viewLoadStartTime = nil;
             self.dataflux_viewUUID = [NSUUID UUID].UUIDString;

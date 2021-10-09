@@ -2,8 +2,8 @@ PODS:
   - FTMacOSSDK (0.0.1-alpha.1):
     - FTMacOSSDK/SDKCore (= 0.0.1-alpha.1)
   - FTMacOSSDK/SDKCore (0.0.1-alpha.1):
-    - FTMobileSDK/Common (~> 1.2.1-alpha.7)
-  - FTMobileSDK/Common (1.2.2-alpha.1)
+    - FTMobileSDK/Common (~> 1.2.5-alpha.1)
+  - FTMobileSDK/Common (1.2.5-alpha.1)
 
 DEPENDENCIES:
   - FTMacOSSDK (from `./`)
@@ -17,8 +17,8 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  FTMacOSSDK: 5ce0db63e422c1981db7696e928ccec27b5f1335
-  FTMobileSDK: 5e121f149a8643c74455760ebe5d2f03f301a3ed
+  FTMacOSSDK: 57708ff6520c08f5bca1000be6187fce5637bf37
+  FTMobileSDK: 0be01706f84bd525e4d2585557effaf998904a9b
 
 PODFILE CHECKSUM: e4c7dff8c1937b061895eb5e19867cf786dbe7db
 

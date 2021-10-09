@@ -90,7 +90,7 @@ static const NSTimeInterval actionMaxDuration = 10; // 10 seconds
         FTRUMLaunchDataModel *model = (FTRUMLaunchDataModel *)self.model;
         self.duration =model.duration;
     }else{
-    self.duration =  [endDate timeIntervalSinceDate:self.actionStartTime] >= actionMaxDuration?@(actionMaxDuration*1000000000):[FTDateUtil nanotimeIntervalSinceDate:self.actionStartTime toDate:endDate];
+    self.duration =  [endDate timeIntervalSinceDate:self.actionStartTime] >= actionMaxDuration?@(actionMaxDuration*1000000000):[FTDateUtil nanosecondtimeIntervalSinceDate:self.actionStartTime toDate:endDate];
         
     }
     NSDictionary *sessionViewTag = [self.model getGlobalSessionViewTags];
@@ -103,7 +103,7 @@ static const NSTimeInterval actionMaxDuration = 10; // 10 seconds
     };
     NSMutableDictionary *tags = [NSMutableDictionary dictionaryWithDictionary:sessionViewTag];
     [tags addEntriesFromDictionary:actiontags];
-    [[FTSDKAgent sharedInstance] rumWrite:@"action" terminal:@"app" tags:tags fields:fields tm:[FTDateUtil dateTimeMillisecond:self.actionStartTime]];
+    [[FTSDKAgent sharedInstance] rumWrite:@"action" terminal:@"app" tags:tags fields:fields tm:[FTDateUtil dateTimeNanosecond:self.actionStartTime]];
     if (self.handler) {
         self.handler();
     }

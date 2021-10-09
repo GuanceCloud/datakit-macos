@@ -88,7 +88,7 @@ static char *viewLoaded = "viewLoaded";
     //NSTitlebarViewController、NSTitlebarAccessoryViewController
     if(!self.dataflux_viewLoaded){
         NSLog(@"dataflux_viewLoadStartTime %@",self.dataflux_viewLoadStartTime);
-        NSNumber *loadTime = [FTDateUtil nanotimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
+        NSNumber *loadTime = [FTDateUtil nanosecondtimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
         self.dataflux_loadDuration = loadTime;
         self.dataflux_viewLoaded = YES;
     }else{
