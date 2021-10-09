@@ -20,7 +20,7 @@
     return sharedInstance;
 }
 -(void)setTrackConfig:(FTTrackConfig *)trackConfig{
-    _trackConfig = [trackConfig copy];
+    _trackConfig = trackConfig;
     FTNetworkInfoManger.sharedInstance.setMetricsUrl(trackConfig.metricsUrl)
     .setSdkVersion(SDK_VERSION)
     .setXDataKitUUID(trackConfig.XDataKitUUID);

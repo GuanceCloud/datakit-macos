@@ -53,24 +53,21 @@
     self.actionHandler =(FTRUMActionHandler *)[self.assistant manage:(FTRUMHandler *)self.actionHandler byPropagatingData:model];
     switch (model.type) {
         case FTRUMDataViewStart:
-            if (self.viewid && [self.viewid isEqualToString:model.baseViewData.view_id]) {
+            if (self.currentViewController && [self.currentViewController isEqual:model.currentViewController]) {
                 if (self.didReceiveStartData ) {
                     self.isActiveView = NO;
                 }
                 self.didReceiveStartData = YES;
-            }else{
-                self.needUpdateView = YES;
-                self.isActiveView = NO;
             }
             break;
         case FTRUMDataViewStop:
-            if (self.viewid && [self.viewid isEqualToString:model.baseViewData.view_id]) {
+            if (self.currentViewController && [self.currentViewController isEqual:model.currentViewController]) {
                 self.needUpdateView = YES;
                 self.isActiveView = NO;
             }
             break;
         case FTRUMDataClick:{
-            if (self.isActiveView && [self.viewid isEqualToString:model.baseActionData.actionView_id] && self.actionHandler == nil) {
+            if (self.isActiveView && [self.currentViewController.dataflux_viewUUID isEqualToString:model.baseActionData.actionView_id] && self.actionHandler == nil) {
                 [self startAction:model];
             }
         }
@@ -182,7 +179,7 @@
     if (!self.model.baseViewData) {
         return;
     }
-    NSNumber *timeSpend = [FTDateUtil nanotimeIntervalSinceDate:self.viewStartTime toDate:[NSDate date]];
+    NSNumber *timeSpend = [FTDateUtil nanosecondtimeIntervalSinceDate:self.viewStartTime toDate:[NSDate date]];
     NSMutableDictionary *sessionViewTag = [NSMutableDictionary dictionaryWithDictionary:[self.model getGlobalSessionViewTags]];
     [sessionViewTag setValue:[FTBaseInfoHander boolStr:self.isActiveView] forKey:@"is_active"];
     [sessionViewTag setValue:[FTBaseInfoHander boolStr:self.currentViewController.dataflux_isKeyWindow] forKey:@"is_keyWindow"];
