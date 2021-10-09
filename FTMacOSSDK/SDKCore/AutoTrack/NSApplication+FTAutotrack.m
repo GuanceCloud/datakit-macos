@@ -28,14 +28,18 @@
         }
         [[FTRumManager sharedInstance] addActionEventWithView:sender];
     }else{
-    //NSMenu 不继承于 NSView
-    if ([sender isKindOfClass:NSMenuItem.class]) {
-        [[FTRumManager sharedInstance] addActionEventWithView:sender];
-        return;
-    }
-    if([sender isKindOfClass:NSView.class]){
-        [[FTRumManager sharedInstance] addActionEventWithView:sender];
-    }
+        //NSMenu 不继承于 NSView
+        if ([sender isKindOfClass:NSMenuItem.class]) {
+            [[FTRumManager sharedInstance] addActionEventWithView:sender];
+            return;
+        }
+        //过滤 NSSearchField 取消按钮一次点击多次sendAction
+        if ([sender isKindOfClass:NSSearchField.class] && action == nil) {
+            return;
+        }
+        if([sender isKindOfClass:NSView.class]){
+            [[FTRumManager sharedInstance] addActionEventWithView:sender];
+        }
     }
     NSLog(@"action %@",NSStringFromSelector(action));
     NSLog(@"target %@",target);
