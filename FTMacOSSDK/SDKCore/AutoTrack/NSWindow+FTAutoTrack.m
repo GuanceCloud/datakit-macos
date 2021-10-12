@@ -53,19 +53,15 @@ static char *viewControllerUUID = "viewControllerUUID";
 
 -(instancetype)dataflux_init{
     NSWindow *win = [self dataflux_init];
-    NSLog(@"\n ==================\nNSWindow init= %@\n ==================",NSStringFromClass([win class]));
     return win;
 }
 -(instancetype)dataflux_initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)style backing:(NSBackingStoreType)backingStoreType defer:(BOOL)flag{
     NSWindow *win = [self dataflux_initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
-    NSLog(@"\n ==================\ndataflux_initWithContentRect init= %@\n ==================",NSStringFromClass([win class]));
 
     return win;
 }
 - (instancetype)dataflux_initWithCoder:(NSCoder *)coder{
     NSWindow *win = [self dataflux_initWithCoder:coder];
-    NSLog(@"\n ==================\ndataflux_initWithCoder init= %@\n ==================",NSStringFromClass([win class]));
-   
     return win;
     
 }

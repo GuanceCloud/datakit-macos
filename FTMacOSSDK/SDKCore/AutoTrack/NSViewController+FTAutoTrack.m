@@ -87,7 +87,6 @@ static char *viewLoaded = "viewLoaded";
     }
     //NSTitlebarViewController、NSTitlebarAccessoryViewController
     if(!self.dataflux_viewLoaded){
-        NSLog(@"dataflux_viewLoadStartTime %@",self.dataflux_viewLoadStartTime);
         NSNumber *loadTime = [FTDateUtil nanosecondtimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
         self.dataflux_loadDuration = loadTime;
         self.dataflux_viewLoaded = YES;
@@ -98,19 +97,14 @@ static char *viewLoaded = "viewLoaded";
     }
     self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
     [[FTRumManager sharedInstance] addViewAppearEvent:self];
-    NSLog(@"dataflux_viewDidAppear = %@",self);
 }
 -(void)dataflux_viewDidDisappear{
     
     [self dataflux_viewDidDisappear];
     if ([self isKindOfClass:NSCollectionViewItem.class]) {
         return;
-    }
-    NSLog(@"dataflux_viewDidDisappear = %@",self);
-    
+    }    
     [[FTRumManager sharedInstance] addViewDisappearEvent:self];
-    
-    
 }
 
 @end

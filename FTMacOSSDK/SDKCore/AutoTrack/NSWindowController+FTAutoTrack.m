@@ -61,7 +61,6 @@ static char *viewControllerUUID = "viewControllerUUID";
 - (void)dataflux_windowDidLoad{
 
     [self dataflux_windowDidLoad];
-    NSLog(@"dataflux_windowDidLoad contentViewController = %@",self.window.contentViewController);
     if(!self.window.contentViewController){
         // 记录 window 的生命周期
         if(self.dataflux_viewLoadStartTime){

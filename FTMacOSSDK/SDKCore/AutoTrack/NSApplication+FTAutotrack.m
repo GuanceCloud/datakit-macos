@@ -41,10 +41,6 @@
             [[FTRumManager sharedInstance] addActionEventWithView:sender];
         }
     }
-    NSLog(@"action %@",NSStringFromSelector(action));
-    NSLog(@"target %@",target);
-    NSLog(@"sender %@",sender);
-    NSLog(@"event %@",self.currentEvent);
 }
 
 
