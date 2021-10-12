@@ -12,9 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^FTAddActionEvent)(FTRUMActionHandler *handler);
 
 @interface FTRUMViewHandler : FTRUMHandler
+@property (nonatomic, strong) FTRUMContext *context;
 @property (nonatomic, strong, readonly) FTRUMDataModel *model;
 @property (nonatomic, copy)  FTAddActionEvent addActionBlock;
--(instancetype)initWithModel:(FTRUMDataModel *)model;
+-(instancetype)initWithModel:(FTRUMViewModel *)model context:(FTRUMContext *)context;
 @end
 
 NS_ASSUME_NONNULL_END

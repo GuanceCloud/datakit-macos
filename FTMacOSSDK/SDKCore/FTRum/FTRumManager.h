@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addActionEventWithView:(id )view;
 
+-(NSDictionary *)getGlobalSessionViewTags;
+
 @end
 
 NS_ASSUME_NONNULL_END

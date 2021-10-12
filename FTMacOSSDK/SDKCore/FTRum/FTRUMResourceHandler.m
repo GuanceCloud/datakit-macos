@@ -12,16 +12,18 @@
 #import "FTConstants.h"
 #import "FTDateUtil.h"
 #import "FTBaseInfoHander.h"
+#import "FTSDKAgent+Private.h"
 @interface FTRUMResourceHandler()<FTRUMSessionProtocol>
 @property (nonatomic, copy,readwrite) NSString *identifier;
-@property (nonatomic, strong) FTRUMResourceDataModel *model;
-
+@property (nonatomic, strong) NSDate *time;
 @end
 @implementation FTRUMResourceHandler
--(instancetype)initWithModel:(FTRUMResourceDataModel *)model{
+-(instancetype)initWithModel:(FTRUMResourceDataModel *)model context:(FTRUMContext *)context{
     self = [super init];
     if (self) {
-        self.model = model;
+        self.identifier = model.identifier;
+        self.time = model.time;
+        self.context = [context copy];
         self.assistant = self;
     }
     return self;
@@ -30,7 +32,7 @@
 - (BOOL)process:(nonnull FTRUMDataModel *)data {
     if ([data isKindOfClass:FTRUMResourceDataModel.class]) {
         FTRUMResourceDataModel *newData = (FTRUMResourceDataModel *)data;
-        if (newData.identifier == self.model.identifier) {
+        if (newData.identifier == self.identifier) {
             switch (data.type) {
                 case FTRUMDataResourceError:{
                     [self writeErrorData:data];
@@ -58,22 +60,18 @@
     return YES;
 }
 - (void)writeResourceData:(FTRUMDataModel *)data{
-    NSDictionary *sessionTag = [self.model getGlobalSessionViewTags];
-    NSDictionary *actiontags =self.model.baseActionData? [self.model.baseActionData getActionTags]:@{};
-    NSMutableDictionary *tags = [NSMutableDictionary dictionaryWithDictionary:sessionTag];
-    [tags addEntriesFromDictionary:actiontags];
+    NSDictionary *rumTag = [self.context getGlobalSessionViewActionTags];
+    NSMutableDictionary *tags = [NSMutableDictionary dictionaryWithDictionary:rumTag];
     [tags addEntriesFromDictionary:data.tags];
-//    [[FTMobileAgent sharedInstance] rumWrite:FT_TYPE_RESOURCE terminal:@"app" tags:tags fields:data.fields tm:[FTDateUtil dateTimeNanosecond:self.model.time]];
+    [[FTSDKAgent sharedInstance] rumWrite:FT_TYPE_RESOURCE terminal:@"app" tags:tags fields:data.fields tm:[FTDateUtil dateTimeNanosecond:self.time]];
     
 
 }
 - (void)writeErrorData:(FTRUMDataModel *)data{
-    NSDictionary *sessionViewTag = [data getGlobalSessionViewTags];
-    
-    NSDictionary *actiontags =self.model.baseActionData? [self.model.baseActionData getActionTags]:@{};
-    NSMutableDictionary *tags = [NSMutableDictionary dictionaryWithDictionary:sessionViewTag];
-    [tags addEntriesFromDictionary:actiontags];
+    NSDictionary *rumTag = [self.context getGlobalSessionViewActionTags];
+
+    NSMutableDictionary *tags = [NSMutableDictionary dictionaryWithDictionary:rumTag];
     [tags addEntriesFromDictionary:data.tags];
-//    [[FTMobileAgent sharedInstance] rumWrite:FT_TYPE_ERROR terminal:@"app" tags:tags fields:data.fields tm:[FTDateUtil dateTimeNanosecond:self.model.time]];
+    [[FTSDKAgent sharedInstance] rumWrite:FT_TYPE_ERROR terminal:@"app" tags:tags fields:data.fields tm:[FTDateUtil dateTimeNanosecond:self.time]];
 }
 @end

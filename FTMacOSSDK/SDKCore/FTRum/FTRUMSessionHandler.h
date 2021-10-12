@@ -10,7 +10,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FTRUMSessionHandler : FTRUMHandler
-
 -(instancetype)initWithModel:(FTRUMDataModel *)model;
 -(void)refreshSession;
 -(NSDictionary *)getCurrentSessionInfo;

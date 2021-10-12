@@ -17,9 +17,8 @@ static const NSTimeInterval sessionMaxDuration = 4 * 60 * 60; // 4 hours
 @property (nonatomic, strong) NSDate *sessionStartTime;
 @property (nonatomic, strong) NSDate *lastInteractionTime;
 @property (nonatomic, strong) NSMutableArray<FTRUMHandler*> *viewHandlers;
-@property (nonatomic, weak)  FTRUMActionHandler *actionHandler;
-@property (nonatomic, strong) FTRUMSessionModel *sessionModel;
 @property (nonatomic, assign) BOOL sampling;
+@property (nonatomic, copy) NSString *session_id;
 @end
 @implementation FTRUMSessionHandler
 -(instancetype)initWithModel:(FTRUMDataModel *)model{
@@ -32,7 +31,7 @@ static const NSTimeInterval sessionMaxDuration = 4 * 60 * 60; // 4 hours
     return  self;
 }
 -(void)refreshSession{
-    self.sessionModel = [[FTRUMSessionModel alloc]initWithSessionID:[NSUUID UUID].UUIDString];
+    self.session_id = [[NSUUID UUID] UUIDString];
     self.sessionStartTime = [NSDate date];
     self.lastInteractionTime = [NSDate date];
     if ([FTBaseInfoHander randomSampling:[FTConfigManager sharedInstance].rumConfig.samplerate]) {
@@ -50,8 +49,6 @@ static const NSTimeInterval sessionMaxDuration = 4 * 60 * 60; // 4 hours
         return YES;
     }
     _lastInteractionTime = [NSDate date];
-    //数据与session绑定
-    model.baseSessionData = self.sessionModel;
   
     switch (model.type) {
         case FTRUMDataViewStart:
@@ -80,12 +77,15 @@ static const NSTimeInterval sessionMaxDuration = 4 * 60 * 60; // 4 hours
     return  YES;
 }
 -(void)startView:(FTRUMDataModel *)model{
-    
-    FTRUMViewHandler *viewHandler = [[FTRUMViewHandler alloc]initWithModel:model];
-    __weak typeof(self) weakSelf = self;
-    viewHandler.addActionBlock = ^(FTRUMActionHandler * _Nonnull handler) {
-        weakSelf.actionHandler = handler;
-    };
+    FTRUMViewModel *viewModel =(FTRUMViewModel *)model;
+    FTRUMContext *context = [[FTRUMContext alloc]init];
+    context.session_id = self.session_id;
+    context.session_type = @"user";
+    context.view_id = viewModel.view_id;
+    context.view_name = viewModel.view_name;
+    context.view_referrer = viewModel.view_referrer;
+    FTRUMViewHandler *viewHandler = [[FTRUMViewHandler alloc]initWithModel:viewModel context:context];
+   
     [self.viewHandlers addObject:viewHandler];
 }
 -(BOOL)timedOutOrExpired:(NSDate*)currentTime{
@@ -100,7 +100,7 @@ static const NSTimeInterval sessionMaxDuration = 4 * 60 * 60; // 4 hours
 -(NSDictionary *)getCurrentSessionInfo{
     FTRUMViewHandler *view = (FTRUMViewHandler *)[self.viewHandlers lastObject];
     if (view) {
-        return @{};
+        return [view.context getGlobalSessionViewTags];
     }
     return @{};
 }

@@ -12,11 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^FTActionEventSent)(void);
 
 @interface FTRUMActionHandler : FTRUMHandler
-@property (nonatomic, strong,readonly) FTRUMDataModel *model;
+@property (nonatomic, strong) FTRUMContext *context;
+
+@property (nonatomic, strong,readonly) FTRUMActionModel *model;
 
 @property (nonatomic, copy) FTActionEventSent handler;
 
--(instancetype)initWithModel:(FTRUMDataModel *)model;
+-(instancetype)initWithModel:(FTRUMActionModel *)model context:(FTRUMContext *)context;
 -(void)writeActionData:(NSDate *)endDate;
 @end
 

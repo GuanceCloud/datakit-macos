@@ -9,18 +9,7 @@
 #import "FTRUMDataModel.h"
 #import "FTBaseInfoHander.h"
 
-@implementation FTRUMSessionModel
 
--(instancetype)initWithSessionID:(NSString *)sessionid{
-    self = [super init];
-    if (self) {
-        self.session_id = sessionid;
-        self.session_type = @"user";
-    }
-    return  self;
-}
-
-@end
 @implementation FTRUMDataModel
 -(instancetype)initWithType:(FTRUMDataType)type time:(NSDate *)time{
     self = [super init];
@@ -29,18 +18,6 @@
         self.type = type;
     }
     return self;
-}
--(NSDictionary *)getGlobalSessionViewTags{
-    NSDictionary *sessionTag = @{@"session_id":self.baseSessionData.session_id,
-                                 @"session_type":self.baseSessionData.session_type,
-    };
-    NSDictionary *viewTag = self.baseViewData?@{@"view_id":self.baseViewData.view_id,
-                                                @"view_name":self.baseViewData.view_name,
-                                                @"view_referrer":self.baseViewData.view_referrer,
-    }:@{};
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:sessionTag];
-    [dict addEntriesFromDictionary:viewTag];
-    return dict;
 }
 @end
 @implementation FTRUMViewModel
@@ -58,7 +35,7 @@
 @implementation FTRUMActionModel
 
 -(instancetype)initWithActionID:(NSString *)actionid actionName:(NSString *)actionName actionType:(nonnull NSString *)actionType{
-    self = [super init];
+    self = [super initWithType:FTRUMDataClick time:[NSDate date]];
     if (self) {
         self.action_id = actionid;
         self.action_name = actionName;
@@ -103,6 +80,34 @@
         self.tm = tm;
     }
     return self;
+}
+
+@end
+@implementation FTRUMContext
+- (instancetype)copyWithZone:(NSZone *)zone {
+    FTRUMContext *context = [[[self class] allocWithZone:zone] init];
+    context.action_id = self.action_id;
+    context.session_id = self.session_id;
+    context.session_type = self.session_type;
+    context.view_id = self.view_id;
+    context.view_referrer = self.view_referrer;
+    context.view_name = self.view_name;
+    return context;
+}
+-(NSDictionary *)getGlobalSessionViewTags{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{
+        @"session_id":self.session_id,
+        @"session_type":self.session_type,
+    }];
+    [dict setValue:self.view_id forKey:@"view_id"];
+    [dict setValue:self.view_referrer forKey:@"view_referrer"];
+    [dict setValue:self.view_name forKey:@"view_name"];
+    return dict;
+}
+-(NSDictionary *)getGlobalSessionViewActionTags{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self getGlobalSessionViewTags]];
+    [dict setValue:self.action_id forKey:@"action_id"];
+    return dict;
 }
 
 @end

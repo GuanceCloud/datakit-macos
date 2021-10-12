@@ -24,8 +24,17 @@ typedef NS_ENUM(NSUInteger, FTRUMDataType) {
 };
 
 NS_ASSUME_NONNULL_BEGIN
+@interface FTRUMDataModel : NSObject
+@property (nonatomic, weak) id<FTRumViewProperty> currentViewController;
+@property (nonatomic, strong) NSDate *time;
+@property (nonatomic, assign) FTRUMDataType type;
+@property (nonatomic, strong) NSDictionary *tags;
+@property (nonatomic, strong) NSDictionary *fields;
+
+-(instancetype)initWithType:(FTRUMDataType)type time:(NSDate *)time;
+@end
 //tags
-@interface FTRUMActionModel : NSObject
+@interface FTRUMActionModel : FTRUMDataModel
 @property (nonatomic, copy) NSString *action_id;
 @property (nonatomic, copy) NSString *action_name;
 @property (nonatomic, copy) NSString *action_type;
@@ -37,33 +46,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 //tags
-@interface FTRUMViewModel : NSObject
+@interface FTRUMViewModel : FTRUMDataModel
 @property (nonatomic, copy) NSString *view_id;
 @property (nonatomic, copy) NSString *view_name;
 @property (nonatomic, copy) NSString *view_referrer;
 @property (nonatomic, strong) NSNumber *loading_time;
--(instancetype)initWithViewID:(NSString *)viewid viewName:(NSString *)viewName viewReferrer:(NSString *)viewReferrer;
 @end
-//tags
-@interface FTRUMSessionModel : NSObject
-@property (nonatomic, copy) NSString *session_id;
-@property (nonatomic, copy) NSString *session_type;
--(instancetype)initWithSessionID:(NSString *)sessionid;
-@end
-@interface FTRUMDataModel : NSObject
 
-@property (nonatomic, strong) NSDate *time;
-@property (nonatomic, assign) FTRUMDataType type;
-@property (nonatomic, strong) NSDictionary *tags;
-@property (nonatomic, strong) NSDictionary *fields;
-@property (nonatomic, weak) id<FTRumViewProperty> currentViewController;
-
-@property (nonatomic, strong) FTRUMViewModel *baseViewData;
-@property (nonatomic, strong) FTRUMActionModel *baseActionData;
-@property (nonatomic, strong) FTRUMSessionModel *baseSessionData;
--(instancetype)initWithType:(FTRUMDataType)type time:(NSDate *)time;
--(NSDictionary *)getGlobalSessionViewTags;
-@end
 
 @interface FTRUMResourceDataModel : FTRUMDataModel
 @property (nonatomic, copy) NSString *identifier;
@@ -79,6 +68,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *measurement;
 -(instancetype)initWithMeasurement:(NSString *)measurement tm:(long long )tm;
 @end
+@interface FTRUMContext : NSObject
+@property (nonatomic, copy) NSString *session_id;
+@property (nonatomic, copy) NSString *session_type;
+@property (nonatomic, copy) NSString *view_id;
+@property (nonatomic, copy) NSString *view_name;
+@property (nonatomic, copy) NSString *view_referrer;
+@property (nonatomic, copy) NSString *action_id;
 
+-(NSDictionary *)getGlobalSessionViewTags;
+-(NSDictionary *)getGlobalSessionViewActionTags;
+@end
 
 NS_ASSUME_NONNULL_END

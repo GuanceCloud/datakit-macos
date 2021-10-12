@@ -66,9 +66,9 @@
     dispatch_async(self.serialQueue, ^{
         FTRUMActionModel *action = [[FTRUMActionModel alloc]initWithActionID:[[NSUUID UUID]UUIDString] actionName:actionName actionType:actionType];
         action.actionView_id = view_id;
-        FTRUMDataModel *model = [[FTRUMDataModel alloc]initWithType:FTRUMDataClick time:time];
-        model.baseActionData = action;
-        [self process:model];
+        action.time = time;
+        action.currentViewController = controller;
+        [self process:action];
     });
     
 }
@@ -86,12 +86,13 @@
     dispatch_async(self.serialQueue, ^{
         NSString *className = NSStringFromClass(appearView.class);
         //viewModel
-        FTRUMViewModel *viewModel = [[FTRUMViewModel alloc]initWithViewID:viewID viewName:className viewReferrer:viewReferrer];
+        FTRUMViewModel *viewModel = [[FTRUMViewModel alloc]initWithType:FTRUMDataViewStart time:time];
         viewModel.loading_time = appearView.dataflux_loadDuration;
-        FTRUMDataModel *model = [[FTRUMDataModel alloc]initWithType:FTRUMDataViewStart time:time];
-        model.currentViewController = appearView;
-        model.baseViewData = viewModel;
-        [self process:model];
+        viewModel.currentViewController = appearView;
+        viewModel.view_referrer = viewReferrer;
+        viewModel.view_id = viewID;
+        viewModel.view_name = className;
+        [self process:viewModel];
     });
 }
 - (void)addViewDisappearEvent:(id)view{
@@ -105,11 +106,11 @@
     NSDate *time = [NSDate date];
     NSString *viewID = disAppearView.dataflux_viewUUID;
     dispatch_async(self.serialQueue, ^{
-        FTRUMViewModel *viewModel = [[FTRUMViewModel alloc]init];
+        FTRUMViewModel *viewModel = [[FTRUMViewModel alloc]initWithType:FTRUMDataViewStop time:time];
         viewModel.view_id = viewID;
-        FTRUMDataModel *model = [[FTRUMDataModel alloc]initWithType:FTRUMDataViewStop time:time];
-        model.baseViewData = viewModel;
-        [self process:model];
+        viewModel.time = time;
+        viewModel.currentViewController = disAppearView;
+        [self process:viewModel];
     });
 }
 
@@ -146,5 +147,12 @@
         _ignoredPrivateControllers = [NSSet setWithArray:@[@"NSTitlebarAccessoryViewController",@"NSTitlebarViewController"]];
     }
     return _ignoredPrivateControllers;
+}
+-(NSDictionary *)getGlobalSessionViewTags{
+    if (self.sessionHandler) {
+        return [self.sessionHandler getCurrentSessionInfo];
+    }else{
+        return @{};
+    }
 }
 @end
