@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FTTrackConfig : NSObject
+@interface FTConfig : NSObject
 /**
  * 数据上报地址，两种模式：
  * ①使用Dataflux的数据网关，可在控制台获取对应网址；

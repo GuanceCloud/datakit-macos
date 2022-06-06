@@ -8,7 +8,7 @@
 
 #import "FTSDKAgent.h"
 #import "FTTrackerEventDBTool.h"
-#import "FTTrackConfig.h"
+#import "FTConfig.h"
 #import "FTReachability.h"
 #import "FTConfigManager.h"
 #import "FTTrackDataManger.h"
@@ -19,7 +19,7 @@
 #import "FTRumManager.h"
 #import "FTPresetProperty.h"
 #import "FTConstants.h"
-#import "FTBaseInfoHander.h"
+#import "FTBaseInfoHandler.h"
 #import "NSString+FTAdd.h"
 #import "FTDateUtil.h"
 @interface FTSDKAgent()
@@ -29,7 +29,7 @@
 @implementation FTSDKAgent
 static FTSDKAgent *sharedInstance = nil;
 
-+ (void)startWithConfigOptions:(FTTrackConfig *)configOptions{
++ (void)startWithConfigOptions:(FTConfig *)configOptions{
     NSAssert ((strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(dispatch_get_main_queue())) == 0),@"SDK 必须在主线程里进行初始化，否则会引发无法预料的问题（比如丢失 launch 事件）。");
     
     NSAssert((configOptions.metricsUrl.length!=0 ), @"请设置FT-GateWay metrics 写入地址");
@@ -43,7 +43,7 @@ static FTSDKAgent *sharedInstance = nil;
     NSAssert(sharedInstance, @"请先使用 startWithConfigOptions: 初始化 SDK");
     return sharedInstance;
 }
--(instancetype)initWithConfig:(FTTrackConfig *)config{
+-(instancetype)initWithConfig:(FTConfig *)config{
     self = [super init];
     if(self){
         //开启网络监听
@@ -58,7 +58,7 @@ static FTSDKAgent *sharedInstance = nil;
     if(!_autoTrack){
         _autoTrack = [[FTAutoTrack alloc]init];
     }
-    [FTRumManager sharedInstance];
+//    [FTRumManager sharedInstance];
 }
 static NSSet *logLevelFilterSet;
 - (void)startLoggerWithConfigOptions:(FTLoggerConfig *)loggerConfigOptions{
@@ -76,15 +76,15 @@ static NSSet *logLevelFilterSet;
             ZYErrorLog(@"请先设置 FTLoggerConfig");
             return;
         }
-        if (!content || content.length == 0 || [content ft_charactorNumber]>FT_LOGGING_CONTENT_SIZE) {
-            ZYErrorLog(@"传入的第数据格式有误，或content超过30kb");
-            return;
-        }
+//        if (!content || content.length == 0 || [content ft_charactorNumber]>FT_LOGGING_CONTENT_SIZE) {
+//            ZYErrorLog(@"传入的第数据格式有误，或content超过30kb");
+//            return;
+//        }
         if (![logLevelFilterSet containsObject:@(status)]) {
             ZYDebug(@"经过过滤算法判断-此条日志不采集");
             return;
         }
-        if (![FTBaseInfoHander randomSampling:self.loggerConfig.samplerate]){
+        if (![FTBaseInfoHandler randomSampling:self.loggerConfig.samplerate]){
             ZYDebug(@"经过采集算法判断-此条日志不采集");
             return;
         }

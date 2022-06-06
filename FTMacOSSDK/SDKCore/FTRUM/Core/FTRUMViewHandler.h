@@ -8,13 +8,10 @@
 
 #import "FTRUMHandler.h"
 NS_ASSUME_NONNULL_BEGIN
-@class FTRUMActionHandler;
-typedef void(^FTAddActionEvent)(FTRUMActionHandler *handler);
 
 @interface FTRUMViewHandler : FTRUMHandler
-@property (nonatomic, strong) FTRUMContext *context;
-@property (nonatomic, strong, readonly) FTRUMDataModel *model;
-@property (nonatomic, copy)  FTAddActionEvent addActionBlock;
+@property (nonatomic, strong,readonly) FTRUMContext *context;
+
 -(instancetype)initWithModel:(FTRUMViewModel *)model context:(FTRUMContext *)context;
 @end
 

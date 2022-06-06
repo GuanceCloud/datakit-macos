@@ -8,7 +8,7 @@
 
 #import "FTConfigManager.h"
 #import "FTMacOSSDKVersion.h"
-#import <FTMobileSDK/FTNetworkInfoManger.h>
+//#import <FTMobileSDK/FTNetworkInfoManger.h>
 @implementation FTConfigManager
 + (instancetype)sharedInstance{
     static FTConfigManager *sharedInstance = nil;
@@ -19,11 +19,11 @@
 
     return sharedInstance;
 }
--(void)setTrackConfig:(FTTrackConfig *)trackConfig{
+-(void)setTrackConfig:(FTConfig *)trackConfig{
     _trackConfig = trackConfig;
-    FTNetworkInfoManger.sharedInstance.setMetricsUrl(trackConfig.metricsUrl)
-    .setSdkVersion(SDK_VERSION)
-    .setXDataKitUUID(trackConfig.XDataKitUUID);
+//    FTNetworkInfoManger.sharedInstance.setMetricsUrl(trackConfig.metricsUrl)
+//    .setSdkVersion(SDK_VERSION)
+//    .setXDataKitUUID(trackConfig.XDataKitUUID);
 }
 -(void)setRumConfig:(FTRumConfig *)rumConfig{
     _rumConfig = rumConfig;

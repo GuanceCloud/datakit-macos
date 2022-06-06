@@ -10,7 +10,9 @@
 #import "FTSwizzler.h"
 #import <objc/runtime.h>
 #import "FTDateUtil.h"
+#import "FTGlobalRumManager.h"
 #import "FTRumManager.h"
+#import "NSViewController+FTAutoTrack.h"
 #import "FTConstants.h"
 @interface NSWindow (FTAutoTrack)<FTRumViewProperty>
 @end
@@ -72,11 +74,11 @@ static char *viewControllerUUID = "viewControllerUUID";
         //记录 init - keyWindow 的时间差 作为window显示加载时长
         //只记录第一次 变成keyWindow
         if(self.dataflux_viewLoadStartTime){
-            NSNumber *loadTime = [FTDateUtil nanosecondtimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
+            NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
             self.dataflux_loadDuration = loadTime;
             self.dataflux_viewLoadStartTime = nil;
             self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
-            [[FTRumManager sharedInstance] addViewAppearEvent:self];
+            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
         }
 
     }
@@ -84,7 +86,7 @@ static char *viewControllerUUID = "viewControllerUUID";
 
 -(void)dataflux_close{
     if (!self.contentViewController && !self.windowController && ![self isKindOfClass:NSPanel.class]) {
-        [[FTRumManager sharedInstance] addViewDisappearEvent:self];
+        [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
     }
     [self dataflux_close];
 

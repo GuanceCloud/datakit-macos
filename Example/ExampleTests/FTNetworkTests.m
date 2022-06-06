@@ -13,7 +13,7 @@
 #import <FTMacOSSDK/FTSDKAgent.h>
 #import "FTRecordModel.h"
 #import "FTNetworkManager.h"
-#import "FTTrackConfig.h"
+#import "FTConfig.h"
 @interface FTNetworkTests : XCTestCase
 
 @end
@@ -24,7 +24,7 @@
     // Put setup code here. This method is called before the invocation of each test method in the class.
     NSProcessInfo *processInfo = [NSProcessInfo processInfo];
     NSString *url = [processInfo environment][@"ACCESS_SERVER_URL"];
-    FTTrackConfig *config = [[FTTrackConfig alloc]initWithMetricsUrl:url];
+    FTConfig *config = [[FTConfig alloc]initWithMetricsUrl:url];
     [FTSDKAgent startWithConfigOptions:config];
 }
 

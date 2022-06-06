@@ -7,10 +7,17 @@
 //
 
 #import "FTRUMDataModel.h"
-#import "FTBaseInfoHander.h"
-
-
+#import "FTConstants.h"
+@interface FTRUMDataModel()
+@end
 @implementation FTRUMDataModel
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        self.time = [NSDate date];
+    }
+    return self;
+}
 -(instancetype)initWithType:(FTRUMDataType)type time:(NSDate *)time{
     self = [super init];
     if (self) {
@@ -18,6 +25,13 @@
         self.type = type;
     }
     return self;
+}
+-(void)setTime:(NSDate *)time{
+    if (!time) {
+        _time = [NSDate date];
+    }else{
+        _time = time;
+    }
 }
 @end
 @implementation FTRUMViewModel
@@ -30,27 +44,20 @@
     }
     return self;
 }
-
 @end
 @implementation FTRUMActionModel
 
--(instancetype)initWithActionID:(NSString *)actionid actionName:(NSString *)actionName actionType:(nonnull NSString *)actionType{
-    self = [super initWithType:FTRUMDataClick time:[NSDate date]];
+-(instancetype)initWithActionName:(NSString *)actionName actionType:(nonnull NSString *)actionType{
+    self = [super init];
     if (self) {
-        self.action_id = actionid;
         self.action_name = actionName;
         self.action_type = actionType;
     }
     return self;
 }
--(NSDictionary *)getActionTags{
-    return @{@"action_id":self.action_id,
-             @"action_name":self.action_name,
-             @"action_type":self.action_type
-    };
-}
+
 @end
-@implementation FTRUMResourceDataModel
+@implementation FTRUMResourceModel
 
 -(instancetype)initWithType:(FTRUMDataType)type identifier:(NSString *)identifier{
     self = [super initWithType:type time:[NSDate date]];
@@ -59,8 +66,12 @@
     }
     return self;
 }
-    
+
 @end
+
+@implementation FTRUMResourceDataModel
+@end
+
 @implementation FTRUMLaunchDataModel
 -(instancetype)initWithType:(FTRUMDataType)type duration:(NSNumber *)duration{
     self = [super initWithType:type time:[NSDate date]];
@@ -84,6 +95,14 @@
 
 @end
 @implementation FTRUMContext
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        self.session_id = [NSUUID UUID].UUIDString;
+        self.session_type = @"user";
+    }
+    return self;
+}
 - (instancetype)copyWithZone:(NSZone *)zone {
     FTRUMContext *context = [[[self class] allocWithZone:zone] init];
     context.action_id = self.action_id;
@@ -95,19 +114,20 @@
     return context;
 }
 -(NSDictionary *)getGlobalSessionViewTags{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:@{
-        @"session_id":self.session_id,
-        @"session_type":self.session_type,
-    }];
-    [dict setValue:self.view_id forKey:@"view_id"];
-    [dict setValue:self.view_referrer forKey:@"view_referrer"];
-    [dict setValue:self.view_name forKey:@"view_name"];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    [dict setValue:self.session_id forKey:FT_RUM_KEY_SESSION_ID];
+    [dict setValue:self.session_type forKey:FT_RUM_KEY_SESSION_TYPE];
+    [dict setValue:self.view_id forKey:FT_KEY_VIEW_ID];
+    if(self.view_referrer.length>0){
+        [dict setValue:self.view_referrer forKey:FT_KEY_VIEW_REFERRER];
+    }
+    [dict setValue:self.view_name forKey:FT_KEY_VIEW_NAME];
     return dict;
 }
 -(NSDictionary *)getGlobalSessionViewActionTags{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[self getGlobalSessionViewTags]];
-    [dict setValue:self.action_id forKey:@"action_id"];
+    [dict setValue:self.action_id forKey:FT_RUM_KEY_ACTION_ID];
     return dict;
 }
-
 @end
+

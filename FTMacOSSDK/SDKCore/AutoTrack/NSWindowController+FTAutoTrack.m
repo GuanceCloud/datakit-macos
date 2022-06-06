@@ -11,7 +11,8 @@
 #import "FTDateUtil.h"
 #import "FTRumManager.h"
 #import "FTConstants.h"
-
+#import "FTGlobalRumManager.h"
+#import "NSView+FTAutoTrack.h"
 @interface NSWindowController(FTAutoTrack)<FTRumViewProperty>
 @end
 
@@ -64,18 +65,18 @@ static char *viewControllerUUID = "viewControllerUUID";
     if(!self.window.contentViewController){
         // 记录 window 的生命周期
         if(self.dataflux_viewLoadStartTime){
-            NSNumber *loadTime = [FTDateUtil nanosecondtimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
+            NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
             self.dataflux_loadDuration = loadTime;
             self.dataflux_viewLoadStartTime = nil;
             self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
-            [[FTRumManager sharedInstance] addViewAppearEvent:self];
+            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
         }
     }
     
 }
 - (void)dataflux_windowWillClose:(NSNotification *)notification{
     if(!self.window.contentViewController){
-        [[FTRumManager sharedInstance] addViewDisappearEvent:self];
+        [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
     }
     [self dataflux_windowWillClose:notification];
 }

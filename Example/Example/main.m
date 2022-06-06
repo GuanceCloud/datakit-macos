@@ -7,7 +7,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <FTSDKAgent.h>
-#import <FTTrackConfig.h>
+#import <FTConfig.h>
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // Setup code that might create autoreleased objects goes here.
@@ -15,7 +15,7 @@ int main(int argc, const char * argv[]) {
         NSString *url = [processInfo environment][@"ACCESS_SERVER_URL"];
         NSString *appid = [processInfo environment][@"APP_ID"];
 
-        FTTrackConfig *config = [[FTTrackConfig alloc]initWithMetricsUrl:url];
+        FTConfig *config = [[FTConfig alloc]initWithMetricsUrl:url];
         [FTSDKAgent startWithConfigOptions:config];
         FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:appid];
         rumConfig.enableTraceUserAction = YES;

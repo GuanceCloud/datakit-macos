@@ -8,6 +8,8 @@
 #import "NSTabView+FTAutoTrack.h"
 #import "FTSwizzler.h"
 #import "FTRumManager.h"
+#import "FTGlobalRumManager.h"
+#import "NSView+FTAutoTrack.h"
 
 @implementation NSTabView (FTAutoTrack)
 -(void)dataflux_setDelegate:(id<NSTabViewDelegate>)delegate{
@@ -22,7 +24,7 @@
         void (^didSelectItemBlock)(id, SEL, id, id) = ^(id view, SEL command, NSTableView *tabView, NSTabViewItem *tabViewItem) {
             
             if (tabView && tabViewItem) {
-                [[FTRumManager sharedInstance] addActionEventWithView:self];
+                [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:self.dataflux_actionName];
 
             }
         };

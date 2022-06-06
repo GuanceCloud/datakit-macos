@@ -7,6 +7,9 @@
 
 #import "NSApplication+FTAutotrack.h"
 #import "FTRumManager.h"
+#import "FTGlobalRumManager.h"
+#import "NSView+FTAutoTrack.h"
+
 @implementation NSApplication (FTAutotrack)
 - (BOOL)dataflux_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender{
     [self datafluxTrack:action to:target from:sender];
@@ -26,11 +29,12 @@
         if([sender isKindOfClass:NSDatePicker.class] && !(action && target)){
             return;
         }
-        [[FTRumManager sharedInstance] addActionEventWithView:sender];
+        NSView *view = sender;
+        [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:view.dataflux_actionName];
     }else{
         //NSMenu 不继承于 NSView
         if ([sender isKindOfClass:NSMenuItem.class]) {
-            [[FTRumManager sharedInstance] addActionEventWithView:sender];
+            [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:@"[NSMenuItem]"];
             return;
         }
         //过滤 NSSearchField 取消按钮一次点击多次sendAction
@@ -38,7 +42,8 @@
             return;
         }
         if([sender isKindOfClass:NSView.class]){
-            [[FTRumManager sharedInstance] addActionEventWithView:sender];
+            NSView *view = sender;
+            [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:view.dataflux_actionName];
         }
     }
 }

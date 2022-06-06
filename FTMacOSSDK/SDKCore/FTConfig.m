@@ -6,19 +6,19 @@
 //  Copyright © 2021 DataFlux-cn. All rights reserved.
 //
 
-#import "FTTrackConfig.h"
-@interface FTTrackConfig()<NSCopying>
+#import "FTConfig.h"
+@interface FTConfig()<NSCopying>
 @end
-@implementation FTTrackConfig
+@implementation FTConfig
 -(instancetype)initWithMetricsUrl:(NSString *)metricsUrl{
     if (self = [super init]) {
         _metricsUrl = metricsUrl;
-        _XDataKitUUID = [FTTrackConfig XDataKitUUID];
+        _XDataKitUUID = [FTConfig XDataKitUUID];
     }
     return self;
 }
 -(id)copyWithZone:(NSZone *)zone{
-    FTTrackConfig *options = [[[self class] allocWithZone:nil] init];
+    FTConfig *options = [[[self class] allocWithZone:nil] init];
     options.metricsUrl = self.metricsUrl;
     options.XDataKitUUID = self.XDataKitUUID;
     return options;

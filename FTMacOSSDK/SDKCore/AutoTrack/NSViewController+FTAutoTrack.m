@@ -10,8 +10,9 @@
 #import <objc/runtime.h>
 #import "NSString+FTAdd.h"
 #import "FTRumManager.h"
+#import "FTGlobalRumManager.h"
 #import "FTConstants.h"
-#import "FTBaseInfoHander.h"
+#import "FTBaseInfoHandler.h"
 static char *viewLoadStartTimeKey = "viewLoadStartTimeKey";
 static char *viewControllerUUID = "viewControllerUUID";
 static char *viewLoadDuration = "viewLoadDuration";
@@ -36,9 +37,6 @@ static char *viewLoaded = "viewLoaded";
 -(void)setDataflux_viewLoaded:(BOOL )dataflux_viewLoaded{
    objc_setAssociatedObject(self, &viewLoaded, [NSNumber numberWithBool:dataflux_viewLoaded], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
--(NSString *)ft_viewControllerId{
-    return [self.ft_viewControllerName ft_md5HashToUpper32Bit];
-}
 - (NSString *)ft_viewControllerName{
     return NSStringFromClass([self class]);
 }
@@ -56,14 +54,14 @@ static char *viewLoaded = "viewLoaded";
 }
 -(BOOL)dataflux_inMainWindow{
     __block BOOL isMain = NO;
-    [FTBaseInfoHander performBlockDispatchMainSyncSafe:^{
+    [FTBaseInfoHandler performBlockDispatchMainSyncSafe:^{
         isMain = self.view.window.isMainWindow;
     }];
     return isMain;
 }
 -(BOOL)dataflux_isKeyWindow{
     __block BOOL isKey = NO;
-    [FTBaseInfoHander performBlockDispatchMainSyncSafe:^{
+    [FTBaseInfoHandler performBlockDispatchMainSyncSafe:^{
         isKey = self.view.window.isKeyWindow;
     }];
     return isKey;
@@ -87,7 +85,7 @@ static char *viewLoaded = "viewLoaded";
     }
     //NSTitlebarViewController、NSTitlebarAccessoryViewController
     if(!self.dataflux_viewLoaded){
-        NSNumber *loadTime = [FTDateUtil nanosecondtimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
+        NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
         self.dataflux_loadDuration = loadTime;
         self.dataflux_viewLoaded = YES;
     }else{
@@ -96,7 +94,7 @@ static char *viewLoaded = "viewLoaded";
         self.dataflux_loadDuration = loadTime;
     }
     self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
-    [[FTRumManager sharedInstance] addViewAppearEvent:self];
+    [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
 }
 -(void)dataflux_viewDidDisappear{
     
@@ -104,7 +102,7 @@ static char *viewLoaded = "viewLoaded";
     if ([self isKindOfClass:NSCollectionViewItem.class]) {
         return;
     }    
-    [[FTRumManager sharedInstance] addViewDisappearEvent:self];
+    [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
 }
 
 @end

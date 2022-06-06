@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FTAutoTrackProtocol.h"
-@class FTTaskInterceptionModel;
 typedef NS_ENUM(NSUInteger, FTRUMDataType) {
     FTRUMDataLaunchHot,
     FTRUMDataLaunchCold,
@@ -18,14 +16,14 @@ typedef NS_ENUM(NSUInteger, FTRUMDataType) {
     FTRUMDataLongTask,
     FTRUMDataError,
     FTRUMDataResourceStart,
-    FTRUMDataResourceSuccess,
-    FTRUMDataResourceError,
+    FTRUMDataResourceComplete,
+    FTRUMDataResourceStop,
     FTRUMDataWebViewJSBData,
 };
 
 NS_ASSUME_NONNULL_BEGIN
+@class FTResourceMetricsModel,FTResourceContentModel;
 @interface FTRUMDataModel : NSObject
-@property (nonatomic, weak) id<FTRumViewProperty> currentViewController;
 @property (nonatomic, strong) NSDate *time;
 @property (nonatomic, assign) FTRUMDataType type;
 @property (nonatomic, strong) NSDictionary *tags;
@@ -35,14 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 //tags
 @interface FTRUMActionModel : FTRUMDataModel
-@property (nonatomic, copy) NSString *action_id;
 @property (nonatomic, copy) NSString *action_name;
 @property (nonatomic, copy) NSString *action_type;
-@property (nonatomic, copy) NSString *actionView_id;
-
--(instancetype)initWithActionID:(NSString *)actionid actionName:(NSString *)actionName actionType:(NSString *)actionType;
-
--(NSDictionary *)getActionTags;
+-(instancetype)initWithActionName:(NSString *)actionName actionType:(NSString *)actionType;
 
 @end
 //tags
@@ -51,15 +44,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *view_name;
 @property (nonatomic, copy) NSString *view_referrer;
 @property (nonatomic, strong) NSNumber *loading_time;
+-(instancetype)initWithViewID:(NSString *)viewid viewName:(NSString *)viewName viewReferrer:(NSString *)viewReferrer;
 @end
 
-
-@interface FTRUMResourceDataModel : FTRUMDataModel
+@interface FTRUMResourceModel : FTRUMDataModel
 @property (nonatomic, copy) NSString *identifier;
 
 -(instancetype)initWithType:(FTRUMDataType)type identifier:(NSString *)identifier;
 @end
-@interface FTRUMLaunchDataModel : FTRUMDataModel
+@interface FTRUMResourceDataModel : FTRUMResourceModel
+@property (nonatomic, strong) FTResourceMetricsModel *metrics;
+@end
+@interface FTRUMLaunchDataModel : FTRUMActionModel
 @property (nonatomic, strong) NSNumber *duration;
 -(instancetype)initWithType:(FTRUMDataType)type duration:(NSNumber *)duration;
 @end
@@ -74,10 +70,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *view_id;
 @property (nonatomic, copy) NSString *view_name;
 @property (nonatomic, copy) NSString *view_referrer;
-@property (nonatomic, copy) NSString *action_id;
+@property (nonatomic, copy, nullable) NSString *action_id;
 
 -(NSDictionary *)getGlobalSessionViewTags;
 -(NSDictionary *)getGlobalSessionViewActionTags;
 @end
-
 NS_ASSUME_NONNULL_END

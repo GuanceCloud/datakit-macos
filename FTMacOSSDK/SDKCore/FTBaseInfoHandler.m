@@ -5,9 +5,9 @@
 //  Created by 胡蕾蕾 on 2021/9/22.
 //
 
-#import "FTBaseInfoHander.h"
+#import "FTBaseInfoHandler.h"
 
-@implementation FTBaseInfoHander
+@implementation FTBaseInfoHandler
 + (BOOL)randomSampling:(int)sampling{
     if(sampling<=0){
         return NO;

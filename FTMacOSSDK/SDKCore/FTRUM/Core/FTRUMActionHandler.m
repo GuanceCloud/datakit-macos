@@ -8,16 +8,17 @@
 
 #import "FTRUMActionHandler.h"
 #import "FTDateUtil.h"
-//#import "FTMobileAgent+Private.h"
 #import "FTConstants.h"
-#import "FTRUMViewHandler.h"
-#import "FTBaseInfoHander.h"
 #import "FTSDKAgent+Private.h"
 
 static const NSTimeInterval actionMaxDuration = 10; // 10 seconds
 
 @interface FTRUMActionHandler ()<FTRUMSessionProtocol>
-@property (nonatomic, strong,readwrite) FTRUMActionModel *model;
+@property (nonatomic, assign) FTRUMDataType type;
+@property (nonatomic, strong) FTRUMContext *context;
+@property (nonatomic, copy) NSString *action_name;
+@property (nonatomic, copy) NSString *action_type;
+@property (nonatomic, copy) NSString *action_id;
 //field
 @property (nonatomic, strong) NSDate *actionStartTime;
 @property (nonatomic, strong) NSNumber *duration;
@@ -35,8 +36,12 @@ static const NSTimeInterval actionMaxDuration = 10; // 10 seconds
     if (self) {
         self.assistant = self;
         self.actionStartTime = model.time;
-        self.model = model;
+        self.action_id = [NSUUID UUID].UUIDString;
+        self.action_name = model.action_name;
+        self.action_type = model.action_type;
+        self.type = model.type;
         self.context = [context copy];
+        self.context.action_id = self.action_id;
     }
     return  self;
 }
@@ -60,13 +65,9 @@ static const NSTimeInterval actionMaxDuration = 10; // 10 seconds
         case FTRUMDataResourceStart:
             self.activeResourcesCount += 1;
             break;
-        case FTRUMDataResourceSuccess:
-            self.activeResourcesCount -= 1;
+        case FTRUMDataResourceComplete:
             self.actionResourcesCount += 1;
-            break;
-        case FTRUMDataResourceError:
             self.activeResourcesCount -= 1;
-            self.actionErrorCount += 1;
             break;
         case FTRUMDataLongTask:
             self.actionLongTaskCount++;
@@ -87,24 +88,23 @@ static const NSTimeInterval actionMaxDuration = 10; // 10 seconds
     return self.activeResourcesCount<=0;
 }
 -(void)writeActionData:(NSDate *)endDate{
-    if (self.model.type == FTRUMDataLaunchHot ||self.model.type == FTRUMDataLaunchCold ) {
-        FTRUMLaunchDataModel *model = (FTRUMLaunchDataModel *)self.model;
-        self.duration =model.duration;
-    }else{
-    self.duration =  [endDate timeIntervalSinceDate:self.actionStartTime] >= actionMaxDuration?@(actionMaxDuration*1000000000):[FTDateUtil nanosecondtimeIntervalSinceDate:self.actionStartTime toDate:endDate];
-        
+    if (self.type == FTRUMDataClick) {
+        self.duration =  [endDate timeIntervalSinceDate:self.actionStartTime] >= actionMaxDuration?@(actionMaxDuration*1000000000):[FTDateUtil nanosecondTimeIntervalSinceDate:self.actionStartTime toDate:endDate];
     }
     NSDictionary *sessionViewTag = [self.context getGlobalSessionViewTags];
 
-    NSDictionary *actiontags = [self.model getActionTags];
-    NSDictionary *fields = @{@"duration":self.duration,
-                             @"action_long_task_count":[NSNumber numberWithInteger:self.actionLongTaskCount],
-                             @"action_resource_count":[NSNumber numberWithInteger:self.actionResourcesCount],
-                             @"action_error_count":[NSNumber numberWithInteger:self.actionErrorCount],
+    NSDictionary *actiontags = @{FT_RUM_KEY_ACTION_ID:self.action_id,
+                                 FT_RUM_KEY_ACTION_NAME:self.action_name,
+                                 FT_RUM_KEY_ACTION_TYPE:self.action_type
+    };
+    NSDictionary *fields = @{FT_DURATION:self.duration,
+                             FT_RUM_KEY_ACTION_LONG_TASK_COUNT:@(self.actionLongTaskCount),
+                             FT_RUM_KEY_ACTION_RESOURCE_COUNT:@(self.actionResourcesCount),
+                             FT_RUM_KEY_ACTION_ERROR_COUNT:@(self.actionErrorCount),
     };
     NSMutableDictionary *tags = [NSMutableDictionary dictionaryWithDictionary:sessionViewTag];
     [tags addEntriesFromDictionary:actiontags];
-    [[FTSDKAgent sharedInstance] rumWrite:FT_TYPE_ACTION terminal:@"app" tags:tags fields:fields tm:[FTDateUtil dateTimeNanosecond:self.actionStartTime]];
+    [[FTSDKAgent sharedInstance] rumWrite:FT_MEASUREMENT_RUM_ACTION terminal:FT_TERMINAL_APP tags:tags fields:fields tm:[FTDateUtil dateTimeNanosecond:self.actionStartTime]];
     if (self.handler) {
         self.handler();
     }
