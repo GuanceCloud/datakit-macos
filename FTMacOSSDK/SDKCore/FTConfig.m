@@ -45,9 +45,6 @@
         _appid = appid;
         _enableTrackAppCrash= NO;
         _samplerate = 100;
-        _enableTrackAppFreeze = NO;
-        _enableTrackAppANR = NO;
-        _enableTraceUserAction = NO;
     }
     return self;
 }
@@ -55,9 +52,6 @@
     FTRumConfig *options = [[[self class] allocWithZone:zone] init];
     options.enableTrackAppCrash = self.enableTrackAppCrash;
     options.samplerate = self.samplerate;
-    options.enableTrackAppFreeze = self.enableTrackAppFreeze;
-    options.enableTrackAppANR = self.enableTrackAppANR;
-    options.enableTraceUserAction = self.enableTraceUserAction;
     options.appid = self.appid;
     return options;
 }

@@ -6,7 +6,6 @@
 //  Copyright © 2022 DataFlux-cn. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-#import "FTConstants.h"
 
 typedef NS_ENUM(NSUInteger, AppState) {
     AppStateUnknown,
@@ -24,3 +23,4 @@ extern NSString * const AppStateStringMap[];
 extern NSString * const FTStatusStringMap[];
 extern NSString * const FTNetworkTraceStringMap[];
 extern NSString * const FTEnvStringMap[];
+extern NSTimeInterval const MonitorFrequencyMap[];

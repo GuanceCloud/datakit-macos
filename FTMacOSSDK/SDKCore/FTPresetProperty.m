@@ -7,11 +7,14 @@
 
 #import "FTPresetProperty.h"
 #import "FTDeviceInfo.h"
+@interface FTPresetProperty()
 
+@end
 @implementation FTPresetProperty
--(instancetype)init{
+
+- (instancetype)initWithVersion:(NSString *)version env:(NSString *)env{
     self = [super init];
-    if (self) {
+    if(self){
         
     }
     return self;

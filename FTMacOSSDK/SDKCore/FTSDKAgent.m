@@ -22,6 +22,7 @@
 #import "FTBaseInfoHandler.h"
 #import "NSString+FTAdd.h"
 #import "FTDateUtil.h"
+#import "FTGlobalRumManager.h"
 @interface FTSDKAgent()
 @property (nonatomic, strong) FTAutoTrack *autoTrack;
 @property (nonatomic, strong) FTLoggerConfig *loggerConfig;
@@ -58,7 +59,7 @@ static FTSDKAgent *sharedInstance = nil;
     if(!_autoTrack){
         _autoTrack = [[FTAutoTrack alloc]init];
     }
-//    [FTRumManager sharedInstance];
+//    [[FTGlobalRumManager sharedInstance] setRumConfig:rumConfigOptions];
 }
 static NSSet *logLevelFilterSet;
 - (void)startLoggerWithConfigOptions:(FTLoggerConfig *)loggerConfigOptions{
@@ -70,7 +71,7 @@ static NSSet *logLevelFilterSet;
 }
 #pragma mark - 数据写入 -
 
--(void)logging:(NSString *)content status:(FTStatus)status{
+-(void)logging:(NSString *)content status:(FTLogStatus)status{
     @try {
         if (!self.loggerConfig) {
             ZYErrorLog(@"请先设置 FTLoggerConfig");

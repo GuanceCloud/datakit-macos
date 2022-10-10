@@ -67,6 +67,22 @@ static char *viewControllerUUID = "viewControllerUUID";
     return win;
     
 }
+-(void)dataflux_makeMainWindow{
+    [self dataflux_makeMainWindow];
+    if (!self.contentViewController && !self.windowController && ![self isKindOfClass:NSPanel.class]) {
+        //window
+        //记录 init - keyWindow 的时间差 作为window显示加载时长
+        //只记录第一次 变成keyWindow
+        if(self.dataflux_viewLoadStartTime){
+            NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
+            self.dataflux_loadDuration = loadTime;
+            self.dataflux_viewLoadStartTime = nil;
+            self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
+//            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
+        }
+
+    }
+}
 -(void)dataflux_makeKeyWindow{
     [self dataflux_makeKeyWindow];
     if (!self.contentViewController && !self.windowController && ![self isKindOfClass:NSPanel.class]) {
@@ -78,7 +94,7 @@ static char *viewControllerUUID = "viewControllerUUID";
             self.dataflux_loadDuration = loadTime;
             self.dataflux_viewLoadStartTime = nil;
             self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
-            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
+//            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
         }
 
     }
@@ -86,7 +102,7 @@ static char *viewControllerUUID = "viewControllerUUID";
 
 -(void)dataflux_close{
     if (!self.contentViewController && !self.windowController && ![self isKindOfClass:NSPanel.class]) {
-        [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
+//        [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
     }
     [self dataflux_close];
 

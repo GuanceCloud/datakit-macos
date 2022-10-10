@@ -6,14 +6,32 @@
 //
 
 #import <Foundation/Foundation.h>
-
 NS_ASSUME_NONNULL_BEGIN
-
 @interface FTBaseInfoHandler : NSObject
-+ (BOOL)randomSampling:(int)sampling;
-+ (NSString *)boolStr:(BOOL)isTrue;
-+ (void)performBlockDispatchMainSyncSafe:(DISPATCH_NOESCAPE dispatch_block_t)block;
 
+/**
+ *  @abstract
+ *  FT access 签名算法
+ *
+ *  @return 签名后字符串
+ */
++(NSString*)signatureWithHTTPMethod:(NSString *)method contentType:(NSString *)contentType dateStr:(NSString *)dateStr akSecret:(NSString *)akSecret data:(NSString *)data;
+
++ (NSString *)XDataKitUUID;
+
++ (NSString *)sessionId;
+
++ (NSString *)convertToStringData:(NSDictionary *)dict;
+
++ (NSString *)replaceNumberCharByUrl:(NSURL *)url;
+
++ (NSString *)boolStr:(BOOL)isTrue;
+
++ (BOOL)randomSampling:(int)sampling;
+#if !TARGET_OS_OSX
++(NSString *)telephonyInfo;
+#endif
 @end
 
 NS_ASSUME_NONNULL_END
+

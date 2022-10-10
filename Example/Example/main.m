@@ -18,7 +18,6 @@ int main(int argc, const char * argv[]) {
         FTConfig *config = [[FTConfig alloc]initWithMetricsUrl:url];
         [FTSDKAgent startWithConfigOptions:config];
         FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:appid];
-        rumConfig.enableTraceUserAction = YES;
         [[FTSDKAgent sharedInstance]startRumWithConfigOptions:rumConfig];
         FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
         logger.enableCustomLog = YES;

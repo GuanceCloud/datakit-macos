@@ -13,6 +13,7 @@
 #import "FTGlobalRumManager.h"
 #import "FTConstants.h"
 #import "FTBaseInfoHandler.h"
+#import "FTThreadDispatchManager.h"
 static char *viewLoadStartTimeKey = "viewLoadStartTimeKey";
 static char *viewControllerUUID = "viewControllerUUID";
 static char *viewLoadDuration = "viewLoadDuration";
@@ -54,14 +55,14 @@ static char *viewLoaded = "viewLoaded";
 }
 -(BOOL)dataflux_inMainWindow{
     __block BOOL isMain = NO;
-    [FTBaseInfoHandler performBlockDispatchMainSyncSafe:^{
+    [FTThreadDispatchManager performBlockDispatchMainSyncSafe:^{
         isMain = self.view.window.isMainWindow;
     }];
     return isMain;
 }
 -(BOOL)dataflux_isKeyWindow{
     __block BOOL isKey = NO;
-    [FTBaseInfoHandler performBlockDispatchMainSyncSafe:^{
+    [FTThreadDispatchManager performBlockDispatchMainSyncSafe:^{
         isKey = self.view.window.isKeyWindow;
     }];
     return isKey;
@@ -94,7 +95,7 @@ static char *viewLoaded = "viewLoaded";
         self.dataflux_loadDuration = loadTime;
     }
     self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
-    [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
+//    [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
 }
 -(void)dataflux_viewDidDisappear{
     
@@ -102,7 +103,7 @@ static char *viewLoaded = "viewLoaded";
     if ([self isKindOfClass:NSCollectionViewItem.class]) {
         return;
     }    
-    [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
+//    [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
 }
 
 @end

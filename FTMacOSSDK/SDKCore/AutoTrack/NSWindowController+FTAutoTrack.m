@@ -60,7 +60,6 @@ static char *viewControllerUUID = "viewControllerUUID";
 }
 //加载nib之后
 - (void)dataflux_windowDidLoad{
-
     [self dataflux_windowDidLoad];
     if(!self.window.contentViewController){
         // 记录 window 的生命周期
@@ -69,14 +68,14 @@ static char *viewControllerUUID = "viewControllerUUID";
             self.dataflux_loadDuration = loadTime;
             self.dataflux_viewLoadStartTime = nil;
             self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
-            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
+//            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
         }
     }
     
 }
 - (void)dataflux_windowWillClose:(NSNotification *)notification{
     if(!self.window.contentViewController){
-        [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
+//        [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
     }
     [self dataflux_windowWillClose:notification];
 }
