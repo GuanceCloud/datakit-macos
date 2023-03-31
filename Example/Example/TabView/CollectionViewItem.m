@@ -20,21 +20,24 @@
     // Do view setup here.
 }
 -(void)setRepresentedObject:(id)representedObject{
-    NSDictionary *data = representedObject;
-    NSString *image = data[@"image"];
-    self.icon.image = [NSImage imageNamed:image];
-    
-    NSString *title = data[@"title"];
-    self.lable.stringValue = title;
-    NSClickGestureRecognizer *tap = [[NSClickGestureRecognizer alloc]init];
-    tap.action = @selector(lableTap);
-    tap.target = self;
-    [self.lable addGestureRecognizer:tap];
-   
-  
-    NSClickGestureRecognizer *gesture = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClick:)];
-    gesture.numberOfClicksRequired = 1;
-    [self.icon addGestureRecognizer:gesture];
+    [super setRepresentedObject:representedObject];
+    if(representedObject){
+        NSDictionary *data = representedObject;
+        NSString *image = data[@"image"];
+        self.icon.image = [NSImage imageNamed:image];
+        
+        NSString *title = data[@"title"];
+        self.lable.stringValue = title;
+        NSClickGestureRecognizer *tap = [[NSClickGestureRecognizer alloc]init];
+        tap.action = @selector(lableTap);
+        tap.target = self;
+        [self.lable addGestureRecognizer:tap];
+        
+        
+        NSClickGestureRecognizer *gesture = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClick:)];
+        gesture.numberOfClicksRequired = 1;
+        [self.icon addGestureRecognizer:gesture];
+    }
 }
 - (void)lableTap{
     NSLog(@"lableTap NSGestureRecognizer set action");

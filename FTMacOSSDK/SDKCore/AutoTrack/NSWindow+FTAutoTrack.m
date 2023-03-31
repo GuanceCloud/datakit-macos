@@ -7,13 +7,13 @@
 
 #import "NSWindow+FTAutoTrack.h"
 #import "FTAutoTrackProtocol.h"
-#import "FTSwizzler.h"
+#import <FTSwizzler.h>
+#import <FTDateUtil.h>
+#import <FTLog.h>
+#import <FTConstants.h>
 #import <objc/runtime.h>
-#import "FTDateUtil.h"
 #import "FTGlobalRumManager.h"
-#import "FTRumManager.h"
 #import "NSViewController+FTAutoTrack.h"
-#import "FTConstants.h"
 @interface NSWindow (FTAutoTrack)<FTRumViewProperty>
 @end
 @implementation NSWindow (FTAutoTrack)
@@ -84,6 +84,7 @@ static char *viewControllerUUID = "viewControllerUUID";
     }
 }
 -(void)dataflux_makeKeyWindow{
+    ZYErrorLog(@"window KeyWindow:%@ \n viewcontroller: %@",self.class,self.contentViewController);
     [self dataflux_makeKeyWindow];
     if (!self.contentViewController && !self.windowController && ![self isKindOfClass:NSPanel.class]) {
         //window
@@ -101,6 +102,8 @@ static char *viewControllerUUID = "viewControllerUUID";
 }
 
 -(void)dataflux_close{
+    ZYErrorLog(@"window close:%@ \n viewcontroller: %@",self.class,self.contentViewController);
+
     if (!self.contentViewController && !self.windowController && ![self isKindOfClass:NSPanel.class]) {
 //        [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
     }

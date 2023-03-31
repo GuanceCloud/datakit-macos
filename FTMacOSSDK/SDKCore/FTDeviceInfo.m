@@ -4,11 +4,11 @@
 //
 //  Created by 胡蕾蕾 on 2021/9/17.
 //
-
+#import <AppKit/AppKit.h>
 #import "FTDeviceInfo.h"
 #import <IOKit/IOKitLib.h>
 #include <sys/sysctl.h>
-#import "FTLog.h"
+#import <FTLog.h>
 @implementation FTDeviceInfo
 + (instancetype)sharedInstance{
     static FTDeviceInfo *shares = nil;

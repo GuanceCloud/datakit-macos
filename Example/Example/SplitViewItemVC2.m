@@ -7,12 +7,12 @@
 
 #import "SplitViewItemVC2.h"
 #import "CollectionVC.h"
-#import "PresentVC.h"
+#import "RumViewController.h"
 #import "TabViewController.h"
 @interface SplitViewItemVC2 ()
 @property (nonatomic, strong) CollectionVC *mCollection;
 @property (nonatomic, strong) TabViewController *mTabView;
-@property (nonatomic, strong) PresentVC *mPresent;
+@property (nonatomic, strong) RumViewController *mRumVC;
 @property (nonatomic, assign) NSInteger currentIndex;
 @end
 
@@ -32,11 +32,11 @@
     }
     return _mCollection;
 }
--(PresentVC *)mPresent{
-    if (!_mPresent) {
-        _mPresent = [[PresentVC alloc]init];
+-(RumViewController *)mPresent{
+    if (!_mRumVC) {
+        _mRumVC = [[RumViewController alloc]init];
     }
-    return _mPresent;
+    return _mRumVC;
 }
 -(TabViewController *)mTabView{
     if (!_mTabView) {
@@ -55,7 +55,7 @@
                 from = self.mTabView;
                 break;
             default:
-                from = self.mPresent;
+                from = self.mRumVC;
                 break;
         }
         
@@ -67,7 +67,7 @@
                 to = self.mTabView;
                 break;
             default:
-                to = self.mPresent;
+                to = self.mRumVC;
                 break;
         }
         [self transitionFromViewController:from toViewController:to options:NSViewControllerTransitionCrossfade completionHandler:^{

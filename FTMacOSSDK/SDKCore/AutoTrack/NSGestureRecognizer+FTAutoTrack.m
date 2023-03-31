@@ -6,12 +6,12 @@
 //
 
 #import "NSGestureRecognizer+FTAutoTrack.h"
-#import "FTLog.h"
-#import "FTSwizzler.h"
-#import "FTRumManager.h"
+#import <FTLog.h>
+#import <FTSwizzler.h>
+#import <FTRumManager.h>
 #import "FTGlobalRumManager.h"
 #import "NSView+FTAutoTrack.h"
-
+#import "FTAutoTrack.h"
 
 @implementation NSGestureRecognizer (FTAutoTrack)
 
@@ -36,8 +36,9 @@
 }
 - (void)ftTrackGestureRecognizerAppClick{
     @try {
-        [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:self.view.dataflux_actionName];
-        
+        if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
+            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:self.view.dataflux_actionName];
+        }
     }@catch (NSException *exception) {
         ZYErrorLog(@"%@ error: %@", self, exception);
     }

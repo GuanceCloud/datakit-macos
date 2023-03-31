@@ -6,8 +6,6 @@
 //
 
 #import "AppDelegate.h"
-#import <FTSDKAgent.h>
-#import <FTConfig.h>
 #import "LoginWindowController.h"
 @interface AppDelegate ()
 

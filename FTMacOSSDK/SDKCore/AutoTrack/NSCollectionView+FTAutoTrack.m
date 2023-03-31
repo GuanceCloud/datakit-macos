@@ -6,10 +6,9 @@
 //
 
 #import "NSCollectionView+FTAutoTrack.h"
-#import "FTSwizzler.h"
-#import "FTRumManager.h"
+#import <FTSwizzler.h>
 #import "FTGlobalRumManager.h"
-
+#import "FTAutoTrack.h"
 @implementation NSCollectionView (FTAutoTrack)
 
 -(void)dataflux_setDelegate:(id<NSCollectionViewDelegate>)delegate{
@@ -25,8 +24,9 @@
         void (^didSelectItemBlock)(id, SEL, id, id) = ^(id view, SEL command, NSCollectionView *collectionView, NSSet<NSIndexPath *> *indexPaths) {
             //  获取 view 的 viewcontroller 时 不考虑 NSCollectionViewItem
             if (collectionView && indexPaths) {
-                [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:self.dataflux_actionName];
-            }
+                if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
+                    [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:self.dataflux_actionName];
+                }            }
         };
         
         [FTSwizzler swizzleSelector:selector
@@ -43,7 +43,7 @@
 -(void)dataflux_setDoubleAction:(SEL)doubleAction{
     [self dataflux_setDoubleAction:doubleAction];
     void (^doubleActionBlock)(void) = ^() {
-        [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:self.dataflux_actionName];
+        //        [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:self.dataflux_actionName];
     };
     [FTSwizzler swizzleSelector:doubleAction
                         onClass:self.class

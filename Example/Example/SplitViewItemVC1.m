@@ -22,7 +22,7 @@
 - (void)createUI{
     SplitViewVC *parent = (SplitViewVC *)self.parentViewController;
     self.delegate = parent;
-    self.datas = @[@"NSCollectionView",@"Click",@"NSToolBar"];
+    self.datas = @[@"NSCollectionView",@"AutoTrack Click",@"Custom RUM"];
     self.mTableview.backgroundColor = [NSColor redColor];
     self.mTableview.usesAlternatingRowBackgroundColors = YES;
     [self.mTableview setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];

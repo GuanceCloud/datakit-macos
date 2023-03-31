@@ -6,21 +6,26 @@
 //  Copyright © 2021 DataFlux-cn. All rights reserved.
 //
 
-#import "FTConfig.h"
-@interface FTConfig()<NSCopying>
+#import "FTSDKConfig.h"
+
+@interface FTSDKConfig()<NSCopying>
 @end
-@implementation FTConfig
+@implementation FTSDKConfig
 -(instancetype)initWithMetricsUrl:(NSString *)metricsUrl{
     if (self = [super init]) {
         _metricsUrl = metricsUrl;
-        _XDataKitUUID = [FTConfig XDataKitUUID];
+        _XDataKitUUID = [FTSDKConfig XDataKitUUID];
+        _service = @"df_rum_macos";
+        _version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     }
     return self;
 }
 -(id)copyWithZone:(NSZone *)zone{
-    FTConfig *options = [[[self class] allocWithZone:nil] init];
+    FTSDKConfig *options = [[[self class] allocWithZone:nil] init];
     options.metricsUrl = self.metricsUrl;
     options.XDataKitUUID = self.XDataKitUUID;
+    options.env = self.env;
+    options.service = self.service;
     return options;
 }
 + (NSString *)XDataKitUUID{
@@ -44,14 +49,14 @@
     if (self) {
         _appid = appid;
         _enableTrackAppCrash= NO;
-        _samplerate = 100;
+        _sampleRate = 100;
     }
     return self;
 }
 - (instancetype)copyWithZone:(NSZone *)zone {
     FTRumConfig *options = [[[self class] allocWithZone:zone] init];
     options.enableTrackAppCrash = self.enableTrackAppCrash;
-    options.samplerate = self.samplerate;
+    options.sampleRate = self.sampleRate;
     options.appid = self.appid;
     return options;
 }
@@ -60,8 +65,7 @@
 -(instancetype)init{
     self = [super init];
     if (self) {
-        _service = @"df_rum_macos";;
-        _samplerate = 100;
+        _sampleRate = 100;
         _enableConsoleLog = NO;
         _enableLinkRumData = NO;
         _enableCustomLog = NO;
@@ -76,13 +80,30 @@
 }
 - (instancetype)copyWithZone:(NSZone *)zone {
     FTLoggerConfig *options = [[[self class] allocWithZone:zone] init];
-    options.service = self.service;
-    options.samplerate = self.samplerate;
+    options.sampleRate = self.sampleRate;
     options.enableConsoleLog = self.enableConsoleLog;
     options.enableLinkRumData = self.enableLinkRumData;
     options.enableCustomLog = self.enableCustomLog;
     options.prefix = self.prefix;
     options.logLevelFilter = self.logLevelFilter;
+    return options;
+}
+@end
+@implementation FTTraceConfig
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        _sampleRate= 100;
+        _networkTraceType = FTNetworkTraceTypeDDtrace;
+    }
+    return self;
+}
+- (instancetype)copyWithZone:(NSZone *)zone {
+    FTTraceConfig *options = [[[self class] allocWithZone:zone] init];
+    options.sampleRate = self.sampleRate;
+    options.enableLinkRumData = self.enableLinkRumData;
+    options.networkTraceType = self.networkTraceType;
+    options.enableAutoTrace = self.enableAutoTrace;
     return options;
 }
 @end

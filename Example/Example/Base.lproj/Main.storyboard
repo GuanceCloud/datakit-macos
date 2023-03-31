@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -679,7 +679,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="89" y="-363"/>
+            <point key="canvasLocation" x="410" y="-365"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -699,7 +699,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="55" y="136"/>
         </scene>
         <!--Split ViewVC-->
         <scene sceneID="DV2-28-3Rk">
@@ -711,7 +711,7 @@
                     </stackView>
                     <splitViewItems>
                         <splitViewItem id="1pO-TG-YBG"/>
-                        <splitViewItem id="BbM-aZ-VRu"/>
+                        <splitViewItem id="Lf3-1x-X6s"/>
                     </splitViewItems>
                     <splitView key="splitView" dividerStyle="thin" vertical="YES" id="v9R-mh-sKJ">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -723,12 +723,12 @@
                     <connections>
                         <outlet property="splitView" destination="v9R-mh-sKJ" id="iV2-de-SXx"/>
                         <segue destination="9Kx-dJ-qh9" kind="relationship" relationship="splitItems" id="kaS-s9-Mht"/>
-                        <segue destination="Zza-7M-ZLT" kind="relationship" relationship="splitItems" id="1rh-7f-cJt"/>
+                        <segue destination="Zza-7M-ZLT" kind="relationship" relationship="splitItems" id="0uC-XV-Jrf"/>
                     </connections>
                 </splitViewController>
                 <customObject id="Xvi-Vm-Csd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-661" y="510"/>
+            <point key="canvasLocation" x="-724" y="564"/>
         </scene>
         <!--Split View ItemVC1-->
         <scene sceneID="Sxj-9L-dar">
@@ -814,20 +814,20 @@
                 </viewController>
                 <customObject id="agF-hI-w28" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-281" y="275"/>
+            <point key="canvasLocation" x="-308" y="502"/>
         </scene>
         <!--Split View ItemVC2-->
         <scene sceneID="IUq-ca-rmu">
             <objects>
                 <viewController id="Zza-7M-ZLT" customClass="SplitViewItemVC2" sceneMemberID="viewController">
-                    <view key="view" id="Jzp-bd-5Y5">
-                        <rect key="frame" x="0.0" y="0.0" width="270" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <view key="view" appearanceType="darkAqua" translatesAutoresizingMaskIntoConstraints="NO" id="Jzp-bd-5Y5">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="800"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                 </viewController>
                 <customObject id="ost-Jn-MBP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-98" y="608"/>
+            <point key="canvasLocation" x="-290" y="1128.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="DLT-dB-SJm">
@@ -840,7 +840,7 @@
                 </viewController>
                 <customObject id="xjj-F6-f0n" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-586" y="886"/>
+            <point key="canvasLocation" x="-977" y="988"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -945,7 +945,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="144" y="617"/>
+            <point key="canvasLocation" x="448" y="617"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="PgI-IR-3of">
@@ -1002,16 +1002,16 @@
             <objects>
                 <viewController storyboardIdentifier="TabViewController" id="q2S-DM-pEU" customClass="TabViewController" sceneMemberID="viewController">
                     <view key="view" id="4am-Vd-ySH">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="384"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="800"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="iTp-lI-5xq">
-                                <rect key="frame" x="43" y="40" width="394" height="300"/>
+                                <rect key="frame" x="43" y="40" width="914" height="716"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="FirstView" identifier="" id="yoC-Xz-CcO">
                                         <view key="view" id="5cj-JY-ymq">
-                                            <rect key="frame" x="10" y="33" width="374" height="254"/>
+                                            <rect key="frame" x="10" y="33" width="894" height="670"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </tabViewItem>
@@ -1024,7 +1024,7 @@
                                 </tabViewItems>
                             </tabView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kFV-Jb-8Qo">
-                                <rect key="frame" x="33" y="363" width="414" height="16"/>
+                                <rect key="frame" x="293" y="779" width="414" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Tab View 切换按钮的点击事件需要通过NSTabViewDelegate进行采集" id="KzV-cU-slg">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1032,7 +1032,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Yw-Xa-AOm">
-                                <rect key="frame" x="396" y="3" width="81" height="32"/>
+                                <rect key="frame" x="916" y="3" width="81" height="32"/>
                                 <buttonCell key="cell" type="push" title="MODAL" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="o9y-a1-VDn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1042,7 +1042,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dzK-gC-uA6">
-                                <rect key="frame" x="324" y="3" width="76" height="32"/>
+                                <rect key="frame" x="844" y="3" width="76" height="32"/>
                                 <buttonCell key="cell" type="push" title="SHEET" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="swL-aM-PQG">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1052,7 +1052,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CzO-75-2vE">
-                                <rect key="frame" x="233" y="3" width="95" height="32"/>
+                                <rect key="frame" x="753" y="3" width="95" height="32"/>
                                 <buttonCell key="cell" type="push" title="POPOVER" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="X3i-MA-vPh">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1062,7 +1062,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QFs-Co-KdQ">
-                                <rect key="frame" x="136" y="3" width="101" height="32"/>
+                                <rect key="frame" x="656" y="3" width="101" height="32"/>
                                 <buttonCell key="cell" type="push" title="ANIMATOR" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UPb-BZ-dYT">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1072,7 +1072,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3Zp-g0-DWH">
-                                <rect key="frame" x="66" y="3" width="74" height="32"/>
+                                <rect key="frame" x="586" y="3" width="74" height="32"/>
                                 <buttonCell key="cell" type="push" title="SHOW" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="wO5-Qe-WUD">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1099,6 +1099,7 @@
                             <constraint firstItem="QFs-Co-KdQ" firstAttribute="centerY" secondItem="3Zp-g0-DWH" secondAttribute="centerY" id="Tzf-Q2-w70"/>
                             <constraint firstItem="kFV-Jb-8Qo" firstAttribute="centerX" secondItem="4am-Vd-ySH" secondAttribute="centerX" id="cDD-T8-sBg"/>
                             <constraint firstItem="iTp-lI-5xq" firstAttribute="leading" secondItem="4am-Vd-ySH" secondAttribute="leading" constant="50" id="deE-Hv-TJP"/>
+                            <constraint firstItem="3Zp-g0-DWH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4am-Vd-ySH" secondAttribute="leading" constant="20" symbolic="YES" id="gQq-qb-Nvy"/>
                             <constraint firstItem="dzK-gC-uA6" firstAttribute="leading" secondItem="CzO-75-2vE" secondAttribute="trailing" constant="10" id="lgB-ez-O8z"/>
                             <constraint firstItem="CzO-75-2vE" firstAttribute="leading" secondItem="QFs-Co-KdQ" secondAttribute="trailing" constant="10" id="nNF-4F-RE7"/>
                         </constraints>
@@ -1109,7 +1110,7 @@
                 </viewController>
                 <customObject id="VUp-48-ey7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-66" y="-404"/>
+            <point key="canvasLocation" x="55.5" y="-404"/>
         </scene>
     </scenes>
     <resources>

@@ -6,14 +6,14 @@
 //
 
 #import "NSViewController+FTAutoTrack.h"
-#import "FTDateUtil.h"
+#import <FTDateUtil.h>
+#import <NSString+FTAdd.h>
+#import <FTConstants.h>
+#import <FTBaseInfoHandler.h>
+#import <FTThreadDispatchManager.h>
 #import <objc/runtime.h>
-#import "NSString+FTAdd.h"
-#import "FTRumManager.h"
 #import "FTGlobalRumManager.h"
-#import "FTConstants.h"
-#import "FTBaseInfoHandler.h"
-#import "FTThreadDispatchManager.h"
+#import "FTAutoTrack.h"
 static char *viewLoadStartTimeKey = "viewLoadStartTimeKey";
 static char *viewControllerUUID = "viewControllerUUID";
 static char *viewLoadDuration = "viewLoadDuration";
@@ -75,15 +75,18 @@ static char *viewLoaded = "viewLoaded";
 - (void)dataflux_viewDidLoad{
     if (![self isKindOfClass:NSCollectionViewItem.class]) {
         self.dataflux_viewLoadStartTime =[NSDate date];
+        ZYErrorLog(@"%@ viewDidLoad",self.class);
     }
     [self dataflux_viewDidLoad];
 }
 -(void)dataflux_viewDidAppear{
-    
+
     [self dataflux_viewDidAppear];
-    if ([self isKindOfClass:NSCollectionViewItem.class]) {
+    // NSPanel 类型
+    if ([self isKindOfClass:NSCollectionViewItem.class]||[self.view.window isKindOfClass:[NSPanel class]]) {
         return;
     }
+    ZYErrorLog(@"%@ viewDidAppear",self.class);
     //NSTitlebarViewController、NSTitlebarAccessoryViewController
     if(!self.dataflux_viewLoaded){
         NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
@@ -98,11 +101,13 @@ static char *viewLoaded = "viewLoaded";
 //    [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
 }
 -(void)dataflux_viewDidDisappear{
-    
+
     [self dataflux_viewDidDisappear];
     if ([self isKindOfClass:NSCollectionViewItem.class]) {
         return;
-    }    
+    }
+    ZYDebug(@"%@ viewDidDisappear",self.class);
+
 //    [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
 }
 

@@ -46,6 +46,7 @@
             break;
         }else if([nextResponder isKindOfClass:NSPanel.class]){
             nextResponder = [NSApplication sharedApplication].keyWindow.contentViewController?:[NSApplication sharedApplication].keyWindow;
+            break;
         }else if([nextResponder isKindOfClass:NSWindow.class]){
             break;
         }else{

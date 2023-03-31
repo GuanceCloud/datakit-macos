@@ -7,6 +7,7 @@
 
 #import "LoginWindowController.h"
 #import "ViewController.h"
+#import <FTMacOSSDK/FTMacOSSDK.h>
 @interface LoginWindowController ()<NSWindowDelegate>
 
 @end
@@ -23,6 +24,10 @@
 -(void)windowWillClose:(NSNotification *)notification{
     self.contentViewController = nil;
     self.window = nil;
+    [[FTGlobalRumManager sharedInstance] stopView];
+}
+-(void)windowDidBecomeKey:(NSNotification *)notification{
+    [[FTGlobalRumManager sharedInstance] startViewWithName:@"LoginWindow"];
 }
 -(void)windowWillBeginSheet:(NSNotification *)notification{
     

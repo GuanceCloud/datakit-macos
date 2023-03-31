@@ -8,9 +8,8 @@
 #import "NSWindowController+FTAutoTrack.h"
 #import "FTAutoTrackProtocol.h"
 #import <objc/runtime.h>
-#import "FTDateUtil.h"
-#import "FTRumManager.h"
-#import "FTConstants.h"
+#import <FTDateUtil.h>
+#import <FTConstants.h>
 #import "FTGlobalRumManager.h"
 #import "NSView+FTAutoTrack.h"
 @interface NSWindowController(FTAutoTrack)<FTRumViewProperty>
@@ -69,12 +68,16 @@ static char *viewControllerUUID = "viewControllerUUID";
             self.dataflux_viewLoadStartTime = nil;
             self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
 //            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
+            ZYErrorLog(@"NSWindowController windowDidLoad:%@ \n viewcontroller: %@",self.window,self.contentViewController);
+
         }
     }
     
 }
 - (void)dataflux_windowWillClose:(NSNotification *)notification{
     if(!self.window.contentViewController){
+        ZYErrorLog(@"NSWindowController WillClose:%@ \n viewcontroller: %@",self.window,self.contentViewController);
+
 //        [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
     }
     [self dataflux_windowWillClose:notification];

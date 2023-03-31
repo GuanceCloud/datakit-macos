@@ -6,8 +6,8 @@
 //
 
 #import "FTAutoTrack.h"
-#import "FTLog.h"
-#import "FTSwizzle.h"
+#import <FTLog.h>
+#import <FTSwizzle.h>
 #import "NSViewController+FTAutoTrack.h"
 #import "NSWindowController+FTAutoTrack.h"
 #import "NSWindow+FTAutoTrack.h"
@@ -17,18 +17,22 @@
 #import "NSTabView+FTAutoTrack.h"
 @implementation FTAutoTrack
 
--(instancetype)init{
-    self = [super init];
-    if (self) {
-        [self startHook];
-    }
-    return self;
++ (instancetype)sharedInstance {
+    static FTAutoTrack *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
 }
-
-- (void)startHook{
-    [self logWindowLifeCycle];
-    [self logViewControllerLifeCycle];
-    [self logTargetAction];
+- (void)startHookView:(BOOL)enableView action:(BOOL)enableAction{
+    if(enableView){
+        [self logWindowLifeCycle];
+        [self logViewControllerLifeCycle];
+    }
+    if(enableAction){
+        [self logTargetAction];
+    }
 }
 - (void)logWindowLifeCycle{
     @try {

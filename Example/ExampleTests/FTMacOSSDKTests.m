@@ -7,7 +7,7 @@
 
 #import <XCTest/XCTest.h>
 #import <FTSDKAgent.h>
-#import <FTConfig.h>
+#import "FTConfig.h"
 #import "FTDateUtil.h"
 #import "FTRecordModel.h"
 #import "FTTrackDataManger.h"
