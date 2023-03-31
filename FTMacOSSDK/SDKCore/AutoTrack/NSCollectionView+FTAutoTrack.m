@@ -11,8 +11,8 @@
 #import "FTAutoTrack.h"
 @implementation NSCollectionView (FTAutoTrack)
 
--(void)dataflux_setDelegate:(id<NSCollectionViewDelegate>)delegate{
-    [self dataflux_setDelegate:delegate];
+-(void)datakit_setDelegate:(id<NSCollectionViewDelegate>)delegate{
+    [self datakit_setDelegate:delegate];
     
     if (self.delegate == nil) {
         return;
@@ -25,7 +25,7 @@
             //  获取 view 的 viewcontroller 时 不考虑 NSCollectionViewItem
             if (collectionView && indexPaths) {
                 if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-                    [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:self.dataflux_actionName];
+                    [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:self.datakit_actionName];
                 }            }
         };
         
@@ -40,17 +40,17 @@
 @end
 @implementation NSTableView (FTAutoTrack)
 
--(void)dataflux_setDoubleAction:(SEL)doubleAction{
-    [self dataflux_setDoubleAction:doubleAction];
+-(void)datakit_setDoubleAction:(SEL)doubleAction{
+    [self datakit_setDoubleAction:doubleAction];
     void (^doubleActionBlock)(void) = ^() {
-        //        [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:self.dataflux_actionName];
+        //        [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:self.datakit_actionName];
     };
     [FTSwizzler swizzleSelector:doubleAction
                         onClass:self.class
                       withBlock:doubleActionBlock
                           named:@"tableView_doubleAction"];
 }
--(NSString *)dataflux_actionName{
+-(NSString *)datakit_actionName{
     return [NSString stringWithFormat:@"[%@][column:%ld][row:%ld]",NSStringFromClass(self.class),self.clickedColumn,(long)self.clickedRow];
 }
 @end

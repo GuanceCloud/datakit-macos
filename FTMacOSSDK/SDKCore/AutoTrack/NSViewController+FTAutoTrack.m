@@ -20,89 +20,89 @@ static char *viewLoadDuration = "viewLoadDuration";
 static char *viewLoaded = "viewLoaded";
 
 @implementation NSViewController (FTAutoTrack)
--(void)setDataflux_viewLoadStartTime:(NSDate  *)viewLoadStartTime{
+-(void)setDatakit_viewLoadStartTime:(NSDate  *)viewLoadStartTime{
     objc_setAssociatedObject(self, &viewLoadStartTimeKey, viewLoadStartTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
--(NSDate *)dataflux_viewLoadStartTime{
+-(NSDate *)datakit_viewLoadStartTime{
     return objc_getAssociatedObject(self, &viewLoadStartTimeKey);
 }
--(NSNumber *)dataflux_loadDuration{
+-(NSNumber *)datakit_loadDuration{
     return objc_getAssociatedObject(self, &viewLoadDuration);
 }
--(void)setDataflux_loadDuration:(NSNumber *)ft_loadDuration{
+-(void)setDatakit_loadDuration:(NSNumber *)ft_loadDuration{
     objc_setAssociatedObject(self, &viewLoadDuration, ft_loadDuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
--(BOOL )dataflux_viewLoaded{
+-(BOOL )datakit_viewLoaded{
     return [objc_getAssociatedObject(self, &viewLoaded) boolValue];
 }
--(void)setDataflux_viewLoaded:(BOOL )dataflux_viewLoaded{
-   objc_setAssociatedObject(self, &viewLoaded, [NSNumber numberWithBool:dataflux_viewLoaded], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+-(void)setDatakit_viewLoaded:(BOOL )datakit_viewLoaded{
+   objc_setAssociatedObject(self, &viewLoaded, [NSNumber numberWithBool:datakit_viewLoaded], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 - (NSString *)ft_viewControllerName{
     return NSStringFromClass([self class]);
 }
--(NSString *)dataflux_viewUUID{
+-(NSString *)datakit_viewUUID{
     return objc_getAssociatedObject(self, &viewControllerUUID);
 }
--(void)setDataflux_viewUUID:(NSString *)ft_viewUUID{
+-(void)setDatakit_viewUUID:(NSString *)ft_viewUUID{
     objc_setAssociatedObject(self, &viewControllerUUID, ft_viewUUID, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
--(NSString *)dataflux_parentVC{
+-(NSString *)datakit_parentVC{
     if (self.parentViewController) {
         return NSStringFromClass(self.parentViewController.class);
     }
     return FT_NULL_VALUE;
 }
--(BOOL)dataflux_inMainWindow{
+-(BOOL)datakit_inMainWindow{
     __block BOOL isMain = NO;
     [FTThreadDispatchManager performBlockDispatchMainSyncSafe:^{
         isMain = self.view.window.isMainWindow;
     }];
     return isMain;
 }
--(BOOL)dataflux_isKeyWindow{
+-(BOOL)datakit_isKeyWindow{
     __block BOOL isKey = NO;
     [FTThreadDispatchManager performBlockDispatchMainSyncSafe:^{
         isKey = self.view.window.isKeyWindow;
     }];
     return isKey;
 }
--(NSString *)dataflux_windowName{
+-(NSString *)datakit_windowName{
     return NSStringFromClass(self.view.window.class);
 }
 #pragma mark - AutoTrack -
 
-- (void)dataflux_viewDidLoad{
+- (void)datakit_viewDidLoad{
     if (![self isKindOfClass:NSCollectionViewItem.class]) {
-        self.dataflux_viewLoadStartTime =[NSDate date];
+        self.datakit_viewLoadStartTime =[NSDate date];
         ZYErrorLog(@"%@ viewDidLoad",self.class);
     }
-    [self dataflux_viewDidLoad];
+    [self datakit_viewDidLoad];
 }
--(void)dataflux_viewDidAppear{
+-(void)datakit_viewDidAppear{
 
-    [self dataflux_viewDidAppear];
+    [self datakit_viewDidAppear];
     // NSPanel 类型
     if ([self isKindOfClass:NSCollectionViewItem.class]||[self.view.window isKindOfClass:[NSPanel class]]) {
         return;
     }
     ZYErrorLog(@"%@ viewDidAppear",self.class);
     //NSTitlebarViewController、NSTitlebarAccessoryViewController
-    if(!self.dataflux_viewLoaded){
-        NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
-        self.dataflux_loadDuration = loadTime;
-        self.dataflux_viewLoaded = YES;
+    if(!self.datakit_viewLoaded){
+        NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.datakit_viewLoadStartTime toDate:[NSDate date]];
+        self.datakit_loadDuration = loadTime;
+        self.datakit_viewLoaded = YES;
     }else{
         NSNumber *loadTime = @0;
-        self.dataflux_viewLoadStartTime = [NSDate date];
-        self.dataflux_loadDuration = loadTime;
+        self.datakit_viewLoadStartTime = [NSDate date];
+        self.datakit_loadDuration = loadTime;
     }
-    self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
+    self.datakit_viewUUID = [NSUUID UUID].UUIDString;
 //    [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
 }
--(void)dataflux_viewDidDisappear{
+-(void)datakit_viewDidDisappear{
 
-    [self dataflux_viewDidDisappear];
+    [self datakit_viewDidDisappear];
     if ([self isKindOfClass:NSCollectionViewItem.class]) {
         return;
     }

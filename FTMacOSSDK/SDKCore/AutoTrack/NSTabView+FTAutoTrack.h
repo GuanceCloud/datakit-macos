@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSTabView (FTAutoTrack)
--(void)dataflux_setDelegate:(id<NSTabViewDelegate>)delegate;
+-(void)datakit_setDelegate:(id<NSTabViewDelegate>)delegate;
 @end
 
 NS_ASSUME_NONNULL_END

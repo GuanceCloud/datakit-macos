@@ -3,7 +3,7 @@
 //  FTMacOSSDK
 //
 //  Created by 胡蕾蕾 on 2021/8/6.
-//  Copyright © 2021 DataFlux-cn. All rights reserved.
+//  Copyright © 2021 Guance-cn. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -99,11 +99,8 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
 
 /// 禁用 new 初始化
 + (instancetype)new NS_UNAVAILABLE;
-/**
- * 数据上报地址，两种模式：
- * ①使用Dataflux的数据网关，可在控制台获取对应网址；
- * ②使用私有化部署的数据网关，填写对应网址即可。
-*/
+
+/// 数据上报地址
 @property (nonatomic, copy) NSString *metricsUrl;
 /**
  * 请求HTTP请求头X-Datakit-UUID 数据采集端  如果用户不设置会自动配置
@@ -185,7 +182,7 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
 /// 禁用 new 初始化
 + (instancetype)new NS_UNAVAILABLE;
 /**
- * 应用唯一ID，在DataFlux控制台上面创建监控时自动生成。
+ * 应用唯一ID，在观测云控制台上面创建监控时自动生成。
  */
 @property (nonatomic, copy) NSString *appid;
 /**

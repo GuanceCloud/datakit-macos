@@ -21,93 +21,97 @@
 static char *viewLoadStartTimeKey = "viewLoadStartTimeKey";
 static char *viewLoadDuration = "viewLoadDuration";
 static char *viewControllerUUID = "viewControllerUUID";
--(void)setDataflux_viewLoadStartTime:(NSDate *)dataflux_viewLoadStartTime{
-    objc_setAssociatedObject(self, &viewLoadStartTimeKey, dataflux_viewLoadStartTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+-(void)setDatakit_viewLoadStartTime:(NSDate *)datakit_viewLoadStartTime{
+    objc_setAssociatedObject(self, &viewLoadStartTimeKey, datakit_viewLoadStartTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
--(NSDate *)setDataflux_loadDuration{
+-(NSDate *)setDatakit_loadDuration{
     return objc_getAssociatedObject(self, &viewLoadStartTimeKey);
 }
--(NSNumber *)dataflux_loadDuration{
+-(NSNumber *)datakit_loadDuration{
     return objc_getAssociatedObject(self, &viewLoadDuration);
 }
--(void)setDataflux_loadDuration:(NSNumber *)dataflux_loadDuration{
-    objc_setAssociatedObject(self, &viewLoadDuration, dataflux_loadDuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+-(void)setDatakit_loadDuration:(NSNumber *)datakit_loadDuration{
+    objc_setAssociatedObject(self, &viewLoadDuration, datakit_loadDuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
--(NSString *)dataflux_viewUUID{
+-(NSString *)datakit_viewUUID{
     return objc_getAssociatedObject(self, &viewControllerUUID);
 }
--(void)setDataflux_viewUUID:(NSString *)dataflux_viewUUID{
-    objc_setAssociatedObject(self, &viewControllerUUID, dataflux_viewUUID, OBJC_ASSOCIATION_COPY_NONATOMIC);
+-(void)setDatakit_viewUUID:(NSString *)datakit_viewUUID{
+    objc_setAssociatedObject(self, &viewControllerUUID, datakit_viewUUID, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
--(NSString *)dataflux_parentVC{
+-(NSString *)datakit_parentVC{
     return FT_NULL_VALUE;
 }
--(BOOL)dataflux_inMainWindow{
+-(BOOL)datakit_inMainWindow{
     return self.isMainWindow;
 }
--(BOOL)dataflux_isKeyWindow{
+-(BOOL)datakit_isKeyWindow{
     return self.isKeyWindow;
 }
--(NSString *)dataflux_windowName{
+-(NSString *)datakit_windowName{
     return NSStringFromClass(self.class);
 }
 #pragma mark - AutoTrack -
 
--(instancetype)dataflux_init{
-    NSWindow *win = [self dataflux_init];
+-(instancetype)datakit_init{
+    NSWindow *win = [self datakit_init];
     return win;
 }
--(instancetype)dataflux_initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)style backing:(NSBackingStoreType)backingStoreType defer:(BOOL)flag{
-    NSWindow *win = [self dataflux_initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
+-(instancetype)datakit_initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)style backing:(NSBackingStoreType)backingStoreType defer:(BOOL)flag{
+    NSWindow *win = [self datakit_initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
 
     return win;
 }
-- (instancetype)dataflux_initWithCoder:(NSCoder *)coder{
-    NSWindow *win = [self dataflux_initWithCoder:coder];
+- (instancetype)datakit_initWithCoder:(NSCoder *)coder{
+    NSWindow *win = [self datakit_initWithCoder:coder];
     return win;
     
 }
--(void)dataflux_makeMainWindow{
-    [self dataflux_makeMainWindow];
+-(void)datakit_makeMainWindow{
+    [self datakit_makeMainWindow];
     if (!self.contentViewController && !self.windowController && ![self isKindOfClass:NSPanel.class]) {
         //window
         //记录 init - keyWindow 的时间差 作为window显示加载时长
         //只记录第一次 变成keyWindow
-        if(self.dataflux_viewLoadStartTime){
-            NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
-            self.dataflux_loadDuration = loadTime;
-            self.dataflux_viewLoadStartTime = nil;
-            self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
+        if(self.datakit_viewLoadStartTime){
+            NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.datakit_viewLoadStartTime toDate:[NSDate date]];
+            self.datakit_loadDuration = loadTime;
+            self.datakit_viewLoadStartTime = nil;
+            self.datakit_viewUUID = [NSUUID UUID].UUIDString;
 //            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
         }
 
     }
 }
--(void)dataflux_makeKeyWindow{
+-(void)datakit_makeKeyWindow{
     ZYErrorLog(@"window KeyWindow:%@ \n viewcontroller: %@",self.class,self.contentViewController);
-    [self dataflux_makeKeyWindow];
+    [self datakit_makeKeyWindow];
     if (!self.contentViewController && !self.windowController && ![self isKindOfClass:NSPanel.class]) {
         //window
         //记录 init - keyWindow 的时间差 作为window显示加载时长
         //只记录第一次 变成keyWindow
-        if(self.dataflux_viewLoadStartTime){
-            NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
-            self.dataflux_loadDuration = loadTime;
-            self.dataflux_viewLoadStartTime = nil;
-            self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
+        if(self.datakit_viewLoadStartTime){
+            NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.datakit_viewLoadStartTime toDate:[NSDate date]];
+            self.datakit_loadDuration = loadTime;
+            self.datakit_viewLoadStartTime = nil;
+            self.datakit_viewUUID = [NSUUID UUID].UUIDString;
 //            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
         }
 
     }
 }
 
--(void)dataflux_close{
+-(void)datakit_close{
     ZYErrorLog(@"window close:%@ \n viewcontroller: %@",self.class,self.contentViewController);
 
     if (!self.contentViewController && !self.windowController && ![self isKindOfClass:NSPanel.class]) {
 //        [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
     }
-    [self dataflux_close];
+    [self datakit_close];
 
+}
+-(void)datakit_becomeKeyWindow{
+    ZYErrorLog(@"window becomeKeyWindow:%@ \n viewcontroller: %@",self.class,self.contentViewController);
+    [self datakit_becomeKeyWindow];
 }
 @end

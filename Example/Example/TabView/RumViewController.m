@@ -7,9 +7,12 @@
 
 #import "RumViewController.h"
 #import <FTMacOSSDK/FTMacOSSDK.h>
-@interface RumViewController ()<NSTableViewDataSource,NSTableViewDelegate>
+@interface RumViewController ()<NSTableViewDataSource,NSTableViewDelegate,NSURLSessionDelegate>
 @property (nonatomic, strong) NSArray *datas;
 @property (weak) IBOutlet NSTableView *mTableView;
+@property (nonatomic, copy) NSString *rumKey;
+@property (nonatomic, strong) NSURLSessionTaskMetrics *metrics API_AVAILABLE(ios(10.0));
+@property (nonatomic, strong) NSData *data;
 
 @end
 
@@ -126,10 +129,45 @@
         case 10:
             [[FTGlobalRumManager sharedInstance] addLongTaskWithStack:@"LongTask_Stack" duration:@1000000000 property:@{@"longtask_property":@"addLongTask"}];
             break;
-        
+        case 11:
+            [self manualRumResource];
+            break;
         default:
             break;
     }
 }
+- (void)manualRumResource{
+    self.rumKey = [[NSUUID UUID]UUIDString];
+    NSString *urlStr = [[NSProcessInfo processInfo] environment][@"TRACE_URL"];
 
+    NSURL *url = [NSURL URLWithString:urlStr];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    
+    NSURLSession *session=[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    [[FTGlobalRumManager sharedInstance] startResourceWithKey:self.rumKey];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request];
+    
+    [task resume];
+    
+}
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics *)metrics API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)){
+    self.metrics = metrics;
+}
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+    didReceiveData:(NSData *)data{
+    self.data = data;
+
+}
+-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error{
+
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
+
+    [[FTGlobalRumManager sharedInstance] stopResourceWithKey:self.rumKey];
+    
+    FTResourceMetricsModel *metricsModel = [[FTResourceMetricsModel alloc]initWithTaskMetrics:self.metrics];
+
+
+    FTResourceContentModel *content = [[FTResourceContentModel alloc]initWithRequest:task.currentRequest response:httpResponse data:self.data error:error];
+    [[FTGlobalRumManager sharedInstance] addResourceWithKey:self.rumKey metrics:metricsModel content:content];
+}
 @end

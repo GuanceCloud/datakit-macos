@@ -20,53 +20,53 @@
 static char *viewLoadStartTimeKey = "viewLoadStartTimeKey";
 static char *viewLoadDuration = "viewLoadDuration";
 static char *viewControllerUUID = "viewControllerUUID";
--(void)setDataflux_viewLoadStartTime:(NSDate *)dataflux_viewLoadStartTime{
-    objc_setAssociatedObject(self, &viewLoadStartTimeKey, dataflux_viewLoadStartTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+-(void)setDatakit_viewLoadStartTime:(NSDate *)datakit_viewLoadStartTime{
+    objc_setAssociatedObject(self, &viewLoadStartTimeKey, datakit_viewLoadStartTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
--(NSDate *)setDataflux_loadDuration{
+-(NSDate *)setDatakit_loadDuration{
     return objc_getAssociatedObject(self, &viewLoadStartTimeKey);
 }
--(NSNumber *)dataflux_loadDuration{
+-(NSNumber *)datakit_loadDuration{
     return objc_getAssociatedObject(self, &viewLoadDuration);
 }
--(void)setDataflux_loadDuration:(NSNumber *)dataflux_loadDuration{
-    objc_setAssociatedObject(self, &viewLoadDuration, dataflux_loadDuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+-(void)setDatakit_loadDuration:(NSNumber *)datakit_loadDuration{
+    objc_setAssociatedObject(self, &viewLoadDuration, datakit_loadDuration, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
--(NSString *)dataflux_viewUUID{
+-(NSString *)datakit_viewUUID{
     return objc_getAssociatedObject(self, &viewControllerUUID);
 }
--(void)setDataflux_viewUUID:(NSString *)dataflux_viewUUID{
-    objc_setAssociatedObject(self, &viewControllerUUID, dataflux_viewUUID, OBJC_ASSOCIATION_COPY_NONATOMIC);
+-(void)setDatakit_viewUUID:(NSString *)datakit_viewUUID{
+    objc_setAssociatedObject(self, &viewControllerUUID, datakit_viewUUID, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
--(NSString *)dataflux_parentVC{
+-(NSString *)datakit_parentVC{
     return FT_NULL_VALUE;
 }
--(BOOL)dataflux_inMainWindow{
+-(BOOL)datakit_inMainWindow{
     return self.window.isMainWindow;
 }
--(BOOL)dataflux_isKeyWindow{
+-(BOOL)datakit_isKeyWindow{
     return self.window.isKeyWindow;
 }
--(NSString *)dataflux_windowName{
+-(NSString *)datakit_windowName{
     return NSStringFromClass(self.window.class);
 }
 #pragma mark - AutoTrack -
 
 //即将加载nib
--(void)dataflux_windowWillLoad{
-    self.dataflux_viewLoadStartTime =[NSDate date];
-    [self dataflux_windowWillLoad];
+-(void)datakit_windowWillLoad{
+    self.datakit_viewLoadStartTime =[NSDate date];
+    [self datakit_windowWillLoad];
 }
 //加载nib之后
-- (void)dataflux_windowDidLoad{
-    [self dataflux_windowDidLoad];
+- (void)datakit_windowDidLoad{
+    [self datakit_windowDidLoad];
     if(!self.window.contentViewController){
         // 记录 window 的生命周期
-        if(self.dataflux_viewLoadStartTime){
-            NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.dataflux_viewLoadStartTime toDate:[NSDate date]];
-            self.dataflux_loadDuration = loadTime;
-            self.dataflux_viewLoadStartTime = nil;
-            self.dataflux_viewUUID = [NSUUID UUID].UUIDString;
+        if(self.datakit_viewLoadStartTime){
+            NSNumber *loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.datakit_viewLoadStartTime toDate:[NSDate date]];
+            self.datakit_loadDuration = loadTime;
+            self.datakit_viewLoadStartTime = nil;
+            self.datakit_viewUUID = [NSUUID UUID].UUIDString;
 //            [[FTGlobalRumManager sharedInstance] trackViewDidAppear:self];
             ZYErrorLog(@"NSWindowController windowDidLoad:%@ \n viewcontroller: %@",self.window,self.contentViewController);
 
@@ -74,13 +74,13 @@ static char *viewControllerUUID = "viewControllerUUID";
     }
     
 }
-- (void)dataflux_windowWillClose:(NSNotification *)notification{
+- (void)datakit_windowWillClose:(NSNotification *)notification{
     if(!self.window.contentViewController){
         ZYErrorLog(@"NSWindowController WillClose:%@ \n viewcontroller: %@",self.window,self.contentViewController);
 
 //        [[FTGlobalRumManager sharedInstance] trackViewDidDisappear:self];
     }
-    [self dataflux_windowWillClose:notification];
+    [self datakit_windowWillClose:notification];
 }
 
 @end

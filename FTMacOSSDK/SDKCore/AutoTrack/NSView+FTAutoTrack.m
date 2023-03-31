@@ -8,7 +8,7 @@
 #import "NSView+FTAutoTrack.h"
 
 @implementation NSView (FTAutoTrack)
--(NSString *)dataflux_viewPath{
+-(NSString *)datakit_viewPath{
     NSMutableString *str = [NSMutableString new];
     [str appendString:NSStringFromClass([self class])];
     NSView *currentView = self;
@@ -34,11 +34,11 @@
     window?[str insertString:[NSString stringWithFormat:@"%@/",NSStringFromClass(window.class)] atIndex:0]:nil;
     return str;
 }
--(NSString *)dataflux_actionName{
+-(NSString *)datakit_actionName{
     return [NSString stringWithFormat:@"[%@]",NSStringFromClass(self.class)];
 }
 
--(id)dataflux_controller{
+-(id)datakit_controller{
     NSResponder *nextResponder = self.nextResponder;
     while (nextResponder != nil) {
         //  获取 view 的 viewcontroller 时 不考虑 NSCollectionViewItem
@@ -58,7 +58,7 @@
 @end
 
 @implementation NSPopUpButton (FTAutoTrack)
--(NSString *)dataflux_actionName{
+-(NSString *)datakit_actionName{
     if (self.selectedItem.title.length>0) {
         return [NSString stringWithFormat:@"[NSPopUpButton]%@",self.selectedItem.title];
     }else{
@@ -67,7 +67,7 @@
 }
 @end
 @implementation NSButton (FTAutoTrack)
--(NSString *)dataflux_actionName{
+-(NSString *)datakit_actionName{
     if (self.title.length>0) {
         return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.title];
     }else{

@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSCollectionView (FTAutoTrack)<FTRUMActionProperty>
--(void)dataflux_setDelegate:(id<NSCollectionViewDelegate>)delegate;
+-(void)datakit_setDelegate:(id<NSCollectionViewDelegate>)delegate;
 @end
 
 @interface NSTableView (FTAutoTrack)<FTRUMActionProperty>

@@ -11,9 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSWindowController (FTAutoTrack)
--(void)dataflux_windowWillLoad;
-- (void)dataflux_windowDidLoad;
-- (void)dataflux_windowWillClose:(NSNotification *)notification;
+-(void)datakit_windowWillLoad;
+- (void)datakit_windowDidLoad;
+- (void)datakit_windowWillClose:(NSNotification *)notification;
 @end
 
 NS_ASSUME_NONNULL_END

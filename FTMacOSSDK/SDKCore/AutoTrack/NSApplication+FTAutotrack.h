@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSApplication (FTAutotrack)
-- (BOOL)dataflux_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender;
+- (BOOL)datakit_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender;
 @end
 
 NS_ASSUME_NONNULL_END

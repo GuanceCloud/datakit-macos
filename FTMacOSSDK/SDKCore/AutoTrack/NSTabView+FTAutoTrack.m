@@ -12,8 +12,8 @@
 #import <FTLog.h>
 #import "FTAutoTrack.h"
 @implementation NSTabView (FTAutoTrack)
--(void)dataflux_setDelegate:(id<NSTabViewDelegate>)delegate{
-    [self dataflux_setDelegate:delegate];
+-(void)datakit_setDelegate:(id<NSTabViewDelegate>)delegate{
+    [self datakit_setDelegate:delegate];
     if (self.delegate == nil) {
         return;
     }
@@ -25,7 +25,7 @@
             
             if (tabView && tabViewItem) {
                 if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-                    [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:self.dataflux_actionName];
+                    [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:self.datakit_actionName];
                 }
             }
         };

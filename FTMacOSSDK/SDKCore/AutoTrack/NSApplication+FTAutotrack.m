@@ -10,11 +10,11 @@
 #import "NSView+FTAutoTrack.h"
 #import "FTAutoTrack.h"
 @implementation NSApplication (FTAutotrack)
-- (BOOL)dataflux_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender{
-    [self datafluxTrack:action to:target from:sender];
-    return [self dataflux_sendAction:action to:target from:sender];
+- (BOOL)datakit_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender{
+    [self datakitTrack:action to:target from:sender];
+    return [self datakit_sendAction:action to:target from:sender];
 }
-- (void)datafluxTrack:(SEL)action to:(id)target from:(id )sender{
+- (void)datakitTrack:(SEL)action to:(id)target from:(id )sender{
 
     if (![sender  isKindOfClass:[NSView class]] && ![sender isKindOfClass:[NSMenuItem class]]) {
         return;
@@ -30,7 +30,7 @@
         }
         NSView *view = sender;
         if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.dataflux_actionName];
+            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.datakit_actionName];
         }
     }else{
         //NSMenu 不继承于 NSView
@@ -47,7 +47,7 @@
         if([sender isKindOfClass:NSView.class]){
             NSView *view = sender;
             if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-                [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.dataflux_actionName];
+                [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.datakit_actionName];
             }
         }
     }

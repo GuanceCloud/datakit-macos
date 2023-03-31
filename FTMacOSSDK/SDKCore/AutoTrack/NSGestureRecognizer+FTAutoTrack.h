@@ -10,8 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSGestureRecognizer (FTAutoTrack)
--(void)dataflux_setAction:(SEL)action;
--(void)dataflux_setTarget:(id)target;
+-(void)datakit_setAction:(SEL)action;
+-(void)datakit_setTarget:(id)target;
 @end
 
 NS_ASSUME_NONNULL_END

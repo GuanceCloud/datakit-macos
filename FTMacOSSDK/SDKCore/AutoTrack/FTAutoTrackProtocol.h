@@ -10,20 +10,20 @@
 
 @protocol FTRUMActionProperty <NSObject>
 @optional
-@property (nonatomic, copy, readonly) NSString *dataflux_viewPath;
-@property (nonatomic, copy, readonly) NSString *dataflux_actionName;
-@property (nonatomic, weak, readonly) id dataflux_controller;
+@property (nonatomic, copy, readonly) NSString *datakit_viewPath;
+@property (nonatomic, copy, readonly) NSString *datakit_actionName;
+@property (nonatomic, weak, readonly) id datakit_controller;
 
 @end
 @protocol FTRumViewProperty <NSObject>
-@property (nonatomic, strong) NSDate *dataflux_viewLoadStartTime;
-@property (nonatomic, strong) NSNumber *dataflux_loadDuration;
-@property (nonatomic, copy) NSString *dataflux_viewUUID;
-@property (nonatomic, assign) BOOL dataflux_viewLoaded;
-@property (nonatomic, copy, readonly) NSString *dataflux_parentVC;
-@property (nonatomic, copy, readonly) NSString *dataflux_windowName;
-@property (nonatomic, assign, readonly) BOOL dataflux_inMainWindow;
-@property (nonatomic, assign, readonly) BOOL dataflux_isKeyWindow;
+@property (nonatomic, strong) NSDate *datakit_viewLoadStartTime;
+@property (nonatomic, strong) NSNumber *datakit_loadDuration;
+@property (nonatomic, copy) NSString *datakit_viewUUID;
+@property (nonatomic, assign) BOOL datakit_viewLoaded;
+@property (nonatomic, copy, readonly) NSString *datakit_parentVC;
+@property (nonatomic, copy, readonly) NSString *datakit_windowName;
+@property (nonatomic, assign, readonly) BOOL datakit_inMainWindow;
+@property (nonatomic, assign, readonly) BOOL datakit_isKeyWindow;
 @end
 
 

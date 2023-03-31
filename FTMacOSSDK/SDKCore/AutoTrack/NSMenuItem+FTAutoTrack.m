@@ -8,10 +8,10 @@
 #import "NSMenuItem+FTAutoTrack.h"
 
 @implementation NSMenuItem (FTAutoTrack)
--(NSString *)dataflux_actionName{
+-(NSString *)datakit_actionName{
     return [NSString stringWithFormat:@"[NSMenuItem]%@",self.title];
 }
--(id)dataflux_controller{
+-(id)datakit_controller{
     return [NSApplication sharedApplication].keyWindow.contentViewController?:[NSApplication sharedApplication].keyWindow;
 }
 -(BOOL)inMainWindow{

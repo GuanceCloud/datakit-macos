@@ -23,6 +23,8 @@ int main(int argc, const char * argv[]) {
         rumConfig.enableTrackAppANR = YES;
         rumConfig.enableTrackAppCrash = YES;
         rumConfig.enableTrackAppFreeze = YES;
+        rumConfig.enableTraceUserView = YES;
+        rumConfig.enableTraceUserAction = YES;
         rumConfig.enableTraceUserResource = YES;
         rumConfig.deviceMetricsMonitorType = FTDeviceMetricsMonitorAll;
         [[FTSDKAgent sharedInstance]startRumWithConfigOptions:rumConfig];

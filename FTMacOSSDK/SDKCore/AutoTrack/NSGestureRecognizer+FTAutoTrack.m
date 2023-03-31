@@ -16,8 +16,8 @@
 @implementation NSGestureRecognizer (FTAutoTrack)
 
 
--(void)dataflux_setAction:(SEL)action{
-    [self dataflux_setAction:action];
+-(void)datakit_setAction:(SEL)action{
+    [self datakit_setAction:action];
     if (self.target) {
         __weak typeof(self) weakSelf = self;
         [FTSwizzler swizzleSelector:action onClass:[self.target class] withBlock:^{
@@ -25,8 +25,8 @@
         } named:@"action"];
     }
 }
--(void)dataflux_setTarget:(id)target{
-    [self dataflux_setTarget:target];
+-(void)datakit_setTarget:(id)target{
+    [self datakit_setTarget:target];
     if (self.action) {
         __weak typeof(self) weakSelf = self;
         [FTSwizzler swizzleSelector:self.action onClass:[self.target class] withBlock:^{
@@ -37,7 +37,7 @@
 - (void)ftTrackGestureRecognizerAppClick{
     @try {
         if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:self.view.dataflux_actionName];
+            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:self.view.datakit_actionName];
         }
     }@catch (NSException *exception) {
         ZYErrorLog(@"%@ error: %@", self, exception);
