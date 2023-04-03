@@ -28,16 +28,17 @@
         
         NSString *title = data[@"title"];
         self.lable.stringValue = title;
-        NSClickGestureRecognizer *tap = [[NSClickGestureRecognizer alloc]init];
-        tap.action = @selector(lableTap);
-        tap.target = self;
-        [self.lable addGestureRecognizer:tap];
-        
-        
-        NSClickGestureRecognizer *gesture = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClick:)];
-        gesture.numberOfClicksRequired = 1;
-        [self.icon addGestureRecognizer:gesture];
+//        NSClickGestureRecognizer *tap = [[NSClickGestureRecognizer alloc]init];
+//        tap.action = @selector(lableTap);
+//        tap.target = self;
+//        [self.lable addGestureRecognizer:tap];
+//        
+//        
+//        NSClickGestureRecognizer *gesture = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClick:)];
+//        gesture.numberOfClicksRequired = 1;
+//        [self.icon addGestureRecognizer:gesture];
     }
+    [self updateStatus];
 }
 - (void)lableTap{
     NSLog(@"lableTap NSGestureRecognizer set action");
@@ -49,7 +50,7 @@
     if (self.selected) {
         self.view.layer.backgroundColor = [NSColor lightGrayColor ].CGColor;
     }else{
-        self.view.layer.backgroundColor = [NSColor whiteColor ].CGColor;
+        self.view.layer.backgroundColor = [NSColor clearColor ].CGColor;
     }
 }
 @end

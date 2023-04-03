@@ -9,7 +9,7 @@
 
 #import <FTMacOSSDK/FTSDKConfig.h>
 #import <FTMacOSSDK/FTSDKAgent.h>
+#import <FTMacOSSDK/FTGlobalRumManager.h>
 #import <FTResourceContentModel.h>
 #import <FTResourceMetricsModel.h>
 #import <FTURLSessionDelegate.h>
-#import "FTGlobalRumManager.h"

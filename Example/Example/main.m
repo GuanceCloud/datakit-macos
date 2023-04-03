@@ -12,8 +12,7 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // Setup code that might create autoreleased objects goes here.
         NSProcessInfo *processInfo = [NSProcessInfo processInfo];
-        NSString *url = @"aaa";
-        //[processInfo environment][@"ACCESS_SERVER_URL"];
+        NSString *url = [processInfo environment][@"ACCESS_SERVER_URL"];
         NSString *appid = [processInfo environment][@"APP_ID"];
 
         FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:url];
@@ -30,6 +29,7 @@ int main(int argc, const char * argv[]) {
         [[FTSDKAgent sharedInstance]startRumWithConfigOptions:rumConfig];
         FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
         logger.enableCustomLog = YES;
+        logger.enableLinkRumData = YES;
         [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:logger];
         FTTraceConfig *trace = [[FTTraceConfig alloc]init];
         trace.enableAutoTrace = YES;

@@ -232,7 +232,7 @@ static FTSDKAgent *sharedInstance = nil;
     }
 }
 - (void)insertDBWithItemData:(FTRecordModel *)model type:(FTAddDataType)type{
-//    [[FTTrackDataManager sharedInstance] addTrackData:model type:type];
+    [[FTTrackDataManager sharedInstance] addTrackData:model type:type];
 }
 //用户注销
 - (void)unbindUser{

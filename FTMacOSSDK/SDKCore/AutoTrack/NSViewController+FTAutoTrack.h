@@ -11,9 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSViewController (FTAutoTrack)<FTRumViewProperty>
-- (void)datakit_viewDidLoad;
-- (void)datakit_viewDidAppear;
-- (void)datakit_viewDidDisappear;
+
 @end
 
 NS_ASSUME_NONNULL_END

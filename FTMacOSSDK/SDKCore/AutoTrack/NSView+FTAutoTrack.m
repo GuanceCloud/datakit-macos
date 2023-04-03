@@ -68,10 +68,6 @@
 @end
 @implementation NSButton (FTAutoTrack)
 -(NSString *)datakit_actionName{
-    if (self.title.length>0) {
-        return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.title];
-    }else{
-        return [NSString stringWithFormat:@"[%@]",NSStringFromClass(self.class)];
-    }
+    return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.title];
 }
 @end

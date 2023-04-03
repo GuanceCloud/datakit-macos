@@ -7,7 +7,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
+@interface LoginViewController : NSViewController
 
 
 @end

@@ -7,7 +7,6 @@
 
 #import "SplitViewVC.h"
 #import "SplitViewItemVC2.h"
-#import <FTMacOSSDK/FTMacOSSDK.h>
 @interface SplitViewVC ()
 
 @end
@@ -16,7 +15,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[FTGlobalRumManager sharedInstance] startViewWithName:@"SplitViewVC"];
     for (NSSplitViewItem *item in self.splitViewItems) {
         NSLog(@"NSSplitViewItem viewController = %@",item.viewController);
 

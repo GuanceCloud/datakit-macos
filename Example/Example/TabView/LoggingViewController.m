@@ -1,44 +1,47 @@
 //
-//  SplitViewItemVC1.m
+//  LoggingViewController.m
 //  Example
 //
-//  Created by 胡蕾蕾 on 2021/9/26.
+//  Created by hulilei on 2023/4/3.
 //
 
-#import "SplitViewItemVC1.h"
-#import "SplitViewVC.h"
+#import "LoggingViewController.h"
 #import <FTMacOSSDK/FTMacOSSDK.h>
-@interface SplitViewItemVC1 ()<NSTableViewDelegate,NSTableViewDataSource>
-@property (weak) IBOutlet NSTableView *mTableview;
+
+@interface LoggingViewController ()<NSTableViewDataSource,NSTableViewDelegate>
+@property (strong) IBOutlet NSTableView *mTableView;
 @property (nonatomic, strong) NSArray *datas;
 
 @end
-
-@implementation SplitViewItemVC1
+@implementation LoggingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do view setup here.
     [self createUI];
 }
 - (void)createUI{
-    SplitViewVC *parent = (SplitViewVC *)self.parentViewController;
-    self.delegate = parent;
-    self.datas = @[@"NSCollectionView",@"AutoTrack Click",@"RUM数据采集",@"日志输出",@"绑定用户",@"解绑用户"];
-    self.mTableview.backgroundColor = [NSColor whiteColor];
-    self.mTableview.usesAlternatingRowBackgroundColors = YES;
-    [self.mTableview setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
-    self.mTableview.dataSource = self;
-    self.mTableview.delegate = self;
-    self.mTableview.allowsMultipleSelection = NO;
-    [self.mTableview reloadData];
+    self.datas = @[@{@"Logging":@"Log Status: info"},
+                   @{@"Logging":@"Log Status: warning"},
+                   @{@"Logging":@"Log Status: error"},
+                   @{@"Logging":@"Log Status: critical"},
+                   @{@"Logging":@"Log Status: ok"},
+    ];
+    self.mTableView.usesAlternatingRowBackgroundColors = YES;
+    [self.mTableView setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
+    self.mTableView.dataSource = self;
+    self.mTableView.delegate = self;
+    [self.mTableView reloadData];
+    
 }
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
     return  self.datas.count;
 }
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row{
-    NSString *data = self.datas[row];
+    NSDictionary *data = self.datas[row];
     NSString *key = tableColumn.identifier;
     //单元格数据
+    NSString *value = [NSString stringWithFormat:@"%@", data[key]];
     
     //根据表格列的标识,创建单元视图
     NSView *view = [tableView makeViewWithIdentifier:key owner:self];
@@ -51,6 +54,7 @@
         NSTextField *textField =  [NSTextField alloc].init;
         textField.translatesAutoresizingMaskIntoConstraints = NO;
         [textField setBezeled:NO];
+        textField.maximumNumberOfLines = 3;
         textField.drawsBackground = NO;
 
         [cellView addSubview:textField];
@@ -72,23 +76,36 @@
     
     NSTextField *textField = subviews[0];
 
-    if (data != nil) {
-        textField.stringValue = data;
+    if (value != nil) {
+        textField.stringValue = value;
     }
     
     return view;
+
 }
+
 -(void)tableViewSelectionDidChange:(NSNotification *)notification{
-    NSInteger row = [notification.object selectedRow];
-    if(row == 4){
-        [[FTSDKAgent sharedInstance] bindUserWithUserID:@"macosid01" userName:@"macos_user" userEmail:@"macos_user@123.com" extra:@{@"user_extra":@"user_extra_demo"}];
-        return;
-    }else if(row == 5){
-        [[FTSDKAgent sharedInstance] unbindUser];
-        return;
-    }
-    if (self.delegate&&[self.delegate respondsToSelector:@selector(tableViewSelectionDidSelect:)]) {
-        [self.delegate tableViewSelectionDidSelect:row];
+    switch (self.mTableView.selectedRow) {
+        case 0:
+            [[FTSDKAgent sharedInstance] logging:@"info log content" status:FTStatusInfo];
+            break;
+        case 1:
+            [[FTSDKAgent sharedInstance] logging:@"warning log content" status:FTStatusWarning];
+
+            break;
+        case 2:
+            [[FTSDKAgent sharedInstance] logging:@"error log content" status:FTStatusError];
+            break;
+        case 3:
+            [[FTSDKAgent sharedInstance] logging:@"critical log content" status:FTStatusCritical];
+
+            break;
+        case 4:
+            [[FTSDKAgent sharedInstance] logging:@"ok log content" status:FTStatusOk];
+
+            break;
+        default:
+            break;
     }
 }
 

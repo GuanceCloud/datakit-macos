@@ -24,8 +24,13 @@
         void (^didSelectItemBlock)(id, SEL, id, id) = ^(id view, SEL command, NSCollectionView *collectionView, NSSet<NSIndexPath *> *indexPaths) {
             //  获取 view 的 viewcontroller 时 不考虑 NSCollectionViewItem
             if (collectionView && indexPaths) {
+                NSCollectionViewItem *item = [collectionView itemAtIndexPath:[indexPaths anyObject]];
+                NSString *actionName = [NSString stringWithFormat:@"[%@]",NSStringFromClass(collectionView.class)];
+                if(item.title.length>0){
+                    actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(collectionView.class),item.title];
+                }
                 if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-                    [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:self.datakit_actionName];
+                    [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:actionName];
                 }            }
         };
         
@@ -40,16 +45,6 @@
 @end
 @implementation NSTableView (FTAutoTrack)
 
--(void)datakit_setDoubleAction:(SEL)doubleAction{
-    [self datakit_setDoubleAction:doubleAction];
-    void (^doubleActionBlock)(void) = ^() {
-        //        [[FTGlobalRumManager sharedInstance].rumManger addClickActionWithName:self.datakit_actionName];
-    };
-    [FTSwizzler swizzleSelector:doubleAction
-                        onClass:self.class
-                      withBlock:doubleActionBlock
-                          named:@"tableView_doubleAction"];
-}
 -(NSString *)datakit_actionName{
     return [NSString stringWithFormat:@"[%@][column:%ld][row:%ld]",NSStringFromClass(self.class),self.clickedColumn,(long)self.clickedRow];
 }

@@ -9,10 +9,12 @@
 #import "CollectionVC.h"
 #import "RumViewController.h"
 #import "TabViewController.h"
+#import "LoggingViewController.h"
 @interface SplitViewItemVC2 ()
 @property (nonatomic, strong) CollectionVC *mCollection;
 @property (nonatomic, strong) TabViewController *mTabView;
 @property (nonatomic, strong) RumViewController *mRumVC;
+@property (nonatomic, strong) LoggingViewController *mLoggerVC;
 @property (nonatomic, assign) NSInteger currentIndex;
 @end
 
@@ -23,7 +25,7 @@
     [self insertChildViewController:self.mCollection atIndex:0];
     [self insertChildViewController:self.mTabView atIndex:1];
     [self insertChildViewController:self.mPresent atIndex:2];
-
+    [self insertChildViewController:self.mLoggerVC atIndex:3];
     [self.view addSubview:self.mCollection.view];
 }
 - (CollectionVC *)mCollection{
@@ -44,6 +46,12 @@
     }
     return _mTabView;
 }
+-(LoggingViewController *)mLoggerVC{
+    if (!_mLoggerVC) {
+        _mLoggerVC = [[LoggingViewController alloc]init];
+    }
+    return _mLoggerVC;
+}
 -(void)showViewIndex:(NSInteger)index{
     if (self.currentIndex != index) {
         NSViewController *from,*to = nil;
@@ -54,8 +62,13 @@
             case 1:
                 from = self.mTabView;
                 break;
-            default:
+            case 2:
                 from = self.mRumVC;
+                break;
+            case 3:
+                from = self.mLoggerVC;
+                break;
+            default:
                 break;
         }
         
@@ -66,8 +79,13 @@
             case 1:
                 to = self.mTabView;
                 break;
-            default:
+            case 2:
                 to = self.mRumVC;
+                break;
+            case 3:
+                to = self.mLoggerVC;
+                break;
+            default:
                 break;
         }
         [self transitionFromViewController:from toViewController:to options:NSViewControllerTransitionCrossfade completionHandler:^{

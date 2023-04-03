@@ -12,6 +12,16 @@
 #import <FTLog.h>
 #import "FTAutoTrack.h"
 @implementation NSTabView (FTAutoTrack)
+-(NSString *)datakit_actionName{
+    if(self.selectedTabViewItem.label.length>0){
+        return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.selectedTabViewItem.label];
+    }
+    NSInteger index = [self indexOfTabViewItem:self.selectedTabViewItem];
+    if(index != NSNotFound){
+        return [NSString stringWithFormat:@"[%@]selectedIndex:%ld",NSStringFromClass(self.class),(long)index];
+    }
+    return [NSString stringWithFormat:@"[%@]",NSStringFromClass(self.class)];
+}
 -(void)datakit_setDelegate:(id<NSTabViewDelegate>)delegate{
     [self datakit_setDelegate:delegate];
     if (self.delegate == nil) {

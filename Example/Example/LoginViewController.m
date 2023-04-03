@@ -5,15 +5,16 @@
 //  Created by 胡蕾蕾 on 2021/8/31.
 //
 
-#import "ViewController.h"
-@interface ViewController()
+#import "LoginViewController.h"
+#import <FTMacOSSDK/FTMacOSSDK.h>
+@interface LoginViewController()
 @property (nonatomic, strong) NSWindowController *mainAppWVC;
 @property (weak) IBOutlet NSButton *loginBtn;
 @property (weak) IBOutlet NSSearchField *userNameTF;
 @property (weak) IBOutlet NSTextField *passwordTF;
 
 @end
-@implementation ViewController
+@implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,7 +39,7 @@
         }];
         return;
     }
-
+    [[FTSDKAgent sharedInstance] bindUserWithUserID:[[NSUUID UUID] UUIDString] userName:self.userNameTF.stringValue userEmail:nil];
     [self.view.window close];
     
     self.mainAppWVC = [[NSStoryboard storyboardWithName:@"Main" bundle:nil] instantiateControllerWithIdentifier:@"MainAppWVC"];
