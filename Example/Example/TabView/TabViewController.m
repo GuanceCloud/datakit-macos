@@ -26,15 +26,16 @@
     [super viewDidLoad];
     // Do view setup here.
     self.view.wantsLayer = YES;
-    self.view.layer.backgroundColor = NSColor.lightGrayColor.CGColor;
 
     NSArray *tabItems = self.tabView.tabViewItems;
     self.tabView.delegate = self;
     FirstViewController *vc1 = [[FirstViewController alloc]init];
     SecondViewController *vc2 = [[SecondViewController alloc]init];
+    CollectionVC *vc3 = [[CollectionVC alloc]init];
     [self addChildViewController:vc1];
     [self addChildViewController:vc2];
-    NSArray *vcs = @[vc1,vc2];
+    [self addChildViewController:vc3];
+    NSArray *vcs = @[vc1,vc2,vc3];
     int index = 0;
     for (NSTabViewItem *item in tabItems) {
         NSViewController *vc = vcs[index];

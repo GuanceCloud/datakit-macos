@@ -6,7 +6,7 @@
 //
 
 #import "NSCollectionView+FTAutoTrack.h"
-#import <FTSwizzler.h>
+#import "FTSwizzler.h"
 #import "FTGlobalRumManager.h"
 #import "FTAutoTrack.h"
 @implementation NSCollectionView (FTAutoTrack)

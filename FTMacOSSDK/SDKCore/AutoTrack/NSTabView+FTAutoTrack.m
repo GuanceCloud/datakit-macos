@@ -6,10 +6,10 @@
 //
 
 #import "NSTabView+FTAutoTrack.h"
-#import <FTSwizzler.h>
+#import "FTSwizzler.h"
 #import "FTGlobalRumManager.h"
 #import "NSView+FTAutoTrack.h"
-#import <FTLog.h>
+#import "FTLog.h"
 #import "FTAutoTrack.h"
 @implementation NSTabView (FTAutoTrack)
 -(NSString *)datakit_actionName{

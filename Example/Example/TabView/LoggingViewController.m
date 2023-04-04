@@ -6,7 +6,7 @@
 //
 
 #import "LoggingViewController.h"
-#import <FTMacOSSDK/FTMacOSSDK.h>
+#import "FTMacOSSDK.h"
 
 @interface LoggingViewController ()<NSTableViewDataSource,NSTableViewDelegate>
 @property (strong) IBOutlet NSTableView *mTableView;

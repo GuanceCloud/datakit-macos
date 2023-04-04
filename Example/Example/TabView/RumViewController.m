@@ -6,7 +6,9 @@
 //
 
 #import "RumViewController.h"
-#import <FTMacOSSDK/FTMacOSSDK.h>
+#import "FTMacOSSDK.h"
+#import "FTResourceContentModel.h"
+#import "FTResourceMetricsModel.h"
 @interface RumViewController ()<NSTableViewDataSource,NSTableViewDelegate,NSURLSessionDelegate>
 @property (nonatomic, strong) NSArray *datas;
 @property (weak) IBOutlet NSTableView *mTableView;
@@ -164,10 +166,10 @@
 
     [[FTGlobalRumManager sharedInstance] stopResourceWithKey:self.rumKey];
     
-    FTResourceMetricsModel *metricsModel = [[FTResourceMetricsModel alloc]initWithTaskMetrics:self.metrics];
+//    FTResourceMetricsModel *metricsModel = [[FTResourceMetricsModel alloc]initWithTaskMetrics:self.metrics];
 
 
-    FTResourceContentModel *content = [[FTResourceContentModel alloc]initWithRequest:task.currentRequest response:httpResponse data:self.data error:error];
-    [[FTGlobalRumManager sharedInstance] addResourceWithKey:self.rumKey metrics:metricsModel content:content];
+//    FTResourceContentModel *content = [[FTResourceContentModel alloc]initWithRequest:task.currentRequest response:httpResponse data:self.data error:error];
+//    [[FTGlobalRumManager sharedInstance] addResourceWithKey:self.rumKey metrics:metricsModel content:content];
 }
 @end

@@ -744,8 +744,8 @@
                                     <rect key="frame" x="1" y="1" width="178" height="298"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="b1J-cT-SMf" viewBased="YES" id="FNw-W5-tTA">
-                                            <rect key="frame" x="0.0" y="0.0" width="178" height="273"/>
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="FNw-W5-tTA">
+                                            <rect key="frame" x="0.0" y="0.0" width="178" height="298"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -791,14 +791,10 @@
                                     <rect key="frame" x="1" y="118" width="238" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="g9G-nC-pKK">
+                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="g9G-nC-pKK">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" wantsLayer="YES" id="b1J-cT-SMf">
-                                    <rect key="frame" x="0.0" y="0.0" width="178" height="25"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableHeaderView>
                             </scrollView>
                         </subviews>
                         <constraints>
@@ -828,19 +824,6 @@
                 <customObject id="ost-Jn-MBP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-290" y="1128.5"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="DLT-dB-SJm">
-            <objects>
-                <viewController id="jD2-6L-OOy" sceneMemberID="viewController">
-                    <view key="view" id="fmy-TR-YbZ">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="xjj-F6-f0n" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-977" y="988"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -1017,7 +1000,13 @@
                                     </tabViewItem>
                                     <tabViewItem label="SecondView" identifier="" id="uTi-NM-qgQ">
                                         <view key="view" id="bda-dL-LBt">
-                                            <rect key="frame" x="10" y="33" width="374" height="254"/>
+                                            <rect key="frame" x="10" y="33" width="894" height="670"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="ThirdView" identifier="" id="MZD-U9-oEh" userLabel="ThirdView">
+                                        <view key="view" id="6rc-Qb-46Q">
+                                            <rect key="frame" x="10" y="33" width="894" height="670"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </tabViewItem>

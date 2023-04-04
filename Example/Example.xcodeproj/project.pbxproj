@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		177BA53329DADAB100DB7497 /* LoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA53129DADAB100DB7497 /* LoggingViewController.m */; };
 		177BA53429DADAB100DB7497 /* LoggingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177BA53229DADAB100DB7497 /* LoggingViewController.xib */; };
+		177BA53E29DBCF4200DB7497 /* TraceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA53C29DBCF4200DB7497 /* TraceViewController.m */; };
+		177BA53F29DBCF4200DB7497 /* TraceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177BA53D29DBCF4200DB7497 /* TraceViewController.xib */; };
 		1799582629D6874F0033B46E /* RumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1799582429D6874F0033B46E /* RumViewController.m */; };
 		1799582729D6874F0033B46E /* RumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1799582529D6874F0033B46E /* RumViewController.xib */; };
-		17E4CC5F29CD465D005C2D99 /* FTMacOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17E4CC5E29CD465D005C2D99 /* FTMacOSSDK.framework */; };
-		17E4CC6029CD465D005C2D99 /* FTMacOSSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 17E4CC5E29CD465D005C2D99 /* FTMacOSSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7C87E29C27003E76001F6C3B /* SplitViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C87E29B27003E76001F6C3B /* SplitViewVC.m */; };
 		7C87E2AE270052A3001F6C3B /* SplitViewItemVC1.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C87E2AC270052A3001F6C3B /* SplitViewItemVC1.m */; };
 		7C87E2B6270052B2001F6C3B /* SplitViewItemVC2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C87E2B4270052B2001F6C3B /* SplitViewItemVC2.m */; };
@@ -40,6 +40,7 @@
 		7CF30EDF26F09D5E003CA20A /* CollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30EDD26F09D5E003CA20A /* CollectionViewItem.m */; };
 		7CF30EE026F09D5E003CA20A /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF30EDE26F09D5E003CA20A /* CollectionViewItem.xib */; };
 		7CF30EE726F1EF9E003CA20A /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30EE626F1EF9D003CA20A /* MainWindow.m */; };
+		EF35B059C4F71C5895779FD1 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB76611A08970596A23B466 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +67,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				17E4CC6029CD465D005C2D99 /* FTMacOSSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,13 +74,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1741185C29DC3A1C004DBB1F /* FTMacOSSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FTMacOSSupport.framework; path = ../FTMacOSSupport.framework; sourceTree = "<group>"; };
 		177BA53029DADAB100DB7497 /* LoggingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoggingViewController.h; sourceTree = "<group>"; };
 		177BA53129DADAB100DB7497 /* LoggingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoggingViewController.m; sourceTree = "<group>"; };
 		177BA53229DADAB100DB7497 /* LoggingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoggingViewController.xib; sourceTree = "<group>"; };
+		177BA53B29DBCF4200DB7497 /* TraceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TraceViewController.h; sourceTree = "<group>"; };
+		177BA53C29DBCF4200DB7497 /* TraceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TraceViewController.m; sourceTree = "<group>"; };
+		177BA53D29DBCF4200DB7497 /* TraceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TraceViewController.xib; sourceTree = "<group>"; };
 		1799582329D6874F0033B46E /* RumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RumViewController.h; sourceTree = "<group>"; };
 		1799582429D6874F0033B46E /* RumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RumViewController.m; sourceTree = "<group>"; };
 		1799582529D6874F0033B46E /* RumViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RumViewController.xib; sourceTree = "<group>"; };
 		17E4CC5E29CD465D005C2D99 /* FTMacOSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FTMacOSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5291CDE6451817817C5E0E99 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		6BB76611A08970596A23B466 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C87E29A27003E76001F6C3B /* SplitViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewVC.h; sourceTree = "<group>"; };
 		7C87E29B27003E76001F6C3B /* SplitViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewVC.m; sourceTree = "<group>"; };
 		7C87E2AB270052A3001F6C3B /* SplitViewItemVC1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewItemVC1.h; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 		7CF30EDE26F09D5E003CA20A /* CollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewItem.xib; sourceTree = "<group>"; };
 		7CF30EE526F1EF9D003CA20A /* MainWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
 		7CF30EE626F1EF9D003CA20A /* MainWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
+		8BA2290E242B56873A7C1081 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17E4CC5F29CD465D005C2D99 /* FTMacOSSDK.framework in Frameworks */,
+				EF35B059C4F71C5895779FD1 /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,9 +169,21 @@
 		0EC4FAB7BDDD6D22CDB31466 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1741185C29DC3A1C004DBB1F /* FTMacOSSupport.framework */,
 				17E4CC5E29CD465D005C2D99 /* FTMacOSSDK.framework */,
+				6BB76611A08970596A23B466 /* Pods_Example.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1663EDFFB95B18F570B37506 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5291CDE6451817817C5E0E99 /* Pods-Example.debug.xcconfig */,
+				8BA2290E242B56873A7C1081 /* Pods-Example.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../Pods;
 			sourceTree = "<group>";
 		};
 		7CD26F9126EAFBE80025CC50 /* WindowController */ = {
@@ -210,6 +229,9 @@
 				177BA53029DADAB100DB7497 /* LoggingViewController.h */,
 				177BA53129DADAB100DB7497 /* LoggingViewController.m */,
 				177BA53229DADAB100DB7497 /* LoggingViewController.xib */,
+				177BA53B29DBCF4200DB7497 /* TraceViewController.h */,
+				177BA53C29DBCF4200DB7497 /* TraceViewController.m */,
+				177BA53D29DBCF4200DB7497 /* TraceViewController.xib */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
@@ -222,6 +244,7 @@
 				7CDA50EA26DE15EE0062CC39 /* ExampleUITests */,
 				7CDA50C726DE15EB0062CC39 /* Products */,
 				0EC4FAB7BDDD6D22CDB31466 /* Frameworks */,
+				1663EDFFB95B18F570B37506 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,10 +308,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CDA50F026DE15EE0062CC39 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
+				CBEB90D4983F4FBE34D72C33 /* [CP] Check Pods Manifest.lock */,
 				7CDA50C226DE15EB0062CC39 /* Sources */,
 				7CDA50C326DE15EB0062CC39 /* Frameworks */,
 				7CDA50C426DE15EB0062CC39 /* Resources */,
 				17E4CC6129CD465D005C2D99 /* Embed Frameworks */,
+				60CC8E5025EF7089D45F83DC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -303,7 +328,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CDA50F326DE15EE0062CC39 /* Build configuration list for PBXNativeTarget "ExampleTests" */;
 			buildPhases = (
-				1E6B499B9151C52CA502BCD0 /* [CP] Check Pods Manifest.lock */,
 				7CDA50D826DE15EE0062CC39 /* Sources */,
 				7CDA50D926DE15EE0062CC39 /* Frameworks */,
 				7CDA50DA26DE15EE0062CC39 /* Resources */,
@@ -342,7 +366,8 @@
 		7CDA50BE26DE15EB0062CC39 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1240;
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					7CDA50C526DE15EB0062CC39 = {
 						CreatedOnToolsVersion = 12.4;
@@ -358,7 +383,7 @@
 				};
 			};
 			buildConfigurationList = 7CDA50C126DE15EB0062CC39 /* Build configuration list for PBXProject "Example" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -386,6 +411,7 @@
 				177BA53429DADAB100DB7497 /* LoggingViewController.xib in Resources */,
 				1799582729D6874F0033B46E /* RumViewController.xib in Resources */,
 				7CDA50D026DE15ED0062CC39 /* Assets.xcassets in Resources */,
+				177BA53F29DBCF4200DB7497 /* TraceViewController.xib in Resources */,
 				7CF30ED826F098AF003CA20A /* CollectionVC.xib in Resources */,
 				7CF30EE026F09D5E003CA20A /* CollectionViewItem.xib in Resources */,
 				7CD26FED26EB24760025CC50 /* FirstViewController.xib in Resources */,
@@ -411,7 +437,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1E6B499B9151C52CA502BCD0 /* [CP] Check Pods Manifest.lock */ = {
+		60CC8E5025EF7089D45F83DC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CBEB90D4983F4FBE34D72C33 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -426,7 +469,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-ExampleTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Example-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -454,6 +497,7 @@
 				7CD26F2726EA06BF0025CC50 /* LoginWindow.m in Sources */,
 				7CDA50CB26DE15EB0062CC39 /* AppDelegate.m in Sources */,
 				7CD26FE226EB223E0025CC50 /* TabViewController.m in Sources */,
+				177BA53E29DBCF4200DB7497 /* TraceViewController.m in Sources */,
 				1799582629D6874F0033B46E /* RumViewController.m in Sources */,
 				7CD26F0E26E9F5140025CC50 /* LoginWindowController.m in Sources */,
 				7C87E2AE270052A3001F6C3B /* SplitViewItemVC1.m in Sources */,
@@ -540,6 +584,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -599,6 +644,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -619,20 +665,23 @@
 		};
 		7CDA50F126DE15EE0062CC39 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5291CDE6451817817C5E0E99 /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = hll.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -640,20 +689,23 @@
 		};
 		7CDA50F226DE15EE0062CC39 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8BA2290E242B56873A7C1081 /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = hll.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -665,6 +717,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -685,6 +738,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -704,6 +758,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				INFOPLIST_FILE = ExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -722,6 +777,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				INFOPLIST_FILE = ExampleUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

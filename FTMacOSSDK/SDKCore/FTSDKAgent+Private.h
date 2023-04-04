@@ -6,7 +6,7 @@
 //
 
 #import "FTSDKAgent.h"
-#import <FTRUMDataWriteProtocol.h>
+#import "FTRUMDataWriteProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

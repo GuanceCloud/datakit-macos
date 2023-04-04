@@ -6,15 +6,15 @@
 //
 
 #import "SplitViewItemVC2.h"
-#import "CollectionVC.h"
 #import "RumViewController.h"
 #import "TabViewController.h"
 #import "LoggingViewController.h"
+#import "TraceViewController.h"
 @interface SplitViewItemVC2 ()
-@property (nonatomic, strong) CollectionVC *mCollection;
 @property (nonatomic, strong) TabViewController *mTabView;
 @property (nonatomic, strong) RumViewController *mRumVC;
 @property (nonatomic, strong) LoggingViewController *mLoggerVC;
+@property (nonatomic, strong) TraceViewController *mTraceVC;
 @property (nonatomic, assign) NSInteger currentIndex;
 @end
 
@@ -22,17 +22,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self insertChildViewController:self.mCollection atIndex:0];
-    [self insertChildViewController:self.mTabView atIndex:1];
-    [self insertChildViewController:self.mPresent atIndex:2];
-    [self insertChildViewController:self.mLoggerVC atIndex:3];
-    [self.view addSubview:self.mCollection.view];
-}
-- (CollectionVC *)mCollection{
-    if(!_mCollection){
-        _mCollection = [[CollectionVC alloc]init];
-    }
-    return _mCollection;
+    [self insertChildViewController:self.mTabView atIndex:0];
+    [self insertChildViewController:self.mPresent atIndex:1];
+    [self insertChildViewController:self.mLoggerVC atIndex:2];
+    [self insertChildViewController:self.mTraceVC atIndex:3];
+    [self.view addSubview:self.mTabView.view];
 }
 -(RumViewController *)mPresent{
     if (!_mRumVC) {
@@ -52,46 +46,40 @@
     }
     return _mLoggerVC;
 }
+-(TraceViewController *)mTraceVC{
+    if(!_mTraceVC){
+        _mTraceVC = [[TraceViewController alloc]init];
+    }
+    return _mTraceVC;
+}
 -(void)showViewIndex:(NSInteger)index{
     if (self.currentIndex != index) {
-        NSViewController *from,*to = nil;
-        switch (self.currentIndex) {
-            case 0:
-                from = self.mCollection;
-                break;
-            case 1:
-                from = self.mTabView;
-                break;
-            case 2:
-                from = self.mRumVC;
-                break;
-            case 3:
-                from = self.mLoggerVC;
-                break;
-            default:
-                break;
-        }
-        
-        switch (index) {
-            case 0:
-                to = self.mCollection;
-                break;
-            case 1:
-                to = self.mTabView;
-                break;
-            case 2:
-                to = self.mRumVC;
-                break;
-            case 3:
-                to = self.mLoggerVC;
-                break;
-            default:
-                break;
-        }
+        NSViewController *from = [self getIndexVC:self.currentIndex];
+        NSViewController *to = [self getIndexVC:index];
         [self transitionFromViewController:from toViewController:to options:NSViewControllerTransitionCrossfade completionHandler:^{
             self.currentIndex = index;
         }];
     }
    
+}
+- (NSViewController *)getIndexVC:(NSInteger)index{
+    NSViewController *back;
+    switch (index) {
+        case 0:
+            back = self.mTabView;
+            break;
+        case 1:
+            back = self.mRumVC;
+            break;
+        case 2:
+            back = self.mLoggerVC;
+            break;
+        case 3:
+            back = self.mTraceVC;
+            break;
+        default:
+            break;
+    }
+    return back;
 }
 @end

@@ -8,27 +8,23 @@
 #if ! __has_feature(objc_arc)
 #error This file must be compiled with ARC. Either turn on ARC for the project or use -fobjc-arc flag on this file.
 #endif
-#import "FTGlobalRumManager.h"
+#import "FTResourceMetricsModel.h"
+#import "FTResourceContentModel.h"
 #import "FTSDKAgent+Private.h"
 #import "FTGlobalRumManager+Private.h"
-#import <FTLog.h>
-#import <FTDateUtil.h>
-#import <FTJSONUtil.h>
-#import <FTUncaughtExceptionHandler.h>
-#import <FTAppLifeCycle.h>
-#import <FTRUMManager.h>
-#import <FTTracer.h>
-#import <FTTraceHandler.h>
-#import <FTURLSessionInterceptor.h>
-#import <FTRUMMonitor.h>
-#import <FTAppLifeCycle.h>
-#import <FTRUMMonitor.h>
-#import <FTUncaughtExceptionHandler.h>
-#import <FTWKWebViewHandler.h>
-#import "FTSDKConfig.h"
-#import <FTANRDetector.h>
-#import <FTAppLaunchTracker.h>
-#import <FTConstants.h>
+#import "FTLog.h"
+#import "FTDateUtil.h"
+#import "FTJSONUtil.h"
+#import "FTUncaughtExceptionHandler.h"
+#import "FTAppLifeCycle.h"
+#import "FTRUMMonitor.h"
+#import "FTWKWebViewHandler.h"
+#import "FTANRDetector.h"
+#import "FTAppLaunchTracker.h"
+#import "FTConstants.h"
+#import "FTPingThread.h"
+#import "FTURLSessionAutoInstrumentation.h"
+
 @interface FTGlobalRumManager ()<FTAppLifeCycleDelegate,FTWKWebViewRumDelegate,FTAppLaunchDataDelegate,FTANRDetectorDelegate>
 @property (nonatomic, strong) FTSDKConfig *config;
 @property (nonatomic, strong) FTRumConfig *rumConfig;

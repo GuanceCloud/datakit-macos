@@ -31,7 +31,7 @@
 - (void)testLoggingUpload{
     XCTestExpectation *expectation= [self expectationWithDescription:@"异步操作timeout"];
 
-    FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"testUploading" op:FT_DATA_TYPE_LOGGING tags:@{@"name":@"testUpload"} field:@{@"event":@"testUpload"} tm:[FTDateUtil currentTimeNanosecond]];
+    FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"testUploading" op:FT_DATA_TYPE_LOGGING tags:@{@"name":@"testUpload"} fields:@{@"event":@"testUpload"} tm:[FTDateUtil currentTimeNanosecond]];
     FTRequest *request = [FTRequest createRequestWithEvents:@[model] type:FT_DATA_TYPE_LOGGING];
     [[FTNetworkManager sharedInstance] sendRequest:request completion:^(NSHTTPURLResponse * _Nonnull httpResponse, NSData * _Nullable data, NSError * _Nullable error) {
         XCTAssertTrue(httpResponse.statusCode == 200);

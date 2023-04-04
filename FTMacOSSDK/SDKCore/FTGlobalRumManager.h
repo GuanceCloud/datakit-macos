@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <FTResourceMetricsModel.h>
-#import <FTResourceContentModel.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class FTResourceMetricsModel,FTResourceContentModel;
 // 用于 开启各项数据的采集 
 @interface FTGlobalRumManager : NSObject
 /**

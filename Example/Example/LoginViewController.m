@@ -6,7 +6,7 @@
 //
 
 #import "LoginViewController.h"
-#import <FTMacOSSDK/FTMacOSSDK.h>
+#import "FTMacOSSDK.h"
 @interface LoginViewController()
 @property (nonatomic, strong) NSWindowController *mainAppWVC;
 @property (weak) IBOutlet NSButton *loginBtn;

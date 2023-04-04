@@ -8,21 +8,24 @@
 
 #import "FTSDKAgent.h"
 #import "FTSDKConfig.h"
-#import <FTReachability.h>
-#import <FTTrackDataManager.h>
-#import <FTRecordModel.h>
-#import <FTLog.h>
-#import <FTDateUtil.h>
-#import <FTConstants.h>
-#import <FTBaseInfoHandler.h>
-#import <NSString+FTAdd.h>
+#import "FTReachability.h"
+#import "FTTrackDataManager.h"
+#import "FTRecordModel.h"
+#import "FTLog.h"
+#import "FTDateUtil.h"
+#import "FTConstants.h"
+#import "FTBaseInfoHandler.h"
+#import "NSString+FTAdd.h"
 #import "FTGlobalRumManager+Private.h"
-#import <FTPresetProperty.h>
-#import <FTEnumConstant.h>
-#import <FTTrackerEventDBTool.h>
+#import "FTPresetProperty.h"
+#import "FTEnumConstant.h"
+#import "FTTrackerEventDBTool.h"
 #import "FTMacOSSDKVersion.h"
-#import <FTWKWebViewHandler.h>
-#import <FTLogHook.h>
+#import "FTWKWebViewHandler.h"
+//#import <FTMobileSDK/FTLogHook.h>
+#import "FTNetworkInfoManager.h"
+#import "FTURLSessionAutoInstrumentation.h"
+#import "FTUserInfo.h"
 #import "FTAutoTrack.h"
 @interface FTSDKAgent()
 @property (nonatomic, strong) FTLoggerConfig *loggerConfig;
@@ -107,18 +110,18 @@ static FTSDKAgent *sharedInstance = nil;
 //控制台日志采集
 - (void)_traceConsoleLog{
     __weak typeof(self) weakSelf = self;
-    [FTLogHook hookWithBlock:^(NSString * _Nonnull logStr,long long tm) {
-            if (!weakSelf.loggerConfig.enableConsoleLog ) {
-                return;
-            }
-            if (weakSelf.loggerConfig.prefix.length>0) {
-                if([logStr containsString:weakSelf.loggerConfig.prefix]){
-                    [weakSelf logging:logStr status:FTStatusInfo tags:nil field:nil tm:tm];
-                }
-            }else{
-                [weakSelf logging:logStr status:FTStatusInfo tags:nil field:nil tm:tm];
-            }
-    }];
+//    [FTLogHook hookWithBlock:^(NSString * _Nonnull logStr,long long tm) {
+//            if (!weakSelf.loggerConfig.enableConsoleLog ) {
+//                return;
+//            }
+//            if (weakSelf.loggerConfig.prefix.length>0) {
+//                if([logStr containsString:weakSelf.loggerConfig.prefix]){
+//                    [weakSelf logging:logStr status:FTStatusInfo tags:nil field:nil tm:tm];
+//                }
+//            }else{
+//                [weakSelf logging:logStr status:FTStatusInfo tags:nil field:nil tm:tm];
+//            }
+//    }];
 }
 #pragma mark - 数据写入 -
 

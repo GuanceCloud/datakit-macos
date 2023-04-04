@@ -5,12 +5,12 @@
 //  Created by hulilei on 2023/3/17.
 //
 
-#import <FTMacOSSDK/FTMacOSSDK.h>
+#import "FTMacOSSDK.h"
 #import "FTGlobalRumManager.h"
 #import "FTSDKConfig.h"
-#import <FTRUMManager.h>
-#import <FTRumDatasProtocol.h>
-#import <FTRumResourceProtocol.h>
+#import "FTRUMManager.h"
+#import "FTRumDatasProtocol.h"
+#import "FTRumResourceProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FTGlobalRumManager ()<FTRumDatasProtocol,FTRumResourceProtocol>

@@ -6,7 +6,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <FTMacOSSDK/FTMacOSSDK.h>
+#import "FTMacOSSDK.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -32,7 +32,7 @@ int main(int argc, const char * argv[]) {
         logger.enableLinkRumData = YES;
         [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:logger];
         FTTraceConfig *trace = [[FTTraceConfig alloc]init];
-        trace.enableAutoTrace = YES;
+        trace.enableAutoTrace = NO;
         trace.enableLinkRumData = YES;
         [[FTSDKAgent sharedInstance] startTraceWithConfigOptions:trace];
         [[FTSDKAgent sharedInstance] logging:@"main" status:FTStatusInfo];

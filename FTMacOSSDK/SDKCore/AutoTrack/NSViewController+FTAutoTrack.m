@@ -6,11 +6,11 @@
 //
 
 #import "NSViewController+FTAutoTrack.h"
-#import <FTDateUtil.h>
-#import <NSString+FTAdd.h>
-#import <FTConstants.h>
-#import <FTBaseInfoHandler.h>
-#import <FTThreadDispatchManager.h>
+#import "FTDateUtil.h"
+#import "NSString+FTAdd.h"
+#import "FTConstants.h"
+#import "FTBaseInfoHandler.h"
+#import "FTThreadDispatchManager.h"
 #import <objc/runtime.h>
 #import "FTGlobalRumManager.h"
 #import "FTAutoTrack.h"

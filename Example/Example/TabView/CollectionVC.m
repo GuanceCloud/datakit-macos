@@ -81,6 +81,9 @@
     CollectionViewItem *item = (CollectionViewItem*)[collectionView itemAtIndexPath:[indexPaths anyObject]];
     [item updateStatus];
 }
-
+-(void)collectionView:(NSCollectionView *)collectionView didDeselectItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths{
+    CollectionViewItem *item = (CollectionViewItem*)[collectionView itemAtIndexPath:[indexPaths anyObject]];
+    [item updateStatus];
+}
 
 @end

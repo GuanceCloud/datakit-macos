@@ -7,7 +7,7 @@
 
 #import "SplitViewItemVC1.h"
 #import "SplitViewVC.h"
-#import <FTMacOSSDK/FTMacOSSDK.h>
+#import "FTMacOSSDK.h"
 @interface SplitViewItemVC1 ()<NSTableViewDelegate,NSTableViewDataSource>
 @property (weak) IBOutlet NSTableView *mTableview;
 @property (nonatomic, strong) NSArray *datas;
@@ -23,7 +23,7 @@
 - (void)createUI{
     SplitViewVC *parent = (SplitViewVC *)self.parentViewController;
     self.delegate = parent;
-    self.datas = @[@"NSCollectionView",@"AutoTrack Click",@"RUM数据采集",@"日志输出",@"绑定用户",@"解绑用户"];
+    self.datas = @[@"AutoTrack Click",@"RUM数据采集",@"日志输出",@"网络链路追踪",@"绑定用户",@"解绑用户"];
     self.mTableview.backgroundColor = [NSColor whiteColor];
     self.mTableview.usesAlternatingRowBackgroundColors = YES;
     [self.mTableview setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
