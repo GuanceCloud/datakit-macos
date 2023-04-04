@@ -22,7 +22,8 @@
 #import "FTTrackerEventDBTool.h"
 #import "FTMacOSSDKVersion.h"
 #import "FTWKWebViewHandler.h"
-//#import <FTMobileSDK/FTLogHook.h>
+// TODO: cocopod 集成需要调整
+//#import "FTLogHook.h"
 #import "FTNetworkInfoManager.h"
 #import "FTURLSessionAutoInstrumentation.h"
 #import "FTUserInfo.h"
