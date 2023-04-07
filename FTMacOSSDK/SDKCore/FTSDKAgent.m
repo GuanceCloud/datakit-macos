@@ -22,8 +22,7 @@
 #import "FTTrackerEventDBTool.h"
 #import "FTMacOSSDKVersion.h"
 #import "FTWKWebViewHandler.h"
-// TODO: cocopod 集成需要调整
-//#import "FTLogHook.h"
+#import "FTLogHook.h"
 #import "FTNetworkInfoManager.h"
 #import "FTURLSessionAutoInstrumentation.h"
 #import "FTUserInfo.h"
@@ -111,18 +110,18 @@ static FTSDKAgent *sharedInstance = nil;
 //控制台日志采集
 - (void)_traceConsoleLog{
     __weak typeof(self) weakSelf = self;
-//    [FTLogHook hookWithBlock:^(NSString * _Nonnull logStr,long long tm) {
-//            if (!weakSelf.loggerConfig.enableConsoleLog ) {
-//                return;
-//            }
-//            if (weakSelf.loggerConfig.prefix.length>0) {
-//                if([logStr containsString:weakSelf.loggerConfig.prefix]){
-//                    [weakSelf logging:logStr status:FTStatusInfo tags:nil field:nil tm:tm];
-//                }
-//            }else{
-//                [weakSelf logging:logStr status:FTStatusInfo tags:nil field:nil tm:tm];
-//            }
-//    }];
+    [FTLogHook hookWithBlock:^(NSString * _Nonnull logStr,long long tm) {
+            if (!weakSelf.loggerConfig.enableConsoleLog ) {
+                return;
+            }
+            if (weakSelf.loggerConfig.prefix.length>0) {
+                if([logStr containsString:weakSelf.loggerConfig.prefix]){
+                    [weakSelf logging:logStr status:FTStatusInfo tags:nil field:nil tm:tm];
+                }
+            }else{
+                [weakSelf logging:logStr status:FTStatusInfo tags:nil field:nil tm:tm];
+            }
+    }];
 }
 #pragma mark - 数据写入 -
 

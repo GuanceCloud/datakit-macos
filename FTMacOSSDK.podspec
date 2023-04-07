@@ -30,7 +30,7 @@ Pod::Spec.new do |spec|
 
   spec.subspec 'SDKCore' do |core|
        core.source_files  = "FTMacOSSDK/SDKCore/**/*.{h,m}"
-       core.dependency 'FTMobileSDK', '1.3.12-alpha.1'
+       core.dependency 'FTMobileSDK', '1.3.12-alpha.2'
 
   end
 

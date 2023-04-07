@@ -166,10 +166,10 @@
 
     [[FTGlobalRumManager sharedInstance] stopResourceWithKey:self.rumKey];
     
-//    FTResourceMetricsModel *metricsModel = [[FTResourceMetricsModel alloc]initWithTaskMetrics:self.metrics];
+    FTResourceMetricsModel *metricsModel = [[FTResourceMetricsModel alloc]initWithTaskMetrics:self.metrics];
 
 
-//    FTResourceContentModel *content = [[FTResourceContentModel alloc]initWithRequest:task.currentRequest response:httpResponse data:self.data error:error];
-//    [[FTGlobalRumManager sharedInstance] addResourceWithKey:self.rumKey metrics:metricsModel content:content];
+    FTResourceContentModel *content = [[FTResourceContentModel alloc]initWithRequest:task.currentRequest response:httpResponse data:self.data error:error];
+    [[FTGlobalRumManager sharedInstance] addResourceWithKey:self.rumKey metrics:metricsModel content:content];
 }
 @end

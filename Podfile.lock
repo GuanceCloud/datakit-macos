@@ -1,53 +1,53 @@
 PODS:
-  - FTMacOSSDK (0.0.1-alpha.1):
-    - FTMacOSSDK/SDKCore (= 0.0.1-alpha.1)
-  - FTMacOSSDK/SDKCore (0.0.1-alpha.1):
-    - FTMobileSDK (= 1.3.12-alpha.1)
-  - FTMobileSDK (1.3.12-alpha.1):
-    - FTMobileSDK/Core (= 1.3.12-alpha.1)
-  - FTMobileSDK/Common (1.3.12-alpha.1):
-    - FTMobileSDK/Common/Base (= 1.3.12-alpha.1)
-    - FTMobileSDK/Common/FTDataBase (= 1.3.12-alpha.1)
-    - FTMobileSDK/Common/Network (= 1.3.12-alpha.1)
-    - FTMobileSDK/Common/Swizzle (= 1.3.12-alpha.1)
-    - FTMobileSDK/Common/Thread (= 1.3.12-alpha.1)
-  - FTMobileSDK/Common/Base (1.3.12-alpha.1)
-  - FTMobileSDK/Common/FTDataBase (1.3.12-alpha.1):
+  - FTMacOSSDK (1.0.1-alpha.1):
+    - FTMacOSSDK/SDKCore (= 1.0.1-alpha.1)
+  - FTMacOSSDK/SDKCore (1.0.1-alpha.1):
+    - FTMobileSDK (= 1.3.12-alpha.2)
+  - FTMobileSDK (1.3.12-alpha.2):
+    - FTMobileSDK/Core (= 1.3.12-alpha.2)
+  - FTMobileSDK/Common (1.3.12-alpha.2):
+    - FTMobileSDK/Common/Base (= 1.3.12-alpha.2)
+    - FTMobileSDK/Common/FTDataBase (= 1.3.12-alpha.2)
+    - FTMobileSDK/Common/Network (= 1.3.12-alpha.2)
+    - FTMobileSDK/Common/Swizzle (= 1.3.12-alpha.2)
+    - FTMobileSDK/Common/Thread (= 1.3.12-alpha.2)
+  - FTMobileSDK/Common/Base (1.3.12-alpha.2)
+  - FTMobileSDK/Common/FTDataBase (1.3.12-alpha.2):
     - FTMobileSDK/Common/Base
-  - FTMobileSDK/Common/Network (1.3.12-alpha.1):
+  - FTMobileSDK/Common/Network (1.3.12-alpha.2):
     - FTMobileSDK/Common/FTDataBase
     - FTMobileSDK/Common/Thread
-  - FTMobileSDK/Common/Swizzle (1.3.12-alpha.1):
+  - FTMobileSDK/Common/Swizzle (1.3.12-alpha.2):
     - FTMobileSDK/Common/Base
-  - FTMobileSDK/Common/Thread (1.3.12-alpha.1)
-  - FTMobileSDK/Core (1.3.12-alpha.1):
+  - FTMobileSDK/Common/Thread (1.3.12-alpha.2)
+  - FTMobileSDK/Core (1.3.12-alpha.2):
     - FTMobileSDK/FTMacOSSupport
     - FTMobileSDK/FTMobileAgent
-  - FTMobileSDK/FTMacOSSupport (1.3.12-alpha.1):
+  - FTMobileSDK/FTMacOSSupport (1.3.12-alpha.2):
     - FTMobileSDK/Common
     - FTMobileSDK/FunctionModule
-  - FTMobileSDK/FunctionModule (1.3.12-alpha.1):
-    - FTMobileSDK/FunctionModule/Exception (= 1.3.12-alpha.1)
-    - FTMobileSDK/FunctionModule/FTRUM (= 1.3.12-alpha.1)
-    - FTMobileSDK/FunctionModule/FTWKWebView (= 1.3.12-alpha.1)
-    - FTMobileSDK/FunctionModule/LongTask (= 1.3.12-alpha.1)
-    - FTMobileSDK/FunctionModule/Protocol (= 1.3.12-alpha.1)
-    - FTMobileSDK/FunctionModule/URLSessionAutoInstrumentation (= 1.3.12-alpha.1)
-  - FTMobileSDK/FunctionModule/Exception (1.3.12-alpha.1):
+  - FTMobileSDK/FunctionModule (1.3.12-alpha.2):
+    - FTMobileSDK/FunctionModule/Exception (= 1.3.12-alpha.2)
+    - FTMobileSDK/FunctionModule/FTRUM (= 1.3.12-alpha.2)
+    - FTMobileSDK/FunctionModule/FTWKWebView (= 1.3.12-alpha.2)
+    - FTMobileSDK/FunctionModule/LongTask (= 1.3.12-alpha.2)
+    - FTMobileSDK/FunctionModule/Protocol (= 1.3.12-alpha.2)
+    - FTMobileSDK/FunctionModule/URLSessionAutoInstrumentation (= 1.3.12-alpha.2)
+  - FTMobileSDK/FunctionModule/Exception (1.3.12-alpha.2):
     - FTMobileSDK/Common/Base
     - FTMobileSDK/FunctionModule/Protocol
-  - FTMobileSDK/FunctionModule/FTRUM (1.3.12-alpha.1):
+  - FTMobileSDK/FunctionModule/FTRUM (1.3.12-alpha.2):
     - FTMobileSDK/Common/Base
     - FTMobileSDK/Common/Thread
     - FTMobileSDK/FunctionModule/Protocol
-  - FTMobileSDK/FunctionModule/FTWKWebView (1.3.12-alpha.1):
+  - FTMobileSDK/FunctionModule/FTWKWebView (1.3.12-alpha.2):
     - FTMobileSDK/Common/Base
     - FTMobileSDK/Common/Swizzle
     - FTMobileSDK/FunctionModule/Protocol
-  - FTMobileSDK/FunctionModule/LongTask (1.3.12-alpha.1):
+  - FTMobileSDK/FunctionModule/LongTask (1.3.12-alpha.2):
     - FTMobileSDK/Common
-  - FTMobileSDK/FunctionModule/Protocol (1.3.12-alpha.1)
-  - FTMobileSDK/FunctionModule/URLSessionAutoInstrumentation (1.3.12-alpha.1):
+  - FTMobileSDK/FunctionModule/Protocol (1.3.12-alpha.2)
+  - FTMobileSDK/FunctionModule/URLSessionAutoInstrumentation (1.3.12-alpha.2):
     - FTMobileSDK/Common/Base
     - FTMobileSDK/Common/Swizzle
     - FTMobileSDK/FunctionModule/Protocol
@@ -64,8 +64,8 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  FTMacOSSDK: 217e146c97703fcc9a411bf0269a6edf243329f7
-  FTMobileSDK: 968cf702fd09316dd1aeac3d19a524d7afa35992
+  FTMacOSSDK: 5e8324754e1484d887cf7fa4cf7d2c0328abd24d
+  FTMobileSDK: fc1de98b353aee0f84c4bcc05a782618d176b76e
 
 PODFILE CHECKSUM: 738dc4d1cd2e31e78e44e1ddacef8bdff2481624
 
