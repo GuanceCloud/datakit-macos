@@ -7,6 +7,17 @@ Pods/Pods.xcodeproj/xcuserdata/
 Pods
 Pods/
 Pod_Products/
+
+/build
+.build
+
 !Podfile
 !Podfile.lock
 Carthage/
+
+.swiftpm
+Package.resolved
+
+*.local.xcconfig
+
+Example/Example.xcodeproj/xcuserdata/
