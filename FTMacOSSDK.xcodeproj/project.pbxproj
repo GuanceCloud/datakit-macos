@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		17164B6D29E02A8A007D71D6 /* FTSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1763BDB829E01642009EE026 /* FTSDKCore.framework */; };
 		17164B7529E0343B007D71D6 /* FTSDKAgent+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 17164B7429E0343B007D71D6 /* FTSDKAgent+Private.h */; };
-		1741186329DC4260004DBB1F /* FTSDKAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1741186229DC4260004DBB1F /* FTSDKAdapter.h */; };
 		17510E0129C9BE7D00C8F1E4 /* FTMacOSSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 17510E0029C9BE7D00C8F1E4 /* FTMacOSSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		177BA54229DBDE8500DB7497 /* FTTraceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 177BA54029DBDE8500DB7497 /* FTTraceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		177BA54329DBDE8500DB7497 /* FTTraceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA54129DBDE8500DB7497 /* FTTraceManager.m */; };
@@ -44,7 +43,6 @@
 
 /* Begin PBXFileReference section */
 		17164B7429E0343B007D71D6 /* FTSDKAgent+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTSDKAgent+Private.h"; sourceTree = "<group>"; };
-		1741186229DC4260004DBB1F /* FTSDKAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTSDKAdapter.h; sourceTree = "<group>"; };
 		17510DFD29C9BE7D00C8F1E4 /* FTMacOSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FTMacOSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		17510E0029C9BE7D00C8F1E4 /* FTMacOSSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTMacOSSDK.h; sourceTree = "<group>"; };
 		1763BDB829E01642009EE026 /* FTSDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FTSDKCore.framework; sourceTree = "<group>"; };
@@ -120,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				17510E0029C9BE7D00C8F1E4 /* FTMacOSSDK.h */,
-				1741186229DC4260004DBB1F /* FTSDKAdapter.h */,
 				1799DF9D29CB05890043D7B5 /* FTGlobalRumManager+Private.h */,
 				1799DF9829CB05890043D7B5 /* FTGlobalRumManager.h */,
 				1799DFB729CB05890043D7B5 /* FTGlobalRumManager.m */,
@@ -195,7 +192,6 @@
 				1799DFD429CB05890043D7B5 /* FTAutoTrack.h in Headers */,
 				17510E0129C9BE7D00C8F1E4 /* FTMacOSSDK.h in Headers */,
 				1799DFD129CB05890043D7B5 /* NSCollectionView+FTAutoTrack.h in Headers */,
-				1741186329DC4260004DBB1F /* FTSDKAdapter.h in Headers */,
 				1799DFDE29CB05890043D7B5 /* FTMacOSSDKVersion.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
