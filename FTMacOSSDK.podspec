@@ -10,27 +10,27 @@ Pod::Spec.new do |spec|
 
   spec.name         = "FTMacOSSDK"
   spec.module_name  = "FTMacOSSDK"
-  spec.version      = "0.0.1-alpha.1"
+  spec.version      = "1.0.1-alpha.1"
   spec.summary      = "DataFlux MacOS SDK"
   spec.description  = "DataFlux MacOS SDK"
 
-  spec.homepage     = "http://gitlab.jiagouyun.com/cma/ft-sdk-macos"
+  spec.homepage     = "https://github.com/GuanceCloud/datakit-macos"
 
   spec.license      = { type: 'Apache', :file => 'LICENSE'}
 
 
   spec.author             = { "hulilei" => "hulilei@jiagouyun.com" }
  
-  spec.osx.deployment_target = '10.10'
+  spec.osx.deployment_target = '10.13'
   spec.requires_arc = true
   
-  spec.source       = { :git => "http://gitlab.jiagouyun.com/cma/ft-sdk-macos.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/GuanceCloud/datakit-macos.git", :tag => "#{spec.version}" }
 
   spec.default_subspec = "SDKCore"
 
   spec.subspec 'SDKCore' do |core|
        core.source_files  = "FTMacOSSDK/SDKCore/**/*.{h,m}"
-       core.dependency 'FTMobileSDK', '1.3.12-alpha.2'
+       core.dependency 'FTMobileSDK/FTSDKCore', '1.3.12-alpha.3'
 
   end
 
