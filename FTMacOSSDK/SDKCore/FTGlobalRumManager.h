@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  * 获取 FTMonitorManager 单例
  * @return 返回的单例
 */
-+ (instancetype)sharedInstance;
++ (instancetype)sharedManager;
 
 /// 创建页面
 ///

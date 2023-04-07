@@ -73,10 +73,11 @@ static FTSDKAgent *sharedInstance = nil;
     NSAssert((rumConfigOptions.appid.length!=0 ), @"请设置 appid 用户访问监测应用ID");
     [self.presetProperty setAppid:rumConfigOptions.appid];
     self.presetProperty.rumContext = [rumConfigOptions.globalContext copy];
-    [[FTGlobalRumManager sharedInstance] setRumConfig:rumConfigOptions];
+    [[FTGlobalRumManager sharedManager] setRumConfig:rumConfigOptions];
     [[FTURLSessionAutoInstrumentation sharedInstance] setRUMEnableTraceUserResource:rumConfigOptions.enableTraceUserResource];
-    [[FTURLSessionAutoInstrumentation sharedInstance] setRumResourceHandler:[FTGlobalRumManager sharedInstance].rumManager];
-    [FTAutoTrack sharedInstance].addRumDatasDelegate = [FTGlobalRumManager sharedInstance];
+    id<FTRumResourceProtocol> rum = [FTGlobalRumManager sharedManager].rumManager;
+    [[FTURLSessionAutoInstrumentation sharedInstance] setRumResourceHandler:rum];
+    [FTAutoTrack sharedInstance].addRumDatasDelegate = [FTGlobalRumManager sharedManager];
     [[FTAutoTrack sharedInstance] startHookView:rumConfigOptions.enableTraceUserView action:rumConfigOptions.enableTraceUserAction];
 
 }
@@ -175,7 +176,7 @@ static FTSDKAgent *sharedInstance = nil;
             if (self.loggerConfig.enableLinkRumData) {
                 [tagDict addEntriesFromDictionary:[self.presetProperty rumPropertyWithTerminal:FT_TERMINAL_APP]];
                 if(![tags.allKeys containsObject:FT_RUM_KEY_SESSION_ID]){
-                    NSDictionary *rumTag = [[FTGlobalRumManager sharedInstance].rumManager getCurrentSessionInfo];
+                    NSDictionary *rumTag = [[FTGlobalRumManager sharedManager].rumManager getCurrentSessionInfo];
                     [tagDict addEntriesFromDictionary:rumTag];
                 }
             }

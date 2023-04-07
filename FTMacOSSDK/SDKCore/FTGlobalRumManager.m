@@ -37,7 +37,7 @@
 @end
 
 @implementation FTGlobalRumManager
-static FTGlobalRumManager *sharedInstance = nil;
+static FTGlobalRumManager *sharedManager = nil;
 static dispatch_once_t onceToken;
 -(instancetype)init{
     self = [super init];
@@ -47,11 +47,11 @@ static dispatch_once_t onceToken;
     }
     return self;
 }
-+ (instancetype)sharedInstance {
++ (instancetype)sharedManager {
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[super allocWithZone:NULL] init];
+        sharedManager = [[super allocWithZone:NULL] init];
     });
-    return sharedInstance;
+    return sharedManager;
 }
 -(void)setRumConfig:(FTRumConfig *)rumConfig{
     _rumConfig = rumConfig;
@@ -201,7 +201,7 @@ static dispatch_once_t onceToken;
 - (void)resetInstance{
     _rumManager = nil;
     onceToken = 0;
-    sharedInstance =nil;
+    sharedManager =nil;
     [[FTAppLifeCycle sharedInstance] removeAppLifecycleDelegate:self];
 }
 @end

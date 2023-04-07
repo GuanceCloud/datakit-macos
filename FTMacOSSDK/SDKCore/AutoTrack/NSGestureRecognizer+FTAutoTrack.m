@@ -8,7 +8,6 @@
 #import "NSGestureRecognizer+FTAutoTrack.h"
 #import "FTLog.h"
 #import "FTSwizzler.h"
-#import "FTRumManager.h"
 #import "FTGlobalRumManager.h"
 #import "NSView+FTAutoTrack.h"
 #import "FTAutoTrack.h"

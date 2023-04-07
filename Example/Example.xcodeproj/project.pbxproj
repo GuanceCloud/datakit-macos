@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17164B7329E02B9A007D71D6 /* FTMacOSSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 17164B7229E02B9A007D71D6 /* FTMacOSSDK */; };
 		177BA53329DADAB100DB7497 /* LoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA53129DADAB100DB7497 /* LoggingViewController.m */; };
 		177BA53429DADAB100DB7497 /* LoggingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177BA53229DADAB100DB7497 /* LoggingViewController.xib */; };
 		177BA53E29DBCF4200DB7497 /* TraceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA53C29DBCF4200DB7497 /* TraceViewController.m */; };
@@ -40,7 +41,7 @@
 		7CF30EDF26F09D5E003CA20A /* CollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30EDD26F09D5E003CA20A /* CollectionViewItem.m */; };
 		7CF30EE026F09D5E003CA20A /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF30EDE26F09D5E003CA20A /* CollectionViewItem.xib */; };
 		7CF30EE726F1EF9E003CA20A /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30EE626F1EF9D003CA20A /* MainWindow.m */; };
-		EF35B059C4F71C5895779FD1 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB76611A08970596A23B466 /* Pods_Example.framework */; };
+		C43F653054F48118D796F30D /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB76611A08970596A23B466 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,21 +61,8 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		17E4CC6129CD465D005C2D99 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		1741185C29DC3A1C004DBB1F /* FTMacOSSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FTMacOSSupport.framework; path = ../FTMacOSSupport.framework; sourceTree = "<group>"; };
+		17164B6629E02871007D71D6 /* ft-sdk-macos */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "ft-sdk-macos"; path = ..; sourceTree = "<group>"; };
 		177BA53029DADAB100DB7497 /* LoggingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoggingViewController.h; sourceTree = "<group>"; };
 		177BA53129DADAB100DB7497 /* LoggingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoggingViewController.m; sourceTree = "<group>"; };
 		177BA53229DADAB100DB7497 /* LoggingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoggingViewController.xib; sourceTree = "<group>"; };
@@ -84,7 +72,6 @@
 		1799582329D6874F0033B46E /* RumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RumViewController.h; sourceTree = "<group>"; };
 		1799582429D6874F0033B46E /* RumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RumViewController.m; sourceTree = "<group>"; };
 		1799582529D6874F0033B46E /* RumViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RumViewController.xib; sourceTree = "<group>"; };
-		17E4CC5E29CD465D005C2D99 /* FTMacOSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FTMacOSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5291CDE6451817817C5E0E99 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		6BB76611A08970596A23B466 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C87E29A27003E76001F6C3B /* SplitViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewVC.h; sourceTree = "<group>"; };
@@ -145,7 +132,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF35B059C4F71C5895779FD1 /* Pods_Example.framework in Frameworks */,
+				17164B7329E02B9A007D71D6 /* FTMacOSSDK in Frameworks */,
+				C43F653054F48118D796F30D /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,8 +157,6 @@
 		0EC4FAB7BDDD6D22CDB31466 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1741185C29DC3A1C004DBB1F /* FTMacOSSupport.framework */,
-				17E4CC5E29CD465D005C2D99 /* FTMacOSSDK.framework */,
 				6BB76611A08970596A23B466 /* Pods_Example.framework */,
 			);
 			name = Frameworks;
@@ -184,6 +170,14 @@
 			);
 			name = Pods;
 			path = ../Pods;
+			sourceTree = "<group>";
+		};
+		17164B6529E02871007D71D6 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				17164B6629E02871007D71D6 /* ft-sdk-macos */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		7CD26F9126EAFBE80025CC50 /* WindowController */ = {
@@ -239,6 +233,7 @@
 		7CDA50BD26DE15EB0062CC39 = {
 			isa = PBXGroup;
 			children = (
+				17164B6529E02871007D71D6 /* Packages */,
 				7CDA50C826DE15EB0062CC39 /* Example */,
 				7CDA50DF26DE15EE0062CC39 /* ExampleTests */,
 				7CDA50EA26DE15EE0062CC39 /* ExampleUITests */,
@@ -312,14 +307,16 @@
 				7CDA50C226DE15EB0062CC39 /* Sources */,
 				7CDA50C326DE15EB0062CC39 /* Frameworks */,
 				7CDA50C426DE15EB0062CC39 /* Resources */,
-				17E4CC6129CD465D005C2D99 /* Embed Frameworks */,
-				60CC8E5025EF7089D45F83DC /* [CP] Embed Pods Frameworks */,
+				031D24FF9B66D4E53CB1D538 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Example;
+			packageProductDependencies = (
+				17164B7229E02B9A007D71D6 /* FTMacOSSDK */,
+			);
 			productName = Example;
 			productReference = 7CDA50C626DE15EB0062CC39 /* Example.app */;
 			productType = "com.apple.product-type.application";
@@ -437,7 +434,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		60CC8E5025EF7089D45F83DC /* [CP] Embed Pods Frameworks */ = {
+		031D24FF9B66D4E53CB1D538 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -675,7 +672,8 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -699,7 +697,8 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -831,6 +830,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		17164B7229E02B9A007D71D6 /* FTMacOSSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FTMacOSSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7CDA50BE26DE15EB0062CC39 /* Project object */;
 }

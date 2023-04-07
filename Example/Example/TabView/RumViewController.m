@@ -98,38 +98,38 @@
 -(void)tableViewSelectionDidChange:(NSNotification *)notification{
     switch (self.mTableView.selectedRow) {
         case 0:
-            [[FTGlobalRumManager sharedInstance] onCreateView:@"RumViewController" loadTime:@10000000];
+            [[FTGlobalRumManager sharedManager] onCreateView:@"RumViewController" loadTime:@10000000];
             break;
         case 1:
-            [[FTGlobalRumManager sharedInstance] startViewWithName:@"RumViewController"];
+            [[FTGlobalRumManager sharedManager] startViewWithName:@"RumViewController"];
             break;
         case 2:
-            [[FTGlobalRumManager sharedInstance] startViewWithName:@"RumViewController" property:@{@"view_property":@"custom_startView"}];
+            [[FTGlobalRumManager sharedManager] startViewWithName:@"RumViewController" property:@{@"view_property":@"custom_startView"}];
             break;
         case 3:
-            [[FTGlobalRumManager sharedInstance] stopView];
+            [[FTGlobalRumManager sharedManager] stopView];
             break;
         case 4:
-            [[FTGlobalRumManager sharedInstance] stopViewWithProperty:@{@"view_property":@"custom_stopView"}];
+            [[FTGlobalRumManager sharedManager] stopViewWithProperty:@{@"view_property":@"custom_stopView"}];
             break;
         case 5:
-            [[FTGlobalRumManager sharedInstance] addActionName:@"[NSTableCellView]" actionType:@"click"];
+            [[FTGlobalRumManager sharedManager] addActionName:@"[NSTableCellView]" actionType:@"click"];
             break;
         case 6:
-            [[FTGlobalRumManager sharedInstance] addActionName:@"[NSTableCellView]" actionType:@"click" property:@{@"action_property":@"addAction"}];
+            [[FTGlobalRumManager sharedManager] addActionName:@"[NSTableCellView]" actionType:@"click" property:@{@"action_property":@"addAction"}];
             break;
         case 7:
-            [[FTGlobalRumManager sharedInstance] addErrorWithType:@"macOS" message:@"ERROR_MESSAGE" stack:@"ERROR_STACK"];
+            [[FTGlobalRumManager sharedManager] addErrorWithType:@"macOS" message:@"ERROR_MESSAGE" stack:@"ERROR_STACK"];
             break;
         case 8:
-            [[FTGlobalRumManager sharedInstance] addErrorWithType:@"macOS" message:@"ERROR_MESSAGE" stack:@"ERROR_STACK" property:@{@"error_property":@"addError"}];
+            [[FTGlobalRumManager sharedManager] addErrorWithType:@"macOS" message:@"ERROR_MESSAGE" stack:@"ERROR_STACK" property:@{@"error_property":@"addError"}];
             break;
         case 9:
-            [[FTGlobalRumManager sharedInstance] addLongTaskWithStack:@"LongTask_Stack" duration:@1000000000];
+            [[FTGlobalRumManager sharedManager] addLongTaskWithStack:@"LongTask_Stack" duration:@1000000000];
 
             break;
         case 10:
-            [[FTGlobalRumManager sharedInstance] addLongTaskWithStack:@"LongTask_Stack" duration:@1000000000 property:@{@"longtask_property":@"addLongTask"}];
+            [[FTGlobalRumManager sharedManager] addLongTaskWithStack:@"LongTask_Stack" duration:@1000000000 property:@{@"longtask_property":@"addLongTask"}];
             break;
         case 11:
             [self manualRumResource];
@@ -146,7 +146,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     
     NSURLSession *session=[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:[NSOperationQueue mainQueue]];
-    [[FTGlobalRumManager sharedInstance] startResourceWithKey:self.rumKey];
+    [[FTGlobalRumManager sharedManager] startResourceWithKey:self.rumKey];
     NSURLSessionTask *task = [session dataTaskWithRequest:request];
     
     [task resume];
@@ -164,12 +164,12 @@
 
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
 
-    [[FTGlobalRumManager sharedInstance] stopResourceWithKey:self.rumKey];
+    [[FTGlobalRumManager sharedManager] stopResourceWithKey:self.rumKey];
     
     FTResourceMetricsModel *metricsModel = [[FTResourceMetricsModel alloc]initWithTaskMetrics:self.metrics];
 
 
     FTResourceContentModel *content = [[FTResourceContentModel alloc]initWithRequest:task.currentRequest response:httpResponse data:self.data error:error];
-    [[FTGlobalRumManager sharedInstance] addResourceWithKey:self.rumKey metrics:metricsModel content:content];
+    [[FTGlobalRumManager sharedManager] addResourceWithKey:self.rumKey metrics:metricsModel content:content];
 }
 @end
