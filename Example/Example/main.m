@@ -7,7 +7,17 @@
 
 #import <Cocoa/Cocoa.h>
 #import "FTMacOSSDK.h"
-
+//Target -> Build Settings -> GCC_PREPROCESSOR_DEFINITIONS 进行配置预设定义
+#if PRE
+#define Track_id       @"0000000001"
+#define STATIC_TAG     @"preprod"
+#elif  DEVELOP
+#define Track_id       @"0000000002"
+#define STATIC_TAG     @"common"
+#else
+#define Track_id       @"0000000003"
+#define STATIC_TAG     @"prod"
+#endif
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // Setup code that might create autoreleased objects goes here.
@@ -26,6 +36,7 @@ int main(int argc, const char * argv[]) {
         rumConfig.enableTraceUserAction = YES;
         rumConfig.enableTraceUserResource = YES;
         rumConfig.deviceMetricsMonitorType = FTDeviceMetricsMonitorAll;
+        rumConfig.globalContext = @{@"track_id":Track_id,@"static_tag":STATIC_TAG};
         [[FTSDKAgent sharedInstance]startRumWithConfigOptions:rumConfig];
         FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
         logger.enableCustomLog = YES;
