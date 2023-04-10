@@ -33,7 +33,6 @@
 		7CDA50D326DE15ED0062CC39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CDA50D126DE15ED0062CC39 /* Main.storyboard */; };
 		7CDA50D626DE15ED0062CC39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDA50D526DE15ED0062CC39 /* main.m */; };
 		7CDA50EC26DE15EE0062CC39 /* ExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDA50EB26DE15EE0062CC39 /* ExampleUITests.m */; };
-		7CDAF53626DE1C8B00F8F01D /* FTNetworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAF53426DE1C8B00F8F01D /* FTNetworkTests.m */; };
 		7CDAF53726DE1C8B00F8F01D /* FTMacOSSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAF53526DE1C8B00F8F01D /* FTMacOSSDKTests.m */; };
 		7CF30ED726F098AF003CA20A /* CollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30ED526F098AF003CA20A /* CollectionVC.m */; };
 		7CF30ED826F098AF003CA20A /* CollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF30ED626F098AF003CA20A /* CollectionVC.xib */; };
@@ -115,7 +114,6 @@
 		7CDA50E726DE15EE0062CC39 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CDA50EB26DE15EE0062CC39 /* ExampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleUITests.m; sourceTree = "<group>"; };
 		7CDA50ED26DE15EE0062CC39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7CDAF53426DE1C8B00F8F01D /* FTNetworkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNetworkTests.m; sourceTree = "<group>"; };
 		7CDAF53526DE1C8B00F8F01D /* FTMacOSSDKTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMacOSSDKTests.m; sourceTree = "<group>"; };
 		7CF30ED426F098AF003CA20A /* CollectionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionVC.h; sourceTree = "<group>"; };
 		7CF30ED526F098AF003CA20A /* CollectionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionVC.m; sourceTree = "<group>"; };
@@ -285,7 +283,6 @@
 			isa = PBXGroup;
 			children = (
 				7CDAF53526DE1C8B00F8F01D /* FTMacOSSDKTests.m */,
-				7CDAF53426DE1C8B00F8F01D /* FTNetworkTests.m */,
 				7CDA50E226DE15EE0062CC39 /* Info.plist */,
 			);
 			path = ExampleTests;
@@ -527,7 +524,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CDAF53726DE1C8B00F8F01D /* FTMacOSSDKTests.m in Sources */,
-				7CDAF53626DE1C8B00F8F01D /* FTNetworkTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +658,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/..\"/**",
+				);
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -866,6 +866,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/..\"/**",
+				);
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -887,6 +891,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/..\"/**",
+				);
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

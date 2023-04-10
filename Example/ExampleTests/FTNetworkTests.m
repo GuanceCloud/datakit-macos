@@ -7,13 +7,13 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <FTDateUtil.h>
+#import "FTDateUtil.h"
 #import "FTRequest.h"
-#import <FTMacOSSDK/FTMacOSSDK.h>
+#import "FTMacOSSDK.h"
 #import "FTRecordModel.h"
 #import "FTNetworkManager.h"
-#import <FTConstants.h>
-#import <FTRecordModel.h>
+#import "FTConstants.h"
+#import "FTRecordModel.h"
 @interface FTNetworkTests : XCTestCase
 
 @end

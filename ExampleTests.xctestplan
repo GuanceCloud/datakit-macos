@@ -1,0 +1,42 @@
+{
+  "configurations" : [
+    {
+      "id" : "2DA10200-587C-48B1-BE34-8F57124D6D65",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:..\/Pods\/Pods.xcodeproj",
+          "identifier" : "ECEAF65910DF7A647B6A7D79821B72F1",
+          "name" : "FTMacOSSDK"
+        }
+      ]
+    },
+    "environmentVariableEntries" : [
+      {
+        "key" : "ACCESS_SERVER_URL",
+        "value" : "xxx"
+      },
+      {
+        "key" : "APP_ID",
+        "value" : "xxx"
+      }
+    ]
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Example.xcodeproj",
+        "identifier" : "7CDA50DB26DE15EE0062CC39",
+        "name" : "ExampleTests"
+      }
+    }
+  ],
+  "version" : 1
+}
