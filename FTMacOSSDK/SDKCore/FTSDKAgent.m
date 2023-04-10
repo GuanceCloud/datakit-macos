@@ -75,8 +75,7 @@ static FTSDKAgent *sharedInstance = nil;
     self.presetProperty.rumContext = [rumConfigOptions.globalContext copy];
     [[FTGlobalRumManager sharedManager] setRumConfig:rumConfigOptions];
     [[FTURLSessionAutoInstrumentation sharedInstance] setRUMEnableTraceUserResource:rumConfigOptions.enableTraceUserResource];
-    id<FTRumResourceProtocol> rum = [FTGlobalRumManager sharedManager].rumManager;
-    [[FTURLSessionAutoInstrumentation sharedInstance] setRumResourceHandler:rum];
+    [[FTURLSessionAutoInstrumentation sharedInstance] setRumResourceHandler:[FTGlobalRumManager sharedManager].rumManager];
     [FTAutoTrack sharedInstance].addRumDatasDelegate = [FTGlobalRumManager sharedManager];
     [[FTAutoTrack sharedInstance] startHookView:rumConfigOptions.enableTraceUserView action:rumConfigOptions.enableTraceUserAction];
 
