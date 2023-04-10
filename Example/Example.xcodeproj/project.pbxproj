@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		175B13AF29E3AE87003A5B1B /* Config-Example.publish.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 175B13AE29E3AE87003A5B1B /* Config-Example.publish.xcconfig */; };
-		175B13B129E3AEA5003A5B1B /* Config-Example.pre.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 175B13B029E3AEA5003A5B1B /* Config-Example.pre.xcconfig */; };
-		175B13B329E3AEB9003A5B1B /* Config-Example.develop.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 175B13B229E3AEB9003A5B1B /* Config-Example.develop.xcconfig */; };
 		177BA53329DADAB100DB7497 /* LoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA53129DADAB100DB7497 /* LoggingViewController.m */; };
 		177BA53429DADAB100DB7497 /* LoggingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177BA53229DADAB100DB7497 /* LoggingViewController.xib */; };
 		177BA53E29DBCF4200DB7497 /* TraceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA53C29DBCF4200DB7497 /* TraceViewController.m */; };
@@ -410,8 +407,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7CD26FF826EB24D40025CC50 /* SecondViewController.xib in Resources */,
-				175B13AF29E3AE87003A5B1B /* Config-Example.publish.xcconfig in Resources */,
-				175B13B129E3AEA5003A5B1B /* Config-Example.pre.xcconfig in Resources */,
 				177BA53429DADAB100DB7497 /* LoggingViewController.xib in Resources */,
 				1799582729D6874F0033B46E /* RumViewController.xib in Resources */,
 				7CDA50D026DE15ED0062CC39 /* Assets.xcassets in Resources */,
@@ -419,7 +414,6 @@
 				7CF30ED826F098AF003CA20A /* CollectionVC.xib in Resources */,
 				7CF30EE026F09D5E003CA20A /* CollectionViewItem.xib in Resources */,
 				7CD26FED26EB24760025CC50 /* FirstViewController.xib in Resources */,
-				175B13B329E3AEB9003A5B1B /* Config-Example.develop.xcconfig in Resources */,
 				7CDA50D326DE15ED0062CC39 /* Main.storyboard in Resources */,
 				7CD2703826EB4E3E0025CC50 /* PresentVC.xib in Resources */,
 			);
@@ -644,13 +638,11 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
 					"Pre=1",
 				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -827,13 +819,11 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
 					"DEVELOP=1",
 				);
-				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -857,8 +847,6 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
