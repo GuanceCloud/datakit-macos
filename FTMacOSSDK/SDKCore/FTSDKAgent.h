@@ -10,21 +10,15 @@
 #import "FTSDKConfig.h"
 NS_ASSUME_NONNULL_BEGIN
 @interface FTSDKAgent : NSObject
-/**
- * @abstract
- * 返回之前所初始化好的单例
- *
- * @discussion
- * 调用这个方法之前，必须先调用 startWithConfigOptions 这个方法
- *
- * @return 返回的单例
-*/
+/// 返回之前所初始化好的单例
+///
+/// 调用这个方法之前，必须先调用 startWithConfigOptions 这个方法
 + (instancetype)sharedInstance;
 /// SDK 初始化方法
 ///
 /// 在启动 SDK 的同时配置基础的配置项，必要的配置项有 FT-GateWay metrics 写入地址。
 ///
-/// SDK 必须在主线程里进行初始化，否则会引发无法预料的问题（比如丢失 launch 事件）。
+/// 由于第一个显示的视图 `NSViewController` 的 `viewDidLoad` 方法、 `NSWindowController` 的 `windowDidLoad` 方法调用要早于 AppDelegate `applicationDidFinishLaunching`，为避免第一个视图的生命周期采集异常，建议在 ` main.m` 文件中进行 SDK 初始化且 SDK 必须在主线程里进行初始化。
 /// - Parameter configOptions: SDK 基础配置项.
 + (void)startWithConfigOptions:(FTSDKConfig *)configOptions;
 /// 配置 RUM Config 开启 RUM 功能
