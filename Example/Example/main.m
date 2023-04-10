@@ -35,6 +35,7 @@ int main(int argc, const char * argv[]) {
         rumConfig.enableTraceUserView = YES;
         rumConfig.enableTraceUserAction = YES;
         rumConfig.enableTraceUserResource = YES;
+        rumConfig.errorMonitorType = FTErrorMonitorAll;
         rumConfig.deviceMetricsMonitorType = FTDeviceMetricsMonitorAll;
         rumConfig.globalContext = @{@"track_id":Track_id,@"static_tag":STATIC_TAG};
         [[FTSDKAgent sharedInstance]startRumWithConfigOptions:rumConfig];

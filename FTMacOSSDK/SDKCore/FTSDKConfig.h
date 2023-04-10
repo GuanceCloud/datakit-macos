@@ -25,6 +25,8 @@ typedef NS_ENUM(NSInteger, FTLogStatus) {
 typedef NS_OPTIONS(NSUInteger, FTErrorMonitorType) {
     /// 开启所有监控： 电池、内存、CPU使用率
     FTErrorMonitorAll          = 0xFFFFFFFF,
+    /// 电池电量
+    FTErrorMonitorBattery      = 1 << 1,
     /// 内存总量、内存使用率
     FTErrorMonitorMemory       = 1 << 2,
     /// CPU使用率
