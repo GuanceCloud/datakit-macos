@@ -17,7 +17,7 @@ Pod::Spec.new do |spec|
   spec.homepage     = "https://github.com/GuanceCloud/datakit-macos"
 
   spec.license      = { type: 'Apache', :file => 'LICENSE'}
-
+  spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 
   spec.author             = { "hulilei" => "hulilei@jiagouyun.com" }
  
