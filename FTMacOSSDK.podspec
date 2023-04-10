@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
 
   spec.name         = "FTMacOSSDK"
   spec.module_name  = "FTMacOSSDK"
-  spec.version      = "1.0.1-alpha.1"
+  spec.version      = "1.0.0-alpha.1"
   spec.summary      = "DataFlux MacOS SDK"
   spec.description  = "DataFlux MacOS SDK"
 
