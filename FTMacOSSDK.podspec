@@ -9,10 +9,10 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "FTMacOSSDK"
-  spec.module_name  = "FTMacOSSDK"
   spec.version      = "1.0.0-alpha.1"
-  spec.summary      = "DataFlux MacOS SDK"
-  spec.description  = "DataFlux MacOS SDK"
+#   spec.version      = "$JENKINS_DYNAMIC_VERSION"
+  spec.summary      = "观测云 macOS 数据采集 SDK"
+  #spec.description  = ""
 
   spec.homepage     = "https://github.com/GuanceCloud/datakit-macos"
 
