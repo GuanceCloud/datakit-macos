@@ -13,9 +13,8 @@
 #import "FTConstants.h"
 #import <objc/runtime.h>
 #import "FTGlobalRumManager.h"
-#import "NSViewController+FTAutoTrack.h"
 #import "FTAutoTrack.h"
-@interface NSWindow (FTAutoTrack)<FTRumViewProperty>
+@interface NSWindow (FTAutoTrack)
 @end
 @implementation NSWindow (FTAutoTrack)
 #pragma mark - Rum Data -
@@ -42,15 +41,6 @@ static char *viewControllerUUID = "viewControllerUUID";
 }
 -(void)setDatakit_viewUUID:(NSString *)datakit_viewUUID{
     objc_setAssociatedObject(self, &viewControllerUUID, datakit_viewUUID, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
--(NSString *)datakit_parentVC{
-    return FT_NULL_VALUE;
-}
--(BOOL)datakit_inMainWindow{
-    return self.isMainWindow;
-}
--(BOOL)datakit_isKeyWindow{
-    return self.isKeyWindow;
 }
 -(NSString *)datakit_windowName{
     if(self.contentViewController){

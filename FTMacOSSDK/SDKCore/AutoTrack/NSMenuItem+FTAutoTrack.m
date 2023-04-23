@@ -11,13 +11,4 @@
 -(NSString *)datakit_actionName{
     return [NSString stringWithFormat:@"[NSMenuItem]%@",self.title];
 }
--(id)datakit_controller{
-    return [NSApplication sharedApplication].keyWindow.contentViewController?:[NSApplication sharedApplication].keyWindow;
-}
--(BOOL)inMainWindow{
-    return [[NSApplication sharedApplication].keyWindow isMainWindow];
-}
--(BOOL)isKeyWindow{
-    return YES;
-}
 @end

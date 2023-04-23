@@ -10,9 +10,8 @@
 
 @protocol FTRUMActionProperty <NSObject>
 @optional
-@property (nonatomic, copy, readonly) NSString *datakit_viewPath;
 @property (nonatomic, copy, readonly) NSString *datakit_actionName;
-@property (nonatomic, weak, readonly) id datakit_controller;
+//@property (nonatomic, weak, readonly) id datakit_controller;
 
 @end
 @protocol FTRumViewProperty <NSObject>
@@ -20,10 +19,7 @@
 @property (nonatomic, strong) NSNumber *datakit_loadDuration;
 @property (nonatomic, copy) NSString *datakit_viewUUID;
 @property (nonatomic, assign) BOOL datakit_viewLoaded;
-@property (nonatomic, copy, readonly) NSString *datakit_parentVC;
 @property (nonatomic, copy, readonly) NSString *datakit_windowName;
-@property (nonatomic, assign, readonly) BOOL datakit_inMainWindow;
-@property (nonatomic, assign, readonly) BOOL datakit_isKeyWindow;
 @end
 
 

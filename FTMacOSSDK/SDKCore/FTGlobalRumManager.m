@@ -198,7 +198,7 @@ static dispatch_once_t onceToken;
     [self.rumManager addLongTaskWithStack:slowStack duration:[NSNumber numberWithLongLong:MXRMonitorRunloopOneStandstillMillisecond*MXRMonitorRunloopStandstillCount*1000000]];
 }
 #pragma mark ========== 注销 ==========
-- (void)resetInstance{
+-(void)rumDeinitialize{
     _rumManager = nil;
     onceToken = 0;
     sharedManager =nil;

@@ -27,6 +27,7 @@
 #import "FTURLSessionAutoInstrumentation.h"
 #import "FTUserInfo.h"
 #import "FTAutoTrack.h"
+#import "FTURLProtocol.h"
 @interface FTSDKAgent()
 @property (nonatomic, strong) FTLoggerConfig *loggerConfig;
 @property (nonatomic, strong) FTPresetProperty *presetProperty;
@@ -37,12 +38,12 @@
 @end
 @implementation FTSDKAgent
 static FTSDKAgent *sharedInstance = nil;
+static dispatch_once_t onceToken;
 
 + (void)startWithConfigOptions:(FTSDKConfig *)configOptions{
     NSAssert ((strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(dispatch_get_main_queue())) == 0),@"SDK 必须在主线程里进行初始化，否则会引发无法预料的问题（比如丢失 launch 事件）。");
     
     NSAssert((configOptions.metricsUrl.length!=0 ), @"请设置FT-GateWay metrics 写入地址");
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[FTSDKAgent alloc] initWithConfig:configOptions];
     });
@@ -146,14 +147,6 @@ static FTSDKAgent *sharedInstance = nil;
 // FT_DATA_TYPE_LOGGING
 -(void)logging:(NSString *)content status:(FTLogStatus)status tags:(NSDictionary *)tags field:(NSDictionary *)field tm:(long long)tm{
     @try {
-        if (!self.loggerConfig) {
-            ZYErrorLog(@"请先设置 FTLoggerConfig");
-            return;
-        }
-        if (!self.loggerConfig.enableCustomLog) {
-            ZYLog(@"enableCustomLog 未开启，数据不进行采集");
-            return;
-        }
         if (!content || content.length == 0 || [content ft_characterNumber]>FT_LOGGING_CONTENT_SIZE) {
             ZYErrorLog(@"传入的第数据格式有误，或content超过30kb");
             return;
@@ -243,5 +236,20 @@ static FTSDKAgent *sharedInstance = nil;
         [value clearUser];
     }];
     ZYDebug(@"User Logout");
+}
+- (void)sdkDeinitialize{
+    [self syncProcess];
+    [[FTGlobalRumManager sharedManager] rumDeinitialize];
+    [[FTURLSessionAutoInstrumentation sharedInstance] resetInstance];
+    _presetProperty = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [FTURLProtocol stopMonitor];
+    onceToken = 0;
+    sharedInstance =nil;
+}
+- (void)syncProcess{
+    dispatch_sync(self.serialQueue, ^{
+        
+    });
 }
 @end

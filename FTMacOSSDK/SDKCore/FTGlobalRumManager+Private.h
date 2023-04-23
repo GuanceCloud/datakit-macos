@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FTGlobalRumManager ()<FTRumDatasProtocol,FTRumResourceProtocol>
 @property (nonatomic, strong) FTRUMManager *rumManager;
 -(void)setRumConfig:(FTRumConfig *)rumConfig;
+-(void)rumDeinitialize;
 @end
 
 NS_ASSUME_NONNULL_END
