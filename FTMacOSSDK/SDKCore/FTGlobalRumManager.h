@@ -11,12 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class FTResourceMetricsModel,FTResourceContentModel;
-// 用于 开启各项数据的采集 
+/// SDK 使用该类开启 RUM 的各项功能，用户可以通过 FTGlobalRumManager 单例添加 Rum 事件
 @interface FTGlobalRumManager : NSObject
-/**
- * 获取 FTMonitorManager 单例
- * @return 返回的单例
-*/
+
+/// 获取 FTGlobalRumManager 单例
 + (instancetype)sharedManager;
 
 /// 创建页面

@@ -86,12 +86,10 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
     FTDiscardOldest
 };
 
+/// SDK 基础配置项
 @interface FTSDKConfig : NSObject
-/**
- * @method 指定初始化方法，设置 metricsUrl
- * @param metricsUrl 数据上报地址
- * @return 配置对象
- */
+/// 指定初始化方法，设置 metricsUrl
+/// - Parameter metricsUrl: 数据上报地址
 - (instancetype)initWithMetricsUrl:(nonnull NSString *)metricsUrl;
 
 /// 禁用 init 初始化
@@ -102,108 +100,78 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
 
 /// 数据上报地址
 @property (nonatomic, copy) NSString *metricsUrl;
-/**
- * 请求HTTP请求头X-Datakit-UUID 数据采集端  如果用户不设置会自动配置
- */
+
+/// 请求 HTTP 请求头 X-Datakit-UUID 数据采集端  如果用户不设置会自动配置
 @property (nonatomic, copy) NSString *XDataKitUUID;
-/**
- * 设置所属业务或服务的名称 默认：df_rum_macos
- */
+/// 所属业务或服务的名称 默认：df_rum_macos
 @property (nonatomic, copy) NSString *service;
-/**
- * 环境字段。
- */
+/// 环境字段。
 @property (nonatomic, assign) FTEnv env;
-/**
- * 设置是否允许 SDK 打印 Debug 日志
- */
+/// 设置是否允许 SDK 打印 Debug 日志。
 @property (nonatomic, assign) BOOL enableSDKDebugLog;
-/**
- * 应用版本号。
- */
+/// 应用版本号。
 @property (nonatomic, copy) NSString *version;
-/**
- * 设置 SDK 全局 tag
- * 保留标签： sdk_package_flutter、sdk_package_react_native
- */
+/// 设置 SDK 全局 tag
+///
+/// 保留标签： sdk_package_flutter、sdk_package_react_native
 @property (nonatomic, strong) NSDictionary<NSString*,NSString*> *globalContext;
 
 @end
-
+/// logger 功能配置项
 @interface FTLoggerConfig : NSObject
 /// 禁用 new 初始化
 + (instancetype)new NS_UNAVAILABLE;
-/**
- * 设置日志废弃策略
- */
+/// 日志废弃策略
 @property (nonatomic, assign) FTLogCacheDiscard  discardType;
-/**
- * 采样配置，属性值：0至100，100则表示百分百采集，不做数据样本压缩。
- */
+/// 采样配置，属性值：0至100，100则表示百分百采集，不做数据样本压缩。
 @property (nonatomic, assign) int sampleRate;
-/**
- * 设置是否需要采集控制台日志 默认为NO
- */
+/// 是否需要采集控制台日志 默认为 NO
 @property (nonatomic, assign) BOOL enableConsoleLog;
-/**
- * 设置采集控制台日志过滤字符串 包含该字符串控制台日志会被采集 默认为全采集
- */
+/// 采集控制台日志过滤字符串 包含该字符串控制台日志会被采集 默认为全采集
 @property (nonatomic, copy) NSString *prefix;
-/**
- * 是否将 logger 数据与 rum 关联
- */
+/// 是否将 logger 数据与 rum 关联
 @property (nonatomic, assign) BOOL enableLinkRumData;
-/**
- * 是否上传自定义 log
- */
+/// 是否上传自定义 log
 @property (nonatomic, assign) BOOL enableCustomLog;
-/**
- * 设置采集自定义日志的状态数组  默认为全采集
- * 例: @[@(FTStatusInfo),@(FTStatusError)]
- * 或 @[@0,@1]
- */
+/// 采集自定义日志的状态数组，默认为全采集
+///
+/// 例: @[@(FTStatusInfo),@(FTStatusError)]
+/// 或 @[@0,@1]
 @property (nonatomic, strong) NSArray<NSNumber*> *logLevelFilter;
-/**
- * 设置 logger 全局 tag
- */
+/// logger 全局 tag
 @property (nonatomic, strong) NSDictionary<NSString*,NSString*> *globalContext;
-
+/// 设置控制台日志采集条件
+/// - Parameters:
+///   - enable: 是否上传自定义 log
+///   - prefix: 采集控制台日志过滤字符串 包含该字符串控制台日志会被采集 默认为全采集
 - (void)enableConsoleLog:(BOOL)enable prefix:(NSString *)prefix;
 @end
 
-
+/// RUM 功能的配置项
 @interface FTRumConfig : NSObject
-/**
- * @method 指定初始化方法，设置 appid
- * @param appid 应用唯一ID 设置后 rum 数据才能正常上报
- * @return 配置对象
- */
+/// 指定初始化方法，设置 appid
+///
+/// - Parameters:
+///   - appid: 用户访问监测应用 ID 唯一标识，在用户访问监测控制台上面创建监控时自动生成.
+/// - Returns: rum 配置项.
 - (instancetype)initWithAppid:(nonnull NSString *)appid;
 /// 禁用 new 初始化
 + (instancetype)new NS_UNAVAILABLE;
-/**
- * 应用唯一ID，在观测云控制台上面创建监控时自动生成。
- */
+/// 用户访问监测应用 ID 唯一标识，在用户访问监测控制台上面创建监控时生成.
 @property (nonatomic, copy) NSString *appid;
-/**
- * 采样配置，属性值：0至100，100则表示百分百采集，不做数据样本压缩。
- */
+/// 采样配置，属性值：0至100，100则表示百分百采集，不做数据样本压缩。
 @property (nonatomic, assign) int sampleRate;
-/// 设置是否追踪用户操作，目前支持应用启动和点击操作，
-/// 在有 View 事件的情况下，开启才能生效（仅作用于autotrack）
+/// 设置是否自动追踪用户行为操作，目前支持应用启动和点击操作，
+/// 在有 View 事件采集的情况下，开启才能生效
 @property (nonatomic, assign) BOOL enableTraceUserAction;
-/// 设置是否追踪页面生命周期 （仅作用于autotrack）
+/// 设置是否自动追踪页面生命周期
 ///
 /// SDK 采集 Window 做为 View，若用户想要更详细的 View 的采集，可以使用 SDK 开放的 API 进行手动采集。
 /// 注意：Resource、Action 数据均需要 View 事件的采集下才能正常采集。
 @property (nonatomic, assign) BOOL enableTraceUserView;
-/**
- * 设置是否追踪用户网络请求  (仅作用于native http)
- */
+/// 设置是否追踪用户网络请求  (仅作用于native http)
 @property (nonatomic, assign) BOOL enableTraceUserResource;
-/**
- * 设置是否需要采集崩溃日志
- */
+/// 设置是否需要采集崩溃日志
 @property (nonatomic, assign) BOOL enableTrackAppCrash;
 /// 设置是否需要采集卡顿
 @property (nonatomic, assign) BOOL enableTrackAppFreeze;
@@ -211,43 +179,31 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
 ///
 /// runloop 采集主线程卡顿
 @property (nonatomic, assign) BOOL enableTrackAppANR;
-/**
- * ERROR 中的设备信息
- */
+/// ERROR 中的设备信息
 @property (nonatomic, assign) FTErrorMonitorType errorMonitorType;
-/**
- * 设置监控类型 不设置则不开启监控
- */
+/// 设置监控类型 不设置则不开启监控
 @property (nonatomic, assign) FTDeviceMetricsMonitorType deviceMetricsMonitorType;
-/**
- * 设置监控采样周期
- */
+/// 设置监控采样周期
 @property (nonatomic, assign) FTMonitorFrequency monitorFrequency;
-/**
- * 设置 rum 全局 tag
- * 特殊 key : track_id (用于追踪功能)
- */
+/// 设置 rum 全局 tag
+///
+/// 保留标签:特殊 key - track_id (用于追踪功能)
 @property (nonatomic, strong) NSDictionary<NSString*,NSString*> *globalContext;
 @end
+/// Trace 功能配置项
 @interface FTTraceConfig : NSObject
 /// 禁用 new 初始化
 + (instancetype)new NS_UNAVAILABLE;
-/**
- * 采样配置，属性值：0至100，100则表示百分百采集，不做数据样本压缩。
- */
+
+/// 采样配置，属性值：0至100，100则表示百分百采集，不做数据样本压缩。
 @property (nonatomic, assign) int sampleRate;
-/**
- *  设置网络请求信息采集时 使用链路追踪类型 type 默认为 Zipkin
-*/
+/// 链路追踪类型  默认为 FTNetworkTraceTypeDDtrace
 @property (nonatomic, assign) FTNetworkTraceType networkTraceType;
-/**
- * 是否将 Trace 数据与 rum 关联
- * 仅在 FTNetworkTraceType 设置为 FTNetworkTraceTypeDDtrace 时生效
- */
+/// 是否将 Trace 数据与 rum 关联
+///
+/// 仅在 FTNetworkTraceType 设置为 FTNetworkTraceTypeDDtrace 时生效
 @property (nonatomic, assign) BOOL enableLinkRumData;
-/**
- * 设置是否开启自动 http trace
- */
+/// 设置是否开启自动网络链路追踪
 @property (nonatomic, assign) BOOL enableAutoTrace;
 @end
 
