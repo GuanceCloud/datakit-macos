@@ -24,31 +24,33 @@ int main(int argc, const char * argv[]) {
         NSProcessInfo *processInfo = [NSProcessInfo processInfo];
         NSString *url = [processInfo environment][@"ACCESS_SERVER_URL"];
         NSString *appid = [processInfo environment][@"APP_ID"];
-
-        FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:url];
-        config.enableSDKDebugLog = YES;
-        [FTSDKAgent startWithConfigOptions:config];
-        FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:appid];
-        rumConfig.enableTrackAppANR = YES;
-        rumConfig.enableTrackAppCrash = YES;
-        rumConfig.enableTrackAppFreeze = YES;
-        rumConfig.enableTraceUserView = YES;
-        rumConfig.enableTraceUserAction = YES;
-        rumConfig.enableTraceUserResource = YES;
-        rumConfig.errorMonitorType = FTErrorMonitorAll;
-        rumConfig.deviceMetricsMonitorType = FTDeviceMetricsMonitorAll;
-        rumConfig.globalContext = @{@"track_id":Track_id,@"static_tag":STATIC_TAG};
-        [[FTSDKAgent sharedInstance]startRumWithConfigOptions:rumConfig];
-        FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
-        logger.enableCustomLog = YES;
-        logger.enableLinkRumData = YES;
-        [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:logger];
-        FTTraceConfig *trace = [[FTTraceConfig alloc]init];
-        trace.enableAutoTrace = NO;
-        trace.enableLinkRumData = YES;
-        [[FTSDKAgent sharedInstance] startTraceWithConfigOptions:trace];
-        [[FTSDKAgent sharedInstance] logging:@"main" status:FTStatusInfo];
-        
+        BOOL isRuningUnitTest = [processInfo environment][@"isUnitTests"];
+        if(!isRuningUnitTest){
+            FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:url];
+            config.enableSDKDebugLog = YES;
+            [FTSDKAgent startWithConfigOptions:config];
+            FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:appid];
+            rumConfig.enableTrackAppANR = YES;
+            rumConfig.enableTrackAppCrash = YES;
+            rumConfig.enableTrackAppFreeze = YES;
+            rumConfig.enableTraceUserView = YES;
+            rumConfig.enableTraceUserAction = YES;
+            rumConfig.enableTraceUserResource = YES;
+            rumConfig.errorMonitorType = FTErrorMonitorAll;
+            rumConfig.deviceMetricsMonitorType = FTDeviceMetricsMonitorAll;
+            rumConfig.globalContext = @{@"track_id":Track_id,@"static_tag":STATIC_TAG};
+            [[FTSDKAgent sharedInstance]startRumWithConfigOptions:rumConfig];
+            FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
+            logger.enableCustomLog = YES;
+            logger.enableConsoleLog = YES;
+            logger.enableLinkRumData = YES;
+            [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:logger];
+            FTTraceConfig *trace = [[FTTraceConfig alloc]init];
+            trace.enableAutoTrace = NO;
+            trace.enableLinkRumData = YES;
+            [[FTSDKAgent sharedInstance] startTraceWithConfigOptions:trace];
+            [[FTSDKAgent sharedInstance] logging:@"main" status:FTStatusInfo];
+        }
     }
     return NSApplicationMain(argc, argv);
 }
