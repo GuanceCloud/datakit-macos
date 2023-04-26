@@ -9,8 +9,8 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "FTMacOSSDK"
-  spec.version      = "1.0.0-alpha.1"
-#   spec.version      = "$JENKINS_DYNAMIC_VERSION"
+#   spec.version      = "1.0.0-alpha.1"
+  spec.version      = "$JENKINS_DYNAMIC_VERSION"
   spec.summary      = "观测云 macOS 数据采集 SDK"
   #spec.description  = ""
 
@@ -19,7 +19,7 @@ Pod::Spec.new do |spec|
   spec.license      = { type: 'Apache', :file => 'LICENSE'}
   spec.user_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 
-  spec.author             = { "hulilei" => "hulilei@jiagouyun.com" }
+  spec.author             = { "hulilei" => "hulilei@jiagouyun.com","BrandonZhang"=> "zhangbo@jiagouyun.com" }
  
   spec.osx.deployment_target = '10.13'
   spec.requires_arc = true
