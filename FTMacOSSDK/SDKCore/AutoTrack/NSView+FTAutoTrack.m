@@ -59,11 +59,7 @@
 
 @implementation NSPopUpButton (FTAutoTrack)
 -(NSString *)datakit_actionName{
-    if (self.selectedItem.title.length>0) {
-        return [NSString stringWithFormat:@"[NSPopUpButton]%@",self.selectedItem.title];
-    }else{
-        return @"[NSPopUpButton]";
-    }
+    return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.selectedItem.title];
 }
 @end
 @implementation NSButton (FTAutoTrack)
@@ -71,3 +67,31 @@
     return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.title];
 }
 @end
+
+@implementation NSSegmentedControl (FTAutoTrack)
+
+-(NSString *)datakit_actionName{
+    NSString *title = [self labelForSegment:self.selectedSegment];
+    if(!title){
+        NSMenu *menu = [self menuForSegment:self.selectedSegment];
+        if(menu){
+            title = menu.title;
+        }
+    }
+    return title?[NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),title]:super.datakit_actionName;
+}
+@end
+
+@implementation NSStepper (FTAutoTrack)
+
+-(NSString *)datakit_actionName{
+    return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.stringValue];
+}
+@end
+@implementation NSSlider (FTAutoTrack)
+
+-(NSString *)datakit_actionName{
+    return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.stringValue];
+}
+@end
+

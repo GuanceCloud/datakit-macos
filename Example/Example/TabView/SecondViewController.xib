@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="imageView" destination="GC5-Iv-vk0" id="UcY-R7-8vM"/>
                 <outlet property="lable" destination="X3A-aX-cAF" id="9l6-hY-BlY"/>
+                <outlet property="stepper" destination="a7O-vE-MuI" id="3QE-aH-QkM"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -27,8 +28,8 @@
                     </constraints>
                     <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" useCurrentDate="YES" id="udv-QJ-gcZ">
                         <font key="font" metaFont="system"/>
-                        <date key="date" timeIntervalSinceReferenceDate="702270914.98301101">
-                            <!--2023-04-04 03:15:14 +0000-->
+                        <date key="date" timeIntervalSinceReferenceDate="704968945.82675803">
+                            <!--2023-05-05 08:42:25 +0000-->
                         </date>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -42,8 +43,8 @@
                     </constraints>
                     <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="textField" useCurrentDate="YES" id="RSc-aJ-9Fs">
                         <font key="font" metaFont="system"/>
-                        <date key="date" timeIntervalSinceReferenceDate="702270914.98537898">
-                            <!--2023-04-04 03:15:14 +0000-->
+                        <date key="date" timeIntervalSinceReferenceDate="704968945.83025301">
+                            <!--2023-05-05 08:42:25 +0000-->
                         </date>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -57,8 +58,8 @@
                     </constraints>
                     <datePickerCell key="cell" borderStyle="bezel" alignment="left" useCurrentDate="YES" id="hqT-H3-jEq">
                         <font key="font" metaFont="system"/>
-                        <date key="date" timeIntervalSinceReferenceDate="702270914.98747206">
-                            <!--2023-04-04 03:15:14 +0000-->
+                        <date key="date" timeIntervalSinceReferenceDate="704968945.83236897">
+                            <!--2023-05-05 08:42:25 +0000-->
                         </date>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>

@@ -24,7 +24,7 @@
         void (^didSelectItemBlock)(id, SEL, id, id) = ^(id view, SEL command, NSCollectionView *collectionView, NSSet<NSIndexPath *> *indexPaths) {
             //  获取 view 的 viewcontroller 时 不考虑 NSCollectionViewItem
             if (collectionView && indexPaths) {
-                NSCollectionViewItem *item = [collectionView itemAtIndexPath:[indexPaths anyObject]];
+                NSCollectionViewItem *item = [collectionView itemAtIndexPath:[[indexPaths allObjects] firstObject]];
                 NSString *actionName = [NSString stringWithFormat:@"[%@]",NSStringFromClass(collectionView.class)];
                 if(item.title.length>0){
                     actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(collectionView.class),item.title];

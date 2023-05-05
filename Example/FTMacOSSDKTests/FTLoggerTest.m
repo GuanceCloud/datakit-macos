@@ -49,8 +49,8 @@
     [self setRightSDKConfig];
     NSInteger count =  [[FTTrackerEventDBTool sharedManger] getDatasCount];
     FTLoggerConfig *loggerConfig = [[FTLoggerConfig alloc]init];
-    loggerConfig.enableCustomLog = NO
-    ;
+    loggerConfig.enableCustomLog = NO;
+    [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:loggerConfig];
     [[FTSDKAgent sharedInstance] logging:@"testLoggingMethod" status:FTStatusInfo];
     [[FTSDKAgent sharedInstance] syncProcess];
     NSInteger newCount =  [[FTTrackerEventDBTool sharedManger] getDatasCount];

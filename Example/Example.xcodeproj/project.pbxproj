@@ -10,6 +10,7 @@
 		1707C82329E52ED5009B7D9C /* FTRUMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1707C82229E52ED5009B7D9C /* FTRUMTests.m */; };
 		1707C83129E534F9009B7D9C /* FTMacOSSDKTest.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1707C83029E534F9009B7D9C /* FTMacOSSDKTest.xcconfig */; };
 		1707C83529E55C19009B7D9C /* FTLoggerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1707C83429E55C19009B7D9C /* FTLoggerTest.m */; };
+		1715F2952A04A123007EF5BB /* FTAutoTrackActionNameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1715F2942A04A123007EF5BB /* FTAutoTrackActionNameTests.m */; };
 		175C7CEF29E6B50B00A7F271 /* LogTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175C7CEE29E6B50B00A7F271 /* LogTest.swift */; };
 		177BA53329DADAB100DB7497 /* LoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA53129DADAB100DB7497 /* LoggingViewController.m */; };
 		177BA53429DADAB100DB7497 /* LoggingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177BA53229DADAB100DB7497 /* LoggingViewController.xib */; };
@@ -70,6 +71,7 @@
 		1707C82829E53068009B7D9C /* ExampleTests2.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests2.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1707C83029E534F9009B7D9C /* FTMacOSSDKTest.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = FTMacOSSDKTest.xcconfig; sourceTree = "<group>"; };
 		1707C83429E55C19009B7D9C /* FTLoggerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTLoggerTest.m; sourceTree = "<group>"; };
+		1715F2942A04A123007EF5BB /* FTAutoTrackActionNameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTAutoTrackActionNameTests.m; sourceTree = "<group>"; };
 		175B13AE29E3AE87003A5B1B /* Config-Example.publish.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-Example.publish.xcconfig"; sourceTree = "<group>"; };
 		175B13B029E3AEA5003A5B1B /* Config-Example.pre.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-Example.pre.xcconfig"; sourceTree = "<group>"; };
 		175B13B229E3AEB9003A5B1B /* Config-Example.develop.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-Example.develop.xcconfig"; sourceTree = "<group>"; };
@@ -207,6 +209,14 @@
 			path = ../Pods;
 			sourceTree = "<group>";
 		};
+		1715F2932A03CE97007EF5BB /* AutoTrack */ = {
+			isa = PBXGroup;
+			children = (
+				1715F2942A04A123007EF5BB /* FTAutoTrackActionNameTests.m */,
+			);
+			path = AutoTrack;
+			sourceTree = "<group>";
+		};
 		175B13AD29E3AE3A003A5B1B /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +330,7 @@
 		7CDA50DF26DE15EE0062CC39 /* FTMacOSSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				1715F2932A03CE97007EF5BB /* AutoTrack */,
 				7CDAF53526DE1C8B00F8F01D /* FTMacOSSDKTests.m */,
 				1707C82229E52ED5009B7D9C /* FTRUMTests.m */,
 				1707C83429E55C19009B7D9C /* FTLoggerTest.m */,
@@ -367,16 +378,14 @@
 				7CDA50C226DE15EB0062CC39 /* Sources */,
 				7CDA50C326DE15EB0062CC39 /* Frameworks */,
 				7CDA50C426DE15EB0062CC39 /* Resources */,
-				031D24FF9B66D4E53CB1D538 /* [CP] Embed Pods Frameworks */,
 				175B13B429E3BAAC003A5B1B /* ShellScript */,
+				974BE770A0C77F77C8936A11 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Example;
-			packageProductDependencies = (
-			);
 			productName = Example;
 			productReference = 7CDA50C626DE15EB0062CC39 /* Example.app */;
 			productType = "com.apple.product-type.application";
@@ -389,7 +398,7 @@
 				7CDA50D826DE15EE0062CC39 /* Sources */,
 				7CDA50D926DE15EE0062CC39 /* Frameworks */,
 				7CDA50DA26DE15EE0062CC39 /* Resources */,
-				78068CC3495B7332F0E27102 /* [CP] Embed Pods Frameworks */,
+				78097B65E9EBA0AA159324FD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -509,23 +518,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		031D24FF9B66D4E53CB1D538 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1207A8126F634B5F4E000447 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -565,7 +557,7 @@
 			shellPath = /bin/sh;
 			shellScript = "#!/bin/bash\n#\n# This is the upload dSYM script\n#\n######################################################\n# 1. 脚本集成到 Xcode工 程的 Target\n######################################################\n#\n# --- Copy the SCRIPT to the Run Script of Build Phases in the Xcode project ---\n#\n# #\nFT_APP_ID=SDK_APP_ID\n#dea_address\nFT_DEA_ADDRESS=SDK_DEA_ADDRESS\n# 环境字段。属性值：prod/gray/pre/common/local。需要与 SDK 设置一致\nFT_ENV=SDK_ENV\n#\n# 脚本默认配置的版本格式为CFBundleShortVersionString,如果你修改默认的版本格式, 请设置此变量。注意：需要确保在此填写的与SDK设置的一致。\n# FT_VERSION=\"\"\n#\n# Debug模式编译是否上传，1＝上传 0＝不上传，默认不上传\n# UPLOAD_DEBUG_SYMBOLS=0\n#\n# # 模拟器编译是否上传，1=上传 0=不上传，默认不上传\n# UPLOAD_SIMULATOR_SYMBOLS=0\n#\n# #只有Archive操作时上传, 1=支持Archive上传 0=所有Release模式编译都上传\nUPLOAD_ARCHIVE_ONLY=1\n# #\n# source FTdSYMUpload.sh\n#\n# --- END OF SCRIPT ---\n#\n#\n#######################################################\n# 2. 脚本根据输入参数处理\n#######################################################\n#\n# #命令行下输入应用基本信息, .dSYM文件的父目录路径, 输出文件目录即可\n#\n# sh dSYMUpload.sh <sdk_url> <rum_app_id> <app_version> <app_env> <bSYMBOL_src_dir> <bSYMBOL_dest_dir>\n#\n#\n\n#\n# --- CONTENT OF SCRIPT ---\n#\n\n# 打印错误信息\nfunction exitWithMessage(){\n    echo \"--------------------------------\"\n    echo \"${1}\"\n    echo \"--------------------------------\"\n    exit ${2}\n}\n\n# 上传bSYMBOL文件\nfunction dSYMUpload(){\n    P_SDK_URL=\"$1\"\n    P_RUM_APP_ID=\"$2\"\n    P_APP_VERSION=\"$3\"\n    P_APP_ENV=\"$4\"\n    P_BSYMBOL_ZIP_FILE=\"$5\"\n    \n    #\n    P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE##*/}\n    P_BSYMBOL_ZIP_FILE_NAME=${P_BSYMBOL_ZIP_FILE_NAME//&/_}\n    P_BSYMBOL_ZIP_FILE_NAME=\"${P_BSYMBOL_ZIP_FILE_NAME// /_}\"\n    echo \"P_BSYMBOL_ZIP_FILE_NAME: ${P_BSYMBOL_ZIP_FILE_NAME}\"\n    DSYM_UPLOAD_URL=\"${FT_DEA_ADDRESS}/v1/rum/sourcemap?app_id=${P_RUM_APP_ID}&env=${P_APP_ENV}&version=${P_APP_VERSION}&platform=ios\"\n    echo \"dSYM upload url: ${DSYM_UPLOAD_URL}\"\n    \n    echo \"-----------------------------\"\n    STATUS=$(curl -X POST \"${DSYM_UPLOAD_URL}\"  -F \"file=@${P_BSYMBOL_ZIP_FILE}\" -H \"Content-Type: multipart/form-data\")\n    echo \"-----------------------------\"\n    \n    UPLOAD_RESULT=\"FAILTURE\"\n    echo \"Upload server response: ${STATUS}\"\n    \n    if [ ! \"${STATUS}\" ]; then\n    echo \"Error: Failed to upload the zip archive file.\"\n    elif [[ \"${STATUS}\" == *\"{\\\"code\\\":200\"* ]]; then\n    echo \"Success to upload the dSYM for the app [${P_APP_ENV} ${P_APP_VERSION}]\"\n    UPLOAD_RESULT=\"SUCCESS\"\n    else\n    echo \"Error: Failed to upload the zip archive file to DataKit.\"\n    fi\n    #Remove temp dSYM archive\n    echo \"Remove temporary zip archive: ${DSYM_ZIP_FPATH}\"\n    #    rm -f \"${P_BSYMBOL_ZIP_FILE}\"\n    \n    if [ \"$?\" -ne 0 ]; then\n    exitWithMessage \"Error: Failed to remove temporary zip archive.\" 0\n    fi\n    \n    echo \"--------------------------------\"\n    echo \"${UPLOAD_RESULT} - dSYM upload complete.\"\n    \n    if [[ \"${UPLOAD_RESULT}\" == \"FAILTURE\" ]]; then\n    echo \"--------------------------------\"\n    echo \"Failed to upload the dSYM\"\n    echo \"Please check the script and try it again.\"\n    fi\n}\n\n#执行\nfunction run() {\n    CONFIG_SDK_URL=\"$1\"\n    CONFIG_APP_ID=\"$2\"\n    \n    CONFIG_APP_VERSION=\"$3\"\n    CONFIG_APP_ENV=\"$4\"\n    CONFIG_DSYM_SOURCE_DIR=\"$5\"\n    CONFIG_DSYM_DEST_DIR=\"$6\"\n\n    # 检查必须参数是否设置\n    if [ ! \"${CONFIG_APP_ID}\" ]; then\n    exitWithMessage \"Error: RUM App ID not defined. Please set 'FT_RUM_APP_ID' \" 0\n    fi\n    \n    if [[ \"${CONFIG_APP_ID}\" == *\"App ID\"* ]]; then\n    exitWithMessage \"Error: RUM App ID not defined.\" 0\n    fi\n    \n    if [ ! \"${CONFIG_APP_VERSION}\" ]; then\n    exitWithMessage \"Error: App Version not defined.\" 0\n    fi\n    \n    if [ ! \"${CONFIG_APP_ENV}\" ]; then\n    exitWithMessage \"Error: SDK Env not defined.\" 0\n    fi\n    \n    if [ ! -e \"${CONFIG_DSYM_SOURCE_DIR}\" ]; then\n    exitWithMessage \"Error: Invalid Source dir ${CONFIG_DSYM_SOURCE_DIR}\" 0\n    fi\n    \n    if [ ! \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n    exitWithMessage \"Error: Invalid Dest dir ${CONFIG_DSYM_DEST_DIR}\" 0\n    fi\n    \n    if [ ! -e \"${CONFIG_DSYM_DEST_DIR}\" ]; then\n    mkdir ${CONFIG_DSYM_DEST_DIR}\n    fi\n    \n    DSYM_FOLDER=\"${CONFIG_DSYM_SOURCE_DIR}\"\n    IFS=$'\\n'\n    \n    echo \"Scaning dSYM FOLDER: ${DSYM_FOLDER} ...\"\n    RET=\"F\"\n    \n    #\n    for dsymFile in $(find \"$DSYM_FOLDER\" -name '*.dSYM'); do\n    RET=\"T\"\n    echo \"Found dSYM file: $dsymFile\"\n    cp -rf $dsymFile $CONFIG_DSYM_DEST_DIR\n    done\n    if [ $RET = \"T\" ]; then\n    DSYM_SYMBOL_ZIP_FILE_NAME=\"DSYM_SYMBOL.zip\"\n    DSYM_SYMBOL_ZIP_FILE_NAME=\"${DSYM_SYMBOL_ZIP_FILE_NAME// /_}\"\n    DSYM_SYMBOL_ZIP_FILE=${CONFIG_DSYM_DEST_DIR}/${DSYM_SYMBOL_ZIP_FILE_NAME}\n    \n    if [ -e $DSYM_SYMBOL_ZIP_FILE ]; then\n    rm -f $DSYM_SYMBOL_ZIP_FILE\n    fi\n    # 压缩dSYM目录\n    pushd $CONFIG_DSYM_DEST_DIR\n    zip -r -q $DSYM_SYMBOL_ZIP_FILE *\n    popd\n    # 上传\n    dSYMUpload $CONFIG_SDK_URL $CONFIG_APP_ID $CONFIG_APP_VERSION $CONFIG_APP_ENV $DSYM_SYMBOL_ZIP_FILE\n    fi\n    \n    if [ $RET = \"F\" ]; then\n    exitWithMessage \"No .dSYM found in ${DSYM_FOLDER}\" 0\n    fi\n}\n# 检查App的dSYM文件是否为空，若为空，循环等待10s后还为空则退出\nfunction checkAppSourceFile(){\n    dsymFile=\"$1\"\n    DSYM_APP_FILE_IS_EXIST=1\n    for i in {1..10}; do\n    sleep 1\n    for dsymSingleFile in $(find \"${dsymFile}\" -name ${PRODUCT_NAME}); do\n    if [ -s \"${dsymSingleFile}\" ]; then\n    DSYM_APP_FILE_IS_EXIST=0\n    return $DSYM_APP_FILE_IS_EXIST\n    fi\n    done\n    done\n    return $DSYM_APP_FILE_IS_EXIST\n}\n\n# 在Xcode工程中执行\nfunction runInXcode(){\n    echo \"Uploading dSYM in Xcode ...\"\n    \n    echo \"Info.Plist : ${INFOPLIST_FILE}\"\n    \n    BUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' \"${INFOPLIST_FILE}\")\n#    BUNDLE_SHORT_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' \"${INFOPLIST_FILE}\")\n    echo \"BUNDLE_VERSION: ${BUNDLE_VERSION}\"\n    echo \"BUNDLE_SHORT_VERSION: ${BUNDLE_SHORT_VERSION}\"\n    \n    # 组装默认识别的版本信息(格式为CFBundleShortVersionString(CFBundleVersion), 例如: 1.0(1))\n    if [ ! \"${FT_VERSION}\" ]; then\n    FT_APP_VERSION=\"${BUNDLE_SHORT_VERSION}(${BUNDLE_VERSION})\"\n    else\n    FT_APP_VERSION=\"${FT_VERSION}\"\n    fi\n    \n    echo \"--------------------------------\"\n    echo \"Prepare application information.\"\n    echo \"--------------------------------\"\n    \n    echo \"Product Name: ${PRODUCT_NAME}\"\n    echo \"Bundle Identifier: ${BUNDLE_IDENTIFIER}\"\n    echo \"Version: ${BUNDLE_SHORT_VERSION}\"\n    echo \"Build: ${BUNDLE_VERSION}\"\n    \n    echo \"RUM App ID: ${FT_APP_ID}\"\n    \n    echo \"--------------------------------\"\n    echo \"Check the arguments ...\"\n    \n    ##检查模拟器编译是否允许上传符号\n    if [ \"$EFFECTIVE_PLATFORM_NAME\" == \"-iphonesimulator\" ]; then\n    if [ $UPLOAD_SIMULATOR_SYMBOLS -eq 0 ]; then\n    exitWithMessage \"Warning: Build for simulator and skipping to upload. \\nYou can modify 'UPLOAD_SIMULATOR_SYMBOLS' to 1 in the script.\" 0\n    fi\n    fi\n    \n    ##检查是否是Release模式编译\n    if [ \"${CONFIGURATION=}\" == \"Debug\" ]; then\n    if [ $UPLOAD_DEBUG_SYMBOLS -eq 0 ]; then\n    exitWithMessage \"Warning: Build for debug mode and skipping to upload. \\nYou can modify 'UPLOAD_DEBUG_SYMBOLS' to 1 in the script.\" 0\n    fi\n    fi\n    \n    ##检查是否Archive操作\n    if [ $UPLOAD_ARCHIVE_ONLY -eq 1 ]; then\n    if [[ \"$TARGET_BUILD_DIR\" == *\"/Archive\"* ]]; then\n    echo \"Archive the package\"\n    else\n    exitWithMessage \"Warning: Build for NOT Archive mode and skipping to upload. \\nYou can modify 'UPLOAD_ARCHIVE_ONLY' to 0 in the script.\" 0\n    fi\n    fi\n    \n    ##检查dSYM文件是否完整\n    for dsymFile in $(find \"$DWARF_DSYM_FOLDER_PATH\" -name '*.dSYM'); do\n    FILE_NAME=${dsymFile##*/}\n    FILE_NAME=${FILE_NAME//&/_}\n    FILE_NAME=\"${FILE_NAME// /_}\"\n    if [[ \"${FILE_NAME}\" == \"${PRODUCT_NAME}\"* ]]; then\n    SDYM_SINGLE_FILE_NAME=\"${dsymFile}/Contents/Resources/DWARF/${PRODUCT_NAME}\"\n    checkAppSourceFile $SDYM_SINGLE_FILE_NAME\n    echo \"checkAppSourceFile: $?\"\n    if [ $? == 1 ]; then\n      exitWithMessage \"Not Found File In ${SDYM_SINGLE_FILE_NAME}\" 0\n    fi\n    fi\n    done\n    #\n    run ${FT_SDK_URL} ${FT_APP_ID} ${FT_APP_VERSION} ${FT_ENV} ${DWARF_DSYM_FOLDER_PATH} ${BUILD_DIR}/SymbolTemp\n}\n# 根据Xcode的环境变量判断是否处于Xcode环境\nINFO_PLIST_FILE=\"${INFOPLIST_FILE}\"\n\nBuildInXcode=\"F\"\nif [ -f \"${INFO_PLIST_FILE}\" ]; then\nBuildInXcode=\"T\"\nfi\n\nif [ $BuildInXcode = \"T\" ]; then\nrunInXcode\nelse\necho \"\\nUsage: dSYMUpload.sh <sdk_url> <rum_app_id> <app_version> <app_env> <dSYMBOL_src_dir> <dSYMBOL_dest_dir>\\n\"\n\n# 你可以在此处直接设置 URL、APP_ID 和 APP_ENV排除不常变参数的输入\nFT_SDK_URL=\"$1\"\nFT_RUM_APP_ID=\"$2\"\nFT_APP_VERSION=\"$3\"\nFT_APP_ENV=\"$4\"\nDWARF_DSYM_FOLDER_PATH=\"$5\"\nSYMBOL_OUTPUT_PATH=\"$6\"\n\nrun ${FT_SDK_URL} ${FT_RUM_APP_ID} ${FT_APP_VERSION} ${FT_APP_ENV} ${DWARF_DSYM_FOLDER_PATH} ${SYMBOL_OUTPUT_PATH}\nfi\n";
 		};
-		78068CC3495B7332F0E27102 /* [CP] Embed Pods Frameworks */ = {
+		78097B65E9EBA0AA159324FD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -580,6 +572,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FTMacOSSDKTests/Pods-FTMacOSSDKTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		974BE770A0C77F77C8936A11 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CBEB90D4983F4FBE34D72C33 /* [CP] Check Pods Manifest.lock */ = {
@@ -646,6 +655,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1715F2952A04A123007EF5BB /* FTAutoTrackActionNameTests.m in Sources */,
 				1707C82329E52ED5009B7D9C /* FTRUMTests.m in Sources */,
 				7CDAF53726DE1C8B00F8F01D /* FTMacOSSDKTests.m in Sources */,
 				1707C83529E55C19009B7D9C /* FTLoggerTest.m in Sources */,

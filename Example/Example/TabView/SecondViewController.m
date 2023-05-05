@@ -10,6 +10,7 @@
 @interface SecondViewController ()
 @property (weak) IBOutlet NSTextField *lable;
 @property (weak) IBOutlet NSImageView *imageView;
+@property (strong) IBOutlet NSStepper *stepper;
 
 @end
 
@@ -43,6 +44,9 @@
     NSClickGestureRecognizer *gesture = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(imageViewClick:)];
     gesture.numberOfClicksRequired = 1;
     [self.imageView addGestureRecognizer:gesture];
+    self.stepper.maxValue = 100;
+    self.stepper.minValue = 0;
+    self.stepper.increment = 2;
 }
 - (void)lableTap{
     NSLog(@"lableTap NSGestureRecognizer set action");
