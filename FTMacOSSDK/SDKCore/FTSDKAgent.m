@@ -117,10 +117,10 @@ static dispatch_once_t onceToken;
             }
             if (weakSelf.loggerConfig.prefix.length>0) {
                 if([logStr containsString:weakSelf.loggerConfig.prefix]){
-                    [weakSelf logging:logStr status:FTStatusInfo tags:nil field:nil tm:tm];
+                    [weakSelf logging:logStr status:FTStatusInfo field:nil tm:tm];
                 }
             }else{
-                [weakSelf logging:logStr status:FTStatusInfo tags:nil field:nil tm:tm];
+                [weakSelf logging:logStr status:FTStatusInfo field:nil tm:tm];
             }
     }];
 }
@@ -139,13 +139,13 @@ static dispatch_once_t onceToken;
             ZYLog(@"enableCustomLog 未开启，数据不进行采集");
             return;
         }
-        [self logging:content status:status tags:nil field:property tm:[FTDateUtil currentTimeNanosecond]];
+        [self logging:content status:status field:property tm:[FTDateUtil currentTimeNanosecond]];
     } @catch (NSException *exception) {
         ZYErrorLog(@"exception %@",exception);
     }
 }
 // FT_DATA_TYPE_LOGGING
--(void)logging:(NSString *)content status:(FTLogStatus)status tags:(NSDictionary *)tags field:(NSDictionary *)field tm:(long long)tm{
+-(void)logging:(NSString *)content status:(FTLogStatus)status field:(NSDictionary *)field tm:(long long)tm{
     @try {
         if (!content || content.length == 0 || [content ft_characterNumber]>FT_LOGGING_CONTENT_SIZE) {
             ZYErrorLog(@"传入的第数据格式有误，或content超过30kb");
@@ -162,42 +162,36 @@ static dispatch_once_t onceToken;
         
         dispatch_async(self.serialQueue, ^{
             NSMutableDictionary *tagDict = [NSMutableDictionary dictionaryWithDictionary:[self.presetProperty loggerPropertyWithStatus:(LogStatus)status]];
-            if (tags) {
-                [tagDict addEntriesFromDictionary:tags];
-            }
             if (self.loggerConfig.enableLinkRumData) {
-                [tagDict addEntriesFromDictionary:[self.presetProperty rumPropertyWithTerminal:FT_TERMINAL_APP]];
-                if(![tags.allKeys containsObject:FT_RUM_KEY_SESSION_ID]){
+                [tagDict addEntriesFromDictionary:[self.presetProperty rumProperty]];
                     NSDictionary *rumTag = [[FTGlobalRumManager sharedManager].rumManager getCurrentSessionInfo];
                     [tagDict addEntriesFromDictionary:rumTag];
-                }
             }
             NSMutableDictionary *filedDict = @{FT_KEY_MESSAGE:content,
             }.mutableCopy;
             if (field) {
                 [filedDict addEntriesFromDictionary:field];
             }
-            FTRecordModel *model = [[FTRecordModel alloc]initWithSource:FT_LOGGER_SOURCE op:FT_DATA_TYPE_LOGGING tags:tagDict fields:filedDict tm:tm];
+            FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"df_rum_macos_log" op:FT_DATA_TYPE_LOGGING tags:tagDict fields:filedDict tm:tm];
             [self insertDBWithItemData:model type:FTAddDataLogging];
         });
     } @catch (NSException *exception) {
         ZYErrorLog(@"exception %@",exception);
     }
 }
-- (void)rumWrite:(NSString *)type terminal:(NSString *)terminal tags:(NSDictionary *)tags fields:(NSDictionary *)fields{
-    [self rumWrite:type terminal:terminal tags:tags fields:fields tm:[FTDateUtil currentTimeNanosecond]];
+- (void)rumWrite:(NSString *)type  tags:(NSDictionary *)tags fields:(NSDictionary *)fields{
+    [self rumWrite:type tags:tags fields:fields tm:[FTDateUtil currentTimeNanosecond]];
 }
-
-- (void)rumWrite:(NSString *)type terminal:(NSString *)terminal tags:(NSDictionary *)tags fields:(NSDictionary *)fields tm:(long long)tm{
+- (void)rumWrite:(NSString *)type tags:(NSDictionary *)tags fields:(NSDictionary *)fields tm:(long long)tm{
     
     @try {
-        if (![type isKindOfClass:NSString.class] || type.length == 0 || terminal.length == 0) {
+        if (![type isKindOfClass:NSString.class] || type.length == 0) {
             return;
         }
         FTAddDataType dataType = FTAddDataImmediate;
         NSMutableDictionary *baseTags =[NSMutableDictionary dictionaryWithDictionary:tags];
         baseTags[@"network_type"] = [FTReachability sharedInstance].net;
-        [baseTags addEntriesFromDictionary:[self.presetProperty rumPropertyWithTerminal:terminal]];
+        [baseTags addEntriesFromDictionary:[self.presetProperty rumProperty]];
         FTRecordModel *model = [[FTRecordModel alloc]initWithSource:type op:FT_DATA_TYPE_RUM tags:baseTags fields:fields tm:tm];
         [self insertDBWithItemData:model type:dataType];
     } @catch (NSException *exception) {
