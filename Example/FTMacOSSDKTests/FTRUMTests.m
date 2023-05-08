@@ -44,6 +44,7 @@
     rumConfig.errorMonitorType = FTErrorMonitorAll;
     rumConfig.enableTraceUserResource = YES;
     rumConfig.deviceMetricsMonitorType = FTDeviceMetricsMonitorAll;
+    rumConfig.monitorFrequency = FTMonitorFrequencyFrequent;
     [[FTSDKAgent sharedInstance] startRumWithConfigOptions:rumConfig];
     [[FTTrackerEventDBTool sharedManger] deleteItemWithTm:[FTDateUtil currentTimeNanosecond]];
 }
@@ -231,6 +232,31 @@
     XCTAssertTrue(hasError == YES);
     [[FTSDKAgent sharedInstance] sdkDeinitialize];
 }
+- (void)testErrorMonitor{
+    [self setRumConfig];
+    [[FTGlobalRumManager sharedManager] addErrorWithType:@"macOS" message:@"error_message" stack:@"error_stack"];
+    [[FTGlobalRumManager sharedManager].rumManager syncProcess];
+    NSArray *newArray = [[FTTrackerEventDBTool sharedManger] getFirstRecords:100 withType:FT_DATA_TYPE_RUM];
+    XCTAssertTrue(newArray.count>0);
+    BOOL hasError = NO;
+    for (FTRecordModel *model in newArray) {
+       NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
+        if([dict[FT_OP] isEqualToString:FT_DATA_TYPE_RUM]){
+            NSDictionary *data = dict[FT_OPDATA];
+            if([data[FT_KEY_SOURCE] isEqualToString:FT_RUM_SOURCE_ERROR]){
+                NSDictionary *tags = data[FT_TAGS];
+                XCTAssertTrue([tags.allKeys containsObject:FT_MEMORY_TOTAL]);
+                XCTAssertTrue([tags.allKeys containsObject:FT_MEMORY_USE]);
+                XCTAssertTrue([tags.allKeys containsObject:FT_CPU_USE]);
+                XCTAssertTrue([tags.allKeys containsObject:FT_BATTERY_USE]);
+                hasError = YES;
+                break;
+            }
+        }
+    }
+    XCTAssertTrue(hasError == YES);
+    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+}
 - (void)testAddLongTaskEvent{
     [self addLongTask:nil];
 }
@@ -282,6 +308,39 @@
             XCTAssertTrue([tags[@"user_age"] isEqualToString:@"12"]);
         }
     }
+    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+}
+- (void)testRumDeviceMetricsMonitor{
+    [self setRumConfig];
+    [[FTGlobalRumManager sharedManager] startViewWithName:@"TestRumView"];
+    XCTestExpectation *expectation= [self expectationWithDescription:@"异步操作timeout"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
+    });
+    [self waitForExpectationsWithTimeout:10 handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+    [NSThread sleepForTimeInterval:1];
+    [[FTGlobalRumManager sharedManager] addErrorWithType:@"macOS" message:@"error_message" stack:@"error_stack"];
+    [[FTGlobalRumManager sharedManager].rumManager syncProcess];
+    NSArray *newArray = [[FTTrackerEventDBTool sharedManger] getFirstRecords:100 withType:FT_DATA_TYPE_RUM];
+    XCTAssertTrue(newArray.count>0);
+    for (FTRecordModel *model in newArray) {
+       NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
+        if([dict[FT_OP] isEqualToString:FT_DATA_TYPE_RUM]){
+            NSDictionary *data = dict[FT_OPDATA];
+            if([data[FT_KEY_SOURCE] isEqualToString:FT_RUM_SOURCE_VIEW]){
+                NSDictionary *field = data[FT_FIELDS];
+                XCTAssertTrue([field.allKeys containsObject:FT_CPU_TICK_COUNT]);
+                XCTAssertTrue([field.allKeys containsObject:FT_CPU_TICK_COUNT_PER_SECOND]);
+                XCTAssertTrue([field.allKeys containsObject:FT_MEMORY_AVG]);
+                XCTAssertTrue([field.allKeys containsObject:FT_MEMORY_MAX]);
+                XCTAssertTrue([field.allKeys containsObject:FT_MEMORY_MAX]);
+                break;
+            }
+        }
+    }
+    
     [[FTSDKAgent sharedInstance] sdkDeinitialize];
 }
 - (void)testUnbindUser{

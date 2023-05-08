@@ -8,10 +8,10 @@ target 'Example' do
    project example_project_path
   
   # Pods for FTMacOSSDK
-   pod 'FTMacOSSDK', :path => './'
+#   pod 'FTMacOSSDK', :path => './'
 end
 
 target 'FTMacOSSDKTests' do
   project example_project_path
-   pod 'FTMacOSSDK', :path => './'
+#   pod 'FTMacOSSDK', :path => './'
 end

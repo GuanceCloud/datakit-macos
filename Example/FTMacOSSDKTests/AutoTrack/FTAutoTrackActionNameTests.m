@@ -17,7 +17,6 @@
 
 @implementation FTAutoTrackActionNameTests
 // NSButton、NSPopUpButton、NSSegmentedControl
-
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
@@ -64,7 +63,31 @@
     XCTAssertTrue([[slider datakit_actionName] isEqualToString:@"[NSSlider]0"]);
 }
 - (void)testComboBoxActionName{
-    
+    NSComboBox *comboBox = [[NSComboBox alloc]init];
+    [comboBox addItemWithObjectValue:@1];
+    [comboBox addItemWithObjectValue:@2];
+    [comboBox addItemsWithObjectValues:@[@3,@4,@5,@6]];
+    [comboBox selectItemWithObjectValue:@2];
+    XCTAssertTrue([[comboBox datakit_actionName] isEqualToString:@"[NSComboBox]2"]);
+}
+- (void)testSwitchActionName{
+    if (@available(macOS 10.15, *)) {
+        NSSwitch *mSwitch = [[NSSwitch alloc]init];
+        mSwitch.state = NSControlStateValueOn;
+        XCTAssertTrue([[mSwitch datakit_actionName] isEqualToString:@"[NSSwitch]On"]);
+    }
+}
+// NSGestureRecognizer
+// 
+- (void)testLableActionName{
+    NSTextField *lable = [[NSTextField alloc]init];
+    lable.stringValue = @"test";
+    XCTAssertTrue([[lable datakit_actionName] isEqualToString:@"[NSTextField]test"]);
+}
+- (void)testImageViewActionName{
+    NSImageView *image = [[NSImageView alloc]init];
+    image.image = [NSImage imageNamed:NSImageNameComputer];
+    XCTAssertTrue([[image datakit_actionName] isEqualToString:@"[NSImageView]"]);
 }
 - (void)check{
     

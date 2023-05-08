@@ -29,8 +29,8 @@
     "codeCoverage" : {
       "targets" : [
         {
-          "containerPath" : "container:..\/Pods\/Pods.xcodeproj",
-          "identifier" : "ECEAF65910DF7A647B6A7D79821B72F1",
+          "containerPath" : "container:..",
+          "identifier" : "FTMacOSSDK",
           "name" : "FTMacOSSDK"
         }
       ]

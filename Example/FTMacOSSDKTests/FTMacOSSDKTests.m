@@ -9,8 +9,6 @@
 #import "FTDateUtil.h"
 #import "FTRecordModel.h"
 #import "FTTrackDataManager.h"
-#import "FTRequest.h"
-#import "FTNetworkManager.h"
 #import "FTTrackerEventDBTool.h"
 #import "FTConstants.h"
 #import "FTMacOSSDK.h"
