@@ -95,3 +95,30 @@
 }
 @end
 
+@implementation NSComboBox (FTAutoTrack)
+
+-(NSString *)datakit_actionName{
+    return self.stringValue?[NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.stringValue]:super.datakit_actionName;
+}
+
+@end
+
+@implementation NSSwitch (FTAutoTrack)
+
+-(NSString *)datakit_actionName{
+    NSString *title = self.state == NSControlStateValueOff ?@"Off":@"On";
+    return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),title];
+}
+
+@end
+
+@implementation NSTextField (FTAutoTrack)
+
+-(NSString *)datakit_actionName{
+    if([self isKindOfClass:[NSSecureTextField class]]){
+        return [NSString stringWithFormat:@"[%@]",NSStringFromClass(self.class)];
+    }
+    return self.stringValue?[NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.stringValue]:super.datakit_actionName;
+}
+
+@end

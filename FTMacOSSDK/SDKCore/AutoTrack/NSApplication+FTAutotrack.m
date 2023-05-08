@@ -23,35 +23,36 @@
     if (self.currentEvent.type != NSEventTypeLeftMouseUp &&  self.currentEvent.type != NSEventTypeLeftMouseDown ) {
         return;
     }
+    //NSMenu 不继承于 NSView
+    if ([sender isKindOfClass:NSMenuItem.class]) {
+        if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
+            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:@"[NSMenuItem]"];
+        }
+        return;
+    }
+    NSView *view = sender;
+    //view 没有 window，点击事件不采集
+    if(!view.window){
+        return;
+    }
     //NSStepper点击触发 NSEventTypeLeftMouseDown
     if (self.currentEvent.type == NSEventTypeLeftMouseDown && ([sender isKindOfClass:NSDatePicker.class] || [sender isKindOfClass:NSStepper.class])) {
         if([sender isKindOfClass:NSDatePicker.class] && !(action && target)){
             return;
         }
-        NSView *view = sender;
         if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
             [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.datakit_actionName];
         }
     }else{
-        //NSMenu 不继承于 NSView
-        if ([sender isKindOfClass:NSMenuItem.class]) {
-            if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-                [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:@"[NSMenuItem]"];
-            }
-            return;
-        }
         //过滤 NSSearchField 取消按钮一次点击多次sendAction
         if ([sender isKindOfClass:NSSearchField.class] && action == nil) {
             return;
         }
         if([sender isKindOfClass:NSView.class]){
-            NSView *view = sender;
             if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
                 [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.datakit_actionName];
             }
         }
     }
 }
-
-
 @end

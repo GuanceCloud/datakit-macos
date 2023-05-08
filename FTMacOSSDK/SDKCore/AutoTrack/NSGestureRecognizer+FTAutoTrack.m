@@ -35,8 +35,14 @@
 }
 - (void)ftTrackGestureRecognizerAppClick{
     @try {
-        if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:self.view.datakit_actionName];
+        if (self.state != NSGestureRecognizerStateEnded) {
+            return;
+        }
+        NSView *view = self.view;
+        if([view isKindOfClass:[NSImageView class]]||[view isKindOfClass:[NSTextField class]]){
+            if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
+                [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.datakit_actionName];
+            }
         }
     }@catch (NSException *exception) {
         ZYErrorLog(@"%@ error: %@", self, exception);

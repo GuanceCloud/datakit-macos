@@ -31,7 +31,7 @@
     Class class = [FTSwizzler realDelegateClassFromSelector:selector proxy:delegate];
     
     if ([FTSwizzler realDelegateClass:class respondsToSelector:selector]) {
-        void (^didSelectItemBlock)(id, SEL, id, id) = ^(id view, SEL command, NSTableView *tabView, NSTabViewItem *tabViewItem) {
+        void (^didSelectItemBlock)(id, SEL, id, id) = ^(id view, SEL command, NSTabView *tabView, NSTabViewItem *tabViewItem) {
             
             if (tabView && tabViewItem) {
                 if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
@@ -43,7 +43,7 @@
         [FTSwizzler swizzleSelector:selector
                             onClass:class
                           withBlock:didSelectItemBlock
-                              named:@"tabView _didSelect"];
+                              named:@"tabView_didSelect"];
     }
     
 }
