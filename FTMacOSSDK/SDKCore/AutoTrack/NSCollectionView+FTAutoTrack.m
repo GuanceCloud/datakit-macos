@@ -46,6 +46,16 @@
 @implementation NSTableView (FTAutoTrack)
 
 -(NSString *)datakit_actionName{
-    return [NSString stringWithFormat:@"[%@][column:%ld][row:%ld]",NSStringFromClass(self.class),self.clickedColumn,(long)self.clickedRow];
+    NSView *itemView =  [self viewAtColumn:self.clickedColumn row:self.clickedRow makeIfNecessary:NO];
+    NSString *title = nil;
+    if(itemView && itemView.subviews.count>0){
+        for (NSView *sub in itemView.subviews) {
+            if([sub isKindOfClass:NSTextField.class]){
+                NSTextField *lable = (NSTextField *)sub;
+                title = lable.stringValue;
+            }
+        }
+    }
+    return title?[NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),title]:[NSString stringWithFormat:@"[%@][column:%ld][row:%ld]",NSStringFromClass(self.class),self.clickedColumn,(long)self.clickedRow];
 }
 @end

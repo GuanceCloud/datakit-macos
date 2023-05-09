@@ -9,6 +9,7 @@
 #import "FTGlobalRumManager.h"
 #import "NSView+FTAutoTrack.h"
 #import "FTAutoTrack.h"
+#import "NSMenuItem+FTAutoTrack.h"
 @implementation NSApplication (FTAutotrack)
 - (BOOL)datakit_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender{
     [self datakitTrack:action to:target from:sender];
@@ -25,8 +26,9 @@
     }
     //NSMenu 不继承于 NSView
     if ([sender isKindOfClass:NSMenuItem.class]) {
+        NSMenuItem *menu = (NSMenuItem *)sender;
         if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:@"[NSMenuItem]"];
+            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:menu.datakit_actionName];
         }
         return;
     }
