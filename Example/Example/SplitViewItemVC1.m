@@ -8,6 +8,7 @@
 #import "SplitViewItemVC1.h"
 #import "SplitViewVC.h"
 #import "FTMacOSSDK.h"
+#import "Example-Swift.h"
 @interface SplitViewItemVC1 ()<NSTableViewDelegate,NSTableViewDataSource>
 @property (weak) IBOutlet NSTableView *mTableview;
 @property (nonatomic, strong) NSArray *datas;
@@ -23,7 +24,7 @@
 - (void)createUI{
     SplitViewVC *parent = (SplitViewVC *)self.parentViewController;
     self.delegate = parent;
-    self.datas = @[@"AutoTrack Click",@"RUM数据采集",@"日志输出",@"网络链路追踪",@"绑定用户",@"解绑用户"];
+    self.datas = @[@"AutoTrack Click",@"RUM数据采集",@"日志输出",@"网络链路追踪",@"绑定用户",@"解绑用户",@"控制台日志采集"];
     self.mTableview.backgroundColor = [NSColor whiteColor];
     self.mTableview.usesAlternatingRowBackgroundColors = YES;
     [self.mTableview setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
@@ -46,15 +47,17 @@
     if (view == nil) {
     
         NSTableCellView *cellView = [NSTableCellView alloc].init;
-        view = cellView;
         
+        view = cellView;
         NSTextField *textField =  [NSTextField alloc].init;
+        textField.tag = 200+row;
         textField.translatesAutoresizingMaskIntoConstraints = NO;
         [textField setBezeled:NO];
         textField.drawsBackground = NO;
 
-        [cellView addSubview:textField];
-        
+//        [cellView addSubview:textField];
+        cellView.textField = textField;
+
         NSLayoutConstraint *topAnchor = [textField.topAnchor constraintEqualToAnchor:cellView.topAnchor constant:0];
         NSLayoutConstraint *bottomAnchor = [textField.bottomAnchor constraintEqualToAnchor:cellView.bottomAnchor constant:0];
 
@@ -86,6 +89,10 @@
     }else if(row == 5){
         [[FTSDKAgent sharedInstance] unbindUser];
         return;
+    }else if(row == 6){
+        NSLog(@"NSLog Console log");
+        LogTest *test = [[LogTest alloc]init];
+        [test show];
     }
     if (self.delegate&&[self.delegate respondsToSelector:@selector(tableViewSelectionDidSelect:)]) {
         [self.delegate tableViewSelectionDidSelect:row];

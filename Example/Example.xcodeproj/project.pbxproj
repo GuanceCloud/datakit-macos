@@ -14,6 +14,7 @@
 		175BC13B2A08A34600AEBEB5 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175BC13A2A08A34600AEBEB5 /* WebViewController.m */; };
 		175BC13D2A08A45700AEBEB5 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 175BC13C2A08A45700AEBEB5 /* sample.html */; };
 		175BC1F42A090B4100AEBEB5 /* FTMacOSSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 175BC1F32A090B4100AEBEB5 /* FTMacOSSDK */; };
+		175BC1F72A0A58FD00AEBEB5 /* FTTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 175BC1F62A0A58FD00AEBEB5 /* FTTestHelper.m */; };
 		175C7CEF29E6B50B00A7F271 /* LogTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175C7CEE29E6B50B00A7F271 /* LogTest.swift */; };
 		177BA53329DADAB100DB7497 /* LoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA53129DADAB100DB7497 /* LoggingViewController.m */; };
 		177BA53429DADAB100DB7497 /* LoggingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177BA53229DADAB100DB7497 /* LoggingViewController.xib */; };
@@ -83,6 +84,8 @@
 		175BC13C2A08A45700AEBEB5 /* sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample.html; sourceTree = "<group>"; };
 		175BC1402A08FD1900AEBEB5 /* FTMacOSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FTMacOSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		175BC1F22A090A3600AEBEB5 /* ft-sdk-macos */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "ft-sdk-macos"; path = ..; sourceTree = "<group>"; };
+		175BC1F52A0A58FD00AEBEB5 /* FTTestHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTTestHelper.h; sourceTree = "<group>"; };
+		175BC1F62A0A58FD00AEBEB5 /* FTTestHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTTestHelper.m; sourceTree = "<group>"; };
 		175C7CED29E6B50A00A7F271 /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		175C7CEE29E6B50B00A7F271 /* LogTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTest.swift; sourceTree = "<group>"; };
 		177BA53029DADAB100DB7497 /* LoggingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoggingViewController.h; sourceTree = "<group>"; };
@@ -352,6 +355,8 @@
 		7CDA50DF26DE15EE0062CC39 /* FTMacOSSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				175BC1F52A0A58FD00AEBEB5 /* FTTestHelper.h */,
+				175BC1F62A0A58FD00AEBEB5 /* FTTestHelper.m */,
 				1715F2932A03CE97007EF5BB /* AutoTrack */,
 				7CDAF53526DE1C8B00F8F01D /* FTMacOSSDKTests.m */,
 				1707C82229E52ED5009B7D9C /* FTRUMTests.m */,
@@ -651,6 +656,7 @@
 				1715F2952A04A123007EF5BB /* FTAutoTrackActionNameTests.m in Sources */,
 				1707C82329E52ED5009B7D9C /* FTRUMTests.m in Sources */,
 				7CDAF53726DE1C8B00F8F01D /* FTMacOSSDKTests.m in Sources */,
+				175BC1F72A0A58FD00AEBEB5 /* FTTestHelper.m in Sources */,
 				1707C83529E55C19009B7D9C /* FTLoggerTest.m in Sources */,
 				17B296B529EE41A000B4A344 /* FTTraceTests.m in Sources */,
 			);

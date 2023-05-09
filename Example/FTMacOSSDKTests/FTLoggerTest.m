@@ -6,6 +6,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "FTTestHelper.h"
 #import "FTSDKAgent+Private.h"
 #import "FTMacOSSDK.h"
 #import "FTConstants.h"
@@ -15,7 +16,7 @@
 #import "FTRecordModel.h"
 #import "FTDateUtil.h"
 #import "FTJSONUtil.h"
-@interface FTLoggerTest : XCTestCase
+@interface FTLoggerTest : FTTestHelper
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, copy) NSString *appid;
 
