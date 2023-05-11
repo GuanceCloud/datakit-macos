@@ -24,7 +24,8 @@
 - (void)createUI{
     SplitViewVC *parent = (SplitViewVC *)self.parentViewController;
     self.delegate = parent;
-    self.datas = @[@"AutoTrack Click",@"RUM数据采集",@"日志输出",@"网络链路追踪",@"绑定用户",@"解绑用户",@"控制台日志采集"];
+    self.datas = @[@"AutoTrack Click",@"RUM数据采集",@"日志输出",@"网络链路追踪",@"绑定用户",@"解绑用户"];
+    //@"控制台日志采集"
     self.mTableview.backgroundColor = [NSColor whiteColor];
     self.mTableview.usesAlternatingRowBackgroundColors = YES;
     [self.mTableview setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
