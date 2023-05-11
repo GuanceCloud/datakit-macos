@@ -74,7 +74,7 @@
     }
     
     NSTextField *textField = subviews[0];
-
+    textField.tag = 200+row;
     if (data != nil) {
         textField.stringValue = data;
     }

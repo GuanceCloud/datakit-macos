@@ -990,21 +990,21 @@
                         <subviews>
                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="iTp-lI-5xq">
                                 <rect key="frame" x="43" y="40" width="914" height="716"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="system" size="14"/>
                                 <tabViewItems>
-                                    <tabViewItem label="FirstView" identifier="" id="yoC-Xz-CcO">
+                                    <tabViewItem label="FirstView" identifier="FirstView" id="yoC-Xz-CcO">
                                         <view key="view" id="5cj-JY-ymq">
                                             <rect key="frame" x="10" y="33" width="894" height="670"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </tabViewItem>
-                                    <tabViewItem label="SecondView" identifier="" id="uTi-NM-qgQ">
+                                    <tabViewItem label="SecondView" identifier="ThirdView" id="uTi-NM-qgQ">
                                         <view key="view" id="bda-dL-LBt">
                                             <rect key="frame" x="10" y="33" width="894" height="670"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </tabViewItem>
-                                    <tabViewItem label="ThirdView" identifier="" id="MZD-U9-oEh" userLabel="ThirdView">
+                                    <tabViewItem label="ThirdView" identifier="ThirdView" id="MZD-U9-oEh" userLabel="ThirdView">
                                         <view key="view" id="6rc-Qb-46Q">
                                             <rect key="frame" x="10" y="33" width="894" height="670"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1012,8 +1012,8 @@
                                     </tabViewItem>
                                 </tabViewItems>
                             </tabView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kFV-Jb-8Qo">
-                                <rect key="frame" x="293" y="779" width="414" height="16"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" tag="300" translatesAutoresizingMaskIntoConstraints="NO" id="kFV-Jb-8Qo">
+                                <rect key="frame" x="293" y="780" width="414" height="15"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Tab View 切换按钮的点击事件需要通过NSTabViewDelegate进行采集" id="KzV-cU-slg">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1076,8 +1076,8 @@
                             <constraint firstItem="iTp-lI-5xq" firstAttribute="centerY" secondItem="4am-Vd-ySH" secondAttribute="centerY" id="2XP-f3-TMX"/>
                             <constraint firstItem="6Yw-Xa-AOm" firstAttribute="centerY" secondItem="dzK-gC-uA6" secondAttribute="centerY" id="6oV-oo-q91"/>
                             <constraint firstAttribute="trailing" secondItem="6Yw-Xa-AOm" secondAttribute="trailing" constant="10" id="7iR-nv-jUw"/>
+                            <constraint firstItem="iTp-lI-5xq" firstAttribute="top" secondItem="kFV-Jb-8Qo" secondAttribute="bottom" constant="30" id="9sk-Ol-zY1"/>
                             <constraint firstAttribute="bottom" secondItem="iTp-lI-5xq" secondAttribute="bottom" constant="50" id="BMG-tt-WVy"/>
-                            <constraint firstItem="iTp-lI-5xq" firstAttribute="top" secondItem="4am-Vd-ySH" secondAttribute="top" constant="50" id="FAd-EB-wg6"/>
                             <constraint firstItem="6Yw-Xa-AOm" firstAttribute="leading" secondItem="dzK-gC-uA6" secondAttribute="trailing" constant="10" id="GgK-2k-qaT"/>
                             <constraint firstItem="kFV-Jb-8Qo" firstAttribute="top" secondItem="4am-Vd-ySH" secondAttribute="top" constant="5" id="HZ6-jE-IGH"/>
                             <constraint firstAttribute="bottom" secondItem="6Yw-Xa-AOm" secondAttribute="bottom" constant="10" id="HzI-p4-IH7"/>

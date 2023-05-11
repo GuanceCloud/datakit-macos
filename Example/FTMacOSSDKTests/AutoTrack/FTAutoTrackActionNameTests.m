@@ -17,6 +17,8 @@
 #import "FTSDKAgent+Private.h"
 #import "FTRUMManager.h"
 #import "FTGlobalRumManager+Private.h"
+#import "SplitViewVC.h"
+#import "SplitViewItemVC2.h"
 @interface FTAutoTrackActionNameTests : FTTestHelper
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, copy) NSString *appid;
@@ -112,7 +114,7 @@
     image.image = [NSImage imageNamed:NSImageNameComputer];
     XCTAssertTrue([[image datakit_actionName] isEqualToString:@"[NSImageView]"]);
 }
-- (void)testLaunchAction{
+- (void)testActionLaunch{
     [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
     [self setRumConfig];
     XCTestExpectation *expectation= [self expectationWithDescription:@"异步操作timeout"];
@@ -141,28 +143,143 @@
      XCTAssertTrue(hasLaunchData == YES);
      [[FTSDKAgent sharedInstance] sdkDeinitialize];
 }
-- (void)testClick{
+- (void)testClickButtonAndTableView{
     [self setRumConfig];
-    [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
-    NSArray *array = [NSApplication sharedApplication].windows;
-    for (NSWindow *window in array) {
-        if([window isKindOfClass:LoginWindow.class]){
-            NSSearchField *search = [window.contentView viewWithTag:50];
-            search.stringValue = @"asd";
-            NSView *view = [window.contentView viewWithTag:100];
-            [self clickAtView:view];
+    [self jumpToMainTestWindow];
+    [self clickView:ClickTableView_AutoTrack];
+    [self clickView:ClickTableView_AutoTrack];
+    [self sleep:1];
+    [[FTGlobalRumManager sharedManager].rumManager syncProcess];
+    NSArray *datas = [[FTTrackerEventDBTool sharedManger] getFirstRecords:10 withType:FT_DATA_TYPE_RUM];
+    XCTAssertTrue(datas.count>0);
+    BOOL tableViewClick = NO,loginBtnClick = NO;
+    for (FTRecordModel *model in datas) {
+        NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
+        NSDictionary *data = dict[FT_OPDATA];
+        if([data[FT_KEY_SOURCE] isEqualToString:FT_RUM_SOURCE_ACTION]){
+            NSDictionary *data = dict[FT_OPDATA];
+            NSDictionary *tags = data[FT_TAGS];
+            NSString *actionName = tags[FT_KEY_ACTION_NAME];
+            if([actionName isEqualToString:@"[NSButton]Login"]){
+                loginBtnClick = YES;
+            }else if([actionName isEqualToString:@"[NSTableView]AutoTrack Click"]){
+                tableViewClick = YES;
+            }
         }
     }
-    XCTestExpectation *expectation2= [self expectationWithDescription:@"异步操作timeout"];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [expectation2 fulfill];
-    });
-    [self waitForExpectationsWithTimeout:10 handler:^(NSError *error) {
-        XCTAssertNil(error);
-    }];
+    XCTAssertTrue(loginBtnClick);
+    XCTAssertTrue(tableViewClick);
+    [[FTSDKAgent sharedInstance] sdkDeinitialize];
 }
-
-
+- (void)testClickCollectionView{
+    [self setRumConfig];
+    [self jumpToMainTestWindow];
+    [self clickView:ClickTableView_AutoTrack];
+    [self clickView:ClickTabViewItem_Third];
+    [self sleep:0.5];
+    [self clickView:ClickCollectionViewItem];
+    [self clickView:ClickCollectionViewItem2];
+    [self sleep:1];
+    [[FTGlobalRumManager sharedManager].rumManager syncProcess];
+    NSArray *datas = [[FTTrackerEventDBTool sharedManger] getFirstRecords:10 withType:FT_DATA_TYPE_RUM];
+    XCTAssertTrue(datas.count>0);
+    BOOL tabViewItemClick = NO,collectionView = NO;
+    for (FTRecordModel *model in datas) {
+        NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
+        NSDictionary *data = dict[FT_OPDATA];
+        if([data[FT_KEY_SOURCE] isEqualToString:FT_RUM_SOURCE_ACTION]){
+            NSDictionary *data = dict[FT_OPDATA];
+            NSDictionary *tags = data[FT_TAGS];
+            NSString *actionName = tags[FT_KEY_ACTION_NAME];
+            if([actionName isEqualToString:@"[NSTabView]ThirdView"]){
+                tabViewItemClick = YES;
+            }else if([actionName isEqualToString:@"[NSCollectionView][section:0][item:1]"]){
+                collectionView = YES;
+            }
+        }
+    }
+    XCTAssertTrue(tabViewItemClick);
+    XCTAssertTrue(collectionView);
+}
+// NSPopUpButton\NSComboBox\NSButton
+- (void)testClickFirstView{
+    [self setRumConfig];
+    [self jumpToMainTestWindow];
+    [self clickView:ClickTableView_AutoTrack];
+    [self clickView:ClickTabViewItem_First];
+    [self sleep:0.5];
+    [self clickView:ClickComboBox];
+//    [self clickView:ClickPopUpButton];
+    [self clickView:ClickButtonCheck];
+    [self clickView:ClickButtonCheck];
+    [self sleep:1];
+    [[FTGlobalRumManager sharedManager].rumManager syncProcess];
+    NSArray *datas = [[FTTrackerEventDBTool sharedManger] getFirstRecords:30 withType:FT_DATA_TYPE_RUM];
+    XCTAssertTrue(datas.count>0);
+    BOOL popUpButtonClick = NO,comboBoxClick = NO,buttonClick = NO;
+    for (FTRecordModel *model in datas) {
+        NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
+        NSDictionary *data = dict[FT_OPDATA];
+        if([data[FT_KEY_SOURCE] isEqualToString:FT_RUM_SOURCE_ACTION]){
+            NSDictionary *data = dict[FT_OPDATA];
+            NSDictionary *tags = data[FT_TAGS];
+            NSString *actionName = tags[FT_KEY_ACTION_NAME];
+            if([actionName isEqualToString:@"[NSPopUpButton]Item 1"]){
+                popUpButtonClick = YES;
+            }else if([actionName isEqualToString:@"[NSComboBox]"]){
+                comboBoxClick = YES;
+            }else if([actionName isEqualToString:@"[NSButton]Check"]){
+                buttonClick = YES;
+            }
+        }
+    }
+//    XCTAssertTrue(popUpButtonClick);
+    XCTAssertTrue(comboBoxClick);
+    XCTAssertTrue(buttonClick);
+}
+// NSSegmentedControl\NSStepper\NSTextField\NSImageView
+- (void)testClickSecondView{
+    [self setRumConfig];
+    [self jumpToMainTestWindow];
+    [self clickView:ClickTableView_AutoTrack];
+    [self clickView:ClickTabViewItem_Second];
+    [self sleep:0.5];
+    [self clickView:ClickSegmentedControl];
+    [self clickView:ClickStepper];
+    [self clickView:ClickLableGes];
+    [self clickView:ClickImageGes];
+    [self clickView:ClickImageGes];
+    [self sleep:1];
+    [[FTGlobalRumManager sharedManager].rumManager syncProcess];
+    NSArray *datas = [[FTTrackerEventDBTool sharedManger] getFirstRecords:30 withType:FT_DATA_TYPE_RUM];
+    XCTAssertTrue(datas.count>0);
+    BOOL segmentedControlClick = NO,stepperClick = NO,lableClick = NO,imageClick = NO;
+    NSInteger count = 0;
+    for (FTRecordModel *model in datas) {
+        NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
+        NSDictionary *data = dict[FT_OPDATA];
+        if([data[FT_KEY_SOURCE] isEqualToString:FT_RUM_SOURCE_ACTION]){
+            count ++ ;
+            NSDictionary *data = dict[FT_OPDATA];
+            NSDictionary *tags = data[FT_TAGS];
+            NSString *actionName = tags[FT_KEY_ACTION_NAME];
+            if([actionName isEqualToString:@"[NSSegmentedControl]1"]){
+                segmentedControlClick = YES;
+            }else if([actionName isEqualToString:@"[NSStepper]2"]){
+                stepperClick = YES;
+            }else if([actionName isEqualToString:@"[NSTextField]Label"]){
+                lableClick = YES;
+            }else if([actionName isEqualToString:@"[NSImageView]"]){
+                imageClick = YES;
+            }
+        }
+    }
+    XCTAssertTrue(count>6 && count<9);
+    XCTAssertTrue(segmentedControlClick);
+    XCTAssertTrue(stepperClick);
+    XCTAssertTrue(lableClick);
+    XCTAssertTrue(imageClick);
+}
 - (void)setRumConfig{
     FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
     config.enableSDKDebugLog = YES;

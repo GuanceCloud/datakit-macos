@@ -1,27 +1,10 @@
 {
   "configurations" : [
     {
-      "id" : "081649BA-B36E-4AC9-B493-52C3EC5F2C79",
+      "id" : "F3B819A4-BF0D-4250-83AE-ED7B488E29C9",
       "name" : "Test Scheme Action",
       "options" : {
-        "environmentVariableEntries" : [
-          {
-            "key" : "isUnitTests",
-            "value" : "1"
-          },
-          {
-            "key" : "ACCESS_SERVER_URL",
-            "value" : "xxxxx"
-          },
-          {
-            "key" : "APP_ID",
-            "value" : "xxxxx"
-          },
-          {
-            "key" : "TRACE_URL",
-            "value" : "https:\/\/console-api.guance.com\/not\/found\/"
-          }
-        ]
+
       }
     }
   ],
@@ -42,15 +25,15 @@
       },
       {
         "key" : "ACCESS_SERVER_URL",
-        "value" : "xxxxx"
+        "value" : "XXXXXX"
       },
       {
         "key" : "APP_ID",
-        "value" : "xxxxx"
+        "value" : "XXXXXX"
       },
       {
         "key" : "TRACE_URL",
-        "value" : "xxxxx"
+        "value" : "https:\/\/console-api.guance.com\/not\/found\/"
       }
     ]
   },

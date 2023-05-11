@@ -72,7 +72,6 @@
 
 /* Begin PBXFileReference section */
 		1707C82229E52ED5009B7D9C /* FTRUMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTRUMTests.m; sourceTree = "<group>"; };
-		1707C82829E53068009B7D9C /* ExampleTests2.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests2.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1707C83029E534F9009B7D9C /* FTMacOSSDKTest.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = FTMacOSSDKTest.xcconfig; sourceTree = "<group>"; };
 		1707C83429E55C19009B7D9C /* FTLoggerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTLoggerTest.m; sourceTree = "<group>"; };
 		1715F2942A04A123007EF5BB /* FTAutoTrackActionNameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTAutoTrackActionNameTests.m; sourceTree = "<group>"; };
@@ -161,13 +160,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1707C82529E53068009B7D9C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7CDA50C326DE15EB0062CC39 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -320,7 +312,6 @@
 				7CDA50C626DE15EB0062CC39 /* Example.app */,
 				7CDA50DC26DE15EE0062CC39 /* FTMacOSSDKTests.xctest */,
 				7CDA50E726DE15EE0062CC39 /* ExampleUITests.xctest */,
-				1707C82829E53068009B7D9C /* ExampleTests2.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -380,23 +371,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1707C82729E53068009B7D9C /* ExampleTests2 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1707C82C29E53068009B7D9C /* Build configuration list for PBXNativeTarget "ExampleTests2" */;
-			buildPhases = (
-				1707C82429E53068009B7D9C /* Sources */,
-				1707C82529E53068009B7D9C /* Frameworks */,
-				1707C82629E53068009B7D9C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ExampleTests2;
-			productName = ExampleTests2;
-			productReference = 1707C82829E53068009B7D9C /* ExampleTests2.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		7CDA50C526DE15EB0062CC39 /* Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7CDA50F026DE15EE0062CC39 /* Build configuration list for PBXNativeTarget "Example" */;
@@ -467,9 +441,6 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					1707C82729E53068009B7D9C = {
-						CreatedOnToolsVersion = 14.3;
-					};
 					7CDA50C526DE15EB0062CC39 = {
 						CreatedOnToolsVersion = 12.4;
 						LastSwiftMigration = 1430;
@@ -500,19 +471,11 @@
 				7CDA50C526DE15EB0062CC39 /* Example */,
 				7CDA50DB26DE15EE0062CC39 /* FTMacOSSDKTests */,
 				7CDA50E626DE15EE0062CC39 /* ExampleUITests */,
-				1707C82729E53068009B7D9C /* ExampleTests2 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1707C82629E53068009B7D9C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7CDA50C426DE15EB0062CC39 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -613,13 +576,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1707C82429E53068009B7D9C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7CDA50C226DE15EB0062CC39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -697,54 +653,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1707C82D29E53068009B7D9C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BW62V33GLH;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = guance.com.ExampleTests2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-			};
-			name = Debug;
-		};
-		1707C82E29E53068009B7D9C /* Pre */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BW62V33GLH;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = guance.com.ExampleTests2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-			};
-			name = Pre;
-		};
-		1707C82F29E53068009B7D9C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = BW62V33GLH;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = guance.com.ExampleTests2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-			};
-			name = Release;
-		};
 		175B13A929E3AC90003A5B1B /* Pre */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1154,16 +1062,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1707C82C29E53068009B7D9C /* Build configuration list for PBXNativeTarget "ExampleTests2" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1707C82D29E53068009B7D9C /* Debug */,
-				1707C82E29E53068009B7D9C /* Pre */,
-				1707C82F29E53068009B7D9C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		7CDA50C126DE15EB0062CC39 /* Build configuration list for PBXProject "Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

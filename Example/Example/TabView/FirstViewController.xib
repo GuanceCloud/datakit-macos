@@ -8,6 +8,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="FirstViewController">
             <connections>
+                <outlet property="comboBox" destination="SVu-nP-AsF" id="9Z3-4H-94l"/>
+                <outlet property="item" destination="Gq0-pZ-bm5" id="vIm-pi-IhI"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -1071,7 +1073,7 @@ Cg
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gq0-pZ-bm5">
+                <popUpButton verticalHuggingPriority="750" tag="320" translatesAutoresizingMaskIntoConstraints="NO" id="Gq0-pZ-bm5">
                     <rect key="frame" x="7" y="181" width="77" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="26v-XO-ZDT"/>
@@ -1122,7 +1124,7 @@ Cg
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </searchFieldCell>
                 </searchField>
-                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wbE-9s-tXJ">
+                <button verticalHuggingPriority="750" tag="322" translatesAutoresizingMaskIntoConstraints="NO" id="wbE-9s-tXJ">
                     <rect key="frame" x="8" y="144" width="62" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="XpX-cR-N0C"/>
@@ -1133,7 +1135,7 @@ Cg
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                 </button>
-                <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SVu-nP-AsF">
+                <comboBox verticalHuggingPriority="750" tag="321" translatesAutoresizingMaskIntoConstraints="NO" id="SVu-nP-AsF">
                     <rect key="frame" x="99" y="183" width="99" height="23"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="95" id="Zba-l6-LXT"/>

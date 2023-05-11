@@ -7,7 +7,9 @@
 
 #import "FirstViewController.h"
 
-@interface FirstViewController ()
+@interface FirstViewController ()<NSComboBoxDelegate>
+@property (strong) IBOutlet NSComboBox *comboBox;
+@property (strong) IBOutlet NSPopUpButton *item;
 
 @end
 
@@ -20,7 +22,8 @@
 - (void)viewDidAppear{
     [super viewDidAppear];
     NSLog(@"FirstViewController viewDidAppear");
-   
+    NSLog(@"keyWindow = %@",[NSApplication sharedApplication].keyWindow);
+    self.comboBox.delegate = self;
 }
 
 - (void)viewClick:(NSGestureRecognizer *)gesture {
@@ -30,6 +33,9 @@
     [super viewDidLoad];
     
     // Do view setup here.
+}
+- (void)comboBoxWillPopUp:(NSNotification *)notification{
+    NSLog(@"keyWindow = %@",[NSApplication sharedApplication].keyWindow);
 }
 - (void)viewDidDisappear{
     [super viewDidDisappear];

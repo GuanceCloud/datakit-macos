@@ -29,8 +29,9 @@
    
     // Do view setup here.
     NSLog(@"SecondViewController viewDidAppear");
-    NSClickGestureRecognizer *tap = [[NSClickGestureRecognizer alloc]init];
-    tap.action = @selector(lableTap);
+    NSClickGestureRecognizer *tap = [[NSClickGestureRecognizer alloc] initWithTarget:self action:@selector(lableTap:)];
+    tap.numberOfClicksRequired = 1;
+    self.lable.enabled = YES;
     [self.lable addGestureRecognizer:tap];
     // 设置背景色
     self.imageView.wantsLayer = YES;
@@ -48,7 +49,7 @@
     self.stepper.minValue = 0;
     self.stepper.increment = 2;
 }
-- (void)lableTap{
+- (void)lableTap:(NSClickGestureRecognizer *)ges{
     NSLog(@"lableTap NSGestureRecognizer set action");
 }
 - (void)imageViewClick:(NSClickGestureRecognizer *)ges{
