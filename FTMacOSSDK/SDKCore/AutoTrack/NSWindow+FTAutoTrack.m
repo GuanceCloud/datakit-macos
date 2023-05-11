@@ -27,9 +27,6 @@ static char *viewControllerUUID = "viewControllerUUID";
 -(NSDate *)datakit_viewLoadStartTime{
     return objc_getAssociatedObject(self, &viewLoadStartTimeKey);
 }
--(NSDate *)setDatakit_loadDuration{
-    return objc_getAssociatedObject(self, &viewLoadStartTimeKey);
-}
 -(NSNumber *)datakit_loadDuration{
     return objc_getAssociatedObject(self, &viewLoadDuration);
 }
@@ -74,16 +71,16 @@ static char *viewControllerUUID = "viewControllerUUID";
     //window
     //记录 init - keyWindow 的时间差 作为window显示加载时长
     //只记录第一次 变成keyWindow
-    NSNumber *loadTime = @0;
     if(self.datakit_viewLoadStartTime){
-        loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.datakit_viewLoadStartTime toDate:[NSDate date]];
+        self.datakit_loadDuration = [FTDateUtil nanosecondTimeIntervalSinceDate:self.datakit_viewLoadStartTime toDate:[NSDate date]];
         self.datakit_viewLoadStartTime = nil;
     }
-    self.datakit_loadDuration = loadTime;
     self.datakit_viewUUID = [NSUUID UUID].UUIDString;
     if([FTAutoTrack sharedInstance].addRumDatasDelegate){
-        if( [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(onCreateView:loadTime:)]){
-            [[FTAutoTrack sharedInstance].addRumDatasDelegate onCreateView:self.datakit_windowName loadTime:loadTime];
+        if([self.datakit_loadDuration intValue]>0){
+            if( [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(onCreateView:loadTime:)]){
+                [[FTAutoTrack sharedInstance].addRumDatasDelegate onCreateView:self.datakit_windowName loadTime:self.datakit_loadDuration];
+            }
         }
         if( [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(startViewWithName:)]){
             [[FTAutoTrack sharedInstance].addRumDatasDelegate startViewWithName:self.datakit_windowName];

@@ -72,13 +72,15 @@
 
 -(NSString *)datakit_actionName{
     NSString *title = [self labelForSegment:self.selectedSegment];
-    if(!title){
+    if(!title||title.length==0){
         NSMenu *menu = [self menuForSegment:self.selectedSegment];
-        if(menu){
+        if(menu && menu.title){
             title = menu.title;
+        }else{
+            title = [NSString stringWithFormat:@"%ld",(long)self.selectedSegment];
         }
     }
-    return title?[NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),title]:super.datakit_actionName;
+    return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),title];
 }
 @end
 

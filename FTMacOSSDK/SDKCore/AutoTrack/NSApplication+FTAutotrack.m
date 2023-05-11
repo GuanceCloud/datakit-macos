@@ -10,6 +10,7 @@
 #import "NSView+FTAutoTrack.h"
 #import "FTAutoTrack.h"
 #import "NSMenuItem+FTAutoTrack.h"
+#import "FTLog.h"
 @implementation NSApplication (FTAutotrack)
 - (BOOL)datakit_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender{
     [self datakitTrack:action to:target from:sender];
@@ -26,6 +27,10 @@
     }
     //NSMenu 不继承于 NSView
     if ([sender isKindOfClass:NSMenuItem.class]) {
+        // 排除 NSPopUpButton 弹出的 NSMenuItem 点击避免重复
+        if(target != NULL && [target isKindOfClass:[NSPopUpButtonCell class]]){
+            return;
+        }
         NSMenuItem *menu = (NSMenuItem *)sender;
         if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
             [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:menu.datakit_actionName];
@@ -48,6 +53,10 @@
     }else{
         //过滤 NSSearchField 取消按钮一次点击多次sendAction
         if ([sender isKindOfClass:NSSearchField.class] && action == nil) {
+            return;
+        }
+        //过滤 NSComboBox 下拉选择框的点击事件，避免重复
+        if ([sender isKindOfClass:NSClassFromString(@"NSComboTableView")]){
             return;
         }
         if([sender isKindOfClass:NSView.class]){
