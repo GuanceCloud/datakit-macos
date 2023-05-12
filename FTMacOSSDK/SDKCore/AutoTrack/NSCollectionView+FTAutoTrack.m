@@ -47,6 +47,9 @@
 @implementation NSTableView (FTAutoTrack)
 
 -(NSString *)datakit_actionName{
+    if(self.clickedRow<0 || self.clickedColumn<0 ){
+        return nil;
+    }
     NSView *itemView =  [self viewAtColumn:self.clickedColumn row:self.clickedRow makeIfNecessary:NO];
     NSString *title = nil;
     if(itemView && itemView.subviews.count>0){
