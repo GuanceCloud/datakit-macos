@@ -24,7 +24,7 @@
 - (void)createUI{
     SplitViewVC *parent = (SplitViewVC *)self.parentViewController;
     self.delegate = parent;
-    self.datas = @[@"AutoTrack Click",@"RUM数据采集",@"日志输出",@"网络链路追踪",@"绑定用户",@"解绑用户"];
+    self.datas = @[@"AutoTrack Click",@"RUM数据采集",@"日志输出",@"网络链路追踪",@"WebViewBridge",@"绑定用户",@"解绑用户"];
     //@"控制台日志采集"
     self.mTableview.backgroundColor = [NSColor whiteColor];
     self.mTableview.usesAlternatingRowBackgroundColors = YES;
@@ -84,13 +84,13 @@
 }
 -(void)tableViewSelectionDidChange:(NSNotification *)notification{
     NSInteger row = [notification.object selectedRow];
-    if(row == 4){
+    if(row == 5){
         [[FTSDKAgent sharedInstance] bindUserWithUserID:@"macosid01" userName:@"macos_user" userEmail:@"macos_user@123.com" extra:@{@"user_extra":@"user_extra_demo"}];
         return;
-    }else if(row == 5){
+    }else if(row == 6){
         [[FTSDKAgent sharedInstance] unbindUser];
         return;
-    }else if(row == 6){
+    }else if(row == 7){
         NSLog(@"NSLog Console log");
         LogTest *test = [[LogTest alloc]init];
         [test show];
