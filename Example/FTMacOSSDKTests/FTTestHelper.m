@@ -34,7 +34,7 @@ void PostMouseEvent(CGMouseButton button, CGEventType type, const CGPoint point,
 {
     CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStatePrivate);
     CGEventRef theEvent = CGEventCreateMouseEvent(source, type, point, button);
-    CGEventSetIntegerValueField(theEvent, kCGMouseEventClickState, clickCount);
+    CGEventSetIntegerValueField(theEvent, kCGMouseEventPressure, clickCount);
     CGEventSetType(theEvent, type);
     CGEventPost(kCGHIDEventTap, theEvent);
     CFRelease(theEvent);
@@ -95,16 +95,14 @@ void dPostKeyboardEvent(CGKeyCode virtualKey, bool keyDown, CGEventFlags flags)
                 XCTAssertNil(error);
             }];
         }else if(view == ClickComboBox){
-//            NSComboBox *box = (NSComboBox *)clickView;
-//            box.delegate = self;
+            NSComboBox *box = (NSComboBox *)clickView;
+            box.delegate = self;
             CGPoint point =  [self getViewPointInWindow:clickView offset:offset];
+            self.popBtnExpectation = [self expectationWithDescription:@"异步操作timeout"];
             [self clickAtPoint:point];
-            [self clickAtPoint:point];
-
-//            self.popBtnExpectation = [self expectationWithDescription:@"异步操作timeout"];
-//            [self waitForExpectationsWithTimeout:5 handler:^(NSError *error) {
-//                XCTAssertNil(error);
-//            }];
+            [self waitForExpectationsWithTimeout:5 handler:^(NSError *error) {
+                XCTAssertNil(error);
+            }];
         }else{
             [self clickAtView:clickView offset:offset];
         }
@@ -112,16 +110,20 @@ void dPostKeyboardEvent(CGKeyCode virtualKey, bool keyDown, CGEventFlags flags)
     
 }
 - (void)comboBoxWillPopUp:(NSNotification *)notification{
-    CGPoint point =  [self getViewPointInWindow:notification.object offset:CGPointMake(0, 20)];
-    [self.popBtnExpectation fulfill];
-    self.popBtnExpectation = nil;
-    PostMouseEvent(kCGMouseButtonLeft, kCGEventLeftMouseDown, point, 2);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+        CGPoint point =  [self getViewPointInWindow:notification.object offset:CGPointMake(0, 20)];
+        [self clickAtPoint:point];
+        [self.popBtnExpectation fulfill];
+    });
 }
 - (void)handleSelectPopBtn:(NSNotification *)notification{
-    CGPoint point =  [self getViewPointInWindow:notification.object offset:CGPointMake(0, 20)];
-    [self.popBtnExpectation fulfill];
-    self.popBtnExpectation = nil;
-    PostMouseEvent(kCGMouseButtonLeft, kCGEventLeftMouseDown, point, 2);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        CGPoint point =  [self getViewPointInWindow:notification.object offset:CGPointMake(0, 20)];
+        [self clickAtPoint:point];
+        [self.popBtnExpectation fulfill];
+        self.popBtnExpectation = nil;
+    });
 
 }
 - (CGPoint)getViewPointInWindow:(NSView *)view offset:(CGPoint)offset{

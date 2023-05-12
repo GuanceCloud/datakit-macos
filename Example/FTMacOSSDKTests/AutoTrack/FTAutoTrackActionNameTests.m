@@ -209,33 +209,39 @@
     [self clickView:ClickTabViewItem_First];
     [self sleep:0.5];
     [self clickView:ClickComboBox];
-//    [self clickView:ClickPopUpButton];
+    [self clickView:ClickPopUpButton];
     [self clickView:ClickButtonCheck];
     [self clickView:ClickButtonCheck];
     [self sleep:1];
     [[FTGlobalRumManager sharedManager].rumManager syncProcess];
     NSArray *datas = [[FTTrackerEventDBTool sharedManger] getFirstRecords:30 withType:FT_DATA_TYPE_RUM];
     XCTAssertTrue(datas.count>0);
-    BOOL popUpButtonClick = NO,comboBoxClick = NO,buttonClick = NO;
+    BOOL popUpButtonClick = NO,comboBoxClick = NO,comboBoxItemClick = NO,buttonClick = NO;
+    NSInteger count = 0;
     for (FTRecordModel *model in datas) {
         NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
         NSDictionary *data = dict[FT_OPDATA];
         if([data[FT_KEY_SOURCE] isEqualToString:FT_RUM_SOURCE_ACTION]){
+            count ++;
             NSDictionary *data = dict[FT_OPDATA];
             NSDictionary *tags = data[FT_TAGS];
             NSString *actionName = tags[FT_KEY_ACTION_NAME];
-            if([actionName isEqualToString:@"[NSPopUpButton]Item 1"]){
+            if([actionName isEqualToString:@"[NSPopUpButton]Item 2"]){
                 popUpButtonClick = YES;
             }else if([actionName isEqualToString:@"[NSComboBox]"]){
                 comboBoxClick = YES;
+            }else if([actionName isEqualToString:@"[NSComboBox]Item 1"]){
+                comboBoxItemClick = YES;
             }else if([actionName isEqualToString:@"[NSButton]Check"]){
                 buttonClick = YES;
             }
         }
     }
-//    XCTAssertTrue(popUpButtonClick);
+    XCTAssertTrue(popUpButtonClick);
     XCTAssertTrue(comboBoxClick);
+    XCTAssertTrue(comboBoxItemClick);
     XCTAssertTrue(buttonClick);
+    XCTAssertTrue(count>6 && count<9);
 }
 // NSSegmentedControl\NSStepper\NSTextField\NSImageView
 - (void)testClickSecondView{

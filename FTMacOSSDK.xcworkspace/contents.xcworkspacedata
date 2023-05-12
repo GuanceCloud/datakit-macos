@@ -11,6 +11,6 @@
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:FTMacOSSDKTests.xctestplan">
+      location = "group:Example/FTMacOSSDKTests.xctestplan">
    </FileRef>
 </Workspace>
