@@ -66,7 +66,6 @@ static char *viewControllerUUID = "viewControllerUUID";
     return win;
 }
 -(void)datakit_becomeKeyWindow{
-    ZYDebug(@"window becomeKeyWindow:%@ \n viewcontroller: %@",self.class,self.contentViewController);
     [self datakit_becomeKeyWindow];
     //window
     //记录 init - keyWindow 的时间差 作为window显示加载时长
@@ -74,6 +73,12 @@ static char *viewControllerUUID = "viewControllerUUID";
     if(self.datakit_viewLoadStartTime){
         self.datakit_loadDuration = [FTDateUtil nanosecondTimeIntervalSinceDate:self.datakit_viewLoadStartTime toDate:[NSDate date]];
         self.datakit_viewLoadStartTime = nil;
+        if([self isKindOfClass:NSPanel.class]){
+            NSPanel *panel = (NSPanel *)self;
+            if(panel.becomesKeyOnlyIfNeeded){
+                self.datakit_loadDuration = @0;
+            }
+        }
     }
     self.datakit_viewUUID = [NSUUID UUID].UUIDString;
     if([FTAutoTrack sharedInstance].addRumDatasDelegate){
@@ -88,7 +93,6 @@ static char *viewControllerUUID = "viewControllerUUID";
     }
 }
 -(void)datakit_resignKeyWindow{
-    ZYDebug(@"window resignKeyWindow:%@ \n viewcontroller: %@",self.class,self.contentViewController);
     [self datakit_resignKeyWindow];
     if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(stopView)]){
         [[FTAutoTrack sharedInstance].addRumDatasDelegate stopView];
