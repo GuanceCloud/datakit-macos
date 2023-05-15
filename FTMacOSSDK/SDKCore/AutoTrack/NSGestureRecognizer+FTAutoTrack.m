@@ -26,7 +26,7 @@
 }
 -(void)datakit_setTarget:(id)target{
     [self datakit_setTarget:target];
-    if (self.action) {
+    if (self.action&&target) {
         __weak typeof(self) weakSelf = self;
         [FTSwizzler swizzleSelector:self.action onClass:[self.target class] withBlock:^{
             [weakSelf ftTrackGestureRecognizerAppClick];
@@ -47,8 +47,5 @@
     }@catch (NSException *exception) {
         ZYErrorLog(@"%@ error: %@", self, exception);
     }
-}
--(void)dealloc{
-    
 }
 @end
