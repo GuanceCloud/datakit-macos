@@ -7,14 +7,14 @@
 //
 
 #import "FTSDKConfig.h"
-
+#import "FTBaseInfoHandler.h"
 @interface FTSDKConfig()<NSCopying>
 @end
 @implementation FTSDKConfig
 -(instancetype)initWithMetricsUrl:(NSString *)metricsUrl{
     if (self = [super init]) {
         _metricsUrl = metricsUrl;
-        _XDataKitUUID = [FTSDKConfig XDataKitUUID];
+        _XDataKitUUID = [FTBaseInfoHandler XDataKitUUID];
         _service = @"df_rum_macos";
         _version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     }
@@ -26,17 +26,10 @@
     options.XDataKitUUID = self.XDataKitUUID;
     options.env = self.env;
     options.service = self.service;
+    options.enableSDKDebugLog = self.enableSDKDebugLog;
+    options.globalContext = self.globalContext;
+    options.version = self.version;
     return options;
-}
-+ (NSString *)XDataKitUUID{
-    NSString *deviceId;
-    deviceId = [[NSUserDefaults standardUserDefaults] valueForKey:@"FTSDKUUID"];
-    if (!deviceId) {
-        deviceId = [[NSUUID UUID] UUIDString];
-        [[NSUserDefaults standardUserDefaults] setValue:deviceId forKey:@"FTSDKUUID"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    return deviceId;
 }
 @end
 
@@ -58,6 +51,15 @@
     options.enableTrackAppCrash = self.enableTrackAppCrash;
     options.sampleRate = self.sampleRate;
     options.appid = self.appid;
+    options.enableTrackAppANR = self.enableTrackAppANR;
+    options.enableTraceUserView = self.enableTraceUserView;
+    options.enableTrackAppFreeze = self.enableTrackAppFreeze;
+    options.enableTraceUserAction = self.enableTraceUserAction;
+    options.enableTraceUserResource = self.enableTraceUserResource;
+    options.errorMonitorType = self.errorMonitorType;
+    options.monitorFrequency = self.monitorFrequency;
+    options.deviceMetricsMonitorType = self.deviceMetricsMonitorType;
+    options.globalContext = self.globalContext;
     return options;
 }
 @end
@@ -86,6 +88,8 @@
     options.enableCustomLog = self.enableCustomLog;
     options.prefix = self.prefix;
     options.logLevelFilter = self.logLevelFilter;
+    options.discardType = self.discardType;
+    options.globalContext = self.globalContext;
     return options;
 }
 @end

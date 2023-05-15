@@ -49,12 +49,30 @@
 }
 - (void)updateDatas{
     self.datas = [NSMutableArray new];
-    NSDictionary *item1 = @{@"title" : @"computer",@"image" : NSImageNameComputer};
-    NSDictionary *item2 = @{@"title" : @"folder",@"image" : NSImageNameFolder};
-    NSDictionary *item3 = @{@"title" : @"home",@"image" : NSImageNameHomeTemplate};
-    NSDictionary *item4 = @{@"title" : @"list",@"image" : NSImageNameListViewTemplate};
-    NSDictionary *item5 = @{@"title" : @"network",@"image" : NSImageNameNetwork};
-    NSDictionary *item6 = @{@"title" : @"share",@"image" : NSImageNameShareTemplate};
+    NSDictionary *item1 = @{@"title" : @"computer",
+                            @"image" : NSImageNameComputer,
+                            @"tag"   : @(305),
+    };
+    NSDictionary *item2 = @{@"title" : @"folder",
+                            @"image" : NSImageNameFolder,
+                            @"tag"   : @(306),
+    };
+    NSDictionary *item3 = @{@"title" : @"home",
+                            @"image" : NSImageNameHomeTemplate,
+                            @"tag"   : @(307),
+    };
+    NSDictionary *item4 = @{@"title" : @"list",
+                            @"image" : NSImageNameListViewTemplate,
+                            @"tag"   : @(308)
+    };
+    NSDictionary *item5 = @{@"title" : @"network",
+                            @"image" : NSImageNameNetwork,
+                            @"tag"   : @(309)
+    };
+    NSDictionary *item6 = @{@"title" : @"share",
+                            @"image" : NSImageNameShareTemplate,
+                            @"tag"   : @(310)
+    };
 
     [self.datas addObjectsFromArray:@[item1,item2,item3,item4,item5,item6]];
     [self.collectionView reloadData];

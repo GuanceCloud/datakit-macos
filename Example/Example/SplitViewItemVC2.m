@@ -10,11 +10,13 @@
 #import "TabViewController.h"
 #import "LoggingViewController.h"
 #import "TraceViewController.h"
+#import "WebViewController.h"
 @interface SplitViewItemVC2 ()
 @property (nonatomic, strong) TabViewController *mTabView;
 @property (nonatomic, strong) RumViewController *mRumVC;
 @property (nonatomic, strong) LoggingViewController *mLoggerVC;
 @property (nonatomic, strong) TraceViewController *mTraceVC;
+@property (nonatomic, strong) WebViewController *mWebViewVC;
 @property (nonatomic, assign) NSInteger currentIndex;
 @end
 
@@ -26,6 +28,7 @@
     [self insertChildViewController:self.mPresent atIndex:1];
     [self insertChildViewController:self.mLoggerVC atIndex:2];
     [self insertChildViewController:self.mTraceVC atIndex:3];
+    [self insertChildViewController:self.mWebViewVC atIndex:4];
     [self.view addSubview:self.mTabView.view];
 }
 -(RumViewController *)mPresent{
@@ -52,6 +55,12 @@
     }
     return _mTraceVC;
 }
+-(WebViewController *)mWebViewVC{
+    if(!_mWebViewVC){
+        _mWebViewVC = [[WebViewController alloc]init];
+    }
+    return _mWebViewVC;
+}
 -(void)showViewIndex:(NSInteger)index{
     if (self.currentIndex != index) {
         NSViewController *from = [self getIndexVC:self.currentIndex];
@@ -76,6 +85,9 @@
             break;
         case 3:
             back = self.mTraceVC;
+            break;
+        case 4:
+            back = self.mWebViewVC;
             break;
         default:
             break;

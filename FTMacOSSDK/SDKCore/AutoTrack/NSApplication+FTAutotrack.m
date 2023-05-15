@@ -9,6 +9,8 @@
 #import "FTGlobalRumManager.h"
 #import "NSView+FTAutoTrack.h"
 #import "FTAutoTrack.h"
+#import "NSMenuItem+FTAutoTrack.h"
+#import "FTLog.h"
 @implementation NSApplication (FTAutotrack)
 - (BOOL)datakit_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender{
     [self datakitTrack:action to:target from:sender];
@@ -23,35 +25,45 @@
     if (self.currentEvent.type != NSEventTypeLeftMouseUp &&  self.currentEvent.type != NSEventTypeLeftMouseDown ) {
         return;
     }
+    //NSMenu 不继承于 NSView
+    if ([sender isKindOfClass:NSMenuItem.class]) {
+        // 排除 NSPopUpButton 弹出的 NSMenuItem 点击避免重复
+        if(target != NULL && [target isKindOfClass:[NSPopUpButtonCell class]]){
+            return;
+        }
+        NSMenuItem *menu = (NSMenuItem *)sender;
+        if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
+            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:menu.datakit_actionName];
+        }
+        return;
+    }
+    NSView *view = sender;
+    //view 没有 window，点击事件不采集
+    if(!view.window){
+        return;
+    }
     //NSStepper点击触发 NSEventTypeLeftMouseDown
     if (self.currentEvent.type == NSEventTypeLeftMouseDown && ([sender isKindOfClass:NSDatePicker.class] || [sender isKindOfClass:NSStepper.class])) {
         if([sender isKindOfClass:NSDatePicker.class] && !(action && target)){
             return;
         }
-        NSView *view = sender;
         if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
             [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.datakit_actionName];
         }
     }else{
-        //NSMenu 不继承于 NSView
-        if ([sender isKindOfClass:NSMenuItem.class]) {
-            if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-                [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:@"[NSMenuItem]"];
-            }
-            return;
-        }
         //过滤 NSSearchField 取消按钮一次点击多次sendAction
         if ([sender isKindOfClass:NSSearchField.class] && action == nil) {
             return;
         }
+        //过滤 NSComboBox 下拉选择框的点击事件，避免重复
+        if ([sender isKindOfClass:NSClassFromString(@"NSComboTableView")]){
+            return;
+        }
         if([sender isKindOfClass:NSView.class]){
-            NSView *view = sender;
             if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
                 [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.datakit_actionName];
             }
         }
     }
 }
-
-
 @end

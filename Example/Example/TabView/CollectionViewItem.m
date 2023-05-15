@@ -25,7 +25,7 @@
         NSDictionary *data = representedObject;
         NSString *image = data[@"image"];
         self.icon.image = [NSImage imageNamed:image];
-        
+        self.icon.tag = [data[@"tag"] integerValue];
         NSString *title = data[@"title"];
         self.lable.stringValue = title;
 //        NSClickGestureRecognizer *tap = [[NSClickGestureRecognizer alloc]init];

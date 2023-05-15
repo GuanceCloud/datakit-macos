@@ -21,6 +21,8 @@
     NSApplication *app = [NSApplication sharedApplication];
     NSLog(@"windows = %@",app.windows);
     self.userNameTF.allowsEditingTextAttributes = YES;
+    self.userNameTF.tag = 50;
+    self.loginBtn.tag = 100;
     // Do any additional setup after loading the view.
 }
 - (IBAction)closeClick:(id)sender {

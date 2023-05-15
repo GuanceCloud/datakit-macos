@@ -24,7 +24,7 @@
 #import "FTConstants.h"
 #import "FTPingThread.h"
 #import "FTURLSessionAutoInstrumentation.h"
-
+#import "FTWKWebViewJavascriptBridge.h"
 @interface FTGlobalRumManager ()<FTAppLifeCycleDelegate,FTWKWebViewRumDelegate,FTAppLaunchDataDelegate,FTANRDetectorDelegate>
 @property (nonatomic, strong) FTSDKConfig *config;
 @property (nonatomic, strong) FTRumConfig *rumConfig;
@@ -33,6 +33,7 @@
 @property (nonatomic, strong) FTRUMMonitor *monitor;
 @property (nonatomic, strong) FTPingThread *pingThread;
 @property (nonatomic, strong) FTAppLaunchTracker *launchTracker;
+@property (nonatomic, strong) FTWKWebViewJavascriptBridge *jsBridge;
 
 @end
 
@@ -197,8 +198,43 @@ static dispatch_once_t onceToken;
 - (void)onMainThreadSlowStackDetected:(NSString*)slowStack{
     [self.rumManager addLongTaskWithStack:slowStack duration:[NSNumber numberWithLongLong:MXRMonitorRunloopOneStandstillMillisecond*MXRMonitorRunloopStandstillCount*1000000]];
 }
+#pragma mark ========== jsBridge ==========
+-(void)ftAddScriptMessageHandlerWithWebView:(WKWebView *)webView{
+    if (![webView isKindOfClass:[WKWebView class]]) {
+        return;
+    }
+    self.jsBridge = [FTWKWebViewJavascriptBridge bridgeForWebView:webView];
+    [self.jsBridge registerHandler:@"sendEvent" handler:^(id data, WVJBResponseCallback responseCallback) {
+        [self dealReceiveScriptMessage:data callBack:responseCallback];
+    }];
+}
+- (void)dealReceiveScriptMessage:(id )message callBack:(WVJBResponseCallback)callBack{
+    @try {
+        NSDictionary *messageDic = [FTJSONUtil dictionaryWithJsonString:message];
+        if (![messageDic isKindOfClass:[NSDictionary class]]) {
+            ZYErrorLog(@"Message body is formatted failure from JS SDK");
+            return;
+        }
+        NSString *name = messageDic[@"name"];
+        if ([name isEqualToString:@"rum"]||[name isEqualToString:@"track"]||[name isEqualToString:@"log"]||[name isEqualToString:@"trace"]) {
+            NSDictionary *data = messageDic[@"data"];
+            NSString *measurement = data[FT_MEASUREMENT];
+            NSDictionary *tags = data[FT_TAGS];
+            NSDictionary *fields = data[FT_FIELDS];
+            long long time = [data[@"time"] longLongValue];
+            time = time>0?:[FTDateUtil currentTimeNanosecond];
+            if (measurement && fields.count>0) {
+                if ([name isEqualToString:@"rum"]) {
+                    [self.rumManager addWebviewData:measurement tags:tags fields:fields tm:time];
+                }
+            }
+        }
+    } @catch (NSException *exception) {
+        ZYErrorLog(@"%@ error: %@", self, exception);
+    }
+}
 #pragma mark ========== 注销 ==========
-- (void)resetInstance{
+-(void)rumDeinitialize{
     _rumManager = nil;
     onceToken = 0;
     sharedManager =nil;

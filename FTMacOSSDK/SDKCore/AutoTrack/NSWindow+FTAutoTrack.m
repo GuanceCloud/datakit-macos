@@ -13,9 +13,8 @@
 #import "FTConstants.h"
 #import <objc/runtime.h>
 #import "FTGlobalRumManager.h"
-#import "NSViewController+FTAutoTrack.h"
 #import "FTAutoTrack.h"
-@interface NSWindow (FTAutoTrack)<FTRumViewProperty>
+@interface NSWindow (FTAutoTrack)
 @end
 @implementation NSWindow (FTAutoTrack)
 #pragma mark - Rum Data -
@@ -26,9 +25,6 @@ static char *viewControllerUUID = "viewControllerUUID";
     objc_setAssociatedObject(self, &viewLoadStartTimeKey, datakit_viewLoadStartTime, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 -(NSDate *)datakit_viewLoadStartTime{
-    return objc_getAssociatedObject(self, &viewLoadStartTimeKey);
-}
--(NSDate *)setDatakit_loadDuration{
     return objc_getAssociatedObject(self, &viewLoadStartTimeKey);
 }
 -(NSNumber *)datakit_loadDuration{
@@ -42,15 +38,6 @@ static char *viewControllerUUID = "viewControllerUUID";
 }
 -(void)setDatakit_viewUUID:(NSString *)datakit_viewUUID{
     objc_setAssociatedObject(self, &viewControllerUUID, datakit_viewUUID, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
--(NSString *)datakit_parentVC{
-    return FT_NULL_VALUE;
-}
--(BOOL)datakit_inMainWindow{
-    return self.isMainWindow;
-}
--(BOOL)datakit_isKeyWindow{
-    return self.isKeyWindow;
 }
 -(NSString *)datakit_windowName{
     if(self.contentViewController){
@@ -84,16 +71,16 @@ static char *viewControllerUUID = "viewControllerUUID";
     //window
     //记录 init - keyWindow 的时间差 作为window显示加载时长
     //只记录第一次 变成keyWindow
-    NSNumber *loadTime = @0;
     if(self.datakit_viewLoadStartTime){
-        loadTime = [FTDateUtil nanosecondTimeIntervalSinceDate:self.datakit_viewLoadStartTime toDate:[NSDate date]];
+        self.datakit_loadDuration = [FTDateUtil nanosecondTimeIntervalSinceDate:self.datakit_viewLoadStartTime toDate:[NSDate date]];
         self.datakit_viewLoadStartTime = nil;
     }
-    self.datakit_loadDuration = loadTime;
     self.datakit_viewUUID = [NSUUID UUID].UUIDString;
     if([FTAutoTrack sharedInstance].addRumDatasDelegate){
-        if( [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(onCreateView:loadTime:)]){
-            [[FTAutoTrack sharedInstance].addRumDatasDelegate onCreateView:self.datakit_windowName loadTime:loadTime];
+        if([self.datakit_loadDuration intValue]>0){
+            if( [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(onCreateView:loadTime:)]){
+                [[FTAutoTrack sharedInstance].addRumDatasDelegate onCreateView:self.datakit_windowName loadTime:self.datakit_loadDuration];
+            }
         }
         if( [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(startViewWithName:)]){
             [[FTAutoTrack sharedInstance].addRumDatasDelegate startViewWithName:self.datakit_windowName];

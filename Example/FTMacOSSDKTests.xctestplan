@@ -1,0 +1,50 @@
+{
+  "configurations" : [
+    {
+      "id" : "413B5031-13EE-4EF2-BE09-B1996F627DF4",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:..",
+          "identifier" : "FTMacOSSDK",
+          "name" : "FTMacOSSDK"
+        }
+      ]
+    },
+    "environmentVariableEntries" : [
+      {
+        "key" : "isUnitTests",
+        "value" : "1"
+      },
+      {
+        "key" : "ACCESS_SERVER_URL",
+        "value" : "XXXXXX"
+      },
+      {
+        "key" : "APP_ID",
+        "value" : "XXXXXX"
+      },
+      {
+        "key" : "TRACE_URL",
+        "value" : "https:\/\/console-api.guance.com\/not\/found\/"
+      }
+    ]
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Example.xcodeproj",
+        "identifier" : "7CDA50DB26DE15EE0062CC39",
+        "name" : "FTMacOSSDKTests"
+      }
+    }
+  ],
+  "version" : 1
+}

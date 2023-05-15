@@ -24,8 +24,9 @@
         void (^didSelectItemBlock)(id, SEL, id, id) = ^(id view, SEL command, NSCollectionView *collectionView, NSSet<NSIndexPath *> *indexPaths) {
             //  获取 view 的 viewcontroller 时 不考虑 NSCollectionViewItem
             if (collectionView && indexPaths) {
-                NSCollectionViewItem *item = [collectionView itemAtIndexPath:[indexPaths anyObject]];
-                NSString *actionName = [NSString stringWithFormat:@"[%@]",NSStringFromClass(collectionView.class)];
+                NSIndexPath *indexpath = [[indexPaths allObjects] firstObject];
+                NSCollectionViewItem *item = [collectionView itemAtIndexPath:indexpath];
+                NSString *actionName = [NSString stringWithFormat:@"[%@][section:%ld][item:%ld]",NSStringFromClass(collectionView.class),(long)indexpath.section,(long)indexpath.item];
                 if(item.title.length>0){
                     actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(collectionView.class),item.title];
                 }
@@ -46,6 +47,19 @@
 @implementation NSTableView (FTAutoTrack)
 
 -(NSString *)datakit_actionName{
-    return [NSString stringWithFormat:@"[%@][column:%ld][row:%ld]",NSStringFromClass(self.class),self.clickedColumn,(long)self.clickedRow];
+    if(self.clickedRow<0 || self.clickedColumn<0 ){
+        return nil;
+    }
+    NSView *itemView =  [self viewAtColumn:self.clickedColumn row:self.clickedRow makeIfNecessary:NO];
+    NSString *title = nil;
+    if(itemView && itemView.subviews.count>0){
+        for (NSView *sub in itemView.subviews) {
+            if([sub isKindOfClass:NSTextField.class]){
+                NSTextField *lable = (NSTextField *)sub;
+                title = lable.stringValue;
+            }
+        }
+    }
+    return title?[NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),title]:[NSString stringWithFormat:@"[%@][column:%ld][row:%ld]",NSStringFromClass(self.class),self.clickedColumn,(long)self.clickedRow];
 }
 @end

@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1707C82329E52ED5009B7D9C /* FTRUMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1707C82229E52ED5009B7D9C /* FTRUMTests.m */; };
+		1707C83129E534F9009B7D9C /* FTMacOSSDKTest.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1707C83029E534F9009B7D9C /* FTMacOSSDKTest.xcconfig */; };
+		1707C83529E55C19009B7D9C /* FTLoggerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1707C83429E55C19009B7D9C /* FTLoggerTest.m */; };
+		1715F2952A04A123007EF5BB /* FTAutoTrackActionNameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1715F2942A04A123007EF5BB /* FTAutoTrackActionNameTests.m */; };
+		175BC13B2A08A34600AEBEB5 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175BC13A2A08A34600AEBEB5 /* WebViewController.m */; };
+		175BC13D2A08A45700AEBEB5 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 175BC13C2A08A45700AEBEB5 /* sample.html */; };
+		175BC1F42A090B4100AEBEB5 /* FTMacOSSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 175BC1F32A090B4100AEBEB5 /* FTMacOSSDK */; };
+		175BC1F72A0A58FD00AEBEB5 /* FTTestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 175BC1F62A0A58FD00AEBEB5 /* FTTestHelper.m */; };
+		175C7CEF29E6B50B00A7F271 /* LogTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175C7CEE29E6B50B00A7F271 /* LogTest.swift */; };
 		177BA53329DADAB100DB7497 /* LoggingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA53129DADAB100DB7497 /* LoggingViewController.m */; };
 		177BA53429DADAB100DB7497 /* LoggingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177BA53229DADAB100DB7497 /* LoggingViewController.xib */; };
 		177BA53E29DBCF4200DB7497 /* TraceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA53C29DBCF4200DB7497 /* TraceViewController.m */; };
 		177BA53F29DBCF4200DB7497 /* TraceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 177BA53D29DBCF4200DB7497 /* TraceViewController.xib */; };
 		1799582629D6874F0033B46E /* RumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1799582429D6874F0033B46E /* RumViewController.m */; };
 		1799582729D6874F0033B46E /* RumViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1799582529D6874F0033B46E /* RumViewController.xib */; };
+		17B296B529EE41A000B4A344 /* FTTraceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B296B429EE41A000B4A344 /* FTTraceTests.m */; };
+		5845686188E16CB9C112BF7E /* Pods_FTMacOSSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E58DBEFCBAB5B1E6E517003 /* Pods_FTMacOSSDKTests.framework */; };
 		7C87E29C27003E76001F6C3B /* SplitViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C87E29B27003E76001F6C3B /* SplitViewVC.m */; };
 		7C87E2AE270052A3001F6C3B /* SplitViewItemVC1.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C87E2AC270052A3001F6C3B /* SplitViewItemVC1.m */; };
 		7C87E2B6270052B2001F6C3B /* SplitViewItemVC2.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C87E2B4270052B2001F6C3B /* SplitViewItemVC2.m */; };
@@ -33,14 +44,13 @@
 		7CDA50D326DE15ED0062CC39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CDA50D126DE15ED0062CC39 /* Main.storyboard */; };
 		7CDA50D626DE15ED0062CC39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDA50D526DE15ED0062CC39 /* main.m */; };
 		7CDA50EC26DE15EE0062CC39 /* ExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDA50EB26DE15EE0062CC39 /* ExampleUITests.m */; };
-		7CDAF53626DE1C8B00F8F01D /* FTNetworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAF53426DE1C8B00F8F01D /* FTNetworkTests.m */; };
 		7CDAF53726DE1C8B00F8F01D /* FTMacOSSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDAF53526DE1C8B00F8F01D /* FTMacOSSDKTests.m */; };
 		7CF30ED726F098AF003CA20A /* CollectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30ED526F098AF003CA20A /* CollectionVC.m */; };
 		7CF30ED826F098AF003CA20A /* CollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF30ED626F098AF003CA20A /* CollectionVC.xib */; };
 		7CF30EDF26F09D5E003CA20A /* CollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30EDD26F09D5E003CA20A /* CollectionViewItem.m */; };
 		7CF30EE026F09D5E003CA20A /* CollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF30EDE26F09D5E003CA20A /* CollectionViewItem.xib */; };
 		7CF30EE726F1EF9E003CA20A /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF30EE626F1EF9D003CA20A /* MainWindow.m */; };
-		C43F653054F48118D796F30D /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB76611A08970596A23B466 /* Pods_Example.framework */; };
+		90C198D1998085FFB8126A27 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BB76611A08970596A23B466 /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,9 +71,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1707C82229E52ED5009B7D9C /* FTRUMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTRUMTests.m; sourceTree = "<group>"; };
+		1707C83029E534F9009B7D9C /* FTMacOSSDKTest.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = FTMacOSSDKTest.xcconfig; sourceTree = "<group>"; };
+		1707C83429E55C19009B7D9C /* FTLoggerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTLoggerTest.m; sourceTree = "<group>"; };
+		1715F2942A04A123007EF5BB /* FTAutoTrackActionNameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTAutoTrackActionNameTests.m; sourceTree = "<group>"; };
 		175B13AE29E3AE87003A5B1B /* Config-Example.publish.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-Example.publish.xcconfig"; sourceTree = "<group>"; };
 		175B13B029E3AEA5003A5B1B /* Config-Example.pre.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-Example.pre.xcconfig"; sourceTree = "<group>"; };
 		175B13B229E3AEB9003A5B1B /* Config-Example.develop.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-Example.develop.xcconfig"; sourceTree = "<group>"; };
+		175BC1392A08A34600AEBEB5 /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		175BC13A2A08A34600AEBEB5 /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		175BC13C2A08A45700AEBEB5 /* sample.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = sample.html; sourceTree = "<group>"; };
+		175BC1402A08FD1900AEBEB5 /* FTMacOSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FTMacOSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		175BC1F22A090A3600AEBEB5 /* ft-sdk-macos */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "ft-sdk-macos"; path = ..; sourceTree = "<group>"; };
+		175BC1F52A0A58FD00AEBEB5 /* FTTestHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTTestHelper.h; sourceTree = "<group>"; };
+		175BC1F62A0A58FD00AEBEB5 /* FTTestHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTTestHelper.m; sourceTree = "<group>"; };
+		175C7CED29E6B50A00A7F271 /* Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		175C7CEE29E6B50B00A7F271 /* LogTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogTest.swift; sourceTree = "<group>"; };
 		177BA53029DADAB100DB7497 /* LoggingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoggingViewController.h; sourceTree = "<group>"; };
 		177BA53129DADAB100DB7497 /* LoggingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoggingViewController.m; sourceTree = "<group>"; };
 		177BA53229DADAB100DB7497 /* LoggingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoggingViewController.xib; sourceTree = "<group>"; };
@@ -73,7 +96,11 @@
 		1799582329D6874F0033B46E /* RumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RumViewController.h; sourceTree = "<group>"; };
 		1799582429D6874F0033B46E /* RumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RumViewController.m; sourceTree = "<group>"; };
 		1799582529D6874F0033B46E /* RumViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RumViewController.xib; sourceTree = "<group>"; };
+		17B296B429EE41A000B4A344 /* FTTraceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTTraceTests.m; sourceTree = "<group>"; };
+		3114B98D402435AAD8C089D2 /* Pods-FTMacOSSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FTMacOSSDKTests.release.xcconfig"; path = "Target Support Files/Pods-FTMacOSSDKTests/Pods-FTMacOSSDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		42B25CD1B1A9B8E2E0C42DFD /* Pods-ExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.release.xcconfig"; path = "Target Support Files/Pods-ExampleTests/Pods-ExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		5291CDE6451817817C5E0E99 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		5B424BE3AD968DA77268007F /* Pods-FTMacOSSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FTMacOSSDKTests.debug.xcconfig"; path = "Target Support Files/Pods-FTMacOSSDKTests/Pods-FTMacOSSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6BB76611A08970596A23B466 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C87E29A27003E76001F6C3B /* SplitViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewVC.h; sourceTree = "<group>"; };
 		7C87E29B27003E76001F6C3B /* SplitViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewVC.m; sourceTree = "<group>"; };
@@ -110,12 +137,11 @@
 		7CDA50D426DE15ED0062CC39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CDA50D526DE15ED0062CC39 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7CDA50D726DE15ED0062CC39 /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
-		7CDA50DC26DE15EE0062CC39 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CDA50DC26DE15EE0062CC39 /* FTMacOSSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FTMacOSSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CDA50E226DE15EE0062CC39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CDA50E726DE15EE0062CC39 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CDA50EB26DE15EE0062CC39 /* ExampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleUITests.m; sourceTree = "<group>"; };
 		7CDA50ED26DE15EE0062CC39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7CDAF53426DE1C8B00F8F01D /* FTNetworkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNetworkTests.m; sourceTree = "<group>"; };
 		7CDAF53526DE1C8B00F8F01D /* FTMacOSSDKTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMacOSSDKTests.m; sourceTree = "<group>"; };
 		7CF30ED426F098AF003CA20A /* CollectionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionVC.h; sourceTree = "<group>"; };
 		7CF30ED526F098AF003CA20A /* CollectionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionVC.m; sourceTree = "<group>"; };
@@ -125,7 +151,11 @@
 		7CF30EDE26F09D5E003CA20A /* CollectionViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewItem.xib; sourceTree = "<group>"; };
 		7CF30EE526F1EF9D003CA20A /* MainWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
 		7CF30EE626F1EF9D003CA20A /* MainWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
+		85D6EEB20AEDFC4BF642ADD9 /* Pods-ExampleTests.pre.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.pre.xcconfig"; path = "Target Support Files/Pods-ExampleTests/Pods-ExampleTests.pre.xcconfig"; sourceTree = "<group>"; };
 		8BA2290E242B56873A7C1081 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
+		8C90D0CF79D33ED6E2DDB8F3 /* Pods-ExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-ExampleTests/Pods-ExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8E58DBEFCBAB5B1E6E517003 /* Pods_FTMacOSSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FTMacOSSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0DBE103D7D7F3266AE7001B /* Pods-FTMacOSSDKTests.pre.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FTMacOSSDKTests.pre.xcconfig"; path = "Target Support Files/Pods-FTMacOSSDKTests/Pods-FTMacOSSDKTests.pre.xcconfig"; sourceTree = "<group>"; };
 		FCFAB8E8550B8F9420470DBB /* Pods-Example.pre.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.pre.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.pre.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,7 +164,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C43F653054F48118D796F30D /* Pods_Example.framework in Frameworks */,
+				90C198D1998085FFB8126A27 /* Pods_Example.framework in Frameworks */,
+				175BC1F42A090B4100AEBEB5 /* FTMacOSSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5845686188E16CB9C112BF7E /* Pods_FTMacOSSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,7 +190,9 @@
 		0EC4FAB7BDDD6D22CDB31466 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				175BC1402A08FD1900AEBEB5 /* FTMacOSSDK.framework */,
 				6BB76611A08970596A23B466 /* Pods_Example.framework */,
+				8E58DBEFCBAB5B1E6E517003 /* Pods_FTMacOSSDKTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,9 +203,23 @@
 				5291CDE6451817817C5E0E99 /* Pods-Example.debug.xcconfig */,
 				8BA2290E242B56873A7C1081 /* Pods-Example.release.xcconfig */,
 				FCFAB8E8550B8F9420470DBB /* Pods-Example.pre.xcconfig */,
+				8C90D0CF79D33ED6E2DDB8F3 /* Pods-ExampleTests.debug.xcconfig */,
+				85D6EEB20AEDFC4BF642ADD9 /* Pods-ExampleTests.pre.xcconfig */,
+				42B25CD1B1A9B8E2E0C42DFD /* Pods-ExampleTests.release.xcconfig */,
+				5B424BE3AD968DA77268007F /* Pods-FTMacOSSDKTests.debug.xcconfig */,
+				B0DBE103D7D7F3266AE7001B /* Pods-FTMacOSSDKTests.pre.xcconfig */,
+				3114B98D402435AAD8C089D2 /* Pods-FTMacOSSDKTests.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
+			sourceTree = "<group>";
+		};
+		1715F2932A03CE97007EF5BB /* AutoTrack */ = {
+			isa = PBXGroup;
+			children = (
+				1715F2942A04A123007EF5BB /* FTAutoTrackActionNameTests.m */,
+			);
+			path = AutoTrack;
 			sourceTree = "<group>";
 		};
 		175B13AD29E3AE3A003A5B1B /* Config */ = {
@@ -182,6 +230,14 @@
 				175B13B229E3AEB9003A5B1B /* Config-Example.develop.xcconfig */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		175BC1F12A090A3600AEBEB5 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				175BC1F22A090A3600AEBEB5 /* ft-sdk-macos */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		7CD26F9126EAFBE80025CC50 /* WindowController */ = {
@@ -230,6 +286,8 @@
 				177BA53B29DBCF4200DB7497 /* TraceViewController.h */,
 				177BA53C29DBCF4200DB7497 /* TraceViewController.m */,
 				177BA53D29DBCF4200DB7497 /* TraceViewController.xib */,
+				175BC1392A08A34600AEBEB5 /* WebViewController.h */,
+				175BC13A2A08A34600AEBEB5 /* WebViewController.m */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
@@ -237,9 +295,10 @@
 		7CDA50BD26DE15EB0062CC39 = {
 			isa = PBXGroup;
 			children = (
+				175BC1F12A090A3600AEBEB5 /* Packages */,
 				175B13AD29E3AE3A003A5B1B /* Config */,
 				7CDA50C826DE15EB0062CC39 /* Example */,
-				7CDA50DF26DE15EE0062CC39 /* ExampleTests */,
+				7CDA50DF26DE15EE0062CC39 /* FTMacOSSDKTests */,
 				7CDA50EA26DE15EE0062CC39 /* ExampleUITests */,
 				7CDA50C726DE15EB0062CC39 /* Products */,
 				0EC4FAB7BDDD6D22CDB31466 /* Frameworks */,
@@ -251,7 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				7CDA50C626DE15EB0062CC39 /* Example.app */,
-				7CDA50DC26DE15EE0062CC39 /* ExampleTests.xctest */,
+				7CDA50DC26DE15EE0062CC39 /* FTMacOSSDKTests.xctest */,
 				7CDA50E726DE15EE0062CC39 /* ExampleUITests.xctest */,
 			);
 			name = Products;
@@ -271,24 +330,33 @@
 				7CDA50D426DE15ED0062CC39 /* Info.plist */,
 				7CDA50D526DE15ED0062CC39 /* main.m */,
 				7CDA50D726DE15ED0062CC39 /* Example.entitlements */,
+				175BC13C2A08A45700AEBEB5 /* sample.html */,
 				7C87E29A27003E76001F6C3B /* SplitViewVC.h */,
 				7C87E29B27003E76001F6C3B /* SplitViewVC.m */,
 				7C87E2AB270052A3001F6C3B /* SplitViewItemVC1.h */,
 				7C87E2AC270052A3001F6C3B /* SplitViewItemVC1.m */,
 				7C87E2B3270052B2001F6C3B /* SplitViewItemVC2.h */,
 				7C87E2B4270052B2001F6C3B /* SplitViewItemVC2.m */,
+				175C7CEE29E6B50B00A7F271 /* LogTest.swift */,
+				175C7CED29E6B50A00A7F271 /* Example-Bridging-Header.h */,
 			);
 			path = Example;
 			sourceTree = "<group>";
 		};
-		7CDA50DF26DE15EE0062CC39 /* ExampleTests */ = {
+		7CDA50DF26DE15EE0062CC39 /* FTMacOSSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				175BC1F52A0A58FD00AEBEB5 /* FTTestHelper.h */,
+				175BC1F62A0A58FD00AEBEB5 /* FTTestHelper.m */,
+				1715F2932A03CE97007EF5BB /* AutoTrack */,
 				7CDAF53526DE1C8B00F8F01D /* FTMacOSSDKTests.m */,
-				7CDAF53426DE1C8B00F8F01D /* FTNetworkTests.m */,
+				1707C82229E52ED5009B7D9C /* FTRUMTests.m */,
+				1707C83429E55C19009B7D9C /* FTLoggerTest.m */,
+				17B296B429EE41A000B4A344 /* FTTraceTests.m */,
 				7CDA50E226DE15EE0062CC39 /* Info.plist */,
+				1707C83029E534F9009B7D9C /* FTMacOSSDKTest.xcconfig */,
 			);
-			path = ExampleTests;
+			path = FTMacOSSDKTests;
 			sourceTree = "<group>";
 		};
 		7CDA50EA26DE15EE0062CC39 /* ExampleUITests */ = {
@@ -311,7 +379,6 @@
 				7CDA50C226DE15EB0062CC39 /* Sources */,
 				7CDA50C326DE15EB0062CC39 /* Frameworks */,
 				7CDA50C426DE15EB0062CC39 /* Resources */,
-				031D24FF9B66D4E53CB1D538 /* [CP] Embed Pods Frameworks */,
 				175B13B429E3BAAC003A5B1B /* ShellScript */,
 			);
 			buildRules = (
@@ -319,14 +386,18 @@
 			dependencies = (
 			);
 			name = Example;
+			packageProductDependencies = (
+				175BC1F32A090B4100AEBEB5 /* FTMacOSSDK */,
+			);
 			productName = Example;
 			productReference = 7CDA50C626DE15EB0062CC39 /* Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7CDA50DB26DE15EE0062CC39 /* ExampleTests */ = {
+		7CDA50DB26DE15EE0062CC39 /* FTMacOSSDKTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7CDA50F326DE15EE0062CC39 /* Build configuration list for PBXNativeTarget "ExampleTests" */;
+			buildConfigurationList = 7CDA50F326DE15EE0062CC39 /* Build configuration list for PBXNativeTarget "FTMacOSSDKTests" */;
 			buildPhases = (
+				1207A8126F634B5F4E000447 /* [CP] Check Pods Manifest.lock */,
 				7CDA50D826DE15EE0062CC39 /* Sources */,
 				7CDA50D926DE15EE0062CC39 /* Frameworks */,
 				7CDA50DA26DE15EE0062CC39 /* Resources */,
@@ -336,9 +407,11 @@
 			dependencies = (
 				7CDA50DE26DE15EE0062CC39 /* PBXTargetDependency */,
 			);
-			name = ExampleTests;
+			name = FTMacOSSDKTests;
+			packageProductDependencies = (
+			);
 			productName = ExampleTests;
-			productReference = 7CDA50DC26DE15EE0062CC39 /* ExampleTests.xctest */;
+			productReference = 7CDA50DC26DE15EE0062CC39 /* FTMacOSSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		7CDA50E626DE15EE0062CC39 /* ExampleUITests */ = {
@@ -370,6 +443,7 @@
 				TargetAttributes = {
 					7CDA50C526DE15EB0062CC39 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1430;
 					};
 					7CDA50DB26DE15EE0062CC39 = {
 						CreatedOnToolsVersion = 12.4;
@@ -395,7 +469,7 @@
 			projectRoot = "";
 			targets = (
 				7CDA50C526DE15EB0062CC39 /* Example */,
-				7CDA50DB26DE15EE0062CC39 /* ExampleTests */,
+				7CDA50DB26DE15EE0062CC39 /* FTMacOSSDKTests */,
 				7CDA50E626DE15EE0062CC39 /* ExampleUITests */,
 			);
 		};
@@ -406,6 +480,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				175BC13D2A08A45700AEBEB5 /* sample.html in Resources */,
 				7CD26FF826EB24D40025CC50 /* SecondViewController.xib in Resources */,
 				177BA53429DADAB100DB7497 /* LoggingViewController.xib in Resources */,
 				1799582729D6874F0033B46E /* RumViewController.xib in Resources */,
@@ -423,6 +498,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1707C83129E534F9009B7D9C /* FTMacOSSDKTest.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,21 +512,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		031D24FF9B66D4E53CB1D538 /* [CP] Embed Pods Frameworks */ = {
+		1207A8126F634B5F4E000447 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FTMacOSSDKTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		175B13B429E3BAAC003A5B1B /* ShellScript */ = {
@@ -502,6 +583,7 @@
 				7CF30EDF26F09D5E003CA20A /* CollectionViewItem.m in Sources */,
 				7CD26FF726EB24D40025CC50 /* SecondViewController.m in Sources */,
 				7CD2705226EB6C820025CC50 /* PresentCustomAnimator.m in Sources */,
+				175C7CEF29E6B50B00A7F271 /* LogTest.swift in Sources */,
 				7CF30ED726F098AF003CA20A /* CollectionVC.m in Sources */,
 				7C87E2B6270052B2001F6C3B /* SplitViewItemVC2.m in Sources */,
 				7CF30EE726F1EF9E003CA20A /* MainWindow.m in Sources */,
@@ -511,6 +593,7 @@
 				7C87E29C27003E76001F6C3B /* SplitViewVC.m in Sources */,
 				7CDA50D626DE15ED0062CC39 /* main.m in Sources */,
 				7CD26F2726EA06BF0025CC50 /* LoginWindow.m in Sources */,
+				175BC13B2A08A34600AEBEB5 /* WebViewController.m in Sources */,
 				7CDA50CB26DE15EB0062CC39 /* AppDelegate.m in Sources */,
 				7CD26FE226EB223E0025CC50 /* TabViewController.m in Sources */,
 				177BA53E29DBCF4200DB7497 /* TraceViewController.m in Sources */,
@@ -526,8 +609,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1715F2952A04A123007EF5BB /* FTAutoTrackActionNameTests.m in Sources */,
+				1707C82329E52ED5009B7D9C /* FTRUMTests.m in Sources */,
 				7CDAF53726DE1C8B00F8F01D /* FTMacOSSDKTests.m in Sources */,
-				7CDAF53626DE1C8B00F8F01D /* FTNetworkTests.m in Sources */,
+				175BC1F72A0A58FD00AEBEB5 /* FTTestHelper.m in Sources */,
+				1707C83529E55C19009B7D9C /* FTLoggerTest.m in Sources */,
+				17B296B529EE41A000B4A344 /* FTTraceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +719,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -651,24 +739,33 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = hll.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Example/Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Pre;
 		};
 		175B13AB29E3AC90003A5B1B /* Pre */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0DBE103D7D7F3266AE7001B /* Pods-FTMacOSSDKTests.pre.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/..\"/**",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = FTMacOSSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = hll.ExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Contents/MacOS/Example";
@@ -678,6 +775,7 @@
 		175B13AC29E3AC90003A5B1B /* Pre */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -813,17 +911,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
 					"DEVELOP=1",
 				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -832,6 +933,9 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = hll.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Example/Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -841,6 +945,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -855,24 +960,32 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = hll.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Example/Example-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
 		7CDA50F426DE15EE0062CC39 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1707C83029E534F9009B7D9C /* FTMacOSSDKTest.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/..\"/**",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = FTMacOSSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = hll.ExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Contents/MacOS/Example";
@@ -881,19 +994,25 @@
 		};
 		7CDA50F526DE15EE0062CC39 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3114B98D402435AAD8C089D2 /* Pods-FTMacOSSDKTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = RRLM22BB37;
-				INFOPLIST_FILE = ExampleTests/Info.plist;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/..\"/**",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = FTMacOSSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = hll.ExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Example.app/Contents/MacOS/Example";
@@ -903,6 +1022,7 @@
 		7CDA50F726DE15EE0062CC39 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -922,6 +1042,7 @@
 		7CDA50F826DE15EE0062CC39 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
@@ -961,7 +1082,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7CDA50F326DE15EE0062CC39 /* Build configuration list for PBXNativeTarget "ExampleTests" */ = {
+		7CDA50F326DE15EE0062CC39 /* Build configuration list for PBXNativeTarget "FTMacOSSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7CDA50F426DE15EE0062CC39 /* Debug */,
@@ -982,6 +1103,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		175BC1F32A090B4100AEBEB5 /* FTMacOSSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FTMacOSSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7CDA50BE26DE15EB0062CC39 /* Project object */;
 }

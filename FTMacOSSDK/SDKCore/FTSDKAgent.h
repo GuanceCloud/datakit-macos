@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - loggerConfigOptions: logger 配置项.
 - (void)startLoggerWithConfigOptions:(FTLoggerConfig *)loggerConfigOptions;
 
-/// 设置过滤 Trace Resource 域名
+/// 自动埋点功能中，过滤不需要进行采集的地址，一般用于排除非业务相关的一些请求
 /// - Parameter handler: 判断是否采集回调，返回 YES 采集， NO 过滤掉
 - (void)isIntakeUrl:(BOOL(^)(NSURL *url))handler;
 /// 配置 Trace Config 开启 Trace 功能
