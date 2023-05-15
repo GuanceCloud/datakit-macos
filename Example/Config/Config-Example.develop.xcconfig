@@ -7,7 +7,6 @@
 
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
-#include "../Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"
 
 SDK_APP_ID = "app_id_common"
 SDK_DEA_ADDRESS = http:\$()\xxxxxxxx:9531
