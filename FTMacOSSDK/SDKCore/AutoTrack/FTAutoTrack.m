@@ -10,7 +10,6 @@
 #import "FTSwizzle.h"
 #import "NSWindow+FTAutoTrack.h"
 #import "NSApplication+FTAutotrack.h"
-#import "NSGestureRecognizer+FTAutoTrack.h"
 #import "NSCollectionView+FTAutoTrack.h"
 #import "NSTabView+FTAutoTrack.h"
 @implementation FTAutoTrack
