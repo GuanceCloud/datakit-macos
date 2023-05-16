@@ -14,7 +14,6 @@
 -(instancetype)initWithMetricsUrl:(NSString *)metricsUrl{
     if (self = [super init]) {
         _metricsUrl = metricsUrl;
-        _XDataKitUUID = [FTBaseInfoHandler XDataKitUUID];
         _service = @"df_rum_macos";
         _version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     }
@@ -23,7 +22,6 @@
 -(id)copyWithZone:(NSZone *)zone{
     FTSDKConfig *options = [[[self class] allocWithZone:nil] init];
     options.metricsUrl = self.metricsUrl;
-    options.XDataKitUUID = self.XDataKitUUID;
     options.env = self.env;
     options.service = self.service;
     options.enableSDKDebugLog = self.enableSDKDebugLog;

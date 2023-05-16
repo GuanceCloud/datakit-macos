@@ -65,13 +65,11 @@
     config.service = @"testsdk";
     config.version = @"1.1.1";
     config.env = FTEnvLocal;
-    config.XDataKitUUID = @"aaaaa";
     FTSDKConfig *copyConfig = [config copy];
     XCTAssertTrue(copyConfig.enableSDKDebugLog == config.enableSDKDebugLog);
     XCTAssertTrue(copyConfig.env == config.env);
     XCTAssertTrue([copyConfig.service isEqualTo:config.service]);
     XCTAssertTrue([copyConfig.version isEqualTo:config.version]);
-    XCTAssertTrue([copyConfig.XDataKitUUID isEqualTo:config.XDataKitUUID]);
     XCTAssertTrue([copyConfig.globalContext isEqual:config.globalContext]);
 }
 - (void)testRUMConfigCopy{

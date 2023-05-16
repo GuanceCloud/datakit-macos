@@ -100,9 +100,6 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
 
 /// 数据上报地址
 @property (nonatomic, copy) NSString *metricsUrl;
-
-/// 请求 HTTP 请求头 X-Datakit-UUID 数据采集端  如果用户不设置会自动配置
-@property (nonatomic, copy) NSString *XDataKitUUID;
 /// 所属业务或服务的名称 默认：df_rum_macos
 @property (nonatomic, copy) NSString *service;
 /// 环境字段。
