@@ -18,11 +18,25 @@
 }
 - (void)datakitTrack:(SEL)action to:(id)target from:(id )sender{
 
-    if (![sender  isKindOfClass:[NSView class]] && ![sender isKindOfClass:[NSMenuItem class]]) {
+    if (![sender isKindOfClass:[NSView class]] && ![sender isKindOfClass:[NSMenuItem class]] && ![sender isKindOfClass:[NSGestureRecognizer class]]) {
         return;
     }
     //拖拽事件不采集
     if (self.currentEvent.type != NSEventTypeLeftMouseUp &&  self.currentEvent.type != NSEventTypeLeftMouseDown ) {
+        return;
+    }
+    //处理手势事件
+    if ([sender isKindOfClass:NSGestureRecognizer.class]) {
+        NSGestureRecognizer *ges = (NSGestureRecognizer *)sender;
+        if (ges.state != NSGestureRecognizerStateEnded) {
+            return;
+        }
+        NSView *view = ges.view;
+        if([view isKindOfClass:[NSImageView class]]||[view isKindOfClass:[NSTextField class]]){
+            if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
+                [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.datakit_actionName];
+            }
+        }
         return;
     }
     //NSMenu 不继承于 NSView
@@ -42,28 +56,38 @@
     if(!view.window){
         return;
     }
+    NSString *actionName = view.datakit_actionName;
     //NSStepper点击触发 NSEventTypeLeftMouseDown
     if (self.currentEvent.type == NSEventTypeLeftMouseDown && ([sender isKindOfClass:NSDatePicker.class] || [sender isKindOfClass:NSStepper.class])) {
-        if([sender isKindOfClass:NSDatePicker.class] && !(action && target)){
-            return;
+        if([sender isKindOfClass:NSDatePicker.class]){
+            if(!(action && target)){
+                return;
+            }else{
+                actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass([sender class]),NSStringFromSelector(action)];
+            }
         }
         if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.datakit_actionName];
+            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:actionName];
         }
     }else{
-        //过滤 NSSearchField 取消按钮一次点击多次sendAction
-        if ([sender isKindOfClass:NSSearchField.class] && action == nil) {
-            return;
-        }
         //过滤 NSComboBox 下拉选择框的点击事件，避免重复
         if ([sender isKindOfClass:NSClassFromString(@"NSComboTableView")]){
             return;
         }
-        if([sender isKindOfClass:NSView.class]){
-            if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-                [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:view.datakit_actionName];
+        //过滤 NSSearchField 取消按钮一次点击多次sendAction，并区分搜索按钮和取消按钮
+        if ([sender isKindOfClass:NSSearchField.class]) {
+            if(!action){
+                return;
             }
+            actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass([sender class]),NSStringFromSelector(action)];
         }
+        if([sender isKindOfClass:NSDatePicker.class] && action){
+            actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass([sender class]),NSStringFromSelector(action)];
+        }
+        if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
+            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:actionName];
+        }
+        
     }
 }
 @end

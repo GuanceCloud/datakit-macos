@@ -124,3 +124,10 @@
 }
 
 @end
+@implementation NSDatePicker (FTAutoTrack)
+
+-(NSString *)datakit_actionName{
+    return [NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.dateValue];
+}
+
+@end

@@ -52,8 +52,6 @@
         dispatch_once(&onceToken, ^{
             NSError *error = NULL;
             [NSApplication ft_swizzleMethod:@selector(sendAction:to:from:) withMethod:@selector(datakit_sendAction:to:from:) error:&error];
-            [NSGestureRecognizer ft_swizzleMethod:@selector(setAction:) withMethod:@selector(datakit_setAction:) error:&error];
-            [NSGestureRecognizer ft_swizzleMethod:@selector(setTarget:) withMethod:@selector(datakit_setTarget:) error:&error];
             [NSCollectionView ft_swizzleMethod:@selector(setDelegate:) withMethod:@selector(datakit_setDelegate:) error:&error];
             [NSTabView ft_swizzleMethod:@selector(setDelegate:) withMethod:@selector(datakit_setDelegate:) error:&error];
         });

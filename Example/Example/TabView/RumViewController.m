@@ -152,6 +152,9 @@
     [task resume];
     
 }
+- (IBAction)doubleAction:(id)sender {
+    NSLog(@"doubleAction");
+}
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics *)metrics API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)){
     self.metrics = metrics;
 }

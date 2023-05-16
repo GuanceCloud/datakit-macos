@@ -11,6 +11,7 @@
 @property (weak) IBOutlet NSTextField *lable;
 @property (weak) IBOutlet NSImageView *imageView;
 @property (strong) IBOutlet NSStepper *stepper;
+@property (strong) IBOutlet NSProgressIndicator *progressIndicator;
 
 @end
 

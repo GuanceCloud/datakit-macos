@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="imageView" destination="GC5-Iv-vk0" id="UcY-R7-8vM"/>
                 <outlet property="lable" destination="X3A-aX-cAF" id="9l6-hY-BlY"/>
+                <outlet property="progressIndicator" destination="wPV-sn-uCi" id="r5m-gZ-AOe"/>
                 <outlet property="stepper" destination="a7O-vE-MuI" id="3QE-aH-QkM"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -28,8 +29,8 @@
                     </constraints>
                     <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="clockAndCalendar" useCurrentDate="YES" id="udv-QJ-gcZ">
                         <font key="font" metaFont="system"/>
-                        <date key="date" timeIntervalSinceReferenceDate="705490162.25828302">
-                            <!--2023-05-11 09:29:22 +0000-->
+                        <date key="date" timeIntervalSinceReferenceDate="705910541.70400298">
+                            <!--2023-05-16 06:15:41 +0000-->
                         </date>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -43,8 +44,8 @@
                     </constraints>
                     <datePickerCell key="cell" borderStyle="bezel" alignment="left" datePickerStyle="textField" useCurrentDate="YES" id="RSc-aJ-9Fs">
                         <font key="font" metaFont="system"/>
-                        <date key="date" timeIntervalSinceReferenceDate="705490162.26202905">
-                            <!--2023-05-11 09:29:22 +0000-->
+                        <date key="date" timeIntervalSinceReferenceDate="705910541.70791495">
+                            <!--2023-05-16 06:15:41 +0000-->
                         </date>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -58,8 +59,8 @@
                     </constraints>
                     <datePickerCell key="cell" borderStyle="bezel" alignment="left" useCurrentDate="YES" id="hqT-H3-jEq">
                         <font key="font" metaFont="system"/>
-                        <date key="date" timeIntervalSinceReferenceDate="705490162.26398802">
-                            <!--2023-05-11 09:29:22 +0000-->
+                        <date key="date" timeIntervalSinceReferenceDate="705910541.71070302">
+                            <!--2023-05-16 06:15:41 +0000-->
                         </date>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -131,6 +132,10 @@
                     </constraints>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="GBE-pI-qIR"/>
                 </imageView>
+                <switch horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" baseWritingDirection="leftToRight" alignment="left" translatesAutoresizingMaskIntoConstraints="NO" id="Glm-C0-bYw">
+                    <rect key="frame" x="396" y="187" width="42" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </switch>
             </subviews>
             <constraints>
                 <constraint firstItem="a7O-vE-MuI" firstAttribute="leading" secondItem="ScL-BO-mUs" secondAttribute="trailing" constant="20" id="2Rb-Vy-06I"/>
@@ -152,7 +157,7 @@
                 <constraint firstItem="j8c-CI-baL" firstAttribute="centerY" secondItem="X3A-aX-cAF" secondAttribute="centerY" id="xng-eP-a02"/>
                 <constraint firstItem="a7O-vE-MuI" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="zfp-Bm-wq4"/>
             </constraints>
-            <point key="canvasLocation" x="-122" y="121"/>
+            <point key="canvasLocation" x="-122" y="120.5"/>
         </customView>
     </objects>
 </document>
