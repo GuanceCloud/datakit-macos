@@ -35,7 +35,8 @@
 //    return str;
 //}
 -(NSString *)datakit_actionName{
-    return [NSString stringWithFormat:@"[%@]",NSStringFromClass(self.class)];
+    // NSToolBar 点击时，sender 为私有 view NSToolbarItemViewer，可以根据 toolTip 区分
+    return self.toolTip?[NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),self.toolTip]:[NSString stringWithFormat:@"[%@]",NSStringFromClass(self.class)];
 }
 
 //-(id)datakit_controller{

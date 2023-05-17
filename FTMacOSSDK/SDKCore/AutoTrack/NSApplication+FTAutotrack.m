@@ -51,43 +51,49 @@
         }
         return;
     }
+    //滚动条上点击事件不采集
+    if ([sender isKindOfClass:NSScroller.class]){
+        return;
+    }
+    //过滤 NSTableView doubleAction
+    if([sender isKindOfClass:NSTableView.class] && action && target){
+        return;
+    }
     NSView *view = sender;
     //view 没有 window，点击事件不采集
     if(!view.window){
         return;
     }
     NSString *actionName = view.datakit_actionName;
-    //NSStepper点击触发 NSEventTypeLeftMouseDown
-    if (self.currentEvent.type == NSEventTypeLeftMouseDown && ([sender isKindOfClass:NSDatePicker.class] || [sender isKindOfClass:NSStepper.class])) {
-        if([sender isKindOfClass:NSDatePicker.class]){
-            if(!(action && target)){
-                return;
-            }else{
-                actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass([sender class]),NSStringFromSelector(action)];
-            }
-        }
-        if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:actionName];
-        }
-    }else{
-        //过滤 NSComboBox 下拉选择框的点击事件，避免重复
-        if ([sender isKindOfClass:NSClassFromString(@"NSComboTableView")]){
+    // NSDatePicker
+    if([sender isKindOfClass:NSDatePicker.class]){
+        // NSEventTypeLeftMouseDown 且 没有 action 的过滤掉
+        if( self.currentEvent.type == NSEventTypeLeftMouseDown && !action){
             return;
         }
-        //过滤 NSSearchField 取消按钮一次点击多次sendAction，并区分搜索按钮和取消按钮
-        if ([sender isKindOfClass:NSSearchField.class]) {
-            if(!action){
-                return;
-            }
+        NSDatePicker *datePicker = (NSDatePicker *)view;
+        if (action && datePicker.datePickerStyle == NSDatePickerStyleClockAndCalendar){
             actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass([sender class]),NSStringFromSelector(action)];
         }
-        if([sender isKindOfClass:NSDatePicker.class] && action){
-            actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass([sender class]),NSStringFromSelector(action)];
-        }
-        if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
-            [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:actionName];
-        }
-        
     }
+    //过滤 NSComboBox 下拉选择框的点击事件，避免重复
+    if ([sender isKindOfClass:NSClassFromString(@"NSComboTableView")]){
+        return;
+    }
+    //过滤 NSSearchField 取消按钮一次点击多次sendAction，并区分搜索按钮和取消按钮
+    if ([sender isKindOfClass:NSSearchField.class]) {
+        if(!action){
+            return;
+        }
+        actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass([sender class]),NSStringFromSelector(action)];
+    }
+    if([sender isKindOfClass:NSDatePicker.class] && action){
+        actionName = [NSString stringWithFormat:@"[%@]%@",NSStringFromClass([sender class]),NSStringFromSelector(action)];
+    }
+    
+    if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(addClickActionWithName:)]){
+        [[FTAutoTrack sharedInstance].addRumDatasDelegate addClickActionWithName:actionName];
+    }
+    
 }
 @end
