@@ -21,7 +21,6 @@
 		1799DFC629CB05890043D7B5 /* NSView+FTAutoTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DFA229CB05890043D7B5 /* NSView+FTAutoTrack.h */; };
 		1799DFC729CB05890043D7B5 /* NSMenuItem+FTAutoTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DFA329CB05890043D7B5 /* NSMenuItem+FTAutoTrack.h */; };
 		1799DFC829CB05890043D7B5 /* FTAutoTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1799DFA429CB05890043D7B5 /* FTAutoTrack.m */; };
-		1799DFCA29CB05890043D7B5 /* NSGestureRecognizer+FTAutoTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DFA629CB05890043D7B5 /* NSGestureRecognizer+FTAutoTrack.h */; };
 		1799DFCB29CB05890043D7B5 /* FTAutoTrackProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DFA729CB05890043D7B5 /* FTAutoTrackProtocol.h */; };
 		1799DFCC29CB05890043D7B5 /* NSTabView+FTAutoTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DFA829CB05890043D7B5 /* NSTabView+FTAutoTrack.h */; };
 		1799DFCD29CB05890043D7B5 /* NSApplication+FTAutotrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DFA929CB05890043D7B5 /* NSApplication+FTAutotrack.h */; };
@@ -29,7 +28,6 @@
 		1799DFCF29CB05890043D7B5 /* NSMenuItem+FTAutoTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1799DFAB29CB05890043D7B5 /* NSMenuItem+FTAutoTrack.m */; };
 		1799DFD029CB05890043D7B5 /* NSWindow+FTAutoTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DFAC29CB05890043D7B5 /* NSWindow+FTAutoTrack.h */; };
 		1799DFD129CB05890043D7B5 /* NSCollectionView+FTAutoTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DFAD29CB05890043D7B5 /* NSCollectionView+FTAutoTrack.h */; };
-		1799DFD329CB05890043D7B5 /* NSGestureRecognizer+FTAutoTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1799DFAF29CB05890043D7B5 /* NSGestureRecognizer+FTAutoTrack.m */; };
 		1799DFD429CB05890043D7B5 /* FTAutoTrack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DFB029CB05890043D7B5 /* FTAutoTrack.h */; };
 		1799DFD629CB05890043D7B5 /* NSApplication+FTAutotrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1799DFB229CB05890043D7B5 /* NSApplication+FTAutotrack.m */; };
 		1799DFD729CB05890043D7B5 /* NSTabView+FTAutoTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1799DFB329CB05890043D7B5 /* NSTabView+FTAutoTrack.m */; };
@@ -55,7 +53,6 @@
 		1799DFA229CB05890043D7B5 /* NSView+FTAutoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSView+FTAutoTrack.h"; sourceTree = "<group>"; };
 		1799DFA329CB05890043D7B5 /* NSMenuItem+FTAutoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMenuItem+FTAutoTrack.h"; sourceTree = "<group>"; };
 		1799DFA429CB05890043D7B5 /* FTAutoTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAutoTrack.m; sourceTree = "<group>"; };
-		1799DFA629CB05890043D7B5 /* NSGestureRecognizer+FTAutoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSGestureRecognizer+FTAutoTrack.h"; sourceTree = "<group>"; };
 		1799DFA729CB05890043D7B5 /* FTAutoTrackProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAutoTrackProtocol.h; sourceTree = "<group>"; };
 		1799DFA829CB05890043D7B5 /* NSTabView+FTAutoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTabView+FTAutoTrack.h"; sourceTree = "<group>"; };
 		1799DFA929CB05890043D7B5 /* NSApplication+FTAutotrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+FTAutotrack.h"; sourceTree = "<group>"; };
@@ -63,7 +60,6 @@
 		1799DFAB29CB05890043D7B5 /* NSMenuItem+FTAutoTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMenuItem+FTAutoTrack.m"; sourceTree = "<group>"; };
 		1799DFAC29CB05890043D7B5 /* NSWindow+FTAutoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+FTAutoTrack.h"; sourceTree = "<group>"; };
 		1799DFAD29CB05890043D7B5 /* NSCollectionView+FTAutoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCollectionView+FTAutoTrack.h"; sourceTree = "<group>"; };
-		1799DFAF29CB05890043D7B5 /* NSGestureRecognizer+FTAutoTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSGestureRecognizer+FTAutoTrack.m"; sourceTree = "<group>"; };
 		1799DFB029CB05890043D7B5 /* FTAutoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAutoTrack.h; sourceTree = "<group>"; };
 		1799DFB229CB05890043D7B5 /* NSApplication+FTAutotrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+FTAutotrack.m"; sourceTree = "<group>"; };
 		1799DFB329CB05890043D7B5 /* NSTabView+FTAutoTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTabView+FTAutoTrack.m"; sourceTree = "<group>"; };
@@ -144,8 +140,6 @@
 				1799DFAB29CB05890043D7B5 /* NSMenuItem+FTAutoTrack.m */,
 				1799DFB029CB05890043D7B5 /* FTAutoTrack.h */,
 				1799DFA429CB05890043D7B5 /* FTAutoTrack.m */,
-				1799DFA629CB05890043D7B5 /* NSGestureRecognizer+FTAutoTrack.h */,
-				1799DFAF29CB05890043D7B5 /* NSGestureRecognizer+FTAutoTrack.m */,
 				1799DFA729CB05890043D7B5 /* FTAutoTrackProtocol.h */,
 				1799DFA829CB05890043D7B5 /* NSTabView+FTAutoTrack.h */,
 				1799DFA929CB05890043D7B5 /* NSApplication+FTAutotrack.h */,
@@ -174,7 +168,6 @@
 				1799DFBF29CB05890043D7B5 /* FTSDKAgent.h in Headers */,
 				1799DFC029CB05890043D7B5 /* FTSDKConfig.h in Headers */,
 				1799DFC729CB05890043D7B5 /* NSMenuItem+FTAutoTrack.h in Headers */,
-				1799DFCA29CB05890043D7B5 /* NSGestureRecognizer+FTAutoTrack.h in Headers */,
 				17164B7529E0343B007D71D6 /* FTSDKAgent+Private.h in Headers */,
 				1799DFC629CB05890043D7B5 /* NSView+FTAutoTrack.h in Headers */,
 				1799DFBD29CB05890043D7B5 /* FTGlobalRumManager.h in Headers */,
@@ -271,7 +264,6 @@
 				1799DFDB29CB05890043D7B5 /* FTGlobalRumManager.m in Sources */,
 				1799DFC829CB05890043D7B5 /* FTAutoTrack.m in Sources */,
 				1799DFC529CB05890043D7B5 /* NSWindow+FTAutoTrack.m in Sources */,
-				1799DFD329CB05890043D7B5 /* NSGestureRecognizer+FTAutoTrack.m in Sources */,
 				1799DFCE29CB05890043D7B5 /* NSView+FTAutoTrack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
