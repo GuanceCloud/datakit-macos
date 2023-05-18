@@ -47,17 +47,28 @@
 @implementation NSTableView (FTAutoTrack)
 
 -(NSString *)datakit_actionName{
-    if(self.clickedRow<0 || self.clickedColumn<0 ){
+    if(self.clickedRow<0 && self.clickedColumn<0){
         return nil;
     }
-    NSView *itemView =  [self viewAtColumn:self.clickedColumn row:self.clickedRow makeIfNecessary:NO];
     NSString *title = nil;
-    if(itemView && itemView.subviews.count>0){
-        for (NSView *sub in itemView.subviews) {
-            if([sub isKindOfClass:NSTextField.class]){
-                NSTextField *lable = (NSTextField *)sub;
-                title = lable.stringValue;
+    NSInteger clickedColumn = self.clickedColumn>=0?self.clickedColumn:0;
+    //self.clickedRow = -1 时，点击的是 NSTableColumn
+    if(self.clickedRow<0){
+        NSTableColumn *column = self.tableColumns[self.clickedColumn];
+        title = column.title?[NSString stringWithFormat:@"[column:%@]",column.title]:[NSString stringWithFormat:@"[column:%ld]",self.clickedColumn];
+    }else{
+        NSView *itemView =  [self viewAtColumn:clickedColumn row:self.clickedRow makeIfNecessary:YES];
+        if(itemView && itemView.subviews.count>0){
+            for (NSView *sub in itemView.subviews) {
+                if([sub isKindOfClass:NSTextField.class]){
+                    NSTextField *lable = (NSTextField *)sub;
+                    title = lable.stringValue;
+                }
             }
+        }else{
+            // 使用 macos 10.5 以前的 api 创建 tableView 单元格或系统的比如 NSFontPanel 上的 tablew
+            NSCell *cell = [self preparedCellAtColumn:clickedColumn row:self.clickedRow];
+            title = cell.stringValue;
         }
     }
     return title?[NSString stringWithFormat:@"[%@]%@",NSStringFromClass(self.class),title]:[NSString stringWithFormat:@"[%@][column:%ld][row:%ld]",NSStringFromClass(self.class),self.clickedColumn,(long)self.clickedRow];
