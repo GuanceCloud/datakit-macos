@@ -56,8 +56,11 @@
         return;
     }
     //过滤 NSTableView doubleAction
-    if([sender isKindOfClass:NSTableView.class] && action && target){
-        return;
+    if([sender isKindOfClass:NSTableView.class]){
+        NSTableView *tableView = (NSTableView *)sender;
+        if(action && tableView.doubleAction != tableView.action && tableView.doubleAction == action){
+            return;
+        }
     }
     NSView *view = sender;
     //view 没有 window，点击事件不采集
