@@ -24,7 +24,7 @@ Pod::Spec.new do |spec|
   spec.osx.deployment_target = '10.13'
   spec.requires_arc = true
   
-  spec.source       = { :git => "https://github.com/GuanceCloud/datakit-macos.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/GuanceCloud/datakit-macos.git", :tag => "$JENKINS_DYNAMIC_VERSION" }
 
   spec.default_subspec = "SDKCore"
 
