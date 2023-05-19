@@ -60,7 +60,8 @@ static dispatch_once_t onceToken;
         NSString *serialLabel = [NSString stringWithFormat:@"ft.serialLabel.%p", self];
         _serialQueue = dispatch_queue_create([serialLabel UTF8String], DISPATCH_QUEUE_SERIAL);
         //开启数据处理管理器
-        [FTTrackerEventDBTool shareDatabase:[NSString stringWithFormat:@"%@_ZYFMDB.sqlite",[self sdkUUIDString]]];
+        NSString *bundleIdentifier = [[[NSBundle mainBundle]infoDictionary] objectForKey:@"CFBundleIdentifier"];
+        [FTTrackerEventDBTool shareDatabaseWithPath:[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject] dbName:[NSString stringWithFormat:@"com.cloudcare.ft.macos.sdk-%@.sqlite",bundleIdentifier]];
         [FTTrackDataManager sharedInstance];
         _presetProperty = [[FTPresetProperty alloc] initWithVersion:config.version env:(Env)config.env service:config.service globalContext:config.globalContext];
         _presetProperty.sdkVersion = SDK_VERSION;
@@ -240,17 +241,6 @@ static dispatch_once_t onceToken;
     [FTURLProtocol stopMonitor];
     onceToken = 0;
     sharedInstance =nil;
-}
-// 用于设置 SDK 数据库唯一标识
--(NSString *)sdkUUIDString{
-    NSString *uuidStr;
-    uuidStr = [[NSUserDefaults standardUserDefaults] valueForKey:@"FTSDKUUID"];
-    if (!uuidStr) {
-        uuidStr = [[NSUUID UUID] UUIDString];
-        [[NSUserDefaults standardUserDefaults] setValue:uuidStr forKey:@"FTSDKUUID"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    return uuidStr;
 }
 - (void)syncProcess{
     dispatch_sync(self.serialQueue, ^{
