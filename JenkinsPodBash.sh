@@ -1,4 +1,4 @@
-FT_PUSH_TAG="refs/tags/1.0.0-alpha.1"
+#FT_PUSH_TAG="refs/tags/1.0.0-alpha.1"
 
 
 VERSION=$(echo "$FT_PUSH_TAG" | sed -e 's/.*\///g' | sed -e 's/~.*//g' )
