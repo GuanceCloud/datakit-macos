@@ -1,3 +1,6 @@
+1.0.0-alpha.2
+1.修改 SDK 本地数据库 path、name
+---
 1.0.0-alpha.1
 1.支持 MacOS 端 RUM、Trace、Logger 等功能。
 
