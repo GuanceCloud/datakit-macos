@@ -45,7 +45,7 @@
     self.mTableView.dataSource = self;
     self.mTableView.delegate = self;
     [self.mTableView reloadData];
-    
+    [self.mTableView setAction:@selector(clickRow)];
 }
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView{
     return  self.datas.count;
@@ -95,8 +95,8 @@
     
     return view;
 }
--(void)tableViewSelectionDidChange:(NSNotification *)notification{
-    switch (self.mTableView.selectedRow) {
+-(void)clickRow{
+    switch (self.mTableView.clickedRow) {
         case 0:
             [[FTGlobalRumManager sharedManager] onCreateView:@"RumViewController" loadTime:@10000000];
             break;
