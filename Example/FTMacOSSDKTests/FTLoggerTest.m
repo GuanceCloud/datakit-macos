@@ -33,7 +33,7 @@
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [[FTTrackerEventDBTool sharedManger]insertCacheToDB];
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testEnableCustomLog{
     [self setRightSDKConfig];

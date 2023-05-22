@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FTSDKAgent (Private)<FTRUMDataWriteProtocol>
 #if FTMacOSSDK_COMPILED_FOR_TESTING
-- (void)sdkDeinitialize;
 - (void)syncProcess;
 #endif
 @end

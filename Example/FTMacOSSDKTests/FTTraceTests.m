@@ -64,7 +64,7 @@
     [self waitForExpectationsWithTimeout:30 handler:^(NSError *error) {
         XCTAssertNil(error);
     }];
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testNoConfigTraceHeader{
     FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
@@ -73,7 +73,7 @@
     NSString *uuidStr = [[NSUUID UUID] UUIDString];
     NSDictionary *traceHeader = [[FTTraceManager sharedInstance] getTraceHeaderWithKey:uuidStr url:[NSURL URLWithString:self.traceUrl]];
     XCTAssertTrue(traceHeader == nil);
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 
 

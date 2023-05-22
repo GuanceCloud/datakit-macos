@@ -63,7 +63,7 @@
     NSArray *newArray = [[FTTrackerEventDBTool sharedManger] getFirstRecords:100 withType:FT_DATA_TYPE_RUM];
     XCTAssertTrue(newArray.count == oldArray.count);
     
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testSamplerate100{
     FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
@@ -78,7 +78,7 @@
     [[FTGlobalRumManager sharedManager].rumManager syncProcess];
     NSArray *newArray = [[FTTrackerEventDBTool sharedManger] getFirstRecords:100 withType:FT_DATA_TYPE_RUM];
     XCTAssertTrue(newArray.count > oldArray.count);
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testAddViewEvent{
     [self addViewEventProperty:nil stopProperty:nil];
@@ -123,7 +123,7 @@
         }
     }
     XCTAssertTrue(hasViewData == YES);
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
     
 }
 - (void)testAddActionEvent{
@@ -165,7 +165,7 @@
         }
     }
     XCTAssertTrue(hasAction == YES);
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testAddResourceEvent{
     [self addResource:nil end:nil];
@@ -198,7 +198,7 @@
         }
     }
     XCTAssertTrue(hasResource == YES);
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testAddErrorEvent{
     [self addErrorWithProperty:nil];
@@ -230,7 +230,7 @@
         }
     }
     XCTAssertTrue(hasError == YES);
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testErrorMonitor{
     [self setRumConfig];
@@ -255,7 +255,7 @@
         }
     }
     XCTAssertTrue(hasError == YES);
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testAddLongTaskEvent{
     [self addLongTask:nil];
@@ -288,7 +288,7 @@
         }
     }
     XCTAssertTrue(hasLongTask == YES);
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testBindUser{
     [self setRumConfig];
@@ -308,7 +308,7 @@
             XCTAssertTrue([tags[@"user_age"] isEqualToString:@"12"]);
         }
     }
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testRumDeviceMetricsMonitor{
     [self setRumConfig];
@@ -341,7 +341,7 @@
         }
     }
     
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testUnbindUser{
     [self setRumConfig];
@@ -378,7 +378,7 @@
             XCTAssertFalse([tags[@"user_age"] isEqualToString:@"12"]);
         }
     }
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testGlobalContext{
     FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
@@ -403,7 +403,7 @@
             XCTAssertTrue([tags[@"sdk_globalContext"] isEqualToString:@"test"]);
         }
     }
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testIntakeUrl{
     [self setRumConfig];

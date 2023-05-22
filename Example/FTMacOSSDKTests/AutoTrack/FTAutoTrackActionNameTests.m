@@ -141,7 +141,7 @@
          }
      }
      XCTAssertTrue(hasLaunchData == YES);
-     [[FTSDKAgent sharedInstance] sdkDeinitialize];
+     [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testClickButtonAndTableView{
     [self setRumConfig];
@@ -169,7 +169,7 @@
     }
     XCTAssertTrue(loginBtnClick);
     XCTAssertTrue(tableViewClick);
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testClickCollectionView{
     [self setRumConfig];

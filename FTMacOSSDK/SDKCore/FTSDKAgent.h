@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameters:
 ///   - Id:  用户Id
 ///   - userName: 用户名称
-///   - userEmailL: 用户邮箱
+///   - userEmail: 用户邮箱
 - (void)bindUserWithUserID:(NSString *)Id userName:(nullable NSString *)userName userEmail:(nullable NSString *)userEmail;
 /// 绑定用户信息
 ///
@@ -77,6 +77,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 注销当前用户
 - (void)unbindUser;
+
+/// 关闭 SDK 内正在运行对象
+- (void)shutDown;
+
 @end
 
 NS_ASSUME_NONNULL_END

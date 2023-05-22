@@ -232,7 +232,7 @@ static dispatch_once_t onceToken;
     }];
     ZYDebug(@"User Logout");
 }
-- (void)sdkDeinitialize{
+- (void)shutDown{
     [self syncProcess];
     [[FTGlobalRumManager sharedManager] rumDeinitialize];
     [[FTURLSessionAutoInstrumentation sharedInstance] resetInstance];

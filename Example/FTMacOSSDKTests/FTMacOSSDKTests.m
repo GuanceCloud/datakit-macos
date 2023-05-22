@@ -37,7 +37,7 @@
     config.enableSDKDebugLog = YES;
     [FTSDKAgent startWithConfigOptions:config];
     XCTAssertNoThrow([FTSDKAgent sharedInstance]);
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testSDKConfigService{
     FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
@@ -56,7 +56,7 @@
     XCTAssertTrue([tags[FT_KEY_SERVICE] isEqualToString:@"df_rum_macos"]);
     XCTAssertTrue([tags[FT_KEY_SERVICE] isEqualToString:@"df_rum_macos"]);
 
-    [[FTSDKAgent sharedInstance] sdkDeinitialize];
+    [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testSDKConfigCopy{
     FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
