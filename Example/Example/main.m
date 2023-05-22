@@ -46,7 +46,7 @@ int main(int argc, const char * argv[]) {
             logger.enableLinkRumData = YES;
             [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:logger];
             FTTraceConfig *trace = [[FTTraceConfig alloc]init];
-            trace.enableAutoTrace = NO;
+            trace.enableAutoTrace = YES;
             trace.enableLinkRumData = YES;
             [[FTSDKAgent sharedInstance] startTraceWithConfigOptions:trace];
             [[FTSDKAgent sharedInstance] logging:@"main" status:FTStatusInfo];
