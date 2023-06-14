@@ -24,7 +24,7 @@ int main(int argc, const char * argv[]) {
         NSProcessInfo *processInfo = [NSProcessInfo processInfo];
         NSString *url = [processInfo environment][@"ACCESS_SERVER_URL"];
         NSString *appid = [processInfo environment][@"APP_ID"];
-        BOOL isRuningUnitTest = [processInfo environment][@"isUnitTests"];
+        BOOL isRuningUnitTest = [[processInfo environment][@"isUnitTests"] boolValue];
         if(!isRuningUnitTest){
             FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:url];
             config.enableSDKDebugLog = YES;
