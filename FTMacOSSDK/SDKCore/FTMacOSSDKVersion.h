@@ -8,6 +8,6 @@
 
 #ifndef FTMacOSSDKVersion_h
 #define FTMacOSSDKVersion_h
-#define SDK_VERSION  @"1.0.0-alpha.2"
+#define SDK_VERSION  @"1.0.0-alpha.3"
 
 #endif /* FTMacOSSDKVersion_h */

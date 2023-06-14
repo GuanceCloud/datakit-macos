@@ -1,3 +1,7 @@
+1.0.0-alpha.3
+1.适配 FTSDKCore 1.4.3-beta.1，解决 RUM 数据丢失问题
+2.开放 SDK shutDown API
+---
 1.0.0-alpha.2
 1.修改 SDK 本地数据库 path、name
 ---
