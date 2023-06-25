@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17164B6D29E02A8A007D71D6 /* FTSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1763BDB829E01642009EE026 /* FTSDKCore.framework */; };
 		17164B7529E0343B007D71D6 /* FTSDKAgent+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 17164B7429E0343B007D71D6 /* FTSDKAgent+Private.h */; };
-		17510E0129C9BE7D00C8F1E4 /* FTMacOSSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 17510E0029C9BE7D00C8F1E4 /* FTMacOSSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		177BA54229DBDE8500DB7497 /* FTTraceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 177BA54029DBDE8500DB7497 /* FTTraceManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		177BA54329DBDE8500DB7497 /* FTTraceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 177BA54129DBDE8500DB7497 /* FTTraceManager.m */; };
 		1799DFBD29CB05890043D7B5 /* FTGlobalRumManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DF9829CB05890043D7B5 /* FTGlobalRumManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -35,13 +33,14 @@
 		1799DFD929CB05890043D7B5 /* FTSDKAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1799DFB529CB05890043D7B5 /* FTSDKAgent.m */; };
 		1799DFDB29CB05890043D7B5 /* FTGlobalRumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1799DFB729CB05890043D7B5 /* FTGlobalRumManager.m */; };
 		1799DFDE29CB05890043D7B5 /* FTMacOSSDKVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 1799DFBA29CB05890043D7B5 /* FTMacOSSDKVersion.h */; };
+		17C5FC992A4830640099A293 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 17C5FC982A4830640099A293 /* Documentation.docc */; };
+		17C5FC9B2A48311B0099A293 /* FTSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17C5FC9A2A48311B0099A293 /* FTSDKCore.framework */; };
+		17C5FCA32A48393F0099A293 /* FTMacOSSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 17C5FCA22A48393F0099A293 /* FTMacOSSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		17164B7429E0343B007D71D6 /* FTSDKAgent+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTSDKAgent+Private.h"; sourceTree = "<group>"; };
 		17510DFD29C9BE7D00C8F1E4 /* FTMacOSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FTMacOSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		17510E0029C9BE7D00C8F1E4 /* FTMacOSSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTMacOSSDK.h; sourceTree = "<group>"; };
-		1763BDB829E01642009EE026 /* FTSDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FTSDKCore.framework; sourceTree = "<group>"; };
 		177BA54029DBDE8500DB7497 /* FTTraceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTraceManager.h; sourceTree = "<group>"; };
 		177BA54129DBDE8500DB7497 /* FTTraceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTraceManager.m; sourceTree = "<group>"; };
 		1799DF9829CB05890043D7B5 /* FTGlobalRumManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGlobalRumManager.h; sourceTree = "<group>"; };
@@ -67,6 +66,9 @@
 		1799DFB529CB05890043D7B5 /* FTSDKAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSDKAgent.m; sourceTree = "<group>"; };
 		1799DFB729CB05890043D7B5 /* FTGlobalRumManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTGlobalRumManager.m; sourceTree = "<group>"; };
 		1799DFBA29CB05890043D7B5 /* FTMacOSSDKVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMacOSSDKVersion.h; sourceTree = "<group>"; };
+		17C5FC982A4830640099A293 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; name = Documentation.docc; path = FTMacOSSDK/Documentation.docc; sourceTree = "<group>"; };
+		17C5FC9A2A48311B0099A293 /* FTSDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FTSDKCore.framework; path = Framework/FTSDKCore.framework; sourceTree = "<group>"; };
+		17C5FCA22A48393F0099A293 /* FTMacOSSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTMacOSSDK.h; path = FTMacOSSDK/FTMacOSSDK.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17164B6D29E02A8A007D71D6 /* FTSDKCore.framework in Frameworks */,
+				17C5FC9B2A48311B0099A293 /* FTSDKCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,9 +86,11 @@
 		17510DF329C9BE7D00C8F1E4 = {
 			isa = PBXGroup;
 			children = (
+				17C5FC982A4830640099A293 /* Documentation.docc */,
 				17510DFF29C9BE7D00C8F1E4 /* FTMacOSSDK */,
-				17510DFE29C9BE7D00C8F1E4 /* Products */,
 				1799DFDF29CB07690043D7B5 /* Frameworks */,
+				17C5FC9F2A48389D0099A293 /* Supporting Files */,
+				17510DFE29C9BE7D00C8F1E4 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,7 +113,6 @@
 		1799DF9529CB05890043D7B5 /* SDKCore */ = {
 			isa = PBXGroup;
 			children = (
-				17510E0029C9BE7D00C8F1E4 /* FTMacOSSDK.h */,
 				1799DF9D29CB05890043D7B5 /* FTGlobalRumManager+Private.h */,
 				1799DF9829CB05890043D7B5 /* FTGlobalRumManager.h */,
 				1799DFB729CB05890043D7B5 /* FTGlobalRumManager.m */,
@@ -151,9 +154,17 @@
 		1799DFDF29CB07690043D7B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1763BDB829E01642009EE026 /* FTSDKCore.framework */,
+				17C5FC9A2A48311B0099A293 /* FTSDKCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		17C5FC9F2A48389D0099A293 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				17C5FCA22A48393F0099A293 /* FTMacOSSDK.h */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,9 +187,9 @@
 				1799DFCC29CB05890043D7B5 /* NSTabView+FTAutoTrack.h in Headers */,
 				1799DFCB29CB05890043D7B5 /* FTAutoTrackProtocol.h in Headers */,
 				1799DFD429CB05890043D7B5 /* FTAutoTrack.h in Headers */,
-				17510E0129C9BE7D00C8F1E4 /* FTMacOSSDK.h in Headers */,
 				1799DFD129CB05890043D7B5 /* NSCollectionView+FTAutoTrack.h in Headers */,
 				1799DFDE29CB05890043D7B5 /* FTMacOSSDKVersion.h in Headers */,
+				17C5FCA32A48393F0099A293 /* FTMacOSSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +272,7 @@
 				1799DFD629CB05890043D7B5 /* NSApplication+FTAutotrack.m in Sources */,
 				1799DFD729CB05890043D7B5 /* NSTabView+FTAutoTrack.m in Sources */,
 				1799DFD929CB05890043D7B5 /* FTSDKAgent.m in Sources */,
+				17C5FC992A4830640099A293 /* Documentation.docc in Sources */,
 				1799DFDB29CB05890043D7B5 /* FTGlobalRumManager.m in Sources */,
 				1799DFC829CB05890043D7B5 /* FTAutoTrack.m in Sources */,
 				1799DFC529CB05890043D7B5 /* NSWindow+FTAutoTrack.m in Sources */,
@@ -400,12 +412,13 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SRCROOT)/FTSDKCore.framework\"",
+					"\"$(SRCROOT)/Framework/FTSDKCore.framework\"",
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Framework",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/FTSDKCore.framework/Headers\"";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Framework/FTSDKCore.framework/Headers\"";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -419,6 +432,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloudcare.ft.mobile.sdk.FTMacOSSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = macosx;
@@ -440,12 +454,13 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SRCROOT)/FTSDKCore.framework\"",
+					"\"$(SRCROOT)/Framework/FTSDKCore.framework\"",
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Framework",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/FTSDKCore.framework/Headers\"";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Framework/FTSDKCore.framework/Headers\"";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -459,6 +474,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloudcare.ft.mobile.sdk.FTMacOSSDK;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				RUN_DOCUMENTATION_COMPILER = YES;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = macosx;
