@@ -2,8 +2,14 @@
 
 
 VERSION=$(echo "$FT_PUSH_TAG" | sed -e 's/.*\///g' | sed -e 's/~.*//g' )
+REPO_URL=git@github.com:GuanceCloud/datakit-macos.git
 
-if git config remote.github.url; then git config remote.github.url git@github.com:GuanceCloud/datakit-macos.git; else git remote add github git@github.com:GuanceCloud/datakit-macos.git; fi
+if git config remote.github.url; then
+    git config remote.github.url $REPO_URL
+else
+    git remote add github $REPO_URL
+fi
+
 git push github $VERSION
 
 if [[ $? -eq 0 ]];then
