@@ -112,6 +112,8 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
 ///
 /// 保留标签： sdk_package_flutter、sdk_package_react_native
 @property (nonatomic, strong) NSDictionary<NSString*,NSString*> *globalContext;
+/// 根据提供的 FTEnv 类型设置 env
+/// - Parameter envType: 环境
 - (void)setEnvWithType:(FTEnv)envType;
 @end
 /// logger 功能配置项

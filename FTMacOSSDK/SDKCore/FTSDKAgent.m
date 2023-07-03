@@ -27,6 +27,7 @@
 #import "FTUserInfo.h"
 #import "FTAutoTrack.h"
 #import "FTURLProtocol.h"
+#import "FTLogger+Private.h"
 @interface FTSDKAgent()<FTLoggerDataWriteProtocol>
 @property (nonatomic, strong) FTLoggerConfig *loggerConfig;
 @property (nonatomic, strong) FTPresetProperty *presetProperty;

@@ -11,3 +11,4 @@
 #import <FTMacOSSDK/FTSDKAgent.h>
 #import <FTMacOSSDK/FTGlobalRumManager.h>
 #import <FTMacOSSDK/FTTraceManager.h>
+#import <FTSDKCore/FTLogger.h>

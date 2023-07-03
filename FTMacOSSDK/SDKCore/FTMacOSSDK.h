@@ -11,3 +11,4 @@
 #import "FTSDKAgent.h"
 #import "FTGlobalRumManager.h"
 #import "FTTraceManager.h"
+#import "FTLogger.h"
