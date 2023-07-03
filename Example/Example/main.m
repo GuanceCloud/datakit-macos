@@ -42,7 +42,6 @@ int main(int argc, const char * argv[]) {
             [[FTSDKAgent sharedInstance]startRumWithConfigOptions:rumConfig];
             FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
             logger.enableCustomLog = YES;
-            logger.enableConsoleLog = YES;
             logger.enableLinkRumData = YES;
             [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:logger];
             FTTraceConfig *trace = [[FTTraceConfig alloc]init];

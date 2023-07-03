@@ -10,7 +10,6 @@
 #import "NSView+FTAutoTrack.h"
 #import "FTAutoTrack.h"
 #import "NSMenuItem+FTAutoTrack.h"
-#import "FTLog.h"
 @implementation NSApplication (FTAutotrack)
 - (BOOL)datakit_sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender{
     [self datakitTrack:action to:target from:sender];

@@ -9,7 +9,7 @@
 #import "FTSwizzler.h"
 #import "FTGlobalRumManager.h"
 #import "NSView+FTAutoTrack.h"
-#import "FTLog.h"
+#import "FTInternalLog.h"
 #import "FTAutoTrack.h"
 @implementation NSTabView (FTAutoTrack)
 -(NSString *)datakit_actionName{

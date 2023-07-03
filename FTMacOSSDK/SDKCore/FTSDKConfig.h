@@ -103,7 +103,7 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
 /// 所属业务或服务的名称 默认：df_rum_macos
 @property (nonatomic, copy) NSString *service;
 /// 环境字段。
-@property (nonatomic, assign) FTEnv env;
+@property (nonatomic, copy) NSString *env;
 /// 设置是否允许 SDK 打印 Debug 日志。
 @property (nonatomic, assign) BOOL enableSDKDebugLog;
 /// 应用版本号。
@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
 ///
 /// 保留标签： sdk_package_flutter、sdk_package_react_native
 @property (nonatomic, strong) NSDictionary<NSString*,NSString*> *globalContext;
-
+- (void)setEnvWithType:(FTEnv)envType;
 @end
 /// logger 功能配置项
 @interface FTLoggerConfig : NSObject
@@ -122,14 +122,12 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
 @property (nonatomic, assign) FTLogCacheDiscard  discardType;
 /// 采样配置，属性值：0至100，100则表示百分百采集，不做数据样本压缩。
 @property (nonatomic, assign) int sampleRate;
-/// 是否需要采集控制台日志 默认为 NO
-@property (nonatomic, assign) BOOL enableConsoleLog;
-/// 采集控制台日志过滤字符串 包含该字符串控制台日志会被采集 默认为全采集
-@property (nonatomic, copy) NSString *prefix;
 /// 是否将 logger 数据与 rum 关联
 @property (nonatomic, assign) BOOL enableLinkRumData;
 /// 是否上传自定义 log
 @property (nonatomic, assign) BOOL enableCustomLog;
+/// 是否将自定义日志在控制台打印
+@property (nonatomic, assign) BOOL printLogsToConsole; 
 /// 采集自定义日志的状态数组，默认为全采集
 ///
 /// 例: @[@(FTStatusInfo),@(FTStatusError)]
@@ -137,11 +135,6 @@ typedef NS_ENUM(NSInteger, FTLogCacheDiscard)  {
 @property (nonatomic, strong) NSArray<NSNumber*> *logLevelFilter;
 /// logger 全局 tag
 @property (nonatomic, strong) NSDictionary<NSString*,NSString*> *globalContext;
-/// 设置控制台日志采集条件
-/// - Parameters:
-///   - enable: 是否上传自定义 log
-///   - prefix: 采集控制台日志过滤字符串 包含该字符串控制台日志会被采集 默认为全采集
-- (void)enableConsoleLog:(BOOL)enable prefix:(NSString *)prefix;
 @end
 
 /// RUM 功能的配置项

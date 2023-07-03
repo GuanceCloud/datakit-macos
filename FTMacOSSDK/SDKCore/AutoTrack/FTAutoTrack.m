@@ -6,7 +6,7 @@
 //
 
 #import "FTAutoTrack.h"
-#import "FTLog.h"
+#import "FTInternalLog.h"
 #import "FTSwizzle.h"
 #import "NSWindow+FTAutoTrack.h"
 #import "NSApplication+FTAutotrack.h"
@@ -42,7 +42,7 @@
             [NSWindow ft_swizzleMethod:@selector(becomeKeyWindow) withMethod:@selector(datakit_becomeKeyWindow) error:&error];
         });
     } @catch (NSException *exception) {
-        ZYErrorLog(@"exception: %@", self, exception);
+        ZYLogError(@"exception: %@", exception);
     }
 }
 - (void)logTargetAction{
@@ -55,7 +55,7 @@
             [NSTabView ft_swizzleMethod:@selector(setDelegate:) withMethod:@selector(datakit_setDelegate:) error:&error];
         });
     } @catch (NSException *exception) {
-        ZYErrorLog(@"exception: %@", self, exception);
+        ZYLogError(@"exception: %@", exception);
     }
 }
 @end

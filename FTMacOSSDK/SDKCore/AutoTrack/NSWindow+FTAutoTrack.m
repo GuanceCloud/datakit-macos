@@ -9,7 +9,6 @@
 #import "FTAutoTrackProtocol.h"
 #import "FTSwizzler.h"
 #import "FTDateUtil.h"
-#import "FTLog.h"
 #import "FTConstants.h"
 #import <objc/runtime.h>
 #import "FTGlobalRumManager.h"

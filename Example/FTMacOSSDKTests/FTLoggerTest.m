@@ -28,6 +28,7 @@
     NSProcessInfo *processInfo = [NSProcessInfo processInfo];
     self.url = [processInfo environment][@"ACCESS_SERVER_URL"];
     self.appid = [processInfo environment][@"APP_ID"];
+    [[FTTrackerEventDBTool sharedManger] deleteItemWithTm:[FTDateUtil currentTimeNanosecond]];
 }
 
 - (void)tearDown {
@@ -53,19 +54,6 @@
     loggerConfig.enableCustomLog = NO;
     [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:loggerConfig];
     [[FTSDKAgent sharedInstance] logging:@"testLoggingMethod" status:FTStatusInfo];
-    [[FTSDKAgent sharedInstance] syncProcess];
-    NSInteger newCount =  [[FTTrackerEventDBTool sharedManger] getDatasCount];
-    XCTAssertTrue(newCount == count);
-}
-- (void)testDisableTraceConsoleLog{
-    [self setRightSDKConfig];
-    NSInteger count =  [[FTTrackerEventDBTool sharedManger] getDatasCount];
-    FTLoggerConfig *loggerConfig = [[FTLoggerConfig alloc]init];
-    loggerConfig.enableConsoleLog = NO;
-    [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:loggerConfig];
-    for (int i = 0; i<21; i++) {
-        NSLog(@"testEnableTraceConsoleLog");
-    }
     [[FTSDKAgent sharedInstance] syncProcess];
     NSInteger newCount =  [[FTTrackerEventDBTool sharedManger] getDatasCount];
     XCTAssertTrue(newCount == count);
@@ -107,27 +95,6 @@
     XCTAssertFalse([model.data isEqualToString:@"testData0"]);
     XCTAssertTrue(newCount == 5000);
 }
-//- (void)testPrefix{
-//    [self setRightSDKConfig];
-//    NSInteger count =  [[FTTrackerEventDBTool sharedManger] getDatasCount];
-//    FTLoggerConfig *loggerConfig = [[FTLoggerConfig alloc]init];
-//    [loggerConfig enableConsoleLog:YES prefix:@"debug"];
-//    [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:loggerConfig];
-//    NSLog(@"debug testDisableTraceConsoleLog");
-//    for (int i = 0; i<20; i++) {
-//        NSLog(@"testDisableTraceConsoleLog");
-//    }
-//    [[FTSDKAgent sharedInstance] syncProcess];
-//    NSInteger newCount =  [[FTTrackerEventDBTool sharedManger] getDatasCount];
-//    XCTAssertTrue(newCount == count);
-//    for (int i = 0; i<20; i++) {
-//        NSLog(@"debug testDisableTraceConsoleLog");
-//    }
-//    [[FTSDKAgent sharedInstance] syncProcess];
-//    NSInteger newCount2 =  [[FTTrackerEventDBTool sharedManger] getDatasCount];
-//    XCTAssertTrue(newCount2 == count+20);
-//
-//}
 - (void)testLogLevelFilter{
     [self setRightSDKConfig];
     NSInteger count =  [[FTTrackerEventDBTool sharedManger] getDatasCount];
@@ -243,7 +210,6 @@
     FTLoggerConfig *loggerConfig = [[FTLoggerConfig alloc]init];
     loggerConfig.sampleRate = 0;
     loggerConfig.enableCustomLog = YES;
-    loggerConfig.enableConsoleLog = YES;
     [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:loggerConfig];
     NSArray *oldDatas = [[FTTrackerEventDBTool sharedManger] getFirstRecords:10 withType:FT_DATA_TYPE_LOGGING];
 
@@ -258,7 +224,6 @@
     [self setRightSDKConfig];
     FTLoggerConfig *loggerConfig = [[FTLoggerConfig alloc]init];
     loggerConfig.enableCustomLog = YES;
-    loggerConfig.enableConsoleLog = YES;
     [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:loggerConfig];
     NSArray *oldDatas = [[FTTrackerEventDBTool sharedManger] getFirstRecords:10 withType:FT_DATA_TYPE_LOGGING];
     [[FTSDKAgent sharedInstance] logging:@"testSampleRate0" status:FTStatusInfo];
@@ -272,7 +237,6 @@
     [self setRightSDKConfig];
     FTLoggerConfig *loggerConfig = [[FTLoggerConfig alloc]init];
     loggerConfig.enableCustomLog = YES;
-    loggerConfig.enableConsoleLog = YES;
     loggerConfig.globalContext = @{@"logger_id":@"logger_id_1"};
     [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:loggerConfig];
     [[FTSDKAgent sharedInstance] logging:@"testGlobalContext" status:FTStatusInfo];
@@ -290,7 +254,6 @@
     [self setRightSDKConfig];
     FTLoggerConfig *loggerConfig = [[FTLoggerConfig alloc]init];
     loggerConfig.enableCustomLog = YES;
-    loggerConfig.enableConsoleLog = YES;
     [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:loggerConfig];
     [[FTSDKAgent sharedInstance] logging:@"testLoggerProperty" status:FTStatusInfo property:@{@"logger_property":@"testLoggerProperty"}];
     [[FTSDKAgent sharedInstance] syncProcess];

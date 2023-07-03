@@ -11,7 +11,7 @@
 #import "FTReachability.h"
 #import "FTTrackDataManager.h"
 #import "FTRecordModel.h"
-#import "FTLog.h"
+#import "FTInternalLog.h"
 #import "FTDateUtil.h"
 #import "FTConstants.h"
 #import "FTBaseInfoHandler.h"
@@ -22,17 +22,14 @@
 #import "FTTrackerEventDBTool.h"
 #import "FTMacOSSDKVersion.h"
 #import "FTWKWebViewHandler.h"
-#import "FTLogHook.h"
 #import "FTNetworkInfoManager.h"
 #import "FTURLSessionAutoInstrumentation.h"
 #import "FTUserInfo.h"
 #import "FTAutoTrack.h"
 #import "FTURLProtocol.h"
-@interface FTSDKAgent()
+@interface FTSDKAgent()<FTLoggerDataWriteProtocol>
 @property (nonatomic, strong) FTLoggerConfig *loggerConfig;
 @property (nonatomic, strong) FTPresetProperty *presetProperty;
-@property (nonatomic, strong) dispatch_queue_t serialQueue;
-@property (nonatomic, strong) NSSet *logLevelFilterSet;
 @property (nonatomic, copy) NSString *netTraceStr;
 @property (nonatomic, strong) FTAutoTrack *autotrack;
 @end
@@ -56,14 +53,13 @@ static dispatch_once_t onceToken;
 -(instancetype)initWithConfig:(FTSDKConfig *)config{
     self = [super init];
     if(self){
-        [FTLog enableLog:config.enableSDKDebugLog];
+        [FTInternalLog enableLog:config.enableSDKDebugLog];
         NSString *serialLabel = [NSString stringWithFormat:@"ft.serialLabel.%p", self];
-        _serialQueue = dispatch_queue_create([serialLabel UTF8String], DISPATCH_QUEUE_SERIAL);
         //开启数据处理管理器
         NSString *bundleIdentifier = [[[NSBundle mainBundle]infoDictionary] objectForKey:@"CFBundleIdentifier"];
         [FTTrackerEventDBTool shareDatabaseWithPath:[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject] dbName:[NSString stringWithFormat:@"com.cloudcare.ft.macos.sdk-%@.sqlite",bundleIdentifier]];
         [FTTrackDataManager sharedInstance];
-        _presetProperty = [[FTPresetProperty alloc] initWithVersion:config.version env:(Env)config.env service:config.service globalContext:config.globalContext];
+        _presetProperty = [[FTPresetProperty alloc] initWithVersion:config.version env:config.env service:config.service globalContext:config.globalContext];
         _presetProperty.sdkVersion = SDK_VERSION;
         [FTNetworkInfoManager sharedInstance].setMetricsUrl(config.metricsUrl)
             .setSdkVersion(SDK_VERSION);
@@ -86,17 +82,9 @@ static dispatch_once_t onceToken;
     if (!_loggerConfig) {
         self.loggerConfig = [loggerConfigOptions copy];
         self.presetProperty.logContext = [self.loggerConfig.globalContext copy];
-        self.logLevelFilterSet = [NSSet setWithArray:self.loggerConfig.logLevelFilter];
         [FTTrackerEventDBTool sharedManger].discardNew = (loggerConfigOptions.discardType == FTDiscard);
-        if(self.loggerConfig.enableConsoleLog){
-            [self _traceConsoleLog];
-        }
+        [FTLogger startWithEablePrintLogsToConsole:loggerConfigOptions.printLogsToConsole enableCustomLog:loggerConfigOptions.enableCustomLog logLevelFilter:loggerConfigOptions.logLevelFilter sampleRate:loggerConfigOptions.sampleRate writer:self];
     }
-    self.loggerConfig = [loggerConfigOptions copy];
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        self.logLevelFilterSet = [NSSet setWithArray:loggerConfigOptions.logLevelFilter];
-    });
 }
 - (void)startTraceWithConfigOptions:(FTTraceConfig *)traceConfigOptions{
     _netTraceStr = FTNetworkTraceStringMap[traceConfigOptions.networkTraceType];
@@ -104,80 +92,86 @@ static dispatch_once_t onceToken;
     [FTWKWebViewHandler sharedInstance].interceptor = [FTURLSessionAutoInstrumentation sharedInstance].interceptor;
     [[FTURLSessionAutoInstrumentation sharedInstance] setTraceEnableAutoTrace:traceConfigOptions.enableAutoTrace enableLinkRumData:traceConfigOptions.enableLinkRumData sampleRate:traceConfigOptions.sampleRate traceType:(NetworkTraceType)traceConfigOptions.networkTraceType];
 }
+#pragma mark ========== publick method ==========
 - (void)isIntakeUrl:(BOOL(^)(NSURL *url))handler{
     if(handler){
         [[FTURLSessionAutoInstrumentation sharedInstance] setIntakeUrlHandler:handler];
     }
 }
-//控制台日志采集
-- (void)_traceConsoleLog{
-    __weak typeof(self) weakSelf = self;
-    [FTLogHook hookWithBlock:^(NSString * _Nonnull logStr,long long tm) {
-            if (!weakSelf.loggerConfig.enableConsoleLog ) {
-                return;
-            }
-            if (weakSelf.loggerConfig.prefix.length>0) {
-                if([logStr containsString:weakSelf.loggerConfig.prefix]){
-                    [weakSelf logging:logStr status:FTStatusInfo field:nil tm:tm];
-                }
-            }else{
-                [weakSelf logging:logStr status:FTStatusInfo field:nil tm:tm];
-            }
-    }];
-}
-#pragma mark - 数据写入 -
-
 -(void)logging:(NSString *)content status:(FTLogStatus)status{
     [self logging:content status:status property:nil];
 }
 -(void)logging:(NSString *)content status:(FTLogStatus)status property:(NSDictionary *)property{
     @try {
         if (!self.loggerConfig) {
-            ZYErrorLog(@"请先设置 FTLoggerConfig");
+            ZYLogError(@"[Logging] 请先设置 FTLoggerConfig");
             return;
         }
-        if (!self.loggerConfig.enableCustomLog) {
-            ZYLog(@"enableCustomLog 未开启，数据不进行采集");
+        if (!content || content.length == 0 ) {
+            ZYLogError(@"[Logging] 传入的第数据格式有误");
             return;
         }
-        [self logging:content status:status field:property tm:[FTDateUtil currentTimeNanosecond]];
+        [[FTLogger sharedInstance] log:content status:(LogStatus)status property:property];
     } @catch (NSException *exception) {
-        ZYErrorLog(@"exception %@",exception);
+        ZYLogError(@"exception %@",exception);
     }
 }
-// FT_DATA_TYPE_LOGGING
--(void)logging:(NSString *)content status:(FTLogStatus)status field:(NSDictionary *)field tm:(long long)tm{
+//用户绑定
+- (void)bindUserWithUserID:(NSString *)Id{
+    [self bindUserWithUserID:Id userName:nil userEmail:nil extra:nil];
+}
+-(void)bindUserWithUserID:(NSString *)Id userName:(NSString *)userName userEmail:(nullable NSString *)userEmail{
+    [self bindUserWithUserID:Id userName:userName userEmail:userEmail extra:nil];
+}
+-(void)bindUserWithUserID:(NSString *)Id userName:(NSString *)userName userEmail:(nullable NSString *)userEmail extra:(NSDictionary *)extra{
+    NSParameterAssert(Id);
+    [self.presetProperty.userHelper concurrentWrite:^(FTUserInfo * _Nonnull value) {
+        [value updateUser:Id name:userName email:userEmail extra:extra];
+    }];
+    ZYLogInfo(@"Bind User ID : %@ , Name : %@ , Email : %@ , Extra : %@",Id,userName,userEmail,extra);
+}
+//用户注销
+- (void)unbindUser{
+    [self.presetProperty.userHelper concurrentWrite:^(FTUserInfo * _Nonnull value) {
+        [value clearUser];
+    }];
+    ZYLogInfo(@"User Logout");
+}
+- (void)shutDown{
+    [[FTTrackerEventDBTool sharedManger] insertCacheToDB];
+    [[FTGlobalRumManager sharedManager] rumDeinitialize];
+    [[FTLogger sharedInstance] shutDown];
+    [[FTURLSessionAutoInstrumentation sharedInstance] resetInstance];
+    [FTURLProtocol stopMonitor];
+    onceToken = 0;
+    sharedInstance =nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    ZYLogInfo(@"[SDK] SHUT DOWN");
+}
+#pragma mark ========== private method ==========
+-(void)logging:(NSString *)content status:(LogStatus)status tags:(nullable NSDictionary *)tags field:(nullable NSDictionary *)field tm:(long long)tm{
     @try {
-        if (!content || content.length == 0 || [content ft_characterNumber]>FT_LOGGING_CONTENT_SIZE) {
-            ZYErrorLog(@"传入的第数据格式有误，或content超过30kb");
-            return;
+        NSString *newContent = [content ft_subStringWithCharacterLength:FT_LOGGING_CONTENT_SIZE];
+        NSMutableDictionary *tagDict = [NSMutableDictionary dictionaryWithDictionary:[self.presetProperty loggerPropertyWithStatus:(LogStatus)status]];
+        if (tags) {
+            [tagDict addEntriesFromDictionary:tags];
         }
-        if (![self.logLevelFilterSet containsObject:@(status)]) {
-            ZYDebug(@"经过过滤算法判断-此条日志不采集");
-            return;
-        }
-        if (![FTBaseInfoHandler randomSampling:self.loggerConfig.sampleRate]){
-            ZYDebug(@"经过采集算法判断-此条日志不采集");
-            return;
-        }
-        
-        dispatch_async(self.serialQueue, ^{
-            NSMutableDictionary *tagDict = [NSMutableDictionary dictionaryWithDictionary:[self.presetProperty loggerPropertyWithStatus:(LogStatus)status]];
-            if (self.loggerConfig.enableLinkRumData) {
-                [tagDict addEntriesFromDictionary:[self.presetProperty rumProperty]];
-                    NSDictionary *rumTag = [[FTGlobalRumManager sharedManager].rumManager getCurrentSessionInfo];
-                    [tagDict addEntriesFromDictionary:rumTag];
+        if (self.loggerConfig.enableLinkRumData) {
+            [tagDict addEntriesFromDictionary:[self.presetProperty rumProperty]];
+            if(![tags.allKeys containsObject:FT_RUM_KEY_SESSION_ID]){
+                NSDictionary *rumTag = [[FTGlobalRumManager sharedManager].rumManager getCurrentSessionInfo];
+                [tagDict addEntriesFromDictionary:rumTag];
             }
-            NSMutableDictionary *filedDict = @{FT_KEY_MESSAGE:content,
-            }.mutableCopy;
-            if (field) {
-                [filedDict addEntriesFromDictionary:field];
-            }
-            FTRecordModel *model = [[FTRecordModel alloc]initWithSource:@"df_rum_macos_log" op:FT_DATA_TYPE_LOGGING tags:tagDict fields:filedDict tm:tm];
-            [self insertDBWithItemData:model type:FTAddDataLogging];
-        });
+        }
+        NSMutableDictionary *filedDict = @{FT_KEY_MESSAGE:newContent,
+        }.mutableCopy;
+        if (field) {
+            [filedDict addEntriesFromDictionary:field];
+        }
+        FTRecordModel *model = [[FTRecordModel alloc]initWithSource:FT_LOGGER_SOURCE op:FT_DATA_TYPE_LOGGING tags:tagDict fields:filedDict tm:tm];
+        [self insertDBWithItemData:model type:FTAddDataLogging];
     } @catch (NSException *exception) {
-        ZYErrorLog(@"exception %@",exception);
+        ZYLogError(@"exception %@",exception);
     }
 }
 - (void)rumWrite:(NSString *)type  tags:(NSDictionary *)tags fields:(NSDictionary *)fields{
@@ -196,55 +190,14 @@ static dispatch_once_t onceToken;
         FTRecordModel *model = [[FTRecordModel alloc]initWithSource:type op:FT_DATA_TYPE_RUM tags:baseTags fields:fields tm:tm];
         [self insertDBWithItemData:model type:dataType];
     } @catch (NSException *exception) {
-        ZYErrorLog(@"exception %@",exception);
-    }
-}
-//用户绑定
-- (void)bindUserWithUserID:(NSString *)Id{
-    [self bindUserWithUserID:Id userName:nil userEmail:nil extra:nil];
-}
--(void)bindUserWithUserID:(NSString *)Id userName:(NSString *)userName userEmail:(nullable NSString *)userEmail{
-    [self bindUserWithUserID:Id userName:userName userEmail:userEmail extra:nil];
-}
--(void)bindUserWithUserID:(NSString *)Id userName:(NSString *)userName userEmail:(nullable NSString *)userEmail extra:(NSDictionary *)extra{
-    NSParameterAssert(Id);
-    [self.presetProperty.userHelper concurrentWrite:^(FTUserInfo * _Nonnull value) {
-        [value updateUser:Id name:userName email:userEmail extra:extra];
-    }];
-    ZYDebug(@"Bind User ID : %@",Id);
-    if (userName) {
-        ZYDebug(@"Bind User Name : %@",userName);
-    }
-    if (userEmail) {
-        ZYDebug(@"Bind User Email : %@",userEmail);
-    }
-    if (extra) {
-        ZYDebug(@"Bind User Extra : %@",extra);
+        ZYLogError(@"exception %@",exception);
     }
 }
 - (void)insertDBWithItemData:(FTRecordModel *)model type:(FTAddDataType)type{
     [[FTTrackDataManager sharedInstance] addTrackData:model type:type];
 }
-//用户注销
-- (void)unbindUser{
-    [self.presetProperty.userHelper concurrentWrite:^(FTUserInfo * _Nonnull value) {
-        [value clearUser];
-    }];
-    ZYDebug(@"User Logout");
-}
-- (void)shutDown{
-    [self syncProcess];
-    [[FTGlobalRumManager sharedManager] rumDeinitialize];
-    [[FTURLSessionAutoInstrumentation sharedInstance] resetInstance];
-    _presetProperty = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [FTURLProtocol stopMonitor];
-    onceToken = 0;
-    sharedInstance =nil;
-}
 - (void)syncProcess{
-    dispatch_sync(self.serialQueue, ^{
-        
-    });
+    [[FTGlobalRumManager sharedManager].rumManager syncProcess];
+    [[FTLogger sharedInstance] syncProcess];
 }
 @end

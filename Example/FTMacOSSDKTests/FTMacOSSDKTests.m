@@ -26,6 +26,7 @@
     NSProcessInfo *processInfo = [NSProcessInfo processInfo];
     self.url = [processInfo environment][@"ACCESS_SERVER_URL"];
     self.traceUrl = [processInfo environment][@"TRACE_URL"];
+    [[FTTrackerEventDBTool sharedManger] deleteItemWithTm:[FTDateUtil currentTimeNanosecond]];
 }
 
 - (void)tearDown {
@@ -54,8 +55,43 @@
     NSDictionary *op = dict[@"opdata"];
     NSDictionary *tags = op[FT_TAGS];
     XCTAssertTrue([tags[FT_KEY_SERVICE] isEqualToString:@"df_rum_macos"]);
-    XCTAssertTrue([tags[FT_KEY_SERVICE] isEqualToString:@"df_rum_macos"]);
 
+    [[FTSDKAgent sharedInstance] shutDown];
+}
+- (void)testSDKConfigEnv{
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    [FTSDKAgent startWithConfigOptions:config];
+    FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
+    logger.enableCustomLog = YES;
+    [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:logger];
+    [[FTSDKAgent sharedInstance] logging:@"testSDKConfigService" status:FTStatusOk];
+    [[FTSDKAgent sharedInstance] syncProcess];
+    [[FTTrackerEventDBTool sharedManger]insertCacheToDB];
+    NSArray *datas = [[FTTrackerEventDBTool sharedManger] getFirstRecords:1 withType:FT_DATA_TYPE_LOGGING];
+    FTRecordModel *model = [datas firstObject];
+    NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
+    NSDictionary *op = dict[@"opdata"];
+    NSDictionary *tags = op[FT_TAGS];
+    XCTAssertTrue([tags[@"env"] isEqualToString:@"prod"]);
+    [[FTSDKAgent sharedInstance] shutDown];
+}
+- (void)testSDKConfigCustomEnv{
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    config.env = @"custom";
+    config.enableSDKDebugLog = YES;
+    [FTSDKAgent startWithConfigOptions:config];
+    FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
+    logger.enableCustomLog = YES;
+    [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:logger];
+    [[FTSDKAgent sharedInstance] logging:@"testSDKConfigService" status:FTStatusOk];
+    [[FTSDKAgent sharedInstance] syncProcess];
+    [[FTTrackerEventDBTool sharedManger]insertCacheToDB];
+    NSArray *datas = [[FTTrackerEventDBTool sharedManger] getFirstRecords:1 withType:FT_DATA_TYPE_LOGGING];
+    FTRecordModel *model = [datas firstObject];
+    NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
+    NSDictionary *op = dict[@"opdata"];
+    NSDictionary *tags = op[FT_TAGS];
+    XCTAssertTrue([tags[@"env"] isEqualToString:@"custom"]);
     [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testSDKConfigCopy{
@@ -64,10 +100,10 @@
     config.globalContext = @{@"aa":@"bb"};
     config.service = @"testsdk";
     config.version = @"1.1.1";
-    config.env = FTEnvLocal;
+    config.env = @"local";
     FTSDKConfig *copyConfig = [config copy];
     XCTAssertTrue(copyConfig.enableSDKDebugLog == config.enableSDKDebugLog);
-    XCTAssertTrue(copyConfig.env == config.env);
+    XCTAssertTrue([copyConfig.env isEqualTo:config.env]);
     XCTAssertTrue([copyConfig.service isEqualTo:config.service]);
     XCTAssertTrue([copyConfig.version isEqualTo:config.version]);
     XCTAssertTrue([copyConfig.globalContext isEqual:config.globalContext]);
@@ -114,19 +150,18 @@
 - (void)testLoggerConfigCopy{
     FTLoggerConfig *loggerConfig = [[FTLoggerConfig alloc]init];
     loggerConfig.enableCustomLog = YES;
-    [loggerConfig enableConsoleLog:YES prefix:@"test"];
     loggerConfig.sampleRate = 50;
     loggerConfig.discardType = FTDiscard;
     loggerConfig.enableLinkRumData = YES;
+    loggerConfig.printLogsToConsole = YES;
     loggerConfig.logLevelFilter = @[@(FTStatusOk)];
     loggerConfig.globalContext = @{@"aa":@"bb"};
     FTLoggerConfig *copyLoggerConfig = [loggerConfig copy];
     XCTAssertTrue(copyLoggerConfig.enableCustomLog == loggerConfig.enableCustomLog);
-    XCTAssertTrue(copyLoggerConfig.enableConsoleLog == loggerConfig.enableConsoleLog);
     XCTAssertTrue(copyLoggerConfig.sampleRate == loggerConfig.sampleRate);
     XCTAssertTrue(copyLoggerConfig.discardType == loggerConfig.discardType);
-    XCTAssertTrue([copyLoggerConfig.prefix isEqualToString:loggerConfig.prefix]);
     XCTAssertTrue(copyLoggerConfig.enableLinkRumData == loggerConfig.enableLinkRumData);
+    XCTAssertTrue(copyLoggerConfig.printLogsToConsole == loggerConfig.printLogsToConsole);
     XCTAssertTrue([copyLoggerConfig.logLevelFilter isEqual: loggerConfig.logLevelFilter]);
     XCTAssertTrue([copyLoggerConfig.globalContext isEqual: loggerConfig.globalContext]);
 
