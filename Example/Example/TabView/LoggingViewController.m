@@ -7,7 +7,6 @@
 
 #import "LoggingViewController.h"
 #import "FTMacOSSDK.h"
-
 @interface LoggingViewController ()<NSTableViewDataSource,NSTableViewDelegate>
 @property (strong) IBOutlet NSTableView *mTableView;
 @property (nonatomic, strong) NSArray *datas;
@@ -101,7 +100,7 @@
 
             break;
         case 4:
-            [[FTSDKAgent sharedInstance] logging:@"ok log content" status:FTStatusOk];
+            [[FTLogger sharedInstance] ok:@"ok log content" property:nil];
 
             break;
         default:
