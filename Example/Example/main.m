@@ -43,6 +43,7 @@ int main(int argc, const char * argv[]) {
             FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
             logger.enableCustomLog = YES;
             logger.enableLinkRumData = YES;
+            logger.printCustomLogToConsole = YES;
             [[FTSDKAgent sharedInstance] startLoggerWithConfigOptions:logger];
             FTTraceConfig *trace = [[FTTraceConfig alloc]init];
             trace.enableAutoTrace = YES;

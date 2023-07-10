@@ -153,7 +153,7 @@
     loggerConfig.sampleRate = 50;
     loggerConfig.discardType = FTDiscard;
     loggerConfig.enableLinkRumData = YES;
-    loggerConfig.printLogsToConsole = YES;
+    loggerConfig.printCustomLogToConsole = YES;
     loggerConfig.logLevelFilter = @[@(FTStatusOk)];
     loggerConfig.globalContext = @{@"aa":@"bb"};
     FTLoggerConfig *copyLoggerConfig = [loggerConfig copy];
@@ -161,7 +161,7 @@
     XCTAssertTrue(copyLoggerConfig.sampleRate == loggerConfig.sampleRate);
     XCTAssertTrue(copyLoggerConfig.discardType == loggerConfig.discardType);
     XCTAssertTrue(copyLoggerConfig.enableLinkRumData == loggerConfig.enableLinkRumData);
-    XCTAssertTrue(copyLoggerConfig.printLogsToConsole == loggerConfig.printLogsToConsole);
+    XCTAssertTrue(copyLoggerConfig.printCustomLogToConsole == loggerConfig.printCustomLogToConsole);
     XCTAssertTrue([copyLoggerConfig.logLevelFilter isEqual: loggerConfig.logLevelFilter]);
     XCTAssertTrue([copyLoggerConfig.globalContext isEqual: loggerConfig.globalContext]);
 
