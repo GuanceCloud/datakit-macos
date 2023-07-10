@@ -105,16 +105,16 @@ static dispatch_once_t onceToken;
 -(void)logging:(NSString *)content status:(FTLogStatus)status property:(NSDictionary *)property{
     @try {
         if (!self.loggerConfig) {
-            ZYLogError(@"[Logging] 请先设置 FTLoggerConfig");
+            FTInnerLogError(@"[Logging] 请先设置 FTLoggerConfig");
             return;
         }
         if (!content || content.length == 0 ) {
-            ZYLogError(@"[Logging] 传入的第数据格式有误");
+            FTInnerLogError(@"[Logging] 传入的第数据格式有误");
             return;
         }
         [[FTLogger sharedInstance] log:content status:(LogStatus)status property:property];
     } @catch (NSException *exception) {
-        ZYLogError(@"exception %@",exception);
+        FTInnerLogError(@"exception %@",exception);
     }
 }
 //用户绑定
@@ -129,14 +129,14 @@ static dispatch_once_t onceToken;
     [self.presetProperty.userHelper concurrentWrite:^(FTUserInfo * _Nonnull value) {
         [value updateUser:Id name:userName email:userEmail extra:extra];
     }];
-    ZYLogInfo(@"Bind User ID : %@ , Name : %@ , Email : %@ , Extra : %@",Id,userName,userEmail,extra);
+    FTInnerLogInfo(@"Bind User ID : %@ , Name : %@ , Email : %@ , Extra : %@",Id,userName,userEmail,extra);
 }
 //用户注销
 - (void)unbindUser{
     [self.presetProperty.userHelper concurrentWrite:^(FTUserInfo * _Nonnull value) {
         [value clearUser];
     }];
-    ZYLogInfo(@"User Logout");
+    FTInnerLogInfo(@"User Logout");
 }
 - (void)shutDown{
     [[FTTrackerEventDBTool sharedManger] insertCacheToDB];
@@ -147,7 +147,7 @@ static dispatch_once_t onceToken;
     onceToken = 0;
     sharedInstance =nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    ZYLogInfo(@"[SDK] SHUT DOWN");
+    FTInnerLogInfo(@"[SDK] SHUT DOWN");
 }
 #pragma mark ========== private method ==========
 -(void)logging:(NSString *)content status:(LogStatus)status tags:(nullable NSDictionary *)tags field:(nullable NSDictionary *)field tm:(long long)tm{
@@ -172,7 +172,7 @@ static dispatch_once_t onceToken;
         FTRecordModel *model = [[FTRecordModel alloc]initWithSource:FT_LOGGER_SOURCE op:FT_DATA_TYPE_LOGGING tags:tagDict fields:filedDict tm:tm];
         [self insertDBWithItemData:model type:FTAddDataLogging];
     } @catch (NSException *exception) {
-        ZYLogError(@"exception %@",exception);
+        FTInnerLogError(@"exception %@",exception);
     }
 }
 - (void)rumWrite:(NSString *)type  tags:(NSDictionary *)tags fields:(NSDictionary *)fields{
@@ -191,7 +191,7 @@ static dispatch_once_t onceToken;
         FTRecordModel *model = [[FTRecordModel alloc]initWithSource:type op:FT_DATA_TYPE_RUM tags:baseTags fields:fields tm:tm];
         [self insertDBWithItemData:model type:dataType];
     } @catch (NSException *exception) {
-        ZYLogError(@"exception %@",exception);
+        FTInnerLogError(@"exception %@",exception);
     }
 }
 - (void)insertDBWithItemData:(FTRecordModel *)model type:(FTAddDataType)type{

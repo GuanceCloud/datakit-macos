@@ -57,7 +57,7 @@ static dispatch_once_t onceToken;
 -(void)setRumConfig:(FTRumConfig *)rumConfig{
     _rumConfig = rumConfig;
     if (self.rumConfig.appid.length<=0) {
-        ZYLogError(@"RumConfig appid 数据格式有误，未能开启 RUM");
+        FTInnerLogError(@"RumConfig appid 数据格式有误，未能开启 RUM");
         return;
     }
     self.monitor = [[FTRUMMonitor alloc]initWithMonitorType:(DeviceMetricsMonitorType)rumConfig.deviceMetricsMonitorType frequency:(MonitorFrequency)rumConfig.monitorFrequency];
@@ -118,7 +118,7 @@ static dispatch_once_t onceToken;
     @try {
         [self.rumManager applicationWillTerminate];
     }@catch (NSException *exception) {
-        ZYLogError(@"applicationWillResignActive exception %@",exception);
+        FTInnerLogError(@"applicationWillResignActive exception %@",exception);
     }
 }
 -(void)addClickActionWithName:(NSString *)actionName{
@@ -212,7 +212,7 @@ static dispatch_once_t onceToken;
     @try {
         NSDictionary *messageDic = [FTJSONUtil dictionaryWithJsonString:message];
         if (![messageDic isKindOfClass:[NSDictionary class]]) {
-            ZYLogError(@"Message body is formatted failure from JS SDK");
+            FTInnerLogError(@"Message body is formatted failure from JS SDK");
             return;
         }
         NSString *name = messageDic[@"name"];
@@ -230,7 +230,7 @@ static dispatch_once_t onceToken;
             }
         }
     } @catch (NSException *exception) {
-        ZYLogError(@"%@ error: %@", self, exception);
+        FTInnerLogError(@"%@ error: %@", self, exception);
     }
 }
 #pragma mark ========== 注销 ==========

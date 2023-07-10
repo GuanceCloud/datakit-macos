@@ -42,7 +42,7 @@
             [NSWindow ft_swizzleMethod:@selector(becomeKeyWindow) withMethod:@selector(datakit_becomeKeyWindow) error:&error];
         });
     } @catch (NSException *exception) {
-        ZYLogError(@"exception: %@", exception);
+        FTInnerLogError(@"exception: %@", exception);
     }
 }
 - (void)logTargetAction{
@@ -55,7 +55,7 @@
             [NSTabView ft_swizzleMethod:@selector(setDelegate:) withMethod:@selector(datakit_setDelegate:) error:&error];
         });
     } @catch (NSException *exception) {
-        ZYLogError(@"exception: %@", exception);
+        FTInnerLogError(@"exception: %@", exception);
     }
 }
 @end
