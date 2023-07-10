@@ -89,7 +89,7 @@
     options.enableCustomLog = self.enableCustomLog;
     options.logLevelFilter = self.logLevelFilter;
     options.discardType = self.discardType;
-    options.printLogsToConsole = self.printLogsToConsole;
+    options.printCustomLogToConsole = self.printCustomLogToConsole;
     options.globalContext = self.globalContext;
     return options;
 }

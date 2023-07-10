@@ -84,7 +84,7 @@ static dispatch_once_t onceToken;
         self.loggerConfig = [loggerConfigOptions copy];
         self.presetProperty.logContext = [self.loggerConfig.globalContext copy];
         [FTTrackerEventDBTool sharedManger].discardNew = (loggerConfigOptions.discardType == FTDiscard);
-        [FTLogger startWithEablePrintLogsToConsole:loggerConfigOptions.printLogsToConsole enableCustomLog:loggerConfigOptions.enableCustomLog logLevelFilter:loggerConfigOptions.logLevelFilter sampleRate:loggerConfigOptions.sampleRate writer:self];
+        [FTLogger startWithEablePrintLogsToConsole:loggerConfigOptions.printCustomLogToConsole enableCustomLog:loggerConfigOptions.enableCustomLog logLevelFilter:loggerConfigOptions.logLevelFilter sampleRate:loggerConfigOptions.sampleRate writer:self];
     }
 }
 - (void)startTraceWithConfigOptions:(FTTraceConfig *)traceConfigOptions{
