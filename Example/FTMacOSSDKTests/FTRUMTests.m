@@ -102,27 +102,38 @@
     [[FTGlobalRumManager sharedManager].rumManager syncProcess];
     NSArray *newArray = [[FTTrackerEventDBTool sharedManger] getFirstRecords:100 withType:FT_DATA_TYPE_RUM];
     XCTAssertTrue(newArray.count>0);
-    BOOL hasViewData = NO;
+    BOOL hasViewData = NO,hasStart = NO,hasStop = NO;
     for (FTRecordModel *model in newArray) {
-       NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
+        NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
         if([dict[FT_OP] isEqualToString:FT_DATA_TYPE_RUM]){
             NSDictionary *data = dict[FT_OPDATA];
             if([data[FT_KEY_SOURCE] isEqualToString:FT_RUM_SOURCE_VIEW]){
                 NSDictionary *tags = data[FT_TAGS];
                 NSString *viewName = tags[FT_KEY_VIEW_NAME];
-                XCTAssertTrue([viewName isEqualToString:@"TestAddViewEvent"]);
-                if(start){
+                if([viewName isEqualToString:@"TestAddViewEvent"]){
                     NSDictionary *fields = data[FT_FIELDS];
-                    XCTAssertTrue([fields[start.allKeys.firstObject] isEqualToString:start[start.allKeys.firstObject]]);
-                    XCTAssertTrue([fields[stop.allKeys.firstObject] isEqualToString:stop[stop.allKeys.firstObject]]);
-
+                    if(start){
+                        if([fields[start.allKeys.firstObject] isEqualToString:start[start.allKeys.firstObject]]){
+                            hasStart = YES;
+                        }
+                    }
+                    if(stop){
+                        if([fields[stop.allKeys.firstObject] isEqualToString:stop[stop.allKeys.firstObject]]){
+                            hasStop = YES;
+                        }
+                    }
+                    hasViewData = YES;
                 }
-                hasViewData = YES;
-                break;
             }
         }
     }
     XCTAssertTrue(hasViewData == YES);
+    if(start){
+        XCTAssertTrue(hasStart == YES);
+    }
+    if(stop){
+        XCTAssertTrue(hasStop == YES);
+    }
     [[FTSDKAgent sharedInstance] shutDown];
     
 }
@@ -325,7 +336,7 @@
     [[FTGlobalRumManager sharedManager].rumManager syncProcess];
     NSArray *newArray = [[FTTrackerEventDBTool sharedManger] getFirstRecords:100 withType:FT_DATA_TYPE_RUM];
     XCTAssertTrue(newArray.count>0);
-    for (FTRecordModel *model in newArray) {
+    [newArray enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(FTRecordModel *model, NSUInteger idx, BOOL * _Nonnull stop) {
        NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
         if([dict[FT_OP] isEqualToString:FT_DATA_TYPE_RUM]){
             NSDictionary *data = dict[FT_OPDATA];
@@ -336,11 +347,10 @@
                 XCTAssertTrue([field.allKeys containsObject:FT_MEMORY_AVG]);
                 XCTAssertTrue([field.allKeys containsObject:FT_MEMORY_MAX]);
                 XCTAssertTrue([field.allKeys containsObject:FT_MEMORY_MAX]);
-                break;
+                *stop = YES;
             }
         }
-    }
-    
+    }];
     [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testUnbindUser{

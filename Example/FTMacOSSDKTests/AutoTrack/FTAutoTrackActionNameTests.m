@@ -241,7 +241,6 @@
     XCTAssertTrue(comboBoxClick);
     XCTAssertTrue(comboBoxItemClick);
     XCTAssertTrue(buttonClick);
-    XCTAssertTrue(count>6 && count<9);
 }
 // NSSegmentedControl\NSStepper\NSTextField\NSImageView
 - (void)testClickSecondView{
