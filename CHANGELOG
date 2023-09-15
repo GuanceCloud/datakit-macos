@@ -1,3 +1,6 @@
+1.0.3-alpha.1
+1.RUM AddError 方法添加 state 参数
+---
 1.0.2-alpha.1
 1.WebView JSBridge 适配
 ---
