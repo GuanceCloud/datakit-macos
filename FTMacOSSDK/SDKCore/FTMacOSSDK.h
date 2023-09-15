@@ -12,3 +12,4 @@
 #import "FTGlobalRumManager.h"
 #import "FTTraceManager.h"
 #import "FTLogger.h"
+#import "FTRumDatasProtocol.h"

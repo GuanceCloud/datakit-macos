@@ -55,7 +55,6 @@ static dispatch_once_t onceToken;
     self = [super init];
     if(self){
         [FTInternalLog enableLog:config.enableSDKDebugLog];
-        NSString *serialLabel = [NSString stringWithFormat:@"ft.serialLabel.%p", self];
         //开启数据处理管理器
         NSString *bundleIdentifier = [[[NSBundle mainBundle]infoDictionary] objectForKey:@"CFBundleIdentifier"];
         [FTTrackerEventDBTool shareDatabaseWithPath:[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject] dbName:[NSString stringWithFormat:@"com.cloudcare.ft.macos.sdk-%@.sqlite",bundleIdentifier]];

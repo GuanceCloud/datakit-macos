@@ -25,6 +25,7 @@
 #import "FTPingThread.h"
 #import "FTURLSessionAutoInstrumentation.h"
 #import "FTWKWebViewJavascriptBridge.h"
+#import "FTRumDatasProtocol.h"
 @interface FTGlobalRumManager ()<FTAppLifeCycleDelegate,FTWKWebViewRumDelegate,FTAppLaunchDataDelegate,FTANRDetectorDelegate>
 @property (nonatomic, strong) FTSDKConfig *config;
 @property (nonatomic, strong) FTRumConfig *rumConfig;
@@ -116,7 +117,7 @@ static dispatch_once_t onceToken;
 #pragma mark ========== AUTO TRACK ==========
 - (void)applicationWillTerminate{
     @try {
-        [self.rumManager applicationWillTerminate];
+        [self.rumManager syncProcess];
     }@catch (NSException *exception) {
         FTInnerLogError(@"applicationWillResignActive exception %@",exception);
     }
@@ -160,6 +161,11 @@ static dispatch_once_t onceToken;
 - (void)stopViewWithProperty:(nullable NSDictionary *)property {
     [self.rumManager stopViewWithProperty:property];
 }
+
+- (void)addErrorWithType:(nonnull NSString *)type state:(FTAppState)state message:(nonnull NSString *)message stack:(nonnull NSString *)stack property:(nullable NSDictionary *)property {
+    [self.rumManager addErrorWithType:type state:state message:message stack:stack property:property];
+}
+
 
 - (void)startResourceWithKey:(nonnull NSString *)key {
     [[FTURLSessionAutoInstrumentation sharedInstance].externalResourceHandler startResourceWithKey:key];

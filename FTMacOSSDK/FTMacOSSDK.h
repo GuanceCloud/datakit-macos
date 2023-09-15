@@ -12,3 +12,4 @@
 #import <FTMacOSSDK/FTGlobalRumManager.h>
 #import <FTMacOSSDK/FTTraceManager.h>
 #import <FTSDKCore/FTLogger.h>
+#import <FTSDKCore/FTRumDatasProtocol.h>

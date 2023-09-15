@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum FTAppState:NSUInteger FTAppState;
 
 NS_ASSUME_NONNULL_BEGIN
 @class FTResourceMetricsModel,FTResourceContentModel;
@@ -69,6 +70,15 @@ NS_ASSUME_NONNULL_BEGIN
 ///   - stack: 堆栈信息
 ///   - property: 事件自定义属性(可选)
 - (void)addErrorWithType:(NSString *)type message:(NSString *)message stack:(NSString *)stack property:(nullable NSDictionary *)property;
+
+/// 添加 Error 事件
+/// - Parameters:
+///   - type: error 类型
+///   - state: 程序运行状态
+///   - message: 错误信息
+///   - stack: 堆栈信息
+///   - property: 事件自定义属性(可选)
+- (void)addErrorWithType:(NSString *)type state:(FTAppState)state  message:(NSString *)message stack:(NSString *)stack property:(nullable NSDictionary *)property;
 
 /// 添加 卡顿 事件
 ///
