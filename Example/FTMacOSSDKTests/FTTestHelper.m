@@ -154,7 +154,7 @@ void dPostKeyboardEvent(CGKeyCode virtualKey, bool keyDown, CGEventFlags flags)
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(time * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [expectation fulfill];
     });
-    [self waitForExpectationsWithTimeout:2 handler:^(NSError *error) {
+    [self waitForExpectationsWithTimeout:time+1 handler:^(NSError *error) {
         XCTAssertNil(error);
     }];
 }

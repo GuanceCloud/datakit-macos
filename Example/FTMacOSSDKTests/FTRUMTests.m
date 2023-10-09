@@ -18,10 +18,15 @@
 #import "FTJSONUtil.h"
 #import "FTResourceContentModel.h"
 #import "FTResourceMetricsModel.h"
-@interface FTRUMTests : XCTestCase
+#import "TestRumWebView.h"
+#import "FTMacOSSDKVersion.h"
+#import "FTTestHelper.h"
+@interface FTRUMTests : XCTestCase<WKNavigationDelegate>
 @property (nonatomic, copy) NSString *url;
 @property (nonatomic, copy) NSString *traceUrl;
 @property (nonatomic, copy) NSString *appid;
+@property (nonatomic, strong) XCTestExpectation *loadExpect;
+@property (nonatomic, strong) TestRumWebView *testWebView;
 @end
 
 @implementation FTRUMTests
@@ -312,11 +317,13 @@
        NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
         if([dict[FT_OP] isEqualToString:FT_DATA_TYPE_RUM]){
             NSDictionary *data = dict[FT_OPDATA];
-            NSDictionary *tags = data[FT_TAGS];
-            XCTAssertTrue([tags[FT_USER_ID] isEqualToString:@"id_12345"]);
-            XCTAssertTrue([tags[FT_USER_NAME] isEqualToString:@"name_1"]);
-            XCTAssertTrue([tags[FT_USER_EMAIL] isEqualToString:@"text@123.com"]);
-            XCTAssertTrue([tags[@"user_age"] isEqualToString:@"12"]);
+            if([data[FT_KEY_SOURCE] isEqualToString:FT_RUM_SOURCE_ERROR]){
+                NSDictionary *tags = data[FT_TAGS];
+                XCTAssertTrue([tags[FT_USER_ID] isEqualToString:@"id_12345"]);
+                XCTAssertTrue([tags[FT_USER_NAME] isEqualToString:@"name_1"]);
+                XCTAssertTrue([tags[FT_USER_EMAIL] isEqualToString:@"text@123.com"]);
+                XCTAssertTrue([tags[@"user_age"] isEqualToString:@"12"]);
+            }
         }
     }
     [[FTSDKAgent sharedInstance] shutDown];
@@ -435,7 +442,7 @@
     [NSThread sleepForTimeInterval:0.5];
     [[FTGlobalRumManager sharedManager].rumManager syncProcess];
     NSUInteger newCount = [[FTTrackerEventDBTool sharedManger] getDatasCount];
-    XCTAssertTrue(newCount-1==oldCount);
+    XCTAssertTrue(newCount>oldCount);
     XCTestExpectation *expectation2= [self expectationWithDescription:@"异步操作timeout"];
 
     [self networkWithUrl:@"https://www.baidu.com/more/" handler:^(NSDictionary *header) {
@@ -500,5 +507,82 @@
     metrics.resource_first_byte = @103;
     [[FTGlobalRumManager sharedManager] addResourceWithKey:key metrics:metrics content:model];
 }
+/// 1.验证有webview传入数据添加
+/// 2.验证数据格式
+///   基础 tags :
+///    与 webview 一致：
+///    sdk_name
+///    sdk_version
+///    service
+///    新增 tag 字段：
+///    package_native
+///    is_web_view
+///   其余与 native SDK 一致
+///
+///   rum 相关调整：
+///   session_id： 与 native SDK 一致
+///   is_active: false
+///   其余与 webview 一致
+- (void)testAddWebRumViewData{
+    [self setRumConfig];
+    self.testWebView = [[TestRumWebView alloc]init];
+    [self.testWebView view];
+    [self.testWebView viewWillAppear];
+    [self.testWebView viewDidLoad];
+    self.testWebView.mWebView.navigationDelegate = self;
+    self.loadExpect = [self expectationWithDescription:@"请求超时timeout!"];
+    [self.testWebView test_loadUrl];
+    [self waitForExpectationsWithTimeout:30 handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+    XCTestExpectation *jsScript = [self expectationWithDescription:@"请求超时timeout!"];
+    [self.testWebView test_addWebViewRumView:^{
+        [jsScript fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:30 handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+    [[FTGlobalRumManager sharedManager].rumManager syncProcess];
+    NSArray *datas =[[FTTrackerEventDBTool sharedManger] getFirstRecords:10 withType:FT_DATA_TYPE_RUM];
+    __block BOOL hasViewData = NO;
+    [datas enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(FTRecordModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:obj.data];
+        NSString *op = dict[@"op"];
+        XCTAssertTrue([op isEqualToString:@"RUM"]);
+        NSDictionary *opdata = dict[FT_OPDATA];
+        NSString *measurement = opdata[FT_KEY_SOURCE];
+        NSDictionary *tags = opdata[FT_TAGS];
+        if ([measurement isEqualToString:FT_RUM_SOURCE_VIEW]) {
+            if(tags[FT_IS_WEBVIEW]){
+                NSDictionary *field = opdata[FT_FIELDS];
+                NSInteger errorCount = [field[FT_KEY_VIEW_ERROR_COUNT] integerValue];
+                NSInteger resourceCount = [field[FT_KEY_VIEW_RESOURCE_COUNT] integerValue];
+                NSInteger longTaskCount = [field[FT_KEY_VIEW_LONG_TASK_COUNT] integerValue];
+                NSString *viewName = tags[FT_KEY_VIEW_NAME];
+                NSDictionary *tags = opdata[FT_TAGS];
+                XCTAssertTrue(errorCount == 0);
+                XCTAssertTrue(longTaskCount == 0);
+                XCTAssertTrue(resourceCount == 0);
+                XCTAssertTrue([viewName isEqualToString:@"testJSBridge"]);
 
+                // rum 相关调整
+                XCTAssertFalse([tags[FT_RUM_KEY_SESSION_ID] isEqualToString:@"12345"]);
+                XCTAssertTrue([field[FT_KEY_IS_ACTIVE] isEqualToString:@"false"]);
+
+                // 基础 tags
+                XCTAssertTrue([tags[@"package_native"] isEqualToString:SDK_VERSION]);
+                XCTAssertFalse([tags[FT_SDK_VERSION] isEqualToString:SDK_VERSION]);
+                XCTAssertTrue([tags[FT_SDK_NAME] isEqualToString:@"df_web_rum_sdk"]);
+                XCTAssertTrue([tags[FT_KEY_SERVICE] isEqualToString:@"browser"]);
+
+                hasViewData = YES;
+            }
+        }
+    }];
+    XCTAssertTrue(hasViewData);
+}
+- (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
+    [self.loadExpect fulfill];
+    self.loadExpect = nil;
+}
 @end

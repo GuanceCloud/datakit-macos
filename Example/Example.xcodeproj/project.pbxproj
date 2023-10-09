@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,7 @@
 		1707C83129E534F9009B7D9C /* FTMacOSSDKTest.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1707C83029E534F9009B7D9C /* FTMacOSSDKTest.xcconfig */; };
 		1707C83529E55C19009B7D9C /* FTLoggerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1707C83429E55C19009B7D9C /* FTLoggerTest.m */; };
 		1715F2952A04A123007EF5BB /* FTAutoTrackActionNameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1715F2942A04A123007EF5BB /* FTAutoTrackActionNameTests.m */; };
+		171B2F112AD39DA4000DB2BC /* TestRumWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 171B2F102AD39DA4000DB2BC /* TestRumWebView.m */; };
 		175BC13B2A08A34600AEBEB5 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 175BC13A2A08A34600AEBEB5 /* WebViewController.m */; };
 		175BC13D2A08A45700AEBEB5 /* sample.html in Resources */ = {isa = PBXBuildFile; fileRef = 175BC13C2A08A45700AEBEB5 /* sample.html */; };
 		175BC1F42A090B4100AEBEB5 /* FTMacOSSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 175BC1F32A090B4100AEBEB5 /* FTMacOSSDK */; };
@@ -73,6 +74,8 @@
 		1707C83029E534F9009B7D9C /* FTMacOSSDKTest.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = FTMacOSSDKTest.xcconfig; sourceTree = "<group>"; };
 		1707C83429E55C19009B7D9C /* FTLoggerTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTLoggerTest.m; sourceTree = "<group>"; };
 		1715F2942A04A123007EF5BB /* FTAutoTrackActionNameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTAutoTrackActionNameTests.m; sourceTree = "<group>"; };
+		171B2F0F2AD39DA4000DB2BC /* TestRumWebView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestRumWebView.h; sourceTree = "<group>"; };
+		171B2F102AD39DA4000DB2BC /* TestRumWebView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestRumWebView.m; sourceTree = "<group>"; };
 		175B13AE29E3AE87003A5B1B /* Config-Example.publish.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-Example.publish.xcconfig"; sourceTree = "<group>"; };
 		175B13B029E3AEA5003A5B1B /* Config-Example.pre.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-Example.pre.xcconfig"; sourceTree = "<group>"; };
 		175B13B229E3AEB9003A5B1B /* Config-Example.develop.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Config-Example.develop.xcconfig"; sourceTree = "<group>"; };
@@ -311,6 +314,8 @@
 		7CDA50DF26DE15EE0062CC39 /* FTMacOSSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				171B2F0F2AD39DA4000DB2BC /* TestRumWebView.h */,
+				171B2F102AD39DA4000DB2BC /* TestRumWebView.m */,
 				175BC1F52A0A58FD00AEBEB5 /* FTTestHelper.h */,
 				175BC1F62A0A58FD00AEBEB5 /* FTTestHelper.m */,
 				1715F2932A03CE97007EF5BB /* AutoTrack */,
@@ -531,6 +536,7 @@
 				1715F2952A04A123007EF5BB /* FTAutoTrackActionNameTests.m in Sources */,
 				1707C82329E52ED5009B7D9C /* FTRUMTests.m in Sources */,
 				7CDAF53726DE1C8B00F8F01D /* FTMacOSSDKTests.m in Sources */,
+				171B2F112AD39DA4000DB2BC /* TestRumWebView.m in Sources */,
 				175BC1F72A0A58FD00AEBEB5 /* FTTestHelper.m in Sources */,
 				1707C83529E55C19009B7D9C /* FTLoggerTest.m in Sources */,
 				17B296B529EE41A000B4A344 /* FTTraceTests.m in Sources */,
