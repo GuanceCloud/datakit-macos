@@ -13,8 +13,6 @@
 #import <objc/runtime.h>
 #import "FTGlobalRumManager.h"
 #import "FTAutoTrack.h"
-@interface NSWindow (FTAutoTrack)
-@end
 @implementation NSWindow (FTAutoTrack)
 #pragma mark - Rum Data -
 static char *viewLoadStartTimeKey = "viewLoadStartTimeKey";

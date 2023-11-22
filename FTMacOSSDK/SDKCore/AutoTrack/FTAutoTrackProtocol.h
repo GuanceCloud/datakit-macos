@@ -18,7 +18,6 @@
 @property (nonatomic, strong) NSDate *datakit_viewLoadStartTime;
 @property (nonatomic, strong) NSNumber *datakit_loadDuration;
 @property (nonatomic, copy) NSString *datakit_viewUUID;
-@property (nonatomic, assign) BOOL datakit_viewLoaded;
 @property (nonatomic, copy, readonly) NSString *datakit_windowName;
 @end
 
