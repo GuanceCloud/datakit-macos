@@ -65,6 +65,7 @@ static char *viewControllerUUID = "viewControllerUUID";
     return win;
 }
 -(void)datakit_becomeKeyWindow{
+    NSLog(@"\n becomeKeyWindow:%@ \n",NSStringFromClass(self.class));
     [self datakit_becomeKeyWindow];
     //window
     //记录 init - keyWindow 的时间差 作为window显示加载时长
@@ -93,6 +94,9 @@ static char *viewControllerUUID = "viewControllerUUID";
 }
 -(void)datakit_resignKeyWindow{
     [self datakit_resignKeyWindow];
+    if([self isKindOfClass:NSClassFromString(@"NSPopupMenuWindow")]){
+        return;
+    }
     if([FTAutoTrack sharedInstance].addRumDatasDelegate && [[FTAutoTrack sharedInstance].addRumDatasDelegate respondsToSelector:@selector(stopView)]){
         [[FTAutoTrack sharedInstance].addRumDatasDelegate stopView];
     }
