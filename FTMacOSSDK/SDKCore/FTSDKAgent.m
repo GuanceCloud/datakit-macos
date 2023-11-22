@@ -23,7 +23,7 @@
 #import "FTMacOSSDKVersion.h"
 #import "FTWKWebViewHandler.h"
 #import "FTNetworkInfoManager.h"
-#import "FTURLSessionAutoInstrumentation.h"
+#import "FTURLSessionInstrumentation.h"
 #import "FTUserInfo.h"
 #import "FTAutoTrack.h"
 #import "FTURLProtocol.h"
@@ -63,7 +63,7 @@ static dispatch_once_t onceToken;
         _presetProperty.sdkVersion = SDK_VERSION;
         [FTNetworkInfoManager sharedInstance].setMetricsUrl(config.metricsUrl)
             .setSdkVersion(SDK_VERSION);
-        [[FTURLSessionAutoInstrumentation sharedInstance] setSdkUrlStr:config.metricsUrl];
+        [[FTURLSessionInstrumentation sharedInstance] setSdkUrlStr:config.metricsUrl];
     }
     return self;
 }
@@ -72,8 +72,8 @@ static dispatch_once_t onceToken;
     [self.presetProperty setAppid:rumConfigOptions.appid];
     self.presetProperty.rumContext = [rumConfigOptions.globalContext copy];
     [[FTGlobalRumManager sharedManager] setRumConfig:rumConfigOptions];
-    [[FTURLSessionAutoInstrumentation sharedInstance] setRUMEnableTraceUserResource:rumConfigOptions.enableTraceUserResource];
-    [[FTURLSessionAutoInstrumentation sharedInstance] setRumResourceHandler:[FTGlobalRumManager sharedManager].rumManager];
+    [[FTURLSessionInstrumentation sharedInstance] setEnableAutoRumTrack:rumConfigOptions.enableTraceUserResource];
+    [[FTURLSessionInstrumentation sharedInstance] setRumResourceHandler:[FTGlobalRumManager sharedManager].rumManager];
     [FTAutoTrack sharedInstance].addRumDatasDelegate = [FTGlobalRumManager sharedManager];
     [[FTAutoTrack sharedInstance] startHookView:rumConfigOptions.enableTraceUserView action:rumConfigOptions.enableTraceUserAction];
 
@@ -89,13 +89,13 @@ static dispatch_once_t onceToken;
 - (void)startTraceWithConfigOptions:(FTTraceConfig *)traceConfigOptions{
     _netTraceStr = FTNetworkTraceStringMap[traceConfigOptions.networkTraceType];
     [FTWKWebViewHandler sharedInstance].enableTrace = traceConfigOptions.enableAutoTrace;
-    [FTWKWebViewHandler sharedInstance].interceptor = [FTURLSessionAutoInstrumentation sharedInstance].interceptor;
-    [[FTURLSessionAutoInstrumentation sharedInstance] setTraceEnableAutoTrace:traceConfigOptions.enableAutoTrace enableLinkRumData:traceConfigOptions.enableLinkRumData sampleRate:traceConfigOptions.sampleRate traceType:(NetworkTraceType)traceConfigOptions.networkTraceType];
+    [FTWKWebViewHandler sharedInstance].interceptor = [FTURLSessionInstrumentation sharedInstance].interceptor;
+    [[FTURLSessionInstrumentation sharedInstance] setTraceEnableAutoTrace:traceConfigOptions.enableAutoTrace enableLinkRumData:traceConfigOptions.enableLinkRumData sampleRate:traceConfigOptions.sampleRate traceType:(NetworkTraceType)traceConfigOptions.networkTraceType];
 }
 #pragma mark ========== publick method ==========
 - (void)isIntakeUrl:(BOOL(^)(NSURL *url))handler{
     if(handler){
-        [[FTURLSessionAutoInstrumentation sharedInstance] setIntakeUrlHandler:handler];
+        [[FTURLSessionInstrumentation sharedInstance] setIntakeUrlHandler:handler];
     }
 }
 -(void)logging:(NSString *)content status:(FTLogStatus)status{
@@ -141,7 +141,7 @@ static dispatch_once_t onceToken;
     [[FTTrackerEventDBTool sharedManger] insertCacheToDB];
     [[FTGlobalRumManager sharedManager] rumDeinitialize];
     [[FTLogger sharedInstance] shutDown];
-    [[FTURLSessionAutoInstrumentation sharedInstance] resetInstance];
+    [[FTURLSessionInstrumentation sharedInstance] resetInstance];
     [FTURLProtocol stopMonitor];
     onceToken = 0;
     sharedInstance =nil;

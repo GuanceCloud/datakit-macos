@@ -19,20 +19,19 @@
 #import "FTAppLifeCycle.h"
 #import "FTRUMMonitor.h"
 #import "FTWKWebViewHandler.h"
-#import "FTANRDetector.h"
 #import "FTAppLaunchTracker.h"
 #import "FTConstants.h"
-#import "FTPingThread.h"
-#import "FTURLSessionAutoInstrumentation.h"
+#import "FTLongTaskDetector.h"
+#import "FTURLSessionInstrumentation.h"
 #import "FTWKWebViewJavascriptBridge.h"
 #import "FTRumDatasProtocol.h"
-@interface FTGlobalRumManager ()<FTAppLifeCycleDelegate,FTWKWebViewRumDelegate,FTAppLaunchDataDelegate,FTANRDetectorDelegate>
+@interface FTGlobalRumManager ()<FTAppLifeCycleDelegate,FTWKWebViewRumDelegate,FTAppLaunchDataDelegate,FTRunloopDetectorDelegate>
 @property (nonatomic, strong) FTSDKConfig *config;
 @property (nonatomic, strong) FTRumConfig *rumConfig;
 @property (nonatomic, assign) CFTimeInterval launch;
 @property (nonatomic, strong) NSDate *launchTime;
 @property (nonatomic, strong) FTRUMMonitor *monitor;
-@property (nonatomic, strong) FTPingThread *pingThread;
+@property (nonatomic, strong) FTLongTaskDetector *longTaskDetector;
 @property (nonatomic, strong) FTAppLaunchTracker *launchTracker;
 @property (nonatomic, strong) FTWKWebViewJavascriptBridge *jsBridge;
 
@@ -72,47 +71,22 @@ static dispatch_once_t onceToken;
     }
     self.launchTracker = [[FTAppLaunchTracker alloc]initWithDelegate:self];
     //采集view、resource、jsBridge
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (rumConfig.enableTrackAppFreeze) {
-            [self startPingThread];
-        }else{
-            [self stopPingThread];
-        }
-        if (rumConfig.enableTrackAppANR) {
-            [FTANRDetector sharedInstance].delegate = self;
-            [[FTANRDetector sharedInstance] startDetecting];
-        }else{
-            [[FTANRDetector sharedInstance] stopDetecting];
-        }
-    });
+    if (rumConfig.enableTrackAppANR||rumConfig.enableTrackAppFreeze) {
+        _longTaskDetector = [[FTLongTaskDetector alloc]initWithDelegate:self enableTrackAppANR:rumConfig.enableTrackAppANR enableTrackAppFreeze:rumConfig.enableTrackAppFreeze];
+        [_longTaskDetector startDetecting];
+    }
     [FTWKWebViewHandler sharedInstance].rumTrackDelegate = self;
 }
 
--(FTPingThread *)pingThread{
-    if (!_pingThread || _pingThread.isCancelled) {
-        _pingThread = [[FTPingThread alloc]init];
-        __weak typeof(self) weakSelf = self;
-        _pingThread.block = ^(NSString * _Nonnull stackStr, NSDate * _Nonnull startDate, NSDate * _Nonnull endDate) {
-            [weakSelf trackAppFreeze:stackStr duration:[FTDateUtil nanosecondTimeIntervalSinceDate:startDate toDate:endDate]];
-        };
-    }
-    return _pingThread;
-}
--(void)startPingThread{
-    if (!self.pingThread.isExecuting) {
-        [self.pingThread start];
-    }
-}
--(void)stopPingThread{
-    if (_pingThread && _pingThread.isExecuting) {
-        [self.pingThread cancel];
-    }
-}
 - (void)trackAppFreeze:(NSString *)stack duration:(NSNumber *)duration{
     [self.rumManager addLongTaskWithStack:stack duration:duration property:nil];
 }
--(void)stopMonitor{
-    [self stopPingThread];
+#pragma mark ========== FTRunloopDetectorDelegate ==========
+- (void)longTaskStackDetected:(NSString*)slowStack duration:(long long)duration{
+    [self.rumManager addLongTaskWithStack:slowStack duration:[NSNumber numberWithLongLong:duration]];
+}
+- (void)anrStackDetected:(NSString*)slowStack{
+    [self.rumManager addErrorWithType:@"ios_crash" message:@"ios_anr" stack:slowStack];
 }
 #pragma mark ========== AUTO TRACK ==========
 - (void)applicationWillTerminate{
@@ -168,23 +142,23 @@ static dispatch_once_t onceToken;
 
 
 - (void)startResourceWithKey:(nonnull NSString *)key {
-    [[FTURLSessionAutoInstrumentation sharedInstance].externalResourceHandler startResourceWithKey:key];
+    [[FTURLSessionInstrumentation sharedInstance].externalResourceHandler startResourceWithKey:key];
 }
 
 - (void)startResourceWithKey:(nonnull NSString *)key property:(nullable NSDictionary *)property {
-    [[FTURLSessionAutoInstrumentation sharedInstance].externalResourceHandler startResourceWithKey:key property:property];
+    [[FTURLSessionInstrumentation sharedInstance].externalResourceHandler startResourceWithKey:key property:property];
 
 }
 
 - (void)stopResourceWithKey:(nonnull NSString *)key {
-    [[FTURLSessionAutoInstrumentation sharedInstance].externalResourceHandler stopResourceWithKey:key];
+    [[FTURLSessionInstrumentation sharedInstance].externalResourceHandler stopResourceWithKey:key];
 }
 
 - (void)stopResourceWithKey:(nonnull NSString *)key property:(nullable NSDictionary *)property {
-    [[FTURLSessionAutoInstrumentation sharedInstance].externalResourceHandler stopResourceWithKey:key property:property];
+    [[FTURLSessionInstrumentation sharedInstance].externalResourceHandler stopResourceWithKey:key property:property];
 }
 - (void)addResourceWithKey:(nonnull NSString *)key metrics:(nullable FTResourceMetricsModel *)metrics content:(nonnull FTResourceContentModel *)content {
-    [[FTURLSessionAutoInstrumentation sharedInstance].externalResourceHandler addResourceWithKey:key metrics:metrics content:content];
+    [[FTURLSessionInstrumentation sharedInstance].externalResourceHandler addResourceWithKey:key metrics:metrics content:content];
 }
 #pragma mark ========== APP LAUNCH ==========
 -(void)ftAppHotStart:(NSNumber *)duration{

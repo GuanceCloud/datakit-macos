@@ -6,7 +6,7 @@
 //
 
 #import "FTTraceManager.h"
-#import "FTURLSessionAutoInstrumentation.h"
+#import "FTURLSessionInstrumentation.h"
 @implementation FTTraceManager
 + (instancetype)sharedInstance {
     static FTTraceManager *sharedInstance = nil;
@@ -17,7 +17,7 @@
     return sharedInstance;
 }
 - (NSDictionary *)getTraceHeaderWithKey:(NSString *)key url:(NSURL *)url{
-    return [[FTURLSessionAutoInstrumentation sharedInstance].externalResourceHandler getTraceHeaderWithKey:key url:url];
+    return [[FTURLSessionInstrumentation sharedInstance].externalResourceHandler getTraceHeaderWithKey:key url:url];
 }
 
 @end
