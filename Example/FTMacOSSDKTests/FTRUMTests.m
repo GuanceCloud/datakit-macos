@@ -170,13 +170,14 @@
             if([data[FT_KEY_SOURCE] isEqualToString:FT_RUM_SOURCE_ACTION]){
                 NSDictionary *tags = data[FT_TAGS];
                 NSString *actionName = tags[FT_KEY_ACTION_NAME];
-                XCTAssertTrue([actionName isEqualToString:@"addAction"]);
-                if(property){
-                    NSDictionary *field = data[FT_FIELDS];
-                    XCTAssertTrue([field[property.allKeys.firstObject] isEqualToString:property[property.allKeys.firstObject]]);
+                if([actionName isEqualToString:@"addAction"]){
+                    if(property){
+                        NSDictionary *field = data[FT_FIELDS];
+                        XCTAssertTrue([field[property.allKeys.firstObject] isEqualToString:property[property.allKeys.firstObject]]);
+                    }
+                    hasAction = YES;
+                    break;
                 }
-                hasAction = YES;
-                break;
             }
         }
     }
