@@ -286,7 +286,7 @@
     XCTAssertTrue(imageClick);
 }
 - (void)setRumConfig{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     config.enableSDKDebugLog = YES;
     [FTSDKAgent startWithConfigOptions:config];
     FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:self.appid];

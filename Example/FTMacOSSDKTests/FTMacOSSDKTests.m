@@ -34,14 +34,14 @@
 }
 - (void)testSDKInit{
     XCTAssertThrows([FTSDKAgent sharedInstance]);
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     config.enableSDKDebugLog = YES;
     [FTSDKAgent startWithConfigOptions:config];
     XCTAssertNoThrow([FTSDKAgent sharedInstance]);
     [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testSDKConfigService{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     [FTSDKAgent startWithConfigOptions:config];
     FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
     logger.enableCustomLog = YES;
@@ -59,7 +59,7 @@
     [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testSDKConfigEnv{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     [FTSDKAgent startWithConfigOptions:config];
     FTLoggerConfig *logger = [[FTLoggerConfig alloc]init];
     logger.enableCustomLog = YES;
@@ -76,7 +76,7 @@
     [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testSDKConfigCustomEnv{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     config.env = @"custom";
     config.enableSDKDebugLog = YES;
     [FTSDKAgent startWithConfigOptions:config];
@@ -95,7 +95,7 @@
     [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testSDKConfigCopy{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     config.enableSDKDebugLog = YES;
     config.globalContext = @{@"aa":@"bb"};
     config.service = @"testsdk";

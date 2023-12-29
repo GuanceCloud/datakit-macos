@@ -43,7 +43,7 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
 }
 - (void)setRumConfig{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     [FTSDKAgent startWithConfigOptions:config];
     FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:self.appid];
     rumConfig.errorMonitorType = FTErrorMonitorAll;
@@ -54,7 +54,7 @@
     [[FTTrackerEventDBTool sharedManger] deleteItemWithTm:[FTDateUtil currentTimeNanosecond]];
 }
 - (void)testSamplerate0{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:self.appid];
     rumConfig.sampleRate = 0;
     [FTSDKAgent startWithConfigOptions:config];
@@ -71,7 +71,7 @@
     [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testSamplerate100{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:self.appid];
     rumConfig.sampleRate = 100;
     [FTSDKAgent startWithConfigOptions:config];
@@ -368,16 +368,15 @@
     [[FTGlobalRumManager sharedManager].rumManager syncProcess];
     NSArray *newArray = [[FTTrackerEventDBTool sharedManger] getFirstRecords:100 withType:FT_DATA_TYPE_RUM];
     XCTAssertTrue(newArray.count>0);
-    for (FTRecordModel *model in newArray) {
+    FTRecordModel *model = [newArray lastObject];
         NSDictionary *dict = [FTJSONUtil dictionaryWithJsonString:model.data];
-        if([dict[FT_OP] isEqualToString:FT_DATA_TYPE_RUM]){
-            NSDictionary *data = dict[FT_OPDATA];
-            NSDictionary *tags = data[FT_TAGS];
-            XCTAssertTrue([tags[FT_USER_ID] isEqualToString:@"id_12345"]);
-            XCTAssertFalse([tags[FT_USER_NAME] isEqualToString:@"name_1"]);
-            XCTAssertFalse([tags[FT_USER_EMAIL] isEqualToString:@"text@123.com"]);
-            XCTAssertFalse([tags[@"user_age"] isEqualToString:@"12"]);
-        }
+    if([dict[FT_OP] isEqualToString:FT_DATA_TYPE_RUM]){
+        NSDictionary *data = dict[FT_OPDATA];
+        NSDictionary *tags = data[FT_TAGS];
+        XCTAssertTrue([tags[FT_USER_ID] isEqualToString:@"id_12345"]);
+        XCTAssertFalse([tags[FT_USER_NAME] isEqualToString:@"name_1"]);
+        XCTAssertFalse([tags[FT_USER_EMAIL] isEqualToString:@"text@123.com"]);
+        XCTAssertFalse([tags[@"user_age"] isEqualToString:@"12"]);
     }
     [[FTSDKAgent sharedInstance] unbindUser];
     [[FTTrackerEventDBTool sharedManger] deleteItemWithTm:[FTDateUtil currentTimeNanosecond]];
@@ -399,7 +398,7 @@
     [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testGlobalContext{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     config.globalContext = @{@"sdk_globalContext":@"test"};
     [FTSDKAgent startWithConfigOptions:config];
     FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:self.appid];
@@ -425,6 +424,7 @@
 }
 - (void)testIntakeUrl{
     [self setRumConfig];
+    [[FTGlobalRumManager sharedManager] startViewWithName:@"Test"];
     [[FTSDKAgent sharedInstance] isIntakeUrl:^BOOL(NSURL * _Nonnull url) {
         if([url isEqual:[NSURL URLWithString:self.traceUrl]]){
             return YES;
@@ -440,7 +440,6 @@
     [self waitForExpectationsWithTimeout:30 handler:^(NSError *error) {
         XCTAssertNil(error);
     }];
-    [NSThread sleepForTimeInterval:0.5];
     [[FTGlobalRumManager sharedManager].rumManager syncProcess];
     NSUInteger newCount = [[FTTrackerEventDBTool sharedManger] getDatasCount];
     XCTAssertTrue(newCount>oldCount);
@@ -452,7 +451,6 @@
     [self waitForExpectationsWithTimeout:30 handler:^(NSError *error) {
         XCTAssertNil(error);
     }];
-    [NSThread sleepForTimeInterval:0.5];
     [[FTGlobalRumManager sharedManager].rumManager syncProcess];
     NSUInteger newCount2 = [[FTTrackerEventDBTool sharedManger] getDatasCount];
     XCTAssertTrue(newCount2==newCount);

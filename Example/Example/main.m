@@ -26,7 +26,7 @@ int main(int argc, const char * argv[]) {
         NSString *appid = [processInfo environment][@"APP_ID"];
         BOOL isRuningUnitTest = [[processInfo environment][@"isUnitTests"] boolValue];
         if(!isRuningUnitTest){
-            FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:url];
+            FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:url];
             config.enableSDKDebugLog = YES;
             [FTSDKAgent startWithConfigOptions:config];
             FTRumConfig *rumConfig = [[FTRumConfig alloc]initWithAppid:appid];

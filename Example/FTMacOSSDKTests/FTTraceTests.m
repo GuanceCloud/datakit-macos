@@ -31,7 +31,7 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
 }
 - (void)testTraceHeader{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     config.enableSDKDebugLog = YES;
     [FTSDKAgent startWithConfigOptions:config];
     FTTraceConfig *trace = [[FTTraceConfig alloc]init];
@@ -67,7 +67,7 @@
     [[FTSDKAgent sharedInstance] shutDown];
 }
 - (void)testNoConfigTraceHeader{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     config.enableSDKDebugLog = YES;
     [FTSDKAgent startWithConfigOptions:config];
     NSString *uuidStr = [[NSUUID UUID] UUIDString];

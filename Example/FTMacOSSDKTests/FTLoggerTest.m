@@ -137,7 +137,7 @@
     XCTAssertTrue(newCount == count);
 }
 - (void)setRightSDKConfig{
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     config.enableSDKDebugLog = YES;
     [FTSDKAgent startWithConfigOptions:config];
     [[FTSDKAgent sharedInstance] unbindUser];
@@ -145,7 +145,7 @@
 }
 -(void)testSetEmptyLoggerServiceName{
     [self setRightSDKConfig];
-    FTSDKConfig *config = [[FTSDKConfig alloc]initWithMetricsUrl:self.url];
+    FTSDKConfig *config = [[FTSDKConfig alloc]initWithDatakitUrl:self.url];
     FTLoggerConfig *loggerConfig = [[FTLoggerConfig alloc]init];
     loggerConfig.enableCustomLog = YES;
     [FTSDKAgent startWithConfigOptions:config];
