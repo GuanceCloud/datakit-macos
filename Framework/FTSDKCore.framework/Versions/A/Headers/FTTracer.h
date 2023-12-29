@@ -9,16 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "FTTracerProtocol.h"
 #import "FTEnumConstant.h"
-@class FTTraceConfig;
 NS_ASSUME_NONNULL_BEGIN
+
 /// 具体实现 trace 功能，请求头添加参数实现
 @interface FTTracer : NSObject<FTTracerProtocol>
-
-/// 初始化
-/// - Parameter config: trace 配置项
--(instancetype)initWithSampleRate:(int)sampleRate traceType:(NetworkTraceType)traceType;
+/// 设置 trace 配置
+/// - Parameters:
+///   - sampleRate: 采样率
+///   - traceType: 链路追踪类型
+///   - link: 是否关联 rum
+-(instancetype)initWithSampleRate:(int)sampleRate traceType:(NetworkTraceType)traceType enableAutoTrace:(BOOL)trace enableLinkRumData:(BOOL)link;
 #if FTSDKUNITTEST
--(NSUInteger)getSkywalkingSeq;
+-(NSUInteger)getSkyWalkingSequence;
 #endif
 
 @end

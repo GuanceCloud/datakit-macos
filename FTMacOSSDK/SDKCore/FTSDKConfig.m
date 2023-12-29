@@ -13,8 +13,25 @@
 @end
 @implementation FTSDKConfig
 -(instancetype)initWithMetricsUrl:(NSString *)metricsUrl{
+    self = [self initWithDatakitUrl:metricsUrl];
+    self->_metricsUrl = metricsUrl;
+    return self;
+}
+-(instancetype)initWithDatakitUrl:(NSString *)datakitUrl{
     if (self = [super init]) {
-        _metricsUrl = metricsUrl;
+        _datakitUrl = datakitUrl;
+        _enableSDKDebugLog = NO;
+        _service = @"df_rum_macos";
+        _version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+        _env = FTEnvStringMap[FTEnvProd];
+    }
+    return self;
+}
+- (nonnull instancetype)initWithDatawayUrl:(nonnull NSString *)datawayUrl clientToken:(nonnull NSString *)clientToken{
+    if (self = [super init]) {
+        _datawayUrl = datawayUrl;
+        _clientToken = clientToken;
+        _enableSDKDebugLog = NO;
         _service = @"df_rum_macos";
         _version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         _env = FTEnvStringMap[FTEnvProd];
@@ -31,7 +48,9 @@
 }
 -(id)copyWithZone:(NSZone *)zone{
     FTSDKConfig *options = [[[self class] allocWithZone:nil] init];
-    options.metricsUrl = self.metricsUrl;
+    options.datakitUrl = self.datakitUrl;
+    options.datawayUrl = self.datawayUrl;
+    options.clientToken = self.clientToken;
     options.env = self.env;
     options.service = self.service;
     options.enableSDKDebugLog = self.enableSDKDebugLog;

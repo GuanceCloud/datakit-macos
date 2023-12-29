@@ -119,6 +119,7 @@ extern NSString * const FT_KEY_LOCALE;
 // error source value
 extern NSString * const FT_LOGGER;
 extern NSString * const FT_NETWORK;
+extern NSString * const FT_NETWORK_ERROR;
 #pragma mark ---------- long task ----------
 extern NSString * const FT_KEY_LONG_TASK_STACK;
 #pragma mark ---------- action ----------
@@ -163,9 +164,9 @@ extern NSString * const FT_USER_EXTRA;
 #pragma mark ========== inner use ==========
 extern NSUInteger const FT_LOGGING_CONTENT_SIZE;
 extern NSUInteger const FT_DB_CONTENT_MAX_COUNT;
+extern NSString * const FT_SCRIPT_MESSAGE_HANDLER_NAME;
+
 /// 超过多少毫秒为一次卡顿,default 5s 记录一次ANR
 extern NSUInteger const MXRMonitorRunloopOneStandstillMillisecond;
 /// 多少次卡顿纪录为一次有效卡顿
-extern NSUInteger const  MXRMonitorRunloopStandstillCount;
-extern NSString * const FT_SCRIPT_MESSAGE_HANDLER_NAME;
-
+extern NSUInteger const MXRMonitorRunloopStandstillCount;

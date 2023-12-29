@@ -21,31 +21,33 @@
 #ifndef FTURLSessionInterceptorProtocol_h
 #define FTURLSessionInterceptorProtocol_h
 #import "FTRumResourceProtocol.h"
+#import "FTTracerProtocol.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef BOOL(^FTIntakeUrl)(NSURL *url);
+typedef BOOL(^FTResourceUrlHandler)(NSURL *url);
+typedef NSDictionary* _Nullable (^ResourcePropertyProvider)( NSURLRequest * _Nullable request, NSURLResponse * _Nullable response,NSData *_Nullable data, NSError *_Nullable error);
 
 /// session 拦截处理代理
-@protocol FTURLSessionInterceptorDelegate<NSObject>
-@required
-/// 设置需要屏蔽的内部链接
-@property (nonatomic, copy) NSString *innerUrl;
+@protocol FTURLSessionInterceptorProtocol<NSObject>
+@optional
 /// 用户采集过滤回调
 @property (nonatomic, copy ,nullable) FTIntakeUrl intakeUrlHandler;
-@optional
-/// 采集的 resource 数据接收对象
-@property (nonatomic, weak) id<FTRumResourceProtocol> innerResourceHandeler;
-/// 设置是否支持自动采集 rum resource 数据
-@property (nonatomic, assign) BOOL enableAutoRumTrack;
+@property (nonatomic, copy ,nullable) FTResourceUrlHandler resourceUrlHandler;
 
+
+/// 采集的 resource 数据接收对象
+@property (nonatomic, weak) id<FTRumResourceProtocol> rumResourceHandler;
+
+- (void)setTracer:(id<FTTracerProtocol>)tracer;
 /// 实现 trace 功能，给 request header 添加 trace 参数
 /// - Parameter request: http 初始请求
-- (NSURLRequest *)injectTraceHeader:(NSURLRequest *)request;
+- (NSURLRequest *)interceptRequest:(NSURLRequest *)request;
 
 /// 请求开始 -startResource
 /// - Parameters:
 ///   - task: 请求任务
 ///   - session: session
-- (void)taskCreated:(NSURLSessionTask *)task  session:(NSURLSession *)session;
+- (void)interceptTask:(NSURLSessionTask *)task;
 
 /// 收集请求的数据信息
 /// - Parameters:
@@ -63,8 +65,14 @@ typedef BOOL(^FTIntakeUrl)(NSURL *url);
 ///   - error: error 信息
 ///
 /// 传入 rum 时，先调用 -stopResource，再调用 -addResourceWithKey
-- (void)taskCompleted:(NSURLSessionTask *)task error:(nullable NSError *)error;
+- (void)taskCompleted:(NSURLSessionTask *)task error:(nullable NSError *)error ;
 
+/// 请求结束 -stopResource
+/// - Parameters:
+///   - task: 请求任务
+///   - error: error 信息
+///   - extraProvider: 用户自定义额外信息
+- (void)taskCompleted:(NSURLSessionTask *)task error:(nullable NSError *)error extraProvider:(nullable ResourcePropertyProvider)extraProvider;
 @end
 NS_ASSUME_NONNULL_END
 #endif /* FTURLSessionInterceptorProtocol_h */

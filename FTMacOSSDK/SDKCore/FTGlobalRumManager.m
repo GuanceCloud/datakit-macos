@@ -61,7 +61,7 @@ static dispatch_once_t onceToken;
         return;
     }
     self.monitor = [[FTRUMMonitor alloc]initWithMonitorType:(DeviceMetricsMonitorType)rumConfig.deviceMetricsMonitorType frequency:(MonitorFrequency)rumConfig.monitorFrequency];
-    self.rumManager = [[FTRUMManager alloc]initWithRumSampleRate:rumConfig.sampleRate errorMonitorType:(ErrorMonitorType)rumConfig.errorMonitorType monitor:self.monitor wirter:[FTSDKAgent sharedInstance]];
+    self.rumManager = [[FTRUMManager alloc]initWithRumSampleRate:rumConfig.sampleRate errorMonitorType:(ErrorMonitorType)rumConfig.errorMonitorType monitor:self.monitor writer:[FTSDKAgent sharedInstance]];
     if(rumConfig.enableTrackAppCrash){
         [[FTUncaughtExceptionHandler sharedHandler] addErrorDataDelegate:self.rumManager];
     }
@@ -206,7 +206,7 @@ static dispatch_once_t onceToken;
             time = time>0?time:[FTDateUtil currentTimeNanosecond];
             if (measurement && fields.count>0) {
                 if ([name isEqualToString:@"rum"]) {
-                    [self.rumManager addWebviewData:measurement tags:tags fields:fields tm:time];
+                    [self.rumManager addWebViewData:measurement tags:tags fields:fields tm:time];
                 }
             }
         }
