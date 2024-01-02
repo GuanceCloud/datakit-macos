@@ -13,7 +13,7 @@ let package = Package(
             targets: ["FTMacOSSDK"]),
     ],
     dependencies: [
-        .package(name: "FTMobileSDK", url: "https://github.com/GuanceCloud/datakit-ios.git", revision:"1.4.8-beta.1"),
+        .package(name: "FTMobileSDK", url: "https://github.com/GuanceCloud/datakit-ios.git", revision:"1.4.9-alpha.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
